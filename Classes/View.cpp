@@ -2,6 +2,20 @@
 
 using namespace MPix;
 
+
+MPix::View::View() : target(nullptr), contents(nullptr), z_order(0)
+{
+}
+
+MPix::View::~View()
+{
+   if (target)
+   {
+      target->removeChild(contents);
+   }
+
+}
+
 void MPix::View::setVisible( bool visibility )
 {
    assert(contents);
@@ -33,3 +47,4 @@ void MPix::View::BindContents( Node* target )
 {
    BindContents(target, z_order);
 }
+

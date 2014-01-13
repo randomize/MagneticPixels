@@ -27,9 +27,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AdwareManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ArrowMark.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -40,9 +37,6 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BadMagneticPixel.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BehaviorManager.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\CactusDynamic.cpp">
@@ -64,9 +58,6 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\ColorBox.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ContentManager.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Context.cpp">
@@ -114,13 +105,7 @@
     <ClCompile Include="..\Classes\GameMain.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameplayManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameState.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameStateManager.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameTest.cpp">
@@ -171,9 +156,6 @@
     <ClCompile Include="..\Classes\LevelGenerator.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\LevelManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\LevelSelector.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -181,9 +163,6 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\LevelXML.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\LocaleManager.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MagneticDiagonalPixel.cpp">
@@ -222,9 +201,6 @@
     <ClCompile Include="..\Classes\PixelXML.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\PlatformManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\RepeatedSprite.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -232,9 +208,6 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\RoundMark.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SettingsManager.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Shake.cpp">
@@ -261,12 +234,6 @@
     <ClCompile Include="..\Classes\Solution.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\SoundManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\StatisticsManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\StonePixel.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -280,9 +247,6 @@
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\View.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ViewManager.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\WallPixel.cpp">
@@ -309,15 +273,48 @@
     <ClCompile Include="..\Classes\HSVSpriteBatchNode.cpp">
       <Filter>Classes\Extension\HSV</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AdwareManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BehaviorManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ContentManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameStateManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LevelManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LocaleManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlatformManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SettingsManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ViewManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StatisticsManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SoundManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameplayManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AdwareManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AnyBehavior.h">
@@ -333,9 +330,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BadMagneticPixel.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BehaviorManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\CactusDynamic.h">
@@ -357,9 +351,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ColorBox.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ContentManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Context.h">
@@ -413,13 +404,7 @@
     <ClInclude Include="..\Classes\GameMain.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameplayManager.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GameState.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameStateManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameTest.h">
@@ -482,9 +467,6 @@
     <ClInclude Include="..\Classes\LevelGenerator.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\LevelManager.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\LevelSelector.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -492,9 +474,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\LevelXML.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\LocaleManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagneticDiagonalPixel.h">
@@ -533,9 +512,6 @@
     <ClInclude Include="..\Classes\PixelXML.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\PlatformManager.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Ranking.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -546,9 +522,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\RoundMark.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SettingsManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Shake.h">
@@ -575,12 +548,6 @@
     <ClInclude Include="..\Classes\Solution.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SoundManager.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\StatisticsManager.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\StonePixel.h">
       <Filter>Classes</Filter>
     </ClInclude>
@@ -594,9 +561,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\View.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ViewManager.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ViewsConstants.h">
@@ -628,6 +592,42 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HSVSprite.h">
       <Filter>Classes\Extension\HSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AdwareManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BehaviorManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ContentManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameStateManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LevelManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LocaleManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlatformManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SettingsManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ViewManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StatisticsManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SoundManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameplayManager.h">
+      <Filter>Classes\Singletons</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

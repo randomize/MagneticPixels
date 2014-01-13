@@ -13,15 +13,12 @@ void MPix::WallPixelView::Build( shared_ptr<Pixel> model )
    PixelView::Build(model);
 
    pixel = std::dynamic_pointer_cast<WallPixel>(model);
-   blocks_urdl.reserve(4);
+   //blocks_urdl.reserve(4);
 
    auto & borset = pixel->GetShape();
    for (auto a : borset)
    {
-      auto pp = Sprite::createWithSpriteFrameName(("wallpixel_"+ToString(rand()%5+1)+".png").c_str());
-      if (rand()%2) {
-         pp->setFlippedX(true);
-      }
+      auto pp = ContentManager::getInstance().GetSimpleSprite("wall_pixel");
       switch (a) 
       {
       case Direction::DIR_UP:
@@ -39,8 +36,8 @@ void MPix::WallPixelView::Build( shared_ptr<Pixel> model )
          assert(false); // Only major directions in wall shape
          break;
       }
-      pp->setPosition(LogicToScreen(pixel->GetPos()) + MPIX_CELL_SIZE_HALF_P);
-      blocks_urdl.push_back(pp);
+      contents->addChild(pp);
+      //blocks_urdl.push_back(pp);
    }
 
 }
@@ -50,40 +47,4 @@ bool MPix::WallPixelView::Update( CmdUIUpdatePixelView::Reason reason )
    return true;
 }
 
-void MPix::WallPixelView::BindContents( Node* target, int recommendedOrder /*= 0 */ )
-{
-   this->contents = nullptr; // Not using
-   this->target = target;
-   auto bn = ContentManager::getInstance().GetBatchNode(target, "wall_pixel");
-   for (auto n : blocks_urdl) {
-      bn->addChild(n, recommendedOrder);
-   }
-}
-
-void MPix::WallPixelView::setVisible( bool visibility )
-{
-   for (auto n : blocks_urdl) {
-      n->setVisible(visibility);
-   }
-}
-
-void MPix::WallPixelView::setPosition( Point pos )
-{
-   for (auto n : blocks_urdl) {
-      n->setPosition(LogicToScreen(pixel->GetPos()) + MPIX_CELL_SIZE_HALF_P + pos);
-   }
-}
-
-MPix::WallPixelView::WallPixelView()
-{
-
-}
-
-MPix::WallPixelView::~WallPixelView()
-{
-   auto bn = ContentManager::getInstance().GetBatchNode(target, "wall_pixel");
-   for (auto n : blocks_urdl) {
-      bn->removeChild(n, true);
-   }
-}
 

@@ -144,7 +144,6 @@ void MPix::EditorFolderTool::BindContents( Node * target )
    EditorTool::BindContents(target);
    if (icon_frame) {
       icon = Sprite::createWithSpriteFrameName(icon_frame);
-      ContentManager::getInstance().GetBatchNode(target, "ui_editor")->addChild(icon);
    } else {
       auto b = ColorBox::create();
       b->setAnchorPoint(Point(0.5f,0.5f));
@@ -152,8 +151,8 @@ void MPix::EditorFolderTool::BindContents( Node * target )
       b->SetBorders(15,Color4F(0.0f,0.0f,0.0f,0.8f));
       b->SetBorderWidth(1.0f);
       icon = b;
-      target->addChild(icon);
    }
+   target->addChild(icon);
 }
 
 MPix::EditorFolderTool::~EditorFolderTool()
@@ -315,7 +314,7 @@ void MPix::EditorToolEraser::BindContents( Node * target )
 {
    EditorTool::BindContents(target);
    icon = Sprite::createWithSpriteFrameName("ed_erase.png");
-   ContentManager::getInstance().GetBatchNode(target, "ui_editor")->addChild(icon);
+   target->addChild(icon);
 }
 
 MPix::EditorToolEraser::~EditorToolEraser()

@@ -19,8 +19,8 @@ namespace MPix {
    {
    public:
 
-      View() : target(nullptr), contents(nullptr), z_order(0) { }
-      virtual ~View() {}
+      View();
+      virtual ~View();
 
       // Makes view content visible/invisible
       virtual void setVisible(bool visibility);

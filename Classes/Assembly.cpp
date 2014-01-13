@@ -146,10 +146,10 @@ ErrorCode Assembly::CheckForLost( const Context& context )
    }
 
    // Test for debug 
-   EM_LOG_ERROR(" Clsss split: got " + classes.size() );
+   /*EM_LOG_ERROR(" Clsss split: got " + classes.size() );
    for ( auto & a : classes ) {
       EM_LOG_ERROR(" - Class = " + a.size() );
-   }
+   }*/
 
    // 2.2 - Check each class, form dead pixel set in toProcess set
    for ( auto & c : classes ) 

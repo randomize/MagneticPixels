@@ -15,9 +15,6 @@ MPix::EditorToolbox::EditorToolbox()
 {
    // Create all tools(Allocates memory, returns RAW pointer array)
    tools = EditorToolGenerator::GenerateDefaultSet();
-
-   ContentManager::getInstance().SetupPixelNodes(this);
-   ContentManager::getInstance().PutBatchNode(this, "ui_editor");
 }
 
 MPix::EditorToolbox::~EditorToolbox()
@@ -27,10 +24,6 @@ MPix::EditorToolbox::~EditorToolbox()
       delete t;
    }
    tools.clear();
-
-   // Remove nodes
-   ContentManager::getInstance().UnsetupPixelNodes(this);
-   ContentManager::getInstance().RemoveBatchNode(this, "ui_editor");
 }
 
 bool EditorToolbox::init()

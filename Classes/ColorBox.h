@@ -39,9 +39,23 @@ namespace MPix {
       void SetBorderWidth(float w) { width = w; }
 
    private:
+
+      // Actual drawing happens here
+      void onDraw();
+
+      // Drawing command for new cocos renderer
+      CustomCommand _customCommand;
+
+      // Box color
       Color4F col;
+
+      // Borderes color
       Color4F borders_col;
+
+      // Borders configuration code(encoded in pows of 2)
       unsigned borders;
+
+      // Width of the borders
       float width;
 
    };

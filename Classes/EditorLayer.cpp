@@ -28,7 +28,6 @@ MPix::EditorLayer::EditorLayer()
 {
     CmdDidEnterBG::listners["EditorLayer"] = std::bind( &EditorLayer::onBGFG, this );
     CmdWillEnterFG::listners["EditorLayer"] = std::bind( &EditorLayer::onBGFG, this );
-    ContentManager::getInstance().SetupPixelNodes(this);
 
     auto lvl = LevelManager::getInstance().EditorGetCurrentLevel();
     if (lvl) {
@@ -46,7 +45,6 @@ MPix::EditorLayer::~EditorLayer()
     tasks.clear();
     CmdDidEnterBG::listners.erase("EditorLayer");
     CmdWillEnterFG::listners.erase("EditorLayer");
-    ContentManager::getInstance().UnsetupPixelNodes(this);
 }
 
 bool EditorLayer::init()

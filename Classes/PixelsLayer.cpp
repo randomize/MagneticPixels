@@ -29,9 +29,6 @@ bool MPix::PixelsLayer::init()
    // Store context reference
    activeContext = &GameplayManager::getInstance().GetContext();
 
-   // Get batch nodes
-   ContentManager::getInstance().SetupPixelNodes(this);
-
    return true;
 }
 
@@ -83,7 +80,6 @@ void MPix::PixelsLayer::Clear()
 {
    // Cleaning views, they should remove everything from BatchNodes
    ViewManager::getInstance().Clear();
-   ContentManager::getInstance().UnsetupPixelNodes(this);
 
    // Ensure that no one left a node on pixels layer
    auto n = this->getChildrenCount();
