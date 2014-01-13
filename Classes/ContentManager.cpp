@@ -30,7 +30,7 @@ MPix::ContentManager::ContentManager()
    NotificationCenter::getInstance()->addObserver(
       &listener,
       callfuncO_selector(ListenerDelegate::listenEnterForeground),
-      EVNET_COME_TO_FOREGROUND,
+      EVENT_COME_TO_FOREGROUND,
       nullptr
    );
 
@@ -40,7 +40,7 @@ MPix::ContentManager::~ContentManager()
 {
    NotificationCenter::getInstance()->removeObserver(
       &listener,
-      EVNET_COME_TO_FOREGROUND
+      EVENT_COME_TO_FOREGROUND
    );
 
 }
