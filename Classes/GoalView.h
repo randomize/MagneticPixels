@@ -40,12 +40,12 @@ namespace MPix {
 
    private:
 
-      unordered_map<Coordinates, NodeRGBA*> tasks;
+      unordered_map<Coordinates, Node*> tasks;
       shared_ptr<Goal> goal;
 
    private:
 
-      NodeRGBA* GetTaskAt(Coordinates pos);
+      Node* GetTaskAt(Coordinates pos);
 
    };
 

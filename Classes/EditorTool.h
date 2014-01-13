@@ -97,7 +97,7 @@ namespace MPix {
       void AddCur();
       void SubCur();
       const char* icon_frame;
-      NodeRGBA* icon;
+      Node* icon;
    };
 
    // EditorToolPixel has pixel in it and can place it to field

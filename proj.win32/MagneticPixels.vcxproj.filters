@@ -138,18 +138,6 @@
     <ClCompile Include="..\Classes\HistoryManager.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HSVArmature.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HSVShader.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HSVSprite.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HSVSpriteBatchNode.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\IAlive.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
@@ -309,6 +297,18 @@
     <ClCompile Include="test.cpp">
       <Filter>win32</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\HSVArmature.cpp">
+      <Filter>Classes\Extension\HSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HSVShader.cpp">
+      <Filter>Classes\Extension\HSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HSVSprite.cpp">
+      <Filter>Classes\Extension\HSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HSVSpriteBatchNode.cpp">
+      <Filter>Classes\Extension\HSV</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -441,21 +441,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HistoryStorage.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HSVArmature.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HSVProtocol.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HSVShader.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HSVSprite.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HSVSpriteBatchNode.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\IAlive.h">
@@ -628,6 +613,21 @@
     </ClInclude>
     <ClInclude Include="test.h">
       <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HSVSpriteBatchNode.h">
+      <Filter>Classes\Extension\HSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HSVArmature.h">
+      <Filter>Classes\Extension\HSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HSVProtocol.h">
+      <Filter>Classes\Extension\HSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HSVShader.h">
+      <Filter>Classes\Extension\HSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HSVSprite.h">
+      <Filter>Classes\Extension\HSV</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -67,10 +67,7 @@ namespace MPix {
 
       // =========== Animation management ==========================================
 
-      // Returns shared cocos object Animation, that can be loaded to instance of Animate::create(***) action
-      Animation* GetAnimation(const string& name);
-
-      SpriteFrame* GetAnimationFirstFrame(const string& name);
+      /// DEPRECATED, armatures used
 
       // =========== GFX helpers ==========================================
       // If some state wants to pass some (data)node to another they use 
@@ -78,7 +75,6 @@ namespace MPix {
 
       void PutNode(Node*, const string& name);
       Node* GetNode(const string& name);
-
 
    private:
 
@@ -92,7 +88,6 @@ namespace MPix {
       void MapBatchNode( const char* name, SpriteBatchNode* n, int z = 0 );
 
       unordered_map<string, list<BatchNodeInfo>> bnode;
-      unordered_map<string, Animation*> anims;
       unordered_map<string, Node*> nodes;
       unordered_map<string, EMShader*> shaders;
 

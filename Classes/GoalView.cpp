@@ -34,7 +34,7 @@ void GoalView::Build( shared_ptr<Goal> model )
 
 }
 
-NodeRGBA* MPix::GoalView::GetTaskAt( Coordinates pos )
+Node* MPix::GoalView::GetTaskAt( Coordinates pos )
 {
    auto t_it = tasks.find(pos);
    assert(t_it != tasks.end() && "Task at pos not found");

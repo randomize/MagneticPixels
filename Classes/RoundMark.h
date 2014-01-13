@@ -20,7 +20,7 @@ namespace MPix {
 
    // RoundMark
 
-   class RoundMark : public NodeRGBA
+   class RoundMark : public Node
    {
    public:
       static RoundMark* create(const char* text);

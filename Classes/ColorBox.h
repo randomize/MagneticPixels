@@ -20,7 +20,7 @@ namespace MPix {
 
    // ColorBox
 
-   class ColorBox : public NodeRGBA
+   class ColorBox : public Node
    {
    public:
 

@@ -25,6 +25,7 @@ namespace MPix {
    public:
 
       static HSVSpriteBatchNode* create(const char* fileImage, int capacity /* = DEFAULT_CAPACITY */);
+      ~HSVSpriteBatchNode();
 
       //bool initWithTexture(Texture2D* texture, int capacity) override;
       void draw() override;

@@ -19,7 +19,7 @@ namespace MPix {
    class HSVArmature;
 
    // Animation
-   class EMAnimation : public NodeRGBA
+   class EMAnimation : public Node
    {
    public:
 
@@ -40,8 +40,7 @@ namespace MPix {
 
    protected:
 
-      void animationUnlock(Armature *armature, MovementEventType movementType, const char *movementID);
-      void animationNext(Armature *armature, MovementEventType movementType, const char *movementID);
+      void animationNext(Armature *armature, MovementEventType movementType, const std::string& movementID);
 
       list<std::pair<bool,string>> ani_queue;
 

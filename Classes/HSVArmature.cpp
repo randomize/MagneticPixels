@@ -9,108 +9,66 @@ using namespace MPix;
 void MPix::HSVArmature::draw()
 {
 
-    if (_parentBone == NULL)
-    {
-        CC_NODE_DRAW_SETUP();
-        static_cast<HSVShader*> (getShaderProgram())->SetHSVMatrix(GetHSVMatrix());
-        GL::blendFunc(_blendFunc.src, _blendFunc.dst);
-    }
+   if (_parentBone == nullptr && _batchNode == nullptr)
+   {
+      CC_NODE_DRAW_SETUP();
+      static_cast<HSVShader*> (getShaderProgram())->SetHSVMatrix(GetHSVMatrix());
+   }
 
-    Object *object = NULL;
-    CCARRAY_FOREACH(_children, object)
-    {
-        if (Bone *bone = dynamic_cast<Bone *>(object))
-        {
-            DisplayManager *displayManager = bone->getDisplayManager();
-            Node *node = displayManager->getDisplayRenderNode();
+   for (auto& object : _children)
+   {
+      if (Bone *bone = dynamic_cast<Bone *>(object))
+      {
+         Node *node = bone->getDisplayRenderNode();
 
-            if (NULL == node)
-                continue;
+         if (nullptr == node)
+            continue;
 
-            switch (displayManager->getCurrentDecorativeDisplay()->getDisplayData()->displayType)
-            {
+         switch (bone->getDisplayRenderNodeType())
+         {
             case CS_DISPLAY_SPRITE:
             {
-                Skin *skin = static_cast<Skin *>(node);
+               Skin *skin = static_cast<Skin *>(node);
+               skin->updateTransform();
 
-                TextureAtlas *textureAtlas = skin->getTextureAtlas();
-                BlendType blendType = bone->getBlendType();
-                if(_atlas != textureAtlas || blendType != BLEND_NORMAL)
-                {
-                    if (_atlas)
-                    {
-                        _atlas->drawQuads();
-                        _atlas->removeAllQuads();
-                    }
-                }
+               bool blendDirty = bone->isBlendDirty();
 
-                _atlas = textureAtlas;
-                if (_atlas->getCapacity() == _atlas->getTotalQuads() && !_atlas->resizeCapacity(_atlas->getCapacity() * 2))
-                    return;
-
-                skin->updateTransform();
-
-                if (blendType != BLEND_NORMAL)
-                {
-                    updateBlendType(blendType);
-                    _atlas->drawQuads();
-                    _atlas->removeAllQuads();
-                    GL::blendFunc(_blendFunc.src, _blendFunc.dst);
-                }
+               if (blendDirty)
+               {
+                  skin->setBlendFunc(bone->getBlendFunc());
+               }
+               skin->draw();
             }
             break;
+
             case CS_DISPLAY_ARMATURE:
             {
-                Armature *armature = static_cast<Armature *>(node);
-
-                TextureAtlas *textureAtlas = armature->getTextureAtlas();
-                if(_atlas != textureAtlas)
-                {
-                    if (_atlas)
-                    {
-                        _atlas->drawQuads();
-                        _atlas->removeAllQuads();
-                    }
-                }
-                armature->draw();
+               node->draw();
             }
             break;
+
             default:
             {
-                if (_atlas)
-                {
-                    _atlas->drawQuads();
-                    _atlas->removeAllQuads();
-                }
-                node->visit();
-
-                CC_NODE_DRAW_SETUP();
-                static_cast<HSVShader*> (getShaderProgram())->SetHSVMatrix(GetHSVMatrix());
-                GL::blendFunc(_blendFunc.src, _blendFunc.dst);
+               node->visit();
+               CC_NODE_DRAW_SETUP();
+               static_cast<HSVShader*> (getShaderProgram())->SetHSVMatrix(GetHSVMatrix());
             }
             break;
-            }
-        }
-        else if(Node *node = dynamic_cast<Node *>(object))
-        {
-            if (_atlas)
-            {
-                _atlas->drawQuads();
-                _atlas->removeAllQuads();
-            }
-            node->visit();
+         }
+      }
+      else if (Node *node = dynamic_cast<Node *>(object))
+      {
+         node->visit();
+         CC_NODE_DRAW_SETUP();
+         static_cast<HSVShader*> (getShaderProgram())->SetHSVMatrix(GetHSVMatrix());
+      }
+   }
 
-            CC_NODE_DRAW_SETUP();
-            static_cast<HSVShader*> (getShaderProgram())->SetHSVMatrix(GetHSVMatrix());
-            GL::blendFunc(_blendFunc.src, _blendFunc.dst);
-        }
-    }
-
-    if(_atlas && !_batchNode && _parentBone == NULL)
-    {
-        _atlas->drawQuads();
-        _atlas->removeAllQuads();
-    }
+    /*{ // Replace each occurance of CC_NODE_DRAW_SETUP in original draw with this
+        CC_NODE_DRAW_SETUP();
+        static_cast<HSVShader*> (getShaderProgram())->SetHSVMatrix(GetHSVMatrix());
+        //GL::blendFunc(_blendFunc.src, _blendFunc.dst);
+    }*/
 }
 
 HSVArmature* MPix::HSVArmature::create( const char *name )

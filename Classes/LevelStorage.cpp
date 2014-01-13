@@ -29,7 +29,7 @@ MPix::LevelStorage::~LevelStorage()
 EmbossLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> &worlds, unordered_map<unsigned int, shared_ptr<Level>> &levels )
 {
 
-   long size = 0;
+   ssize_t size = 0;
    char* pLevelData = nullptr;
 
    // Logic of loading:

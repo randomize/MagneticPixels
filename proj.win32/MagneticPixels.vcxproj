@@ -345,6 +345,15 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ProjectReference Include="..\cocos2d\external\chipmunk\proj.win32\chipmunk.vcxproj">
       <Project>{207bc7a9-ccf1-4f2f-a04d-45f72242ae25}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\cocos2d\cocos\editor-support\cocostudio\proj.win32\libCocosStudio.vcxproj">
+      <Project>{B57CF53F-2E49-4031-9822-047CC0E6BDE2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\cocos2d\cocos\gui\proj.win32\libGUI.vcxproj">
+      <Project>{7E06E92C-537A-442B-9E4A-4761C84F8A1A}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\cocos2d\extensions\proj.win32\libExtensions.vcxproj">
+      <Project>{21B2C324-891F-48EA-AD1A-5AE13DE12E28}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
@@ -353,4 +362,3 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
 </Project>
-

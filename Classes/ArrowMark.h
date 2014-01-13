@@ -16,7 +16,7 @@
 namespace MPix {
 
    // ArrowMark
-   class ArrowMark : public NodeRGBA
+   class ArrowMark : public Node
    {
    public:
 

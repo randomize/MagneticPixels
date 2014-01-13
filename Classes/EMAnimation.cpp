@@ -60,7 +60,7 @@ void MPix::EMAnimation::PlayNow( const char* name )
 }
 
 
-void MPix::EMAnimation::animationNext( Armature *armature, MovementEventType movementType, const char *movementID )
+void MPix::EMAnimation::animationNext( Armature *armature, MovementEventType movementType, const std::string& movementID )
 {
     if (movementType == COMPLETE)
     {

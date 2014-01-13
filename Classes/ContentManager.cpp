@@ -66,11 +66,6 @@ void MPix::ContentManager::CreateBatchNodes()
    cache->addSpriteFramesWithFile("ed.plist");
    MapBatchNode("ui_editor", spritebatch, 1);
 
-   // load armatures
-   ArmatureDataManager::getInstance()->addArmatureFileInfo("magnetic.png", "magnetic.plist", "magnetic.xml");
-   Texture2D *texture = Director::getInstance()->getTextureCache()->addImage("magnetic.png");
-   texture->setAliasTexParameters();
-
 }
 
 void MPix::ContentManager::LoadResources()
@@ -109,61 +104,14 @@ MPix::ContentManager::BatchNodeInfo MPix::ContentManager::GetBatchNodeInfo( Node
 
 
 
-Animation* MPix::ContentManager::GetAnimation( const string& name )
-{
-   auto p = anims.find(name);
-   assert (p != anims.end());
-   return p->second;
-}
-
-
 void MPix::ContentManager::CreateAnimations()
 {
-   // Temp buffer
-   char str[64] = {0};
-   Animation* animation;
-   auto fwd = Array::createWithCapacity(10);
-   auto bwd = Array::createWithCapacity(10);
 
-   // Magnetic pixel face wake/sleep animation
-   for(int i = 0; i < 7; i++) 
-   {
-      sprintf(str, "wake_%d.png", i);
-      auto frame = SpriteFrameCache::getInstance()->getSpriteFrameByName( str );
-      fwd->addObject(frame);
-      sprintf(str, "wake_%d.png", 6-i);
-      frame = SpriteFrameCache::getInstance()->getSpriteFrameByName( str );
-      bwd->addObject(frame);
-   }
+   // load armatures
+   ArmatureDataManager::getInstance()->addArmatureFileInfo("magnetic.png", "magnetic.plist", "magnetic.xml");
+   auto texture = Director::getInstance()->getTextureCache()->addImage("magnetic.png");
+   texture->setAliasTexParameters();
 
-   animation = Animation::createWithSpriteFrames(fwd, 0.02f);
-   animation->retain();
-   this->anims.emplace("magnetic_sleep_idle", animation);
-
-   animation = Animation::createWithSpriteFrames(bwd, 0.05f);
-   animation->retain();
-   this->anims.emplace("magnetic_idle_sleep", animation);
-
-   // Magnetic pixel face smile/unsmile animation
-   fwd->removeAllObjects();
-   bwd->removeAllObjects();
-   for(int i = 0; i < 6; i++) 
-   {
-      sprintf(str, "smile_%d.png", i);
-      auto frame = SpriteFrameCache::getInstance()->getSpriteFrameByName( str );
-      fwd->addObject(frame);
-      sprintf(str, "smile_%d.png", 5-i);
-      frame = SpriteFrameCache::getInstance()->getSpriteFrameByName( str );
-      bwd->addObject(frame);
-   }
-
-   animation = Animation::createWithSpriteFrames(fwd, 0.05f);
-   animation->retain();
-   this->anims.emplace("magnetic_idle_smile", animation);
-
-   animation = Animation::createWithSpriteFrames(bwd, 0.05f);
-   animation->retain();
-   this->anims.emplace("magnetic_smile_idle", animation);
 }
 
 
@@ -262,14 +210,6 @@ void MPix::ContentManager::MapBatchNode( const char* name, SpriteBatchNode* n, i
    n->retain();
    lst.push_back(BatchNodeInfo(z, n));
    bnode.emplace(name, lst );
-}
-
-SpriteFrame* MPix::ContentManager::GetAnimationFirstFrame( const string& name )
-{
-   auto an = GetAnimation("magnetic_sleep_idle");
-   auto frr = an->getFrames();
-   AnimationFrame* frame = static_cast<AnimationFrame*>(*(frr->begin()));
-   return frame->getSpriteFrame();
 }
 
 void MPix::ContentManager::CreateShaders()

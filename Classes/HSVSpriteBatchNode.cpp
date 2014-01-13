@@ -12,7 +12,7 @@ HSVSpriteBatchNode* MPix::HSVSpriteBatchNode::create( const char* fileImage, int
 
       NotificationCenter::getInstance()->addObserver(fab,
          callfuncO_selector(HSVSpriteBatchNode::listenBackToForeground),
-         EVNET_COME_TO_FOREGROUND,
+         EVENT_COME_TO_FOREGROUND,
          NULL);
 
       fab->initProgram();
@@ -21,6 +21,12 @@ HSVSpriteBatchNode* MPix::HSVSpriteBatchNode::create( const char* fileImage, int
    delete fab;
    return nullptr;
 }
+
+MPix::HSVSpriteBatchNode::~HSVSpriteBatchNode()
+{
+   NotificationCenter::getInstance()->removeObserver(this, EVENT_COME_TO_FOREGROUND);
+}
+
 
 void MPix::HSVSpriteBatchNode::listenBackToForeground( Object *obj )
 {
@@ -31,21 +37,9 @@ void MPix::HSVSpriteBatchNode::listenBackToForeground( Object *obj )
 void MPix::HSVSpriteBatchNode::draw()
 {
 
-    // Optimization: Fast Dispatch
-    if( _textureAtlas->getTotalQuads() == 0 )
-    {
-        return;
-    }
-
-   getShaderProgram()->use();
-   getShaderProgram()->setUniformsForBuiltins();
    setUniforms();
 
-   arrayMakeObjectsPerformSelector(_children, updateTransform, Sprite*);
-
-   GL::blendFunc( _blendFunc.src, _blendFunc.dst );
-
-   _textureAtlas->drawQuads();
+   SpriteBatchNode::draw();
 
 }
 
