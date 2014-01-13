@@ -1,7 +1,5 @@
 #include "AppDelegate.h"
 #include "MPix.h"
-#include "GameStateManager.h"
-#include "HistoryManager.h"
 #include "Cmd.h"
 
 using namespace MPix;
