@@ -1,0 +1,45 @@
+
+# Ignore cocos
+cocos2d/
+
+# Ignore files build by Visual Studio
+proj.win32/*.opensdf
+proj.win32/*.sdf
+proj.win32/[Dd]ebug.win32/
+proj.win32/[Rr]elease.win32/
+proj.win32/*.suo
+
+# Ignore files build by ndk and eclipse
+proj.android/assets/
+proj.android/obj/
+proj.android/libs/
+proj.android/bin/
+proj.android/gen/
+proj.android/.settings
+proj.android/local.properties
+
+# Ignore linux bin and obj output directories
+proj.linux/obj/
+proj.linux/bin/
+
+
+# Ignore thumbnails created by windows and macos explorers
+Thumbs.db
+.DS_Store
+
+# Ignore python compiled files
+*.pyc
+
+# Ignore files build by xcode
+proj.ios_mac/*.mode*v*
+proj.ios_mac/*.pbxuser
+proj.ios_mac/*.xcbkptlist
+proj.ios_mac/*.xcscheme
+proj.ios_mac/*.xcworkspacedata
+proj.ios_mac/*.xcuserstate
+proj.ios_mac/*.xccheckout
+proj.ios_mac/xcschememanagement.plist
+proj.ios_mac/._.*
+proj.ios_mac/xcuserdata/
+proj.ios_mac/DerivedData/
+
