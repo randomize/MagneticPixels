@@ -16,8 +16,10 @@ namespace MPix {
 
    // forwards
    class EMShader;
+   class HSVSprite;
 
    // ContentManager
+   // It is actually a resource manager ;)
 
    class ContentManager
    {
@@ -26,6 +28,7 @@ namespace MPix {
       // =========== General interface ==========================================
 
       // Called once on startup
+      // TODO: make async with notifier delegate
       void LoadResources();
 
       // =========== Shader management ==========================================
@@ -34,10 +37,11 @@ namespace MPix {
       // =========== Sprite management ==========================================
 
       Sprite* GetSimpleSprite(const string& name);
+      HSVSprite* GetHSVSprite(const string& name);
 
       // =========== Animation management ==========================================
 
-      /// DEPRECATED, armatures used
+      Armature* GetAnimation(const string& name);
 
       // =========== GFX helpers ==========================================
       // If some state wants to pass some (data)node to another they use 
@@ -51,10 +55,12 @@ namespace MPix {
       // Initialization 
       void CreateAnimations();
       void CreateShaders();
+      void CreateSprites();
 
       // Helpers
       void ReloadShaders();
 
+      // Manages maps for fast search
       unordered_map<string, EMShader*> shaders;
       unordered_map<string, string> resources;
 

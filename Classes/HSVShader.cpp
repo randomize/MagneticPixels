@@ -26,6 +26,7 @@ HSVShader* MPix::HSVShader::create()
 {
    auto fab = new HSVShader();
    if ( fab->init() ) {
+      fab->autorelease();
       return fab;
    }
    delete fab;
@@ -120,5 +121,11 @@ kmMat3 MPix::HSVShader::GetYIQ2RGB()
 
 void MPix::HSVShader::SetHSVMatrix( float* mat4x4 )
 {
+   // TODO: cache
    setUniformLocationWithMatrix4fv(xformLocation, mat4x4, 1);
+}
+
+std::string MPix::HSVShader::getDescription() const
+{
+   return "Shader implements hue shift filtering";
 }

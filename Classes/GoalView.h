@@ -28,7 +28,6 @@ namespace MPix {
       //static GoalView* create(shared_ptr<Goal> goal);
 
       GoalView();
-      ~GoalView();
 
    public: // ===== Views interface ====================
 

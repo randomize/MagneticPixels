@@ -3,6 +3,7 @@
 
 #include "HSVSprite.h"
 #include "ViewsConstants.h"
+#include "ContentManager.h"
 
 using namespace MPix;
 
@@ -12,20 +13,14 @@ GoalView::GoalView()
    tasks.reserve(16);
 }
 
-GoalView::~GoalView()
-{
-   target->removeChild(contents);
-}
-
 void GoalView::Build( shared_ptr<Goal> model )
 {
    goal = model;
-   contents = NodeRGBA::create();
-   HSVSprite* cp;
+   contents = Node::create();
 
    for (auto p : goal->GetTasks() ) {
       auto p1 = LogicToScreen(p.first.x, p.first.y) + MPIX_CELL_SIZE_HALF_P;
-      cp = HSVSprite::create("goal_bg.png");
+      auto cp = ContentManager::getInstance().GetHSVSprite("goal_bg");
       cp->SetHSV(PixelColorToHSV(p.second.GetColor()));
       cp->setPosition(p1);
       tasks.emplace(p.first, cp);

@@ -33,6 +33,7 @@ namespace MPix {
       static HSVShader* create();
 
       void Reload() override;
+      std::string getDescription() const override;
 
       static void GenHSVMatrix(float * mat4x4, float hue, float saturation, float value);
       void SetHSVMatrix(float* mat4x4);

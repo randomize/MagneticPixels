@@ -4,12 +4,13 @@
 #include "GameMain.h"
 
 #include "HSVShader.h"
+#include "HSVSprite.h"
 
 using namespace MPix;
 
 // Stupid cocos listeners dont work with non-Object instances
-// I dont wanna have ContentManager subclassing Object, so 
-// this little helper handles situation
+// I don't want to have ContentManager subclassing Object, so 
+// this little helper handles the situation
 class ListenerDelegate : public Object {
 public:
 
@@ -49,19 +50,7 @@ void MPix::ContentManager::LoadResources()
 {
    CreateShaders();
    CreateAnimations();
-
-   SpriteFrameCache* cache = SpriteFrameCache::getInstance();
-
-   // Scene objects // TODO: merge to one sprite sheet
-   resources.emplace("wall_pixel", "wall.png");
-   //resources.emplace()
-
-   // UI Objects
-   //..
-
-   // Editor
-   cache->addSpriteFramesWithFile("ed.plist");
-
+   CreateSprites();
 }
 
 void MPix::ContentManager::CreateAnimations()
@@ -74,14 +63,30 @@ void MPix::ContentManager::CreateAnimations()
 
 }
 
+void MPix::ContentManager::CreateSprites()
+{
+   SpriteFrameCache* cache = SpriteFrameCache::getInstance();
+
+   // Scene objects // TODO: merge to one sprite sheet
+   //cache->addSpriteFramesWithFile("scene.plist");
+   resources.emplace("wall_pixel", "wall.png");
+   resources.emplace("goal_bg", "pixel_goal.png");
+   //resources.emplace()
+
+   // UI Objects
+   //cache->addSpriteFramesWithFile("ui.plist");
+   //resources.emplace("goal_bg", "pixel_goal.png");
+   //..
+
+   // Editor
+   cache->addSpriteFramesWithFile("ed.plist");
+}
 
 void MPix::ContentManager::CreateShaders()
 {
    auto shader = HSVShader::create();
-   shader->autorelease();
    shader->retain();
    shaders.emplace("hsvshader", shader);
-
 }
 
 GLProgram* MPix::ContentManager::GetShader( const string& name )
@@ -104,7 +109,7 @@ void MPix::ContentManager::ReloadShaders()
 
 Sprite* MPix::ContentManager::GetSimpleSprite(const string& name)
 {
-   // TODO: localize if needed
+
    EM_LOG_DEBUG("Loading simple sprite resource: " + name);
 
    Sprite* fab = nullptr;
@@ -123,6 +128,27 @@ Sprite* MPix::ContentManager::GetSimpleSprite(const string& name)
    assert(fab);
    return fab;
 
+}
+
+HSVSprite* MPix::ContentManager::GetHSVSprite(const string& name)
+{
+   EM_LOG_DEBUG("Loading HSV sprite resource: " + name);
+
+   HSVSprite* fab = nullptr;
+
+   auto it = resources.find(name);
+   if (it == resources.end())
+   {
+       fab = HSVSprite::create("dummy.png");
+       EM_LOG_WARNING("Not found resource " + name);
+   }
+   else
+   {
+      fab = HSVSprite::create(it->second);
+   }
+
+   assert(fab);
+   return fab;
 }
 
 

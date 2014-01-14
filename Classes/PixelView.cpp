@@ -33,7 +33,7 @@ void MPix::PixelView::Build( shared_ptr<Pixel> model )
 {
    assert(model);
    assert(!contents);
-   contents = NodeRGBA::create();
+   contents = Node::create();
    contents->setPosition(LogicToScreen(model->GetPos())+MPIX_CELL_SIZE_HALF_P);
    this->model = model;
 }

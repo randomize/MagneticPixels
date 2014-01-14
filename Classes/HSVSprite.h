@@ -25,11 +25,16 @@ namespace MPix {
    {
    public:
 
-      static HSVSprite* create(const char *filename);
-      static HSVSprite* createWithSpriteFrameName(const char *spriteFrameName);
+      static HSVSprite* create( const string& file_name );
+      static HSVSprite* createWithSpriteFrameName( const string& frame_name );
 
       bool initWithTexture(Texture2D* texture, const Rect&  rect) override;
       void draw() override;
+
+   protected:
+
+      CustomCommand _renderCommand;
+      void onDraw();
 
    };
 
