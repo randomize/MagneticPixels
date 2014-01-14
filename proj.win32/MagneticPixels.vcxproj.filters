@@ -10,268 +10,85 @@
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Extension">
-      <UniqueIdentifier>{523bf1dd-560b-43cc-8827-aa7d96ee7de8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\Extension\HSV">
-      <UniqueIdentifier>{f3244c6f-bcb5-4ff3-ab98-09014b33d0f5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Singletons">
       <UniqueIdentifier>{5823593e-000c-47ba-8f78-33595798c110}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Core">
+      <UniqueIdentifier>{fc421dc4-36bc-4a1a-b2d2-48ef9a677037}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Extensions">
+      <UniqueIdentifier>{523bf1dd-560b-43cc-8827-aa7d96ee7de8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Extensions\HSV">
+      <UniqueIdentifier>{f3244c6f-bcb5-4ff3-ab98-09014b33d0f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Editor">
+      <UniqueIdentifier>{366b32fd-1362-4a7b-b8cb-e8e8c0a8dbdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Logic">
+      <UniqueIdentifier>{c0a1bb86-e058-4567-a368-7afec8af55c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\States">
+      <UniqueIdentifier>{98d2eadc-851a-4378-92df-64a01907f561}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Views">
+      <UniqueIdentifier>{5d1a357c-22cf-475f-85bd-d127c324b395}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Views\PixelViews">
+      <UniqueIdentifier>{effc6d6f-248f-4aad-903a-6c182488709f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Serialization">
+      <UniqueIdentifier>{d0ebf736-5e4a-4acd-bd4d-88c7fc706c8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Logic\Levels">
+      <UniqueIdentifier>{7d580f75-1c1f-463f-9c48-c88546a59055}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Logic\Events">
+      <UniqueIdentifier>{8435dd71-d47e-4d20-aa79-b62a384d8242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Extensions\UIElements">
+      <UniqueIdentifier>{22448177-b4de-462a-9251-e00e65d3e997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\States\GameMain">
+      <UniqueIdentifier>{5720185f-546c-426e-b37b-b131db03632d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Logic\Pixel Models">
+      <UniqueIdentifier>{e1d23e3d-8f46-4410-8736-c4c68134f551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Logic\Pixel Models\Interfaces">
+      <UniqueIdentifier>{ff6ec5fe-943a-4c06-be62-e9fc7f06c577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Logic\Pixel Models\PixelTypes">
+      <UniqueIdentifier>{ec76506c-7b7f-4cdd-b0af-6bca2c34629f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Logic\Pixel Models\PixelTypes\Derived">
+      <UniqueIdentifier>{275c112f-275d-4ebe-a999-7e64ba257555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Logic\Pixel Models\Behaviors">
+      <UniqueIdentifier>{ba31c3e1-2364-475a-abe8-497f11fded01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Views\PixelViews\Derived">
+      <UniqueIdentifier>{f4701bda-c61e-4f6b-847d-bb979e29dc19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ArrowMark.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\AssembledMagneticBase.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Assembly.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BadMagneticPixel.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CactusDynamic.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CactusDynamicView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CactusStatic.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CactusStaticView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CactusView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Cmd.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ColorBox.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Context.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EditorData.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EditorLayer.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EditorMain.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EditorMenu.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EditorTool.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EditorToolbox.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EditorToolGenerator.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EMAnimation.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EMBaseMasterLoop.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EMNode.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\EventProcessor.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Field.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\FieldXML.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameMain.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameState.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GameTest.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Goal.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GoalView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\GoalXML.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HistoryManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\IAlive.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\IAssembled.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\IColorful.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\IKilling.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ImageView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\IMovable.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\IMoveBlocker.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\IProtector.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\IWallPixel.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Level.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\LevelGenerator.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\LevelSelector.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\LevelStorage.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\LevelXML.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagneticDiagonalPixel.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagneticPixel.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagneticPixelView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MagneticView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MenuMain.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MPix.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Pitfall.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\PitfallView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Pixel.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\PixelsLayer.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\PixelView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\PixelXML.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\RepeatedSprite.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\ResultsState.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\RoundMark.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Shake.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SimpleInputDialog.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SleepingZets.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SocialManager.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SokobanBase.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SokobanPixel.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SokobanPixelView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Solution.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\StonePixel.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\StonePixelView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Strategies.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\TouchLayer.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\View.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\WallPixel.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\WallPixelView.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\World.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="test.cpp">
       <Filter>win32</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\HSVArmature.cpp">
-      <Filter>Classes\Extension\HSV</Filter>
+      <Filter>Classes\Extensions\HSV</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\HSVShader.cpp">
-      <Filter>Classes\Extension\HSV</Filter>
+      <Filter>Classes\Extensions\HSV</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\HSVSprite.cpp">
-      <Filter>Classes\Extension\HSV</Filter>
+      <Filter>Classes\Extensions\HSV</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\HSVSpriteBatchNode.cpp">
-      <Filter>Classes\Extension\HSV</Filter>
+      <Filter>Classes\Extensions\HSV</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AdwareManager.cpp">
       <Filter>Classes\Singletons</Filter>
@@ -309,289 +126,262 @@
     <ClCompile Include="..\Classes\GameplayManager.cpp">
       <Filter>Classes\Singletons</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\EMBaseMasterLoop.cpp">
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EMNode.cpp">
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EMAnimation.cpp">
+      <Filter>Classes\Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MPix.cpp">
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CactusView.cpp">
+      <Filter>Classes\Views\PixelViews</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IAlive.cpp">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IAssembled.cpp">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IColorful.cpp">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IKilling.cpp">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IMovable.cpp">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IMoveBlocker.cpp">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IProtector.cpp">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\IWallPixel.cpp">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Assembly.cpp">
+      <Filter>Classes\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Context.cpp">
+      <Filter>Classes\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EditorData.cpp">
+      <Filter>Classes\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EditorLayer.cpp">
+      <Filter>Classes\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EditorMain.cpp">
+      <Filter>Classes\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EditorMenu.cpp">
+      <Filter>Classes\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EditorTool.cpp">
+      <Filter>Classes\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EditorToolbox.cpp">
+      <Filter>Classes\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EditorToolGenerator.cpp">
+      <Filter>Classes\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Cmd.cpp">
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Field.cpp">
+      <Filter>Classes\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameState.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameTest.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MenuMain.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ResultsState.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Goal.cpp">
+      <Filter>Classes\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GoalView.cpp">
+      <Filter>Classes\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FieldXML.cpp">
+      <Filter>Classes\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GoalXML.cpp">
+      <Filter>Classes\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HistoryManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Level.cpp">
+      <Filter>Classes\Logic\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EventProcessor.cpp">
+      <Filter>Classes\Logic\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LevelSelector.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ImageView.cpp">
+      <Filter>Classes\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LevelGenerator.cpp">
+      <Filter>Classes\Logic\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LevelStorage.cpp">
+      <Filter>Classes\Logic\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LevelXML.cpp">
+      <Filter>Classes\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagneticView.cpp">
+      <Filter>Classes\Views\PixelViews</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RepeatedSprite.cpp">
+      <Filter>Classes\Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Shake.cpp">
+      <Filter>Classes\Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ArrowMark.cpp">
+      <Filter>Classes\Extensions\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ColorBox.cpp">
+      <Filter>Classes\Extensions\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RoundMark.cpp">
+      <Filter>Classes\Extensions\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SleepingZets.cpp">
+      <Filter>Classes\Extensions\UIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PixelXML.cpp">
+      <Filter>Classes\Serialization</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BadMagneticPixel.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CactusDynamic.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CactusStatic.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagneticDiagonalPixel.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagneticPixel.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Pitfall.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SokobanPixel.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StonePixel.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WallPixel.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AssembledMagneticBase.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SokobanBase.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Pixel.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SocialManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Strategies.cpp">
+      <Filter>Classes\Logic\Pixel Models\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SimpleInputDialog.cpp">
+      <Filter>Classes\Extensions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameMain.cpp">
+      <Filter>Classes\States\GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Solution.cpp">
+      <Filter>Classes\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\View.cpp">
+      <Filter>Classes\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PixelsLayer.cpp">
+      <Filter>Classes\States\GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TouchLayer.cpp">
+      <Filter>Classes\States\GameMain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\World.cpp">
+      <Filter>Classes\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CactusDynamicView.cpp">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CactusStaticView.cpp">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MagneticPixelView.cpp">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PitfallView.cpp">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SokobanPixelView.cpp">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StonePixelView.cpp">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WallPixelView.cpp">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PixelView.cpp">
+      <Filter>Classes\Views\PixelViews</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AnyBehavior.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ArrowMark.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AssembledMagneticBase.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Assembly.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BadMagneticPixel.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CactusDynamic.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CactusDynamicView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CactusStatic.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CactusStaticView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CactusView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Cmd.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ColorBox.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Context.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EditorData.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EditorLayer.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EditorMain.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EditorMenu.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EditorTool.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EditorToolbox.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EditorToolGenerator.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EMAnimation.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EMBase.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EMBaseMasterLoop.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EMNode.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\EventProcessor.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Events.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Field.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\FieldXML.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameMain.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameState.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GameTest.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Goal.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GoalView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\GoalXML.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Historical.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HistoryManager.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HistoryStorage.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IAlive.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IAssembled.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IColorful.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IDynamic.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IKilling.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ImageView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IMagnetic.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IMovable.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IMoveBlocker.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IProtector.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\IWallPixel.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Level.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\LevelGenerator.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\LevelSelector.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\LevelStorage.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\LevelXML.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagneticDiagonalPixel.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagneticPixel.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagneticPixelView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MagneticView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MenuMain.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MPix.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Pitfall.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\PitfallView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Pixel.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\PixelsLayer.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\PixelView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\PixelXML.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Ranking.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\RepeatedSprite.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ResultsState.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\RoundMark.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Shake.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SimpleInputDialog.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SleepingZets.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SocialManager.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SokobanBase.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SokobanPixel.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SokobanPixelView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Solution.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\StonePixel.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\StonePixelView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Strategies.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\TouchLayer.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\View.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\ViewsConstants.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\WallPixel.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\WallPixelView.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\World.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="test.h">
       <Filter>win32</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HSVSpriteBatchNode.h">
-      <Filter>Classes\Extension\HSV</Filter>
+      <Filter>Classes\Extensions\HSV</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HSVArmature.h">
-      <Filter>Classes\Extension\HSV</Filter>
+      <Filter>Classes\Extensions\HSV</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HSVProtocol.h">
-      <Filter>Classes\Extension\HSV</Filter>
+      <Filter>Classes\Extensions\HSV</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HSVShader.h">
-      <Filter>Classes\Extension\HSV</Filter>
+      <Filter>Classes\Extensions\HSV</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HSVSprite.h">
-      <Filter>Classes\Extension\HSV</Filter>
+      <Filter>Classes\Extensions\HSV</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AdwareManager.h">
       <Filter>Classes\Singletons</Filter>
@@ -628,6 +418,267 @@
     </ClInclude>
     <ClInclude Include="..\Classes\GameplayManager.h">
       <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EMBase.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EMBaseMasterLoop.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EMNode.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EMAnimation.h">
+      <Filter>Classes\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MPix.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CactusView.h">
+      <Filter>Classes\Views\PixelViews</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IAlive.h">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IAssembled.h">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IColorful.h">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IDynamic.h">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IKilling.h">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IMagnetic.h">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IMovable.h">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IMoveBlocker.h">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IProtector.h">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IWallPixel.h">
+      <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Assembly.h">
+      <Filter>Classes\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Context.h">
+      <Filter>Classes\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EditorData.h">
+      <Filter>Classes\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EditorLayer.h">
+      <Filter>Classes\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EditorMain.h">
+      <Filter>Classes\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EditorMenu.h">
+      <Filter>Classes\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EditorTool.h">
+      <Filter>Classes\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EditorToolbox.h">
+      <Filter>Classes\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EditorToolGenerator.h">
+      <Filter>Classes\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Cmd.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Field.h">
+      <Filter>Classes\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameState.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameTest.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MenuMain.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ResultsState.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Goal.h">
+      <Filter>Classes\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GoalView.h">
+      <Filter>Classes\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FieldXML.h">
+      <Filter>Classes\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GoalXML.h">
+      <Filter>Classes\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HistoryManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HistoryStorage.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Historical.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Level.h">
+      <Filter>Classes\Logic\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EventProcessor.h">
+      <Filter>Classes\Logic\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Events.h">
+      <Filter>Classes\Logic\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LevelSelector.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ImageView.h">
+      <Filter>Classes\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LevelStorage.h">
+      <Filter>Classes\Logic\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LevelGenerator.h">
+      <Filter>Classes\Logic\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LevelXML.h">
+      <Filter>Classes\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagneticView.h">
+      <Filter>Classes\Views\PixelViews</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RepeatedSprite.h">
+      <Filter>Classes\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Shake.h">
+      <Filter>Classes\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ArrowMark.h">
+      <Filter>Classes\Extensions\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ColorBox.h">
+      <Filter>Classes\Extensions\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RoundMark.h">
+      <Filter>Classes\Extensions\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SleepingZets.h">
+      <Filter>Classes\Extensions\UIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PixelXML.h">
+      <Filter>Classes\Serialization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BadMagneticPixel.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CactusDynamic.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CactusStatic.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagneticDiagonalPixel.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagneticPixel.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SokobanPixel.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StonePixel.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WallPixel.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AssembledMagneticBase.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SokobanBase.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Pixel.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SocialManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnyBehavior.h">
+      <Filter>Classes\Logic\Pixel Models\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Strategies.h">
+      <Filter>Classes\Logic\Pixel Models\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SimpleInputDialog.h">
+      <Filter>Classes\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameMain.h">
+      <Filter>Classes\States\GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Ranking.h">
+      <Filter>Classes\Logic\Pixel Models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Solution.h">
+      <Filter>Classes\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\View.h">
+      <Filter>Classes\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PixelsLayer.h">
+      <Filter>Classes\States\GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TouchLayer.h">
+      <Filter>Classes\States\GameMain</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\World.h">
+      <Filter>Classes\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ViewsConstants.h">
+      <Filter>Classes\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CactusStaticView.h">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CactusDynamicView.h">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagneticPixelView.h">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PitfallView.h">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SokobanPixelView.h">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StonePixelView.h">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WallPixelView.h">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PixelView.h">
+      <Filter>Classes\Views\PixelViews</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Pitfall.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

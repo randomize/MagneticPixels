@@ -23,11 +23,9 @@ namespace MPix {
    {
    public:
 
-      static EMAnimation* create(const char* arm_name);
+      static EMAnimation* create( const string& arm_name );
 
-      bool init(const char* arm_name);
-
-      void SetHSV(HSVColor color);
+      bool init(const string& arm_name);
 
       // Plays or schedules to queue and play after current
       void Play(const char* name);
@@ -46,7 +44,7 @@ namespace MPix {
 
       void ProcessOne();
 
-      HSVArmature* armature;
+      Armature* armature;
 
       bool isplaying;
       bool islocking;

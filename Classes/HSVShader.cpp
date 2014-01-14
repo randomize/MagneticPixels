@@ -19,6 +19,7 @@ void main() \n\
 {\n\
    //gl_FragColor = xform * v_fragmentColor * texture2D(CC_Texture0, v_texCoord);\n\
    gl_FragColor = xform * texture2D(CC_Texture0, v_texCoord) * v_fragmentColor;\n\
+   //gl_FragColor = vec4(1,0,0,1);\n\
 }\n\
 ";
 

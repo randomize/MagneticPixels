@@ -26,12 +26,18 @@ namespace MPix {
    public:
 
       static HSVArmature* create(const char *name);
-
-      void draw() override;
+      //void draw() override;
 
    protected:
 
+      GroupCommand _groupCommand;
+      CustomCommand _beginCommand;
+      CustomCommand _endCommand;
+
    private:
+
+      //void OnBegin();
+      //void OnEnd();
 
    };
 

@@ -17,6 +17,7 @@ namespace MPix {
    // forwards
    class EMShader;
    class HSVSprite;
+   class EMAnimation;
 
    // ContentManager
    // It is actually a resource manager ;)
@@ -41,7 +42,7 @@ namespace MPix {
 
       // =========== Animation management ==========================================
 
-      Armature* GetAnimation(const string& name);
+      EMAnimation* GetAnimation(const string& name);
 
       // =========== GFX helpers ==========================================
       // If some state wants to pass some (data)node to another they use 

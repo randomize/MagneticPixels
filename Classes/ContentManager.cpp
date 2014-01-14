@@ -5,11 +5,12 @@
 
 #include "HSVShader.h"
 #include "HSVSprite.h"
+#include "EMAnimation.h"
 
 using namespace MPix;
 
-// Stupid cocos listeners dont work with non-Object instances
-// I don't want to have ContentManager subclassing Object, so 
+// Stupid cocos listeners don't work with non-Object instances
+// I don't want to have ContentManager deriving Object class, so 
 // this little helper handles the situation
 class ListenerDelegate : public Object {
 public:
@@ -58,8 +59,10 @@ void MPix::ContentManager::CreateAnimations()
 
    // load armatures
    ArmatureDataManager::getInstance()->addArmatureFileInfo("magnetic.png", "magnetic.plist", "magnetic.xml");
-   auto texture = Director::getInstance()->getTextureCache()->addImage("magnetic.png");
-   texture->setAliasTexParameters();
+   //auto texture = Director::getInstance()->getTextureCache()->addImage("magnetic.png");
+   //texture->setAliasTexParameters();
+   resources.emplace("socoban_0", "Pixel");
+   resources.emplace("magnetic_0", "Pixel");
 
 }
 
@@ -150,6 +153,28 @@ HSVSprite* MPix::ContentManager::GetHSVSprite(const string& name)
    assert(fab);
    return fab;
 }
+
+EMAnimation* MPix::ContentManager::GetAnimation(const string& name)
+{
+   EM_LOG_DEBUG("Loading HSV sprite resource: " + name);
+
+   EMAnimation* fab = nullptr;
+
+   auto it = resources.find(name);
+   if (it == resources.end())
+   {
+       EM_LOG_WARNING("Not found resource " + name);
+       assert(false);
+   }
+   else
+   {
+      fab = EMAnimation::create(it->second);
+   }
+
+   assert(fab);
+   return fab;
+}
+
 
 
 

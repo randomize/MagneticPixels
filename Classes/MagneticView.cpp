@@ -35,9 +35,10 @@ void MPix::MagneticView::Build( shared_ptr<Pixel> model )
    zzz = SleepingZets::create();
 
    // Animated body
-   body = EMAnimation::create("Pixel");
-   body->SetHSV(PixelColorToHSV(asm_interface->GetColor()));
-   body->setScale(0.25f);
+   body = ContentManager::getInstance().GetAnimation("magnetic_0");
+   //body = EMAnimation::create("Pixel");
+   //body->SetHSV(PixelColorToHSV(asm_interface->GetColor()));
+   //body->setScale(0.25f);
 
    // Setup contents
    contents->addChild( zzz, 5);

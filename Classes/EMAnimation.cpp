@@ -8,7 +8,7 @@ using namespace MPix;
 //====---------------------------------------------======//
 
 
-MPix::EMAnimation* MPix::EMAnimation::create( const char* arm_name )
+MPix::EMAnimation* MPix::EMAnimation::create( const string& arm_name )
 {
    auto fab = new EMAnimation;
    if (fab->init(arm_name)) {
@@ -19,13 +19,13 @@ MPix::EMAnimation* MPix::EMAnimation::create( const char* arm_name )
    return nullptr;
 }
 
-bool MPix::EMAnimation::init( const char* arm_name )
+bool MPix::EMAnimation::init( const string& arm_name )
 {
-   armature = HSVArmature::create(arm_name);
+   armature = Armature::create(arm_name);
    assert(armature);
    this->setCascadeOpacityEnabled(true);
    armature->setBlendFunc(BlendFunc::ALPHA_NON_PREMULTIPLIED);
-   armature->getAnimation()->setMovementEventCallFunc(this, movementEvent_selector(EMAnimation::animationNext));
+   armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_3(EMAnimation::animationNext, this ));
    islocking = false;
    isplaying = true;
    addChild(armature);
@@ -74,11 +74,6 @@ void MPix::EMAnimation::animationNext( Armature *armature, MovementEventType mov
           }
        }
     }
-}
-
-void MPix::EMAnimation::SetHSV( HSVColor color )
-{
-   armature->SetHSV(color);
 }
 
 void MPix::EMAnimation::ProcessOne()
