@@ -7,13 +7,17 @@
 #include "ContentManager.h"
 #include "GameStateManager.h"
 #include "SleepingZets.h"
+#include "HSVSprite.h"
 
 using namespace MPix;
 
 //====---------------------------------------------======//
 
 MPix::MagneticView::MagneticView():
+   mimics(nullptr),
+   bg(nullptr),
    body(nullptr),
+   smash(nullptr),
    zzz(nullptr)
 {
    z_order = 10;
@@ -31,18 +35,32 @@ void MPix::MagneticView::Build( shared_ptr<Pixel> model )
    asm_interface = std::dynamic_pointer_cast<IAssembled>(model);
    assert(asm_interface && "Pixel using this view must implement this interface");
 
+   auto& cm = ContentManager::getInstance();
+
    // Z letters
    zzz = SleepingZets::create();
 
-   // Animated body
-   body = ContentManager::getInstance().GetAnimation("magnetic_0");
-   //body = EMAnimation::create("Pixel");
-   //body->SetHSV(PixelColorToHSV(asm_interface->GetColor()));
-   //body->setScale(0.25f);
+   // Animated face
+   mimics = cm.GetAnimation("magnetic_0");
+
+   // Colored background
+   bg = cm.GetHSVSprite("magnetic_bg_norm");
+   bg->SetHSV(PixelColorToHSV(asm_interface->GetColor()));
+   //bg->setScale(0.25f);
+
+   // Dead state
+   smash = cm.GetHSVSprite("magnetic_bg_smash");
+   smash->SetHSV(PixelColorToHSV(asm_interface->GetColor()));
+
+   // Body
+   body = Node::create();
+   body->addChild(bg, 1);
+   body->addChild(mimics, 2);
+   body->addChild(smash, 3);
 
    // Setup contents
    contents->addChild( zzz, 5);
-   contents->addChild(body);
+   contents->addChild( body, 1);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -84,13 +102,19 @@ bool MPix::MagneticView::Update( CmdUIUpdatePixelView::Reason reason )
 
 void MPix::MagneticView::PixelCreated()
 {
-   body->setScale(0.001f);
+   smash->setOpacity(0);
+   bg->setVisible(true);
+   bg->setScale(0.01f);
    auto sq = Sequence::create(
       DelayTime::create(rand()%100 / 100.0f),
-      CallFunc::create( [&]() { body->setScale(1.0f * 0.25f); body->PlayNow("create"); } ),
+      CallFunc::create([&]() { 
+         bg->setScale(1.0f);
+         mimics->PlayNow("create");
+         mimics->Play("sleeping");
+      }),
       nullptr
-      );
-   RunLockingAction(body, sq);
+   );
+   RunLockingAction(bg, sq);
    zzz->Show();
 }
 
@@ -98,19 +122,30 @@ void MPix::MagneticView::PixelAccepted()
 {
    auto m_act = Sequence::create(
       Spawn::create(
-         ScaleTo::create(0.5f, 0.5f), // FIXME scale later fix
+         ScaleTo::create(0.5f, 2.0f),
          FadeOut::create(0.5f),
          nullptr
       ),
       nullptr
    );
-   body->runAction(m_act);
+   mimics->runAction(m_act);
+   bg->runAction(Sequence::create(
+      Spawn::create(
+         ScaleTo::create(0.5f, 2.0f),
+         FadeOut::create(0.5f),
+         nullptr
+      ),
+      nullptr
+   ));
 }
 
 void MPix::MagneticView::PixelReset()
 {
    PixelView::PixelReset();
-   body->PlayNow("asleep");
+   smash->setOpacity(0);
+   bg->setVisible(true);
+   bg->setScale(1.0f);
+   mimics->PlayNow("asleep");
    zzz->Show();
 }
 
@@ -119,17 +154,19 @@ void MPix::MagneticView::PixelDied()
    auto ast = asm_interface->GetLiveState();
    if (ast == IAlive::State::KILLED_BY_NEEDLE || ast == IAlive::State::KILLED_BY_STONE ) 
    {
-      body->Play("die");
+      mimics->PlayNow("die");
       auto sq = Sequence::create(
          DelayTime::create(0.2f),
          CallFunc::create( [&]() {
-            body->setScale(1.0f * 0.25f);
-            body->PlayNow("blood");
+            mimics->setScale(1.0f);
+            body->setVisible(false);
+            smash->setOpacity(255);
+            smash->runAction(FadeOut::create(0.2f));
             GameStateManager::getInstance().CurrentState()->Execute(new CmdPlaySound("pop_" + ToString(rand()%3+1)));
          }),
          nullptr 
          );
-      body->runAction(sq);
+      mimics->runAction(sq);
    } 
    else if (ast == IAlive::State::KILLED_BY_PITTRAP ) 
    {
@@ -150,14 +187,14 @@ void MPix::MagneticView::PixelDied()
 
 void MPix::MagneticView::PixelResurrect()
 {
-   body->Play("create");
-   body->setOpacity(255);
-   body->setScale(0.001f);
-   body->setRotation(0);
-   auto m_act = ScaleTo::create(0.4f, 0.25f);
-   body->runAction(m_act);
+   mimics->Play("create");
+   mimics->setOpacity(255);
+   mimics->setScale(0.001f);
+   mimics->setRotation(0);
+   auto m_act = ScaleTo::create(0.4f, 1.0);
+   mimics->runAction(m_act);
    if ( asm_interface->IsSmiling() ) {
-      body->Play("happy");
+      mimics->Play("happy");
    }
    if ( asm_interface->IsInAssembly() == false ) {
       zzz->Show();
@@ -166,35 +203,36 @@ void MPix::MagneticView::PixelResurrect()
 
 void MPix::MagneticView::PixelSmiled()
 {
-   body->Play("smile");
-   body->Play("happy");
+   mimics->PlayNow("smile");
+   mimics->Play("happy");
 }
 
 void MPix::MagneticView::PixelUnsmiled()
 {
    if ( asm_interface->IsInAssembly() )
-      body->PlayNow("unsmile");
+      mimics->PlayNow("unsmile");
 }
 
 void MPix::MagneticView::PixelWake()
 {
-   body->PlayLocked("wake");
+   mimics->PlayNow("wake");
    zzz->Hide();
+   RunLockingAction(contents,  DelayTime::create(0.2f));
 }
 
 void MPix::MagneticView::PixelAsleep()
 {
-   body->PlayNow("asleep");
+   mimics->PlayNow("asleep");
    zzz->Show();
 }
 
 void MPix::MagneticView::PixelBlocks()
 {
    GameStateManager::getInstance().CurrentState()->Execute(new CmdPlaySound("bump"));
-   body->PlayNow("shocked");
-   RunLockingAction(body,  Shake::create(0.2f, 2.0f));
+   mimics->PlayNow("shocked");
+   RunLockingAction(mimics,  Shake::create(0.2f, 2.0f));
    if ( asm_interface->IsSmiling() ) {
-      body->Play("happy");
+      mimics->Play("happy");
    }
 }
 

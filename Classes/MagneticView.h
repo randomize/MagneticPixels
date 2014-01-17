@@ -19,6 +19,7 @@ namespace MPix {
    class SleepingZets;
    class EMAnimation;
    class IAssembled;
+   class HSVSprite;
 
    // MagneticView
 
@@ -51,8 +52,12 @@ namespace MPix {
 
    protected:
 
+     // contents
       SleepingZets* zzz;
-      EMAnimation* body;
+      Node* body;
+       EMAnimation* mimics;
+       HSVSprite* bg;
+       HSVSprite* smash;
 
    private:
 

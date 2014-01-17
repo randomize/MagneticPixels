@@ -26,6 +26,17 @@ namespace MPix {
    {
    public:
 
+      class ResourceItem {
+
+         enum class Type {
+            SINGLE_SPRITE,
+            SPRITE_FRAME,
+            HSV_SPRITE,
+            ANIMATION,
+            SOUND
+         };
+      };
+
       // =========== General interface ==========================================
 
       // Called once on startup

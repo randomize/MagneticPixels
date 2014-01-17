@@ -24,17 +24,8 @@ bool MPix::MenuMain::init()
       return false;
    }
 
-   return true;
-
-}
-
-void MPix::MenuMain::onEnter()
-{
-
-   Scene::onEnter();
-
    MenuItemFont::setFontSize(64);
-   MenuItemFont::setFontName("fonts/markerfelt.ttf");
+   MenuItemFont::setFontName("fonts/Exo2-Medium.ttf");
    auto menu = Menu::create();
 
    MenuItemFont* item = nullptr;
@@ -42,32 +33,33 @@ void MPix::MenuMain::onEnter()
 #ifdef MPIX_DEVELOPERS_BUILD
    item = MenuItemFont::create(LocalUTF8Char("Editor"), [&](Object *sender) {
       ToEditor();
-   }); menu->addChild(item);
+   }); item->setColor(Color3B::BLACK); menu->addChild(item);
 
    item = MenuItemFont::create(LocalUTF8Char("Test level"), [&](Object *sender) {
       ToTest();
-   }); menu->addChild(item);
+   }); item->setColor(Color3B::BLACK); menu->addChild(item);
 
 #endif
 
    item = MenuItemFont::create(LocalUTF8Char("Play"), [&](Object *sender) {
       ToSelector();
-   }); menu->addChild(item); item->setScale(1.5f);
+   }); item->setColor(Color3B::BLACK); menu->addChild(item);
 
    item = MenuItemFont::create(LocalUTF8Char("Exit"), [&](Object *sender) {
       ToExit();
-   }); menu->addChild(item);
+   }); item->setColor(Color3B::BLACK); menu->addChild(item);
 
 #ifdef MPIX_DEVELOPERS_BUILD
    item = MenuItemFont::create(LocalUTF8Char("Crash"), [&](Object *sender) {
       assert(false);
-   }); menu->addChild(item); item->setColor(Color3B::RED);
+   }); item->setColor(Color3B::RED); menu->addChild(item);
 #endif
 
    menu->alignItemsVertically();
 
-   // elastic effect
+   // Get center
    auto s = Director::getInstance()->getWinSize();
+   Point center(s.width / 2, s.height / 2);
 
    /* int i=0;
    //Node* child;
@@ -90,8 +82,8 @@ void MPix::MenuMain::onEnter()
    i++;
    }*/
 
-   menu->setPosition(Point(s.width/2, s.height/2));
-   addChild(menu);
+   menu->setPosition(center);
+   addChild(menu, 2);
 
    string vers(MPIX_VERSION);
 
@@ -104,13 +96,25 @@ void MPix::MenuMain::onEnter()
    auto orig = Director::getInstance()->getVisibleOrigin();
    auto sz = Director::getInstance()->getVisibleSize();
    vlabel->setPosition(Point(orig.x + sz.width, orig.y));
-   addChild(vlabel);
+   addChild(vlabel, 2);
 
-}
 
-void MPix::MenuMain::onExit()
-{
-   Scene::onExit();
+   auto bg = Sprite::create("bg/01.jpg");
+   bg->setScale(0.64f);
+   bg->setPosition(center);
+   bg->runAction(
+      RepeatForever::create(
+         Sequence::create(
+            MoveTo::create(5, center + Point(400, 0)),
+            MoveTo::create(5, center - Point(400, 0)),
+            nullptr
+         )
+      )
+   );
+   addChild(bg, 1);
+
+   return true;
+
 }
 
 void MPix::MenuMain::ToEditor()

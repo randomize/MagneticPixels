@@ -72,17 +72,12 @@ void GameMain::onEnter()
 
    bg = LayerColor::create(Color4B::GRAY);
    //bg->setPosition(halfSize.width, halfSize.height);
-   bg->setScale(2.0f);
+   //bg->setScale(2.0f);
    addChild(bg, 0);
 
-   /*auto sp1 = Sprite::create("bg_1.png");
-   sp1->setPosition(Point(halfSize.width, halfSize.height));
-   bg->addChild(sp1,1);
-   auto sp2 = Sprite::create("bg_2.png");
-   sp2->setPosition(Point(halfSize.width, halfSize.height));
-   auto act = Sequence::createWithTwoActions(FadeIn::create(8), FadeOut::create(8));
-   sp2->runAction(RepeatForever::create(act));
-   bg->addChild(sp2,2);*/
+   auto bg1 = Sprite::create("bg/02.jpg");
+   //bg1->setPosition(Point(halfSize.width, halfSize.height));
+   bg->addChild(bg1, 1);
 
    content = Node::create();
    addChild(content, 1);

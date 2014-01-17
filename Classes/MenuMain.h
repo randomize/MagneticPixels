@@ -29,9 +29,6 @@ namespace MPix {
       ~MenuMain();
       bool init() override;
 
-      void onEnter() override;
-      void onExit() override;
-
    private: // Helpers
 
       void ToEditor();

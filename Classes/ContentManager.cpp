@@ -58,11 +58,15 @@ void MPix::ContentManager::CreateAnimations()
 {
 
    // load armatures
-   ArmatureDataManager::getInstance()->addArmatureFileInfo("magnetic.png", "magnetic.plist", "magnetic.xml");
-   //auto texture = Director::getInstance()->getTextureCache()->addImage("magnetic.png");
-   //texture->setAliasTexParameters();
-   resources.emplace("socoban_0", "Pixel");
-   resources.emplace("magnetic_0", "Pixel");
+   auto t_cache = Director::getInstance()->getTextureCache();
+   auto arm_man = ArmatureDataManager::getInstance();
+
+   // Load mimics for magnetic
+   arm_man->addArmatureFileInfo("magnetic_mimics.png", "magnetic_mimics.plist", "magnetic_mimics.xml");
+   auto texture = t_cache->addImage("magnetic_mimics.png");
+   texture->setAliasTexParameters();
+   resources.emplace("magnetic_0", "magnetic_0");
+   resources.emplace("socoban_0", "magnetic_0");
 
 }
 
@@ -74,7 +78,8 @@ void MPix::ContentManager::CreateSprites()
    //cache->addSpriteFramesWithFile("scene.plist");
    resources.emplace("wall_pixel", "wall.png");
    resources.emplace("goal_bg", "pixel_goal.png");
-   //resources.emplace()
+   resources.emplace("magnetic_bg_smash", "magnetic_bg_smash.png");
+   resources.emplace("magnetic_bg_norm", "magnetic_bg_norm.png");
 
    // UI Objects
    //cache->addSpriteFramesWithFile("ui.plist");
