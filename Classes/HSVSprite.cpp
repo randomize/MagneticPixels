@@ -42,7 +42,7 @@ bool MPix::HSVSprite::initWithTexture( Texture2D* texture, const Rect& rect )
 
 void MPix::HSVSprite::draw()
 {
-   _renderCommand.init(0, _vertexZ);
+   _renderCommand.init(_globalZOrder);
    _renderCommand.func = CC_CALLBACK_0(HSVSprite::onDraw, this);
    Director::getInstance()->getRenderer()->addCommand(&_renderCommand);
 }

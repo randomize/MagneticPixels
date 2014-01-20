@@ -51,6 +51,11 @@ namespace EMCore {
       EM_LOG_INFO("=== Windows platform manager ready ====");
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
       EM_LOG_INFO("=== IOS platform manager ready ====");
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+      EM_LOG_INFO("=== Linux platform manager ready ====");
+#else
+      EM_LOG_ERROR("=== No platform manager for this platform ===");
+      assert(false);
 #endif
    }
 
@@ -60,6 +65,7 @@ namespace EMCore {
       jvm->DetachCurrentThread();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
 #endif
    }
 
@@ -71,6 +77,8 @@ namespace EMCore {
       return GetDesktopPath();
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
       return "Sorry, I am iOS, you can't access file system";
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
+      return "/home/randy/Desktop";
 #endif
    }
 
@@ -82,6 +90,8 @@ namespace EMCore {
       //auto inst = GetModuleHandle();
       MessageBoxA(0,text,title, MB_OK | MB_ICONINFORMATION);
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+      MessageBox(text, title);
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
       MessageBox(text, title);
 #endif
    }

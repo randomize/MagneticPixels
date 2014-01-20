@@ -84,7 +84,8 @@
    #pragma clang diagnostic ignored "-Wall"
    #include <cocos2d.h>
    #include <cocos-ext.h>
-   //#include <SimpleAudioEngine.h>
+   #include <cocostudio/CocoStudio.h>
+   #include <external/tinyxml2/tinyxml2.h>
    #pragma clang diagnostic pop
 
 #elif _MSC_VER
@@ -93,7 +94,6 @@
    #include "cocos-ext.h"
    #include "cocostudio/CocoStudio.h"
    #include "external/tinyxml2/tinyxml2.h"
-   //#include "SimpleAudioEngine.h"
    #pragma warning (pop)
 
 #elif __GNUG__
@@ -104,7 +104,6 @@
    #include "extensions/cocos-ext.h"
    #include "editor-support/cocostudio/CocoStudio.h"
    #include "external/tinyxml2/tinyxml2.h"
-   //#include <SimpleAudioEngine.h>
    #pragma GCC diagnostic pop
 
 #endif
