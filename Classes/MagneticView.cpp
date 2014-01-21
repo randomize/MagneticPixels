@@ -57,7 +57,9 @@ void MPix::MagneticView::Build( shared_ptr<Pixel> model )
    body->addChild(bg, 1);
    body->addChild(mimics, 2);
    body->addChild(smash, 3);
-   //body->set///
+   //body->set//
+   // body->
+   body->setCascadeOpacityEnabled(true);
 
    // Setup contents
    contents->addChild( zzz, 5);
