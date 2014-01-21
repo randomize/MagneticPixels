@@ -57,8 +57,6 @@ void MPix::MagneticView::Build( shared_ptr<Pixel> model )
    body->addChild(bg, 1);
    body->addChild(mimics, 2);
    body->addChild(smash, 3);
-   //body->set//
-   // body->
    body->setCascadeOpacityEnabled(true);
 
    // Setup contents
@@ -157,7 +155,7 @@ void MPix::MagneticView::PixelReset()
 void MPix::MagneticView::PixelDied()
 {
    auto ast = asm_interface->GetLiveState();
-   if (ast == IAlive::State::KILLED_BY_NEEDLE || ast == IAlive::State::KILLED_BY_STONE ) 
+   if (ast == IAlive::State::KILLED_BY_NEEDLE) 
    {
       mimics->PlayNow("die");
       auto sq = Sequence::create(
@@ -173,6 +171,20 @@ void MPix::MagneticView::PixelDied()
          );
       mimics->runAction(sq);
    } 
+   else if (ast == IAlive::State::KILLED_BY_STONE ) 
+   {
+      auto sq = Sequence::create(
+         Hide::create(),
+         CallFunc::create( [&]() {
+            bg->setVisible(false);
+            smash->setOpacity(255);
+            smash->runAction(FadeOut::create(0.5f));
+            GameStateManager::getInstance().CurrentState()->Execute(new CmdPlaySound("pop_" + ToString(rand()%3+1)));
+         }),
+         nullptr 
+         );
+      mimics->runAction(sq);
+   }
    else if (ast == IAlive::State::KILLED_BY_PITTRAP ) 
    {
       auto m_act = Spawn::create( 

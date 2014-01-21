@@ -33,7 +33,7 @@ MPix::EditorLayer::EditorLayer()
     if (lvl) {
        editor_data = LevelGenerator::getInstance()->SaveToEditorData(lvl);
        assert(editor_data);
-    } else 
+    } else
        editor_data = new EditorData();
 }
 
@@ -50,7 +50,7 @@ MPix::EditorLayer::~EditorLayer()
 bool EditorLayer::init()
 {
    cursor = Coordinates(0, 0);
-   st = TouchState::WAITING_TOUCH; 
+   st = TouchState::WAITING_TOUCH;
 
    auto box = ColorBox::create();
    box->SetColor(Color4F::WHITE);
@@ -71,25 +71,18 @@ bool EditorLayer::init()
    auto cl = Color4F(0.5f, 0.5f, 0.5f, 1.0f);
    const int size = 90;
    for (int i=0; i < size*2+1; ++i){
-      dn->drawSegment( 
+      dn->drawSegment(
          LogicToScreen(Coordinates(-size, i-size)),
          LogicToScreen(Coordinates(size, i-size)),
          0.5f,
          cl);
-      dn->drawSegment( 
+      dn->drawSegment(
          LogicToScreen(Coordinates(i-size, -size)),
          LogicToScreen(Coordinates(i-size, size)),
          0.5f,
          cl);
    }
    addChild(dn);
-
-   for (int i=0; i<4; ++i) {
-      auto m = RoundMark::create("X");
-      m->setScale(3.0f );
-      addChild(m, 100500);
-      vp_marks[i] = m;
-   }
 
    if (editor_data) {
 
@@ -110,7 +103,7 @@ bool EditorLayer::init()
    }
 
    cursor = Coordinates(0, 0);
-   
+
 
    return true;
 }
@@ -162,7 +155,6 @@ void EditorLayer::onTouchMoved( Touch *touch, Event *event )
       auto was = getParent()->convertToNodeSpace(touch->getStartLocation());
       auto dir = getParent()->convertToNodeSpace(touch->getLocation()) - was;
       this->setPosition(pos + dir);
-      UpdateViewport();
       break;
    }
    case TouchState::ZOOMING:
@@ -387,32 +379,6 @@ shared_ptr<Level> MPix::EditorLayer::CreateLevel()
    }
 }
 
-void MPix::EditorLayer::UpdateViewport()
-{
-   auto diff = getPosition() - initial_pos;
-   auto p = ScreenToLogic(diff);
-   Rectangle r;
-   r.BL = Coordinates(-4-p.x,-6-p.y);
-   r.TR = Coordinates(3-p.x,5-p.y);
-   this->editor_data->SetViewport(r);
-   vp_marks[0]->setPosition(LogicToScreen(r.BL.x,r.BL.y) + MPIX_CELL_SIZE_HALF_P);
-   vp_marks[1]->setPosition(LogicToScreen(r.TR.x,r.BL.y) + MPIX_CELL_SIZE_HALF_P);
-   vp_marks[2]->setPosition(LogicToScreen(r.BL.x,r.TR.y) + MPIX_CELL_SIZE_HALF_P);
-   vp_marks[3]->setPosition(LogicToScreen(r.TR.x,r.TR.y) + MPIX_CELL_SIZE_HALF_P);
-
-}
-
-void MPix::EditorLayer::FixPosition()
-{
-   auto vm = editor_data->GetViewport();
-   Coordinates p = vm.BL + Coordinates(4,6); // pos defined with BL only
-   auto sc = this->getScale();
-   auto pos = this->getPosition() - LogicToScreen(p);
-   initial_pos = this->getPosition();
-   this->setPosition(pos);
-   UpdateViewport();
-}
-
 
 void MPix::EditorLayer::RenameLevel( string newname )
 {
@@ -420,12 +386,6 @@ void MPix::EditorLayer::RenameLevel( string newname )
    editor_data->SetName(newname);
 }
 
-bool MPix::EditorLayer::TogglePan()
-{
-   auto n = ! editor_data->GetAutoPan();
-   editor_data->SetAutoPan(n);
-   return n;
-}
 
 const string& MPix::EditorLayer::GetLevelName()
 {
@@ -433,6 +393,25 @@ const string& MPix::EditorLayer::GetLevelName()
    return editor_data->GetName();
 }
 
+
+void MPix::EditorLayer::TouchEnable()
+{
+   EM_LOG_DEBUG("Editor touch layer touches on");
+   auto listener = EventListenerTouchOneByOne::create();
+   listener->setSwallowTouches(true);
+   listener->onTouchBegan     = CC_CALLBACK_2(EditorLayer::onTouchBegan, this);
+   listener->onTouchMoved     = CC_CALLBACK_2(EditorLayer::onTouchMoved, this);
+   listener->onTouchEnded     = CC_CALLBACK_2(EditorLayer::onTouchEnded, this);
+   listener->onTouchCancelled = CC_CALLBACK_2(EditorLayer::onTouchCancelled, this);
+
+   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+}
+
+void MPix::EditorLayer::TouchDisable()
+{
+   _eventDispatcher->removeEventListeners(EventListener::Type::TOUCH_ONE_BY_ONE);
+}
 
 
 

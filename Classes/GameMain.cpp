@@ -11,10 +11,8 @@
 using namespace MPix;
 using namespace std::placeholders;
 
-
 // Constants
 int const MPix::GameMain::GAMEPLAY_TICK_RATIO = 6;
-
 
 // UI Z orders
 int const MPix::GameMain::Z_PIXEL_MIMICS = 5;
@@ -23,20 +21,17 @@ int const MPix::GameMain::Z_WALLS = 10;
 
 MPix::GameMain::GameMain()
 {
-   CmdUIContentTransform::listners["GameMain"] = std::bind( &GameMain::ContentTransform, this, _1, _2);
-   CmdUIUpdateViewport::listners["GameMain"] = std::bind( &GameMain::UpdateViewport, this );
    CmdUIGameFinished::listners["GameMain"] = std::bind( &GameMain::FinishGame, this );
 }
 
 MPix::GameMain::~GameMain()
 {
-   CmdUIContentTransform::listners.erase("GameMain"); 
-   CmdUIUpdateViewport::listners.erase("GameMain");
    CmdUIGameFinished::listners.erase("GameMain");
 }
 
 bool GameMain::init()
 {
+   EM_LOG_ERROR("init");
 
    // 1. super init first
    if ( !Scene::init() )
@@ -47,6 +42,46 @@ bool GameMain::init()
    // Check that game play is ready
    assert(GameplayManager::getInstance().GetState() == GameplayManager::State::READY);
 
+   // Take some metrics
+   Size fullSize = Director::getInstance()->getWinSize();
+   Size halfSize =  fullSize / 2.0f;
+   Size visibleSize = Director::getInstance()->getVisibleSize();
+   Point origin = Director::getInstance()->getVisibleOrigin();
+
+   float contentScale = (visibleSize.height/fullSize.height * visibleSize.width/fullSize.width);
+
+   // Create scene:
+   // bg = 0
+   //  bg1
+   // content = 1
+   //   pixels = 1
+   //   touch = 2
+   
+   auto bg1 = Sprite::create("bg/02.jpg");
+   bg1->setScale(visibleSize.height / bg1->getContentSize().height);
+   bg1->setPosition(halfSize.width, halfSize.height);
+
+   bg = Layer::create();
+   bg->addChild(bg1, 1);
+   addChild(bg, 0);
+
+   pixels = PixelsLayer::create();
+   assert(pixels);
+
+   touch = TouchLayer::create();
+   assert(touch);
+
+   // Content
+   content = Node::create();
+   content->addChild(touch, 2);
+   content->addChild(pixels, 1);
+   content->setScale(contentScale);
+   content->setPosition(halfSize.width, halfSize.height);
+   addChild(content, 1);
+
+   // Create buttons
+   CreateButtons();
+
    return true;
 }
 
@@ -55,53 +90,6 @@ void GameMain::onEnter()
 {
    Scene::onEnter();
 
-   // Create scene
-   Size fullSize = Director::getInstance()->getWinSize();
-   Size halfSize =  fullSize / 2.0f;
-   Size visibleSize = Director::getInstance()->getVisibleSize();
-   Point origin = Director::getInstance()->getVisibleOrigin();
-
-   contentScale = visibleSize.height/fullSize.height * visibleSize.width/fullSize.width;
-
-   // Setup layers
-   // bg = 0
-   // content = 1
-   //   pixels = 1
-   //   touch = 2
-
-
-   bg = LayerColor::create(Color4B::GRAY);
-   //bg->setPosition(halfSize.width, halfSize.height);
-   //bg->setScale(2.0f);
-   addChild(bg, 0);
-
-   auto bg1 = Sprite::create("bg/02.jpg");
-   //bg1->setPosition(Point(halfSize.width, halfSize.height));
-   bg->addChild(bg1, 1);
-
-   content = Node::create();
-   addChild(content, 1);
- 
-   pixels = PixelsLayer::create();
-   assert(pixels);
-   //pixels->setPosition(halfSize.width, halfSize.height);
-   pixels->setScale(contentScale);
-   content->addChild(pixels, 1);
-
-   touch = TouchLayer::create();
-   assert(touch);
-   //touch->setPosition(halfSize.width, halfSize.height);
-   touch->setScale(contentScale); 
-   content->addChild(touch, 2);
-
-   // Create buttons
-   CreateButtons();
-
-   // save original viewport and content pos
-   viewport = GameplayManager::getInstance().GetViewport();
-   Coordinates p = viewport.BL + Coordinates(4,6); // pos defined with BL only
-   content->setPosition(-LogicToScreen(p) + Point(halfSize.width, halfSize.height));
-   initial_pos = content->getPosition();
 
    // Run GameplayManager
    GameplayManager::getInstance().Play();
@@ -145,7 +133,6 @@ void MPix::GameMain::BtnHnadler(Object* sender)
       pixels->Reset();
       ResetLocks();
       GameplayManager::getInstance().Play();
-      UpdateViewport();
       return;
    }
    case 102: {
@@ -193,7 +180,7 @@ ErrorCode GameMain::Tick( float t )
 
 EmbossLib::ErrorCode MPix::GameMain::FinishedGame()
 {
-   // TODO: 
+   // TODO:
    // Get a snapshot render texture and filter it(blur or someth)
    // Store to content manager
    // SwithcTo final state
@@ -210,38 +197,6 @@ void GameMain::onExit()
 
 //////////////////////////////////////////////////////////////////////////
 // Commands handlers
-
-ErrorCode GameMain::ContentTransform( float scale, Point position )
-{
-   const float speed = 1.8f;
-   const float dist = 0.9f;
-   position = position * contentScale + initial_pos;
-   // Move content
-   if (content->getNumberOfRunningActions()) {
-      auto act = Spawn::createWithTwoActions(ScaleTo::create(speed, scale), EaseInOut::create(MoveTo::create(speed/2.0, position),1.5f));
-      content->stopAllActions();
-      content->runAction(act);
-      bg->stopAllActions();
-      bg->runAction(MoveTo::create(speed/2.0, position * dist));
-   } else {
-      auto act = Spawn::createWithTwoActions(ScaleTo::create(speed, scale), EaseInOut::create(MoveTo::create(speed, position),1.5f));
-      content->runAction(act);
-      bg->runAction(MoveTo::create(speed, position * dist));
-   }
-
-   return ErrorCode::RET_OK;
-}
-
-EmbossLib::ErrorCode MPix::GameMain::UpdateViewport()
-{
-   auto & newv = GameplayManager::getInstance().GetCurrentViewport();
-   // Currently only pan
-   int x = newv.BL.x - viewport.BL.x;
-   int y = newv.BL.y - viewport.BL.y;
-   ContentTransform(1.0f, LogicToScreen(-x, -y));
-
-   return ErrorCode::RET_OK;
-}
 
 EmbossLib::ErrorCode MPix::GameMain::FinishGame()
 {

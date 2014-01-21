@@ -6,7 +6,6 @@
     </worlds>
     <levels>
         <lvl id="12345" w="1" name="Training 2" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <w x="1" y="3" s="2"/>
                 <w x="0" y="3" s="3"/>
@@ -23,7 +22,6 @@
             </gl>
         </lvl>
         <lvl id="5641" w="2" name="Noname" pan="1">
-            <vp tx="4" ty="7" bx="-3" by="-4"/>
             <fld>
                 <m x="-1" y="1" c="2"/>
                 <m x="1" y="-2" c="2"/>
@@ -46,7 +44,6 @@
             </gl>
         </lvl>
         <lvl id="12986" w="3" name="Noname" pan="1">
-            <vp tx="4" ty="5" bx="-3" by="-6"/>
             <fld>
                 <m x="1" y="3" c="3"/>
                 <m x="-1" y="-1" c="2"/>
@@ -72,7 +69,6 @@
             </gl>
         </lvl>
         <lvl id="23179" w="2" name="Noname" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <m x="-1" y="-5" c="2"/>
                 <m x="-2" y="-4" c="2"/>
@@ -95,7 +91,6 @@
             </gl>
         </lvl>
         <lvl id="443" w="0" name="Noname" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <m x="1" y="1" c="2"/>
                 <c x="0" y="1" t="0" d="0"/>
@@ -154,7 +149,6 @@
             </gl>
         </lvl>
         <lvl id="12610" w="0" name="Noname" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <C x="0" y="1"/>
                 <m x="-1" y="-2" c="2"/>
@@ -166,7 +160,6 @@
             </gl>
         </lvl>
         <lvl id="15236" w="0" name="Noname" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <m x="-1" y="1" c="2"/>
                 <s x="1" y="1" c="2"/>
@@ -181,7 +174,6 @@
             </gl>
         </lvl>
         <lvl id="22536" w="0" name="Noname" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <c x="0" y="1" t="0" d="0"/>
                 <c x="-3" y="-5" t="1" d="0"/>
@@ -240,7 +232,6 @@
             </gl>
         </lvl>
         <lvl id="28299" w="0" name="Noname" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <p x="0" y="0"/>
                 <S x="-2" y="0"/>
@@ -258,7 +249,6 @@
             </gl>
         </lvl>
         <lvl id="6463" w="0" name="Noname" pan="1">
-            <vp tx="2" ty="6" bx="-5" by="-5"/>
             <fld>
                 <m x="0" y="0" c="2"/>
             </fld>
@@ -269,7 +259,6 @@
             </gl>
         </lvl>
         <lvl id="5140" w="3" name="Some Stones" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <S x="-1" y="0"/>
                 <S x="0" y="0"/>
@@ -283,7 +272,6 @@
             </gl>
         </lvl>
         <lvl id="14228" w="0" name="SokobanPixel" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <s x="0" y="0" c="4"/>
                 <m x="1" y="1" c="2"/>
@@ -312,7 +300,6 @@
             </gl>
         </lvl>
         <lvl id="17212" w="0" name="Bug" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <p x="-3" y="0"/>
                 <s x="-2" y="0" c="4"/>
@@ -337,7 +324,6 @@
             </gl>
         </lvl>
         <lvl id="27405" w="0" name="Surround" pan="1">
-            <vp tx="3" ty="5" bx="-4" by="-6"/>
             <fld>
                 <S x="0" y="0"/>
                 <m x="-3" y="0" c="4"/>

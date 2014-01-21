@@ -51,14 +51,6 @@ namespace MPix {
       std::vector<shared_ptr<Pixel>> GetAllPixels();
       std::vector<std::pair<Coordinates, PixelColor>> GetAllGoals();
 
-      // Viewport
-      void SetViewport(Rectangle r) { viewport = r; }
-      Rectangle GetViewport() { return viewport; }
-
-      // Auto pan
-      bool GetAutoPan() const { return autopan; }
-      void SetAutoPan(bool ap) { autopan = ap; }
-
       // Name
       void SetName(const string& s) { name = s; }
       const string& GetName() const { return name; }
@@ -69,8 +61,6 @@ namespace MPix {
       unordered_map<Coordinates, vector<shared_ptr<Pixel>>> field;
       unordered_map<Coordinates, shared_ptr<Pixel>> walls;
       vector<shared_ptr<Goal>> goals;
-      Rectangle viewport;
-      bool autopan;
       string name;
 
    };

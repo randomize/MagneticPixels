@@ -73,9 +73,7 @@ void EditorMain::onEnter()
    assert(editor);
    editor->setPosition(halfSize.width, halfSize.height);
    editor->setScale(contentScale);
-   editor->setTouchMode(Touch::DispatchMode::ONE_BY_ONE);
-   editor->setTouchEnabled(true);
-   editor->FixPosition();
+   editor->TouchEnable();
    addChild(editor, 1);
 
    const unsigned char f = 190;
@@ -86,7 +84,6 @@ void EditorMain::onEnter()
    this->tb = EditorToolbox::create();
    tb->setPosition(halfSize.width-MPIX_CELL_SIZE_HALF, halfSize.height-MPIX_CELL_SIZE_HALF);
    tb->setScale(contentScale);
-   tb->setTouchMode(Touch::DispatchMode::ONE_BY_ONE);
    tb->setVisible(false);
    tb->Editor = editor;
    addChild(tb, 3);
@@ -126,7 +123,7 @@ void EditorMain::onExit()
 {
    Scene::onExit();
 
-   editor->setTouchEnabled(true);
+   editor->TouchDisable();
 }
 
 ErrorCode EditorMain::Tick( float t )
@@ -163,11 +160,7 @@ void MPix::EditorMain::BtnHnadler(Object* sender)
          return;
       }
       case 103: {
-         if (editor->TogglePan()) {
-            ShowHint("Pan on");
-         } else {
-            ShowHint("Pan off");
-         }
+         ShowHint("REMOVED FUNCTION");
          return;
       }
       case 104: {
@@ -214,8 +207,8 @@ void MPix::EditorMain::ShowToolBox()
    tb_bg->setVisible(true);
    tb_bg->stopAllActions();
    tb_bg->runAction(FadeTo::create(0.4f, 200));
-   editor->setTouchEnabled(false);
-   tb->setTouchEnabled(true);
+   editor->TouchDisable();
+   tb->TouchEnable();
    tb->setVisible(true);
    tb->onShow();
 }
@@ -225,8 +218,8 @@ void MPix::EditorMain::HideToolBox()
    tb_bg->stopAllActions();
    tb_bg->runAction(Sequence::create(FadeTo::create(0.4f, 0), Hide::create(), nullptr));
    tb->setVisible(true);
-   tb->setTouchEnabled(false);
-   editor->setTouchEnabled(true);
+   tb->TouchDisable();
+   editor->TouchEnable();
    tb->setVisible(false);
 }
 

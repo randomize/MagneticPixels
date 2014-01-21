@@ -7,7 +7,7 @@ using namespace MPix;
 SimpleInputDialog* MPix::SimpleInputDialog::create( const char* req /*= "Input, please"*/, const char* def /*= ""*/ )
 {
    auto fab = new SimpleInputDialog();
-   if (fab->init(req, def)) {
+   if (fab->initWithRequast(req, def)) {
       fab->autorelease();
       return fab;
    }
@@ -15,7 +15,7 @@ SimpleInputDialog* MPix::SimpleInputDialog::create( const char* req /*= "Input, 
    return nullptr;
 }
 
-bool MPix::SimpleInputDialog::init( const char* req /*= "Input, please"*/, const char* def /*= ""*/ )
+bool MPix::SimpleInputDialog::initWithRequast( const char* req /*= "Input, please"*/, const char* def /*= ""*/ )
 {
 
    auto sx = Director::getInstance()->getWinSize();

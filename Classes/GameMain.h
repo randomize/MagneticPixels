@@ -42,14 +42,9 @@ namespace MPix {
       PixelsLayer* pixels;
       TouchLayer* touch;
       Layer * bg;
-      float contentScale; // calculated based on aspect ratio
        
       // Content holds pixels and touch layers, making easy to scroll/zoom
       Node* content;
-
-
-      Rectangle viewport;  // Original viewport
-      Point initial_pos;
 
    protected:
 
@@ -63,13 +58,6 @@ namespace MPix {
 
       // Handles CmdGameFinish
       ErrorCode FinishGame();
-
-      // Handles CmdContentTransform ContentTransform controls its position and 
-      ErrorCode ContentTransform(float scale, Point position);
-
-   protected: // FIXME: for child call, actually bad design
-      // Handles CmdUpdateViewport Update viewport calculates viewport screen pos and updates content transform
-      ErrorCode UpdateViewport();
 
    public: // General UI game constants
 

@@ -11,9 +11,6 @@ MPix::Level::Level()
    field = make_shared<Field>();
    goals = make_shared<Goals>();
    solution = make_shared<Solution>();
-   auto_pan = true;
-   viewport.BL = Coordinates(-4,-6);
-   viewport.TR = Coordinates(3,5);
    world = 0;
    starz = 0;
 
@@ -40,8 +37,6 @@ shared_ptr<Level> MPix::Level::Dublicate()
    fab->field = field->Dublicate();
    fab->goals = goals->Dublicate();
    fab->solution = solution->Dublicate();
-   fab->auto_pan = auto_pan;
-   fab->viewport = viewport;
    fab->starz = starz;
    fab->world = world;
    fab->levelID = levelID;

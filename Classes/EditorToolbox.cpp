@@ -142,5 +142,22 @@ void MPix::EditorToolbox::CloseToolbox()
    GameStateManager::getInstance().CurrentState()->Execute(new CmdEditorAction(CmdEditorAction::EditorAction::ED_HIDE_TOOLS));
 }
 
+void MPix::EditorToolbox::TouchDisable()
+{
+   EM_LOG_DEBUG("Editor toolbox layer touches on");
+   auto listener = EventListenerTouchOneByOne::create();
+   listener->setSwallowTouches(true);
+   listener->onTouchBegan     = CC_CALLBACK_2(EditorToolbox::onTouchBegan, this);
+   // listener->onTouchMoved     = CC_CALLBACK_2(EditorLayer::onTouchMoved, this);
+   // listener->onTouchEnded     = CC_CALLBACK_2(EditorLayer::onTouchEnded, this);
+   // listener->onTouchCancelled = CC_CALLBACK_2(EditorLayer::onTouchCancelled, this);
+
+   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+}
+
+void MPix::EditorToolbox::TouchEnable()
+{
+   _eventDispatcher->removeEventListeners(EventListener::Type::TOUCH_ONE_BY_ONE);
+}
 
 

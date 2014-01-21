@@ -39,7 +39,9 @@ namespace MPix {
 
       EditorLayer* Editor;
 
-      bool onTouchBegan( Touch *touch, Event *event) override;
+      void TouchEnable();
+      void TouchDisable();
+
 
    private:
 
@@ -52,6 +54,8 @@ namespace MPix {
       void CloseToolbox();
       vector<EditorTool*> tools;
       LabelTTF* tool_name;
+
+      bool onTouchBegan( Touch *touch, Event *event) override;
 
    };
 

@@ -321,8 +321,8 @@ EmbossLib::ErrorCode MPix::TouchLayer::TouchDisable()
 {
    EM_LOG_DEBUG("Touch layer touches off");
 
-   //_eventDispatcher->DISABLE():
-   
+   _eventDispatcher->removeEventListeners(EventListener::Type::TOUCH_ONE_BY_ONE);
+
    ResetState();
    return ErrorCode::RET_OK;
 }
