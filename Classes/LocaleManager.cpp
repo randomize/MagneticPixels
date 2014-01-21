@@ -2,7 +2,7 @@
 
 namespace EMCore {
 
-   const char* LocaleManager::implemented_langs[] = {
+   const string LocaleManager::implemented_langs[] = {
       "lang/russian.xml" // Russian
    };
 
@@ -13,25 +13,29 @@ namespace EMCore {
       Dictionary() {}
       virtual ~Dictionary() {}
 
-      static Dictionary* create(const char* path) {
+      static Dictionary* create(const string& path) {
+
          auto fab = new Dictionary();
-         if (fab->initWithData(path)) {
+
+         auto full_path = FileUtils::getInstance()->fullPathForFilename(path);
+
+         if (fab->initWithData(full_path)) {
             return fab;
          }
+
          delete fab;
          return nullptr;
       }
 
-      bool initWithData(const char* path) {
+      bool initWithData(const string& path) {
 
-         if (path == nullptr) return false;
+         EM_LOG_DEBUG("Reading dictionary " + path);
 
          tinyxml2::XMLDocument doc;
-         doc.LoadFile(path);
+         doc.LoadFile(path.c_str());
 
          if (doc.Error()) {
             EM_LOG_ERROR("Cant parse file, Txml says: \n " + doc.GetErrorStr1() + "\n" + doc.GetErrorStr2()); return false;
-
          }
 
          auto root = doc.FirstChildElement("language");
@@ -132,7 +136,7 @@ namespace EMCore {
       current = nullptr;
 
       // Loading XML's
-      for ( auto f : implemented_langs ) {
+      for (auto& f : implemented_langs ) {
          auto fab = Dictionary::create(f);
          if (!fab) {
             EM_LOG_ERROR("Failed load lang XML :" + f + "skipping");
@@ -150,9 +154,10 @@ namespace EMCore {
 
       auto it = languages.find(GetCurrentLanguage());
       if (it == languages.end()) {
-         EM_LOG_INFO("Selecting English as default");
+         EM_LOG_INFO("Selecting English language as default");
          current = en;
       } else {
+         EM_LOG_INFO("Selecting " + it->first + " language");
          current = it->second;
       }
 

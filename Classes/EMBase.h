@@ -431,8 +431,10 @@ namespace EMCore {
 
    #else // Linux and OS X and others
 
+      #define __NAME_OF_FILE__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+
       // Use escape sequences in nix consoles, also GCC can insert full Function names
-      #define EM_CONCATENATOR_HELPER(s) __FILE__ << ":" << __LINE__ << ": " << __PRETTY_FUNCTION__ << ": " << (EMCore::EMChainConcatenator() + s).str() << "\033[0m" << endl;
+      #define EM_CONCATENATOR_HELPER(s) __NAME_OF_FILE__ << ":" << __LINE__ << ": " << __PRETTY_FUNCTION__ << ": " << (EMCore::EMChainConcatenator() + s).str() << "\033[0m" << endl;
 
       #undef EM_LOG
       #define EM_LOG(s) do { cout << EM_CONCATENATOR_HELPER(s) } while(false)
@@ -469,21 +471,26 @@ namespace EMCore {
 
       #else
 
-          #if (PL_LOG_LEVEL >= 1)
-             #define EM_LOG_ERROR(s) do { cout << "\033[1;31m" << EM_CONCATENATOR_HELPER(s) } while(false)
-          #endif
+         #ifdef EM_LOGGING_ERRORS
+            #undef EM_LOG_ERROR
+            #define EM_LOG_ERROR(s) do { cout << "\033[1;31m" << EM_CONCATENATOR_HELPER(s) } while(false)
+         #endif
 
-          #if (PL_LOG_LEVEL >= 2)
-             #define EM_LOG_WARNING(s) do { cout << "\033[1;33m" << EM_CONCATENATOR_HELPER(s) } while(false)
-          #endif
+         #ifdef EM_LOGGING_WARNINGS
+            #undef EM_LOG_WARNING
+            #define EM_LOG_WARNING(s) do { cout << "\033[1;33m" << EM_CONCATENATOR_HELPER(s) } while(false)
+         #endif
 
-          #if (PL_LOG_LEVEL >= 3)
-             #define EM_LOG_INFO(s) do { cout << "\033[1;32m" << EM_CONCATENATOR_HELPER(s) } while(false)
-          #endif
+         #ifdef EM_LOGGING_INFO
+            #undef EM_LOG_INFO
+            #define EM_LOG_INFO(s) do { cout << "\033[1;32m" << EM_CONCATENATOR_HELPER(s) } while(false)
+         #endif
 
-          #if (PL_LOG_LEVEL >= 4)
-             #define EM_LOG_DEBUG(s) do { cout << "\033[1;35m" << EM_CONCATENATOR_HELPER(s) } while(false)
-          #endif
+         #ifdef EM_LOGGING_DEBUG
+            #undef EM_LOG_DEBUG
+            #define EM_LOG_DEBUG(s) do { cout << "\033[1;35m" << EM_CONCATENATOR_HELPER(s) } while(false)
+         #endif
+
       #endif
 
    #endif
