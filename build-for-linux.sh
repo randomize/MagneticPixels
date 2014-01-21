@@ -3,6 +3,8 @@
 # Break on error
 set -e
 
+cd "$(dirname "$0")"
+
 ls ./cocos2d > /dev/null
 
 if [ $# -ne 0 ]; then
