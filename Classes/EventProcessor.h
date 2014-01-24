@@ -53,7 +53,6 @@ namespace MPix {
       virtual bool operator==(const EventPacket& rhs) const = 0;
       virtual size_t hash() const = 0;
       virtual void RuleCheck(EventList & events) = 0;
-      virtual bool IsBad() = 0;
 
    protected:
       virtual void Dispatch() = 0;
@@ -88,7 +87,6 @@ namespace MPix {
       size_t hash() const override;
       void Dispatch() override;
       void RuleCheck(EventList & events) override;
-      bool IsBad() override;
 
    private:
 
@@ -115,7 +113,6 @@ namespace MPix {
       size_t hash() const override;
       void Dispatch() override;
       void RuleCheck(EventList & events) override;
-      bool IsBad() override;
 
    private:
 
@@ -144,7 +141,6 @@ namespace MPix {
       // Events
       void PostEvent(shared_ptr<EventPacket> e);
       void ClearEvents();
-      bool WasBadEvent() const { return was_bad; }
 
       ErrorCode ProcessEvents();
 
@@ -155,9 +151,6 @@ namespace MPix {
 
       // Holds events(changes) happened due move(undo) pairs(event,id)
       EventList events;
-
-      // flag of bad
-      bool was_bad;
 
    };
 

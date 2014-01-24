@@ -23,7 +23,6 @@ GameplayManager::GameplayManager()
 
            CmdGameplayClick::listners["GameplayManager"] = std::bind(&GameplayManager::ClickAtPoint,     this, std::placeholders::_1);
             CmdGameplayMove::listners["GameplayManager"] = std::bind(&GameplayManager::MoveAssembly,     this, std::placeholders::_1);
-        CmdGameplayMoveFast::listners["GameplayManager"] = std::bind(&GameplayManager::MoveAssemblyFast, this, std::placeholders::_1);
        CmdGameplayAfterMove::listners["GameplayManager"] = std::bind(&GameplayManager::AfterMoveAssembly, this, std::placeholders::_1);
         CmdGameplayUndoMove::listners["GameplayManager"] = std::bind(&GameplayManager::UndoMove,         this);
  CmdGameplayRestartAssembly::listners["GameplayManager"] = std::bind(&GameplayManager::CancelAssembly,  this);
@@ -61,8 +60,6 @@ const char* MPix::GameplayManager::StateString( State s )
       return "READY";
    case State::PLAYING:
       return "PLAYING";
-   case State::PLAYING_FAST:
-      return "PLAYING_FAST";
    case State::PAUSED:
       return "PAUSE";
    case State::FINISHED:
@@ -84,9 +81,6 @@ ErrorCode GameplayManager::SwitchState( State to )
 
       (st==State::PLAYING && to==State::FINISHED) ||
 
-      (st==State::PLAYING && to==State::PLAYING_FAST) ||
-      (st==State::PLAYING_FAST && to==State::PLAYING) ||
-
       (st==State::FINISHED && to==State::IDLE) ||  // Reset
       (st==State::PLAYING && to==State::IDLE)      // Reset
       );
@@ -107,10 +101,12 @@ ErrorCode GameplayManager::ProcessOneCommand()
    // Return RET_FAIL if no more commands ans RET_OK when have more ti process
 
    // Break on wrong state
-   if (st != State::PLAYING && st != State::PLAYING_FAST) return ErrorCode::RET_FAIL;
+   if (st != State::PLAYING) 
+      return ErrorCode::RET_FAIL;
 
    // Break on empty
-   if (commands.empty()) return ErrorCode::RET_FAIL;
+   if (commands.empty())
+      return ErrorCode::RET_FAIL;
 
    // Take one and exec
    auto cmd = commands.front();
@@ -296,8 +292,9 @@ ErrorCode MPix::GameplayManager::StartAssembling( shared_ptr<IAssembled> pixel )
 
 ErrorCode GameplayManager::MoveAssembly(Direction d)
 {
+   assert(st == GameplayManager::State::PLAYING );
+
    EM_LOG_INFO("GameplayManager->MoveAssembly()");
-   assert(st == GameplayManager::State::PLAYING || st == GameplayManager::State::PLAYING_FAST );
 
    if (context.assembly->IsEmpty()) {
       SendUINeedWakePixelFirst();
@@ -342,8 +339,9 @@ ErrorCode GameplayManager::MoveAssembly(Direction d)
 
 ErrorCode MPix::GameplayManager::AfterMoveAssembly( Direction d ) {
 
+   assert(st == State::PLAYING);
+
    EM_LOG_INFO("GameplayManager->AfterMoveAssembly()");
-   assert(st == State::PLAYING || st == State::PLAYING_FAST);
 
    context.field->WorldCheckForLost(context);
 
@@ -373,8 +371,9 @@ ErrorCode MPix::GameplayManager::AfterMoveAssembly( Direction d ) {
 
 ErrorCode GameplayManager::GrowAssembly()
 {
+   assert(st == State::PLAYING);
+
    EM_LOG_INFO("GameplayManager->GrowAssembly()");
-   assert(st == State::PLAYING || st == State::PLAYING_FAST );
 
    // Searching for dead pixels killed by cactus or pits
    auto ret = context.assembly->CheckForLost(context); 
@@ -406,43 +405,6 @@ ErrorCode GameplayManager::GrowAssembly()
    UpdateUI();
 
    return ErrorCode::RET_FAIL;
-}
-
-ErrorCode GameplayManager::MoveAssemblyFast( Direction whereMove )
-{
-   static int cnt = 0;
-
-   assert (st == State::PLAYING || st == State::PLAYING_FAST) ;
-
-   if ( st == State::PLAYING )
-   { 
-
-      if ( context.assembly->IsEmpty() )
-      {
-         SendUINeedWakePixelFirst();
-         return ErrorCode::RET_FAIL;
-      }
-
-      SwitchState(State::PLAYING_FAST);
-      cnt = 0;
-      PostPriorityCommand(new CmdGameplayMoveFast(whereMove));
-      MoveAssembly(whereMove);
-   } 
-   else 
-   {
-      cnt++;
-      if (context.pixel_events->WasBadEvent() == true || cnt > 4) { // No more then 4 moves!
-         SwitchState(State::PLAYING);
-         context.pixel_events->ProcessEvents();
-         return ErrorCode::RET_OK;
-      } else {
-         PostPriorityCommand(new CmdGameplayMoveFast(whereMove));
-         MoveAssembly(whereMove);
-      }
-   }
-   
-   return ErrorCode::RET_OK;
-
 }
 
 ErrorCode GameplayManager::UndoMove()
@@ -558,8 +520,7 @@ ErrorCode MPix::GameplayManager::UpdateUI()
 {
 
    // Update pixel UI
-   if ( st != State::PLAYING_FAST )
-      context.pixel_events->ProcessEvents();
+   context.pixel_events->ProcessEvents();
 
    // If there is solution - ui notifies
    if ( context.goals->ExistsSolution()) {

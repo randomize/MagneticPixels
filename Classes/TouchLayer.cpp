@@ -232,38 +232,37 @@ void MPix::TouchLayer::GestureTapPoint( Point p )
    p = Director::getInstance()->convertToGL(p);
    p = this->convertToNodeSpace(p);
    Coordinates pos = ScreenToLogic(p);
-   EM_LOG_DEBUG("Sending a tap at: " + pos);
+   EM_LOG_DEBUG("Got a tap at: " + pos);
 
    GameplayManager::getInstance().PostCommand(new CmdGameplayClick(pos));
 }
 
 void MPix::TouchLayer::GestureSwipe( Direction dir )
 {
-   EM_LOG_DEBUG("Sending a swype to " + dir);
+   EM_LOG_DEBUG("Got a swype to " + dir);
    GameplayManager::getInstance().PostCommand(new CmdGameplayMove(dir));
 }
 
 void MPix::TouchLayer::GestureLongSwipe( Direction dir )
 {
-   EM_LOG_DEBUG("Sending a long swype to " + dir);
-   GameplayManager::getInstance().PostCommand(new CmdGameplayMoveFast(dir));
+   EM_LOG_DEBUG("Got a long swype to " + dir);
 }
 
 void MPix::TouchLayer::GestureShake()
 {
-   EM_LOG_DEBUG("Sending restart assembly");
+   EM_LOG_DEBUG("Got a shake");
    GameplayManager::getInstance().PostCommand(new CmdGameplayRestartAssembly);
 }
 
 void MPix::TouchLayer::GestureRotateCW()
 {
-   EM_LOG_DEBUG("Sending redo move in assembly");
+   EM_LOG_DEBUG("Got a CW circle");
    GameplayManager::getInstance().PostCommand(new CmdGameplayRedoMove);
 }
 
 void MPix::TouchLayer::GestureRotateCCW()
 {
-   EM_LOG_DEBUG("Sending undo move in assembly");
+   EM_LOG_DEBUG("Got a CCW circle");
    GameplayManager::getInstance().PostCommand(new CmdGameplayUndoMove);
 }
 

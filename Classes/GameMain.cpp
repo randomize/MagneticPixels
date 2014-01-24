@@ -46,7 +46,7 @@ bool GameMain::init()
    Size fullSize = Director::getInstance()->getWinSize();
    Size halfSize =  fullSize / 2.0f;
    Size visibleSize = Director::getInstance()->getVisibleSize();
-   Point origin = Director::getInstance()->getVisibleOrigin();
+   // Point origin = Director::getInstance()->getVisibleOrigin();
 
    float contentScale = (visibleSize.height/fullSize.height * visibleSize.width/fullSize.width);
 
@@ -180,13 +180,15 @@ ErrorCode GameMain::Tick( float t )
 
 EmbossLib::ErrorCode MPix::GameMain::FinishedGame()
 {
+   Size visibleSize = Director::getInstance()->getVisibleSize();
+   auto rt = RenderTexture::create(visibleSize.w, visibleSize.h);
    // TODO:
    // Get a snapshot render texture and filter it(blur or someth)
    // Store to content manager
    // SwithcTo final state
    GameStateManager::getInstance().SwitchToResults();
-   return ErrorCode::RET_OK;
 
+   return ErrorCode::RET_OK;
 }
 
 void GameMain::onExit()

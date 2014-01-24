@@ -47,12 +47,6 @@ void MPix::ResultsState::onEnter()
       ToNext();
    }); menu->addChild(item);
 
-#ifdef MPIX_DEVELOPERS_BUILD
-   item = MenuItemFont::create("Crash", [&](Object *sender) {
-      assert(false);
-   }); menu->addChild(item); item->setColor(Color3B::RED);
-#endif
-
    menu->alignItemsVertically();
 
    auto s = Director::getInstance()->getWinSize();
@@ -70,6 +64,9 @@ void MPix::ResultsState::onExit()
 
 void MPix::ResultsState::ToReplay()
 {
+   GameplayManager::getInstance().Reset();
+   auto lvl = LevelManager::getInstance().GetLastLevel();
+   GameplayManager::getInstance().LoadLevel(lvl);
    GameStateManager::getInstance().SwitchToGame();
 }
 
