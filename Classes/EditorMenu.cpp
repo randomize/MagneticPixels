@@ -37,7 +37,7 @@ bool MPix::EditorMenu::init()
    }
 
    // 2. Build BG
-   auto g = LayerGradient::create(Color4B::GRAY, Color4B::BLACK, Point(1,1));
+   auto g = LayerColor::create(Color4B::BLACK);
    addChild(g, 1);
 
    // 3. Build main menu
@@ -137,7 +137,6 @@ void MPix::EditorMenu::BuildLevelsMenu( int w )
 void MPix::EditorMenu::BuildEditorsMenu()
 {
    MenuItemFont::setFontSize(64);
-   MenuItemFont::setFontName("fonts/markerfelt.ttf");
    auto menu = Menu::create();
 
    MenuItemFont* item = nullptr;

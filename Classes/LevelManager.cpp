@@ -220,3 +220,11 @@ void MPix::LevelManager::SaveEditorsLevel()
    StoreLevel(ed_lvl);
 }
 
+shared_ptr<Level> MPix::LevelManager::GetNextLevel()
+{
+   auto l = GetLastLevel();
+   // TODO: get id and find next, or next world
+   return GetLastLevel();
+}
+
+

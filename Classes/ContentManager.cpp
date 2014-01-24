@@ -180,6 +180,36 @@ EMAnimation* MPix::ContentManager::GetAnimation(const string& name)
    return fab;
 }
 
+Node* MPix::ContentManager::GetNode(const string& node_name)
+{
+   auto it = nodes.find(node_name);
+
+   if (it != nodes.end()) {
+      return it->second;
+   }
+
+   return nullptr;
+}
+
+void MPix::ContentManager::AddNode(Node* new_node, const string& node_name)
+{
+   assert(GetNode(node_name) == nullptr);
+   nodes.emplace(node_name, new_node);
+   new_node->retain();
+}
+
+void MPix::ContentManager::RemoveNode(const string& node_name)
+{
+   auto n = GetNode(node_name);
+   assert(n);
+   n->release();
+   nodes.erase(node_name);
+}
+
+
+
+
+
 
 
 

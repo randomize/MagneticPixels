@@ -27,10 +27,8 @@ namespace MPix {
       EM_GAME_STATE(ResultsState);
       ResultsState();
       ~ResultsState();
-      bool init() override;
 
-      void onEnter() override;
-      void onExit() override;
+      bool init() override;
 
    private:
 

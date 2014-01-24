@@ -7,6 +7,7 @@
 #include "GameplayManager.h"
 #include "GameStateManager.h"
 #include "LevelManager.h"
+#include "ContentManager.h"
 
 using namespace MPix;
 using namespace std::placeholders;
@@ -21,7 +22,7 @@ int const MPix::GameMain::Z_WALLS = 10;
 
 MPix::GameMain::GameMain()
 {
-   CmdUIGameFinished::listners["GameMain"] = std::bind( &GameMain::FinishGame, this );
+   CmdUIGameFinished::listners["GameMain"] = std::bind( &GameMain::onCmdGameFinished, this );
 }
 
 MPix::GameMain::~GameMain()
@@ -89,10 +90,13 @@ bool GameMain::init()
 void GameMain::onEnter()
 {
    Scene::onEnter();
-
-
    // Run GameplayManager
    GameplayManager::getInstance().Play();
+}
+
+void GameMain::onExit()
+{
+   Scene::onExit();
 }
 
 void MPix::GameMain::CreateButtons()
@@ -180,29 +184,31 @@ ErrorCode GameMain::Tick( float t )
 
 EmbossLib::ErrorCode MPix::GameMain::FinishedGame()
 {
+   // Get a snapshot render texture
    Size visibleSize = Director::getInstance()->getVisibleSize();
-   auto rt = RenderTexture::create(visibleSize.w, visibleSize.h);
-   // TODO:
-   // Get a snapshot render texture and filter it(blur or someth)
+   auto rt = RenderTexture::create(visibleSize.width, visibleSize.height);
+   rt->beginWithClear(1, 0, 0, 1);
+   DrawPrimitives::drawCircle(Point::ZERO, 100, 180, 32, false);
+   // TODO: WTF is wrong
+   bg->visit();
+   rt->end();
+
    // Store to content manager
+   ContentManager::getInstance().AddNode(rt, "screen_for_blur");
+
    // SwithcTo final state
    GameStateManager::getInstance().SwitchToResults();
 
    return ErrorCode::RET_OK;
 }
 
-void GameMain::onExit()
-{
-   Scene::onExit();
-
-}
 
 //////////////////////////////////////////////////////////////////////////
 // Commands handlers
 
-EmbossLib::ErrorCode MPix::GameMain::FinishGame()
+EmbossLib::ErrorCode MPix::GameMain::onCmdGameFinished()
 {
-   // Polymorphic call to finish
+   // Delegate to virtual method
    return FinishedGame();
 }
 

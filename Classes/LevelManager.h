@@ -47,6 +47,9 @@ namespace MPix {
       // Store level for editing between sessions/test runs
       shared_ptr<Level> GetEditorsLevel();
 
+      // Return level next to last ;)
+      shared_ptr<Level> GetNextLevel();
+
       // Misc info about levels
       int GetLevelStarsByID(unsigned int levelID);
       const string& GetLevelNameByID(unsigned int levelID);

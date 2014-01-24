@@ -3,6 +3,7 @@
 #include "GameplayManager.h"
 #include "GameStateManager.h"
 #include "LevelStorage.h"
+#include "ContentManager.h"
 
 using namespace MPix;
 
@@ -24,15 +25,9 @@ bool MPix::ResultsState::init()
    {
       return false;
    }
-
-   return true;
-
-}
-
-void MPix::ResultsState::onEnter()
-{
-
-   Scene::onEnter();
+   
+   auto bg = LayerColor::create(Color4B::MAGENTA);
+   addChild(bg, 0);
 
    MenuItemFont::setFontSize(64);
    auto menu = Menu::create();
@@ -50,27 +45,42 @@ void MPix::ResultsState::onEnter()
    menu->alignItemsVertically();
 
    auto s = Director::getInstance()->getWinSize();
+   Point center(s.width / 2, s.height / 2);
 
-   menu->setPosition(Point(s.width/2, s.height/2));
-   addChild(menu);
+   menu->setPosition(center);
+   addChild(menu, 2);
 
-}
 
-void MPix::ResultsState::onExit()
-{
-   Scene::onExit();
+   auto& cnt = ContentManager::getInstance();
+
+   auto n = cnt.GetNode("screen_for_blur");
+   assert(n);
+   n->setOpacity(200);
+   n->setPosition(center);
+   // TODO: Add blur
+   addChild(n, 1); 
+   cnt.RemoveNode("screen_for_blur");
+
+   return true;
 
 }
 
 void MPix::ResultsState::ToReplay()
 {
    GameplayManager::getInstance().Reset();
+
    auto lvl = LevelManager::getInstance().GetLastLevel();
    GameplayManager::getInstance().LoadLevel(lvl);
+
    GameStateManager::getInstance().SwitchToGame();
 }
 
 void MPix::ResultsState::ToNext()
 {
-   GameStateManager::getInstance().SwitchToSelector();
+   GameplayManager::getInstance().Reset();
+
+   auto lvl = LevelManager::getInstance().GetNextLevel();
+   GameplayManager::getInstance().LoadLevel(lvl);
+
+   GameStateManager::getInstance().SwitchToGame();
 }

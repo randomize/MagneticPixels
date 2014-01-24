@@ -59,8 +59,9 @@ namespace MPix {
       // If some state wants to pass some (data)node to another they use 
       // these methods, ContentManager acts as middle-man 
 
-      void PutNode(Node*, const string& name);
-      Node* GetNode(const string& name);
+      void AddNode(Node* new_node, const string& node_name);
+      void RemoveNode(const string& node_name);
+      Node* GetNode(const string& node_name);
 
    private:
 
@@ -72,9 +73,14 @@ namespace MPix {
       // Helpers
       void ReloadShaders();
 
-      // Manages maps for fast search
+      // List of shaders
       unordered_map<string, EMShader*> shaders;
+
+      // List of resources
       unordered_map<string, string> resources;
+
+      // List of saved nodes
+      unordered_map<string, Node*> nodes;
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
    

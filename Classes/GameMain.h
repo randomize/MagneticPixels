@@ -48,16 +48,18 @@ namespace MPix {
 
    protected:
 
-      // Command to display results on game finish
+      // Method is called when game state initializes
       virtual void CreateButtons();
+
+      // Method is called when player finished game
       virtual ErrorCode FinishedGame();
 
       void BtnHnadler(Object* sender);
 
    private: // Commands
 
-      // Handles CmdGameFinish
-      ErrorCode FinishGame();
+      // Handles CmdGameFinished
+      ErrorCode onCmdGameFinished();
 
    public: // General UI game constants
 
