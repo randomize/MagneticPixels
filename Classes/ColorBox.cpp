@@ -5,7 +5,7 @@ using namespace MPix;
 
 void MPix::ColorBox::draw()
 {
-    _customCommand.init(0, _vertexZ);
+    _customCommand.init(_globalZOrder);
     _customCommand.func = CC_CALLBACK_0(ColorBox::onDraw, this);
     Director::getInstance()->getRenderer()->addCommand(&_customCommand);
 }

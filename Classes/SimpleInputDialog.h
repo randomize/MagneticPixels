@@ -26,7 +26,7 @@ namespace MPix {
 
       static SimpleInputDialog* create(const char* req = "Input, please", const char* def = "");
 
-      bool init(const char* req = "Input, please", const char* def = "");
+      bool initWithRequast(const char* req = "Input, please", const char* def = "");
 
       void SetCallback(FunType f) { fun = f; }
 

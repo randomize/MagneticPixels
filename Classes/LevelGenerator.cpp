@@ -127,7 +127,6 @@ shared_ptr<Level> MPix::LevelGenerator::CreateFromEditorData( EditorData* source
       fab = CreateEmpty();
    }
 
-   fab->viewport = source->GetViewport();
    for (auto pos : source->field ) {
       for ( auto px : pos.second ) {
          fab->field->InsertPixel(px->Dublicate());
@@ -143,7 +142,6 @@ shared_ptr<Level> MPix::LevelGenerator::CreateFromEditorData( EditorData* source
    }
 
    fab->SetName(source->GetName());
-   fab->SetAutopan(source->GetAutoPan());
    return fab;
 }
 
@@ -167,9 +165,7 @@ EditorData* MPix::LevelGenerator::SaveToEditorData( shared_ptr<Level> source )
          fab->InsertTask(p, t.second.GetPos(), t.second.GetColor());
       }
    }
-   fab->SetViewport(source->viewport);
    fab->SetName(source->GetName());
-   fab->SetAutoPan(source->AutoPan());
    return fab;
 }
 

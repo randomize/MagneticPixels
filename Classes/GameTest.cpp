@@ -30,7 +30,6 @@ void MPix::GameTest::BtnHnadler(Object* sender)
       pixels->Reset();
       ResetLocks();
       GameplayManager::getInstance().Play();
-      UpdateViewport();
       return;
    }
    case 102: {

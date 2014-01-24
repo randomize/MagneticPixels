@@ -52,22 +52,6 @@ MPix::PixelRules MPix::PixelEventPacket::rules = [] () {
 
 }();
 
-// Setup events, not breaking fast move, naming them good
-unordered_set<PixelEvent> MPix::PixelEventPacket::good_events = [] () {
-
-   unordered_set<PixelEvent> good_events;
-
-   good_events.emplace(PixelEvent::MOVED);
-   good_events.emplace(PixelEvent::SMILED);
-   good_events.emplace(PixelEvent::UNSMILED);
-   good_events.emplace(PixelEvent::ADDED_TO_ASSEMBLY);
-   good_events.emplace(PixelEvent::CHANGED_DATA);
-
-   return good_events;
-
-}();
-
-
 PixelEventPacket::PixelEventPacket( PixelEvent e, int id, int pri ) : 
    EventPacket(pri), 
    event(e), 
@@ -201,14 +185,6 @@ void MPix::PixelEventPacket::RuleCheck( EventList & tokill )
 
 }
 
-bool MPix::PixelEventPacket::IsBad()
-{
-   if (good_events.find(event) == good_events.end()) {
-      return true; // Bad
-   }
-   return false; // Good
-}
-
 //====-----GoalEventPacket----------------------------------------======//
 
 GoalEventPacket::GoalEventPacket( GoalEvent e, int id, Coordinates task, int pri ) : 
@@ -282,23 +258,15 @@ void MPix::GoalEventPacket::RuleCheck( EventList & events )
    // No overrides for now
 }
 
-bool MPix::GoalEventPacket::IsBad()
-{
-   return false; // Good events
-}
-
 //====-----Processor----------------------------------------======//
 
 EventProcessor::EventProcessor()
 {
 
-   was_bad = false;
 }
 
 void MPix::EventProcessor::PostEvent( shared_ptr<EventPacket> e )
 {
-   if (e->IsBad()) 
-      was_bad = true;
    events.push_front(e);
 }
 
@@ -309,7 +277,6 @@ MPix::EventProcessor::~EventProcessor()
 void EventProcessor::ClearEvents()
 {
    events.clear();
-   was_bad = false;
 }
 
 EmbossLib::ErrorCode EventProcessor::ProcessEvents()

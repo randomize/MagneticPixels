@@ -23,7 +23,7 @@ namespace MPix {
    {
    public:
 
-      bool init() override;  
+      bool init() override;
       CREATE_FUNC(TouchLayer);
 
    public:
@@ -39,17 +39,16 @@ namespace MPix {
       ~TouchLayer();
 
       void onEnter() override;
-      void onExit() override;
-      void draw() override;
-      //void onBackClicked() override;
 
-      // -------- Touch delegates -------------------------------------------------
+      // -------- Delegates -------------------------------------------------
 
-      bool     onTouchBegan( Touch *touch, Event *event) override;
-      void onTouchCancelled( Touch *touch, Event *event) override;
-      void     onTouchEnded( Touch *touch, Event *event) override;
-      void     onTouchMoved( Touch *touch, Event *event) override;
-       
+      bool     onTouchBegan( Touch *touch, Event *event);
+      void onTouchCancelled( Touch *touch, Event *event);
+      void     onTouchEnded( Touch *touch, Event *event);
+      void     onTouchMoved( Touch *touch, Event *event);
+
+      void onBackClicked();
+
       // ---------- listners ----------------------------------------------
        ErrorCode onBGFG();
        void onTimeoutElapsed(float);
@@ -73,7 +72,7 @@ namespace MPix {
 
    private: // Recognized gestures
 
-      // Called when tap received 
+      // Called when tap received
       void GestureTapPoint(Point pos);
       void GestureSwipe(Direction dir);
       void GestureLongSwipe(Direction dir);

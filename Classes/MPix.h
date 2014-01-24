@@ -161,7 +161,7 @@ namespace MPix {
 }
    //== ------ For cocos classes --------------------------------------
 
-namespace MPix {
+namespace cocos2d {
    ostream& operator<<( ostream& os, const Point& b );
 }
 

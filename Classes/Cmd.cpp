@@ -32,7 +32,6 @@ unordered_map<string,function<ErrorCode(void)>> MPix::CmdGameplayRedoMove::listn
 unordered_map<string,function<ErrorCode(void)>> MPix::CmdGameplayUndoMove::listners;
 unordered_map<string,function<ErrorCode(Direction)>> MPix::CmdGameplayMove::listners;
 unordered_map<string,function<ErrorCode(Direction)>> MPix::CmdGameplayAfterMove::listners;
-unordered_map<string,function<ErrorCode(Direction)>> MPix::CmdGameplayMoveFast::listners;
 unordered_map<string,function<ErrorCode(Coordinates)>> MPix::CmdGameplayClick::listners;
 unordered_map<string,function<ErrorCode(void)>> MPix::CmdGameplayGrowAsm::listners;
 

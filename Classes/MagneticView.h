@@ -62,7 +62,6 @@ namespace MPix {
    private:
 
       shared_ptr<IAssembled> asm_interface;
-      bool canFallOn;
 
    };
 

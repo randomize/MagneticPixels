@@ -23,7 +23,6 @@ GameplayManager::GameplayManager()
 
            CmdGameplayClick::listners["GameplayManager"] = std::bind(&GameplayManager::ClickAtPoint,     this, std::placeholders::_1);
             CmdGameplayMove::listners["GameplayManager"] = std::bind(&GameplayManager::MoveAssembly,     this, std::placeholders::_1);
-        CmdGameplayMoveFast::listners["GameplayManager"] = std::bind(&GameplayManager::MoveAssemblyFast, this, std::placeholders::_1);
        CmdGameplayAfterMove::listners["GameplayManager"] = std::bind(&GameplayManager::AfterMoveAssembly, this, std::placeholders::_1);
         CmdGameplayUndoMove::listners["GameplayManager"] = std::bind(&GameplayManager::UndoMove,         this);
  CmdGameplayRestartAssembly::listners["GameplayManager"] = std::bind(&GameplayManager::CancelAssembly,  this);
@@ -38,7 +37,7 @@ GameplayManager::GameplayManager()
 //////////////////////////////////////////////////////////////////////////
 // Getters
 
-const GameplayManager::State MPix::GameplayManager::GetState( void ) const
+GameplayManager::State MPix::GameplayManager::GetState( void ) const
 {
    return st;
 }
@@ -48,22 +47,10 @@ const Context & MPix::GameplayManager::GetContext()
    return context;
 }
 
-const MPix::Rectangle & MPix::GameplayManager::GetViewport() const
-{
-   assert( st == State::READY);
-   return level->GetViewport();
-}
-
-const MPix::Rectangle & MPix::GameplayManager::GetCurrentViewport() const
-{
-   assert( st == State::PLAYING || st == State::PLAYING_FAST);
-   return context.viewport;
-}
-
 //////////////////////////////////////////////////////////////////////////
 // State management
 
-const char * MPix::GameplayManager::StateString( State s )
+const char* MPix::GameplayManager::StateString( State s )
 {
    switch (s)
    {
@@ -73,8 +60,6 @@ const char * MPix::GameplayManager::StateString( State s )
       return "READY";
    case State::PLAYING:
       return "PLAYING";
-   case State::PLAYING_FAST:
-      return "PLAYING_FAST";
    case State::PAUSED:
       return "PAUSE";
    case State::FINISHED:
@@ -96,9 +81,6 @@ ErrorCode GameplayManager::SwitchState( State to )
 
       (st==State::PLAYING && to==State::FINISHED) ||
 
-      (st==State::PLAYING && to==State::PLAYING_FAST) ||
-      (st==State::PLAYING_FAST && to==State::PLAYING) ||
-
       (st==State::FINISHED && to==State::IDLE) ||  // Reset
       (st==State::PLAYING && to==State::IDLE)      // Reset
       );
@@ -119,10 +101,12 @@ ErrorCode GameplayManager::ProcessOneCommand()
    // Return RET_FAIL if no more commands ans RET_OK when have more ti process
 
    // Break on wrong state
-   if (st != State::PLAYING && st != State::PLAYING_FAST) return ErrorCode::RET_FAIL;
+   if (st != State::PLAYING) 
+      return ErrorCode::RET_FAIL;
 
    // Break on empty
-   if (commands.empty()) return ErrorCode::RET_FAIL;
+   if (commands.empty())
+      return ErrorCode::RET_FAIL;
 
    // Take one and exec
    auto cmd = commands.front();
@@ -185,7 +169,6 @@ ErrorCode GameplayManager::Play()
    // Create context
    context.field = level->GetField();
    context.goals = level->GetGoals();
-   context.viewport = level->GetViewport();
    context.assembly = make_shared<Assembly>();
    context.moveNumber = 0;
 
@@ -231,7 +214,6 @@ ErrorCode GameplayManager::Reset()
    context.goals    = nullptr;
    context.field    = nullptr;
    context.assembly = nullptr;
-   context.viewport = MPix::Rectangle();
    context.moveNumber = 0;
 
    // Remove commands
@@ -310,8 +292,9 @@ ErrorCode MPix::GameplayManager::StartAssembling( shared_ptr<IAssembled> pixel )
 
 ErrorCode GameplayManager::MoveAssembly(Direction d)
 {
+   assert(st == GameplayManager::State::PLAYING );
+
    EM_LOG_INFO("GameplayManager->MoveAssembly()");
-   assert(st == GameplayManager::State::PLAYING || st == GameplayManager::State::PLAYING_FAST );
 
    if (context.assembly->IsEmpty()) {
       SendUINeedWakePixelFirst();
@@ -356,8 +339,9 @@ ErrorCode GameplayManager::MoveAssembly(Direction d)
 
 ErrorCode MPix::GameplayManager::AfterMoveAssembly( Direction d ) {
 
+   assert(st == State::PLAYING);
+
    EM_LOG_INFO("GameplayManager->AfterMoveAssembly()");
-   assert(st == State::PLAYING || st == State::PLAYING_FAST);
 
    context.field->WorldCheckForLost(context);
 
@@ -387,8 +371,9 @@ ErrorCode MPix::GameplayManager::AfterMoveAssembly( Direction d ) {
 
 ErrorCode GameplayManager::GrowAssembly()
 {
+   assert(st == State::PLAYING);
+
    EM_LOG_INFO("GameplayManager->GrowAssembly()");
-   assert(st == State::PLAYING || st == State::PLAYING_FAST );
 
    // Searching for dead pixels killed by cactus or pits
    auto ret = context.assembly->CheckForLost(context); 
@@ -420,44 +405,6 @@ ErrorCode GameplayManager::GrowAssembly()
    UpdateUI();
 
    return ErrorCode::RET_FAIL;
-}
-
-ErrorCode GameplayManager::MoveAssemblyFast( Direction whereMove )
-{
-   static int cnt = 0;
-
-   assert (st == State::PLAYING || st == State::PLAYING_FAST) ;
-
-   if ( st == State::PLAYING )
-   { 
-
-      if ( context.assembly->IsEmpty() )
-      {
-         SendUINeedWakePixelFirst();
-         return ErrorCode::RET_FAIL;
-      }
-
-      SwitchState(State::PLAYING_FAST);
-      cnt = 0;
-      PostPriorityCommand(new CmdGameplayMoveFast(whereMove));
-      MoveAssembly(whereMove);
-   } 
-   else 
-   {
-      cnt++;
-      if (context.pixel_events->WasBadEvent() == true || cnt > 4) { // No more then 4 moves!
-         SwitchState(State::PLAYING);
-         context.pixel_events->ProcessEvents();
-         FitViewport();
-         return ErrorCode::RET_OK;
-      } else {
-         PostPriorityCommand(new CmdGameplayMoveFast(whereMove));
-         MoveAssembly(whereMove);
-      }
-   }
-   
-   return ErrorCode::RET_OK;
-
 }
 
 ErrorCode GameplayManager::UndoMove()
@@ -572,12 +519,8 @@ ErrorCode MPix::GameplayManager::CheckLoseStatus()
 ErrorCode MPix::GameplayManager::UpdateUI()
 {
 
-   // Update viewports
-   FitViewport();
-
    // Update pixel UI
-   if ( st != State::PLAYING_FAST )
-      context.pixel_events->ProcessEvents();
+   context.pixel_events->ProcessEvents();
 
    // If there is solution - ui notifies
    if ( context.goals->ExistsSolution()) {
@@ -596,44 +539,6 @@ ErrorCode GameplayManager::CheckForSolution()
 
    // Update solution
    context.goals->UpdateSolution(context);
-
-   return ErrorCode::RET_OK;
-}
-
-
-ErrorCode MPix::GameplayManager::FitViewport()
-{
-
-   if (level->AutoPan() == false) return ErrorCode::RET_FAIL;
-
-   if (context.assembly->IsEmpty()) {
-      context.viewport = level->GetViewport();
-      GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateViewport);
-      return ErrorCode::RET_OK;
-   }
-
-   auto rect = context.assembly->GetContentsRect();
-   const int basis = 2;
-
-   // Borders
-   auto bl = -( rect.BL.x - context.viewport.BL.x - basis );
-   auto br = -( context.viewport.TR.x - rect.TR.x - basis );
-   auto bd = -( rect.BL.y - context.viewport.BL.y - basis );
-   auto bu = -( context.viewport.TR.y - rect.TR.y - basis );
-
-   if (bl > 0) {
-      context.viewport.MoveTo(Direction::DIR_LEFT, bl);
-   } else if (br > 0) {
-      context.viewport.MoveTo(Direction::DIR_RIGHT, br);
-   }
-
-   if (bd > 0) {
-      context.viewport.MoveTo(Direction::DIR_DOWN, bd);
-   } else if (bu > 0) {
-      context.viewport.MoveTo(Direction::DIR_UP, bu);
-   }
-
-   GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateViewport);
 
    return ErrorCode::RET_OK;
 }

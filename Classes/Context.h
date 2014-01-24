@@ -57,9 +57,6 @@ namespace MPix {
       // Current move number, counting from last assembly, zero if not assembling
       int moveNumber;
 
-      // Viewport lets logic know where it will be placed on screen, defined by two points
-      Rectangle viewport;
-
    public: 
 
       // ================= Field helpers ======================

@@ -40,10 +40,8 @@ namespace MPix {
 
 
       // Informers
-      const State GetState(void) const;
+      State GetState(void) const;
       const Context & GetContext();
-      const Rectangle & GetViewport() const;
-      const Rectangle & GetCurrentViewport() const;
 
       // Global controllers - take effect immediately
       ErrorCode ProcessOneCommand();
@@ -70,8 +68,6 @@ namespace MPix {
       ErrorCode StartAssembling(shared_ptr<IAssembled> pixel);
       ErrorCode EndAssembling();
       ErrorCode UpdateUI();
-
-      ErrorCode FitViewport();
 
       ErrorCode CheckForSolution();
 

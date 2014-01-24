@@ -48,13 +48,6 @@ namespace MPix {
       shared_ptr<Field> GetField() const { return field; }
       shared_ptr<Goals> GetGoals() const { return goals; }
 
-      // Getter for auto pan, used by GPM
-      bool AutoPan() { return auto_pan; }
-      void SetAutopan(bool v) { auto_pan = v; }
-
-      // Getter for viewport, used by GPM
-      const Rectangle & GetViewport() const { return viewport; }
-
       // Getter for ID, used by LM
       unsigned int GetID() const { return levelID; }
 
@@ -86,12 +79,6 @@ namespace MPix {
 
       // Name is simple string
       string name;
-
-      // Use or not auto pan, set to true for levels > 8x12
-      bool auto_pan;
-
-      // Viewport defines level startup zoom and pan
-      Rectangle viewport;
 
       // Field and goal
       shared_ptr<Field> field;

@@ -1,6 +1,7 @@
 
 # Ignore cocos
 cocos2d/
+cocos2d
 
 # Ignore files build by Visual Studio
 proj.win32/*.opensdf
@@ -19,8 +20,7 @@ proj.android/.settings
 proj.android/local.properties
 
 # Ignore linux bin and obj output directories
-proj.linux/obj/
-proj.linux/bin/
+proj.linux/build/
 
 
 # Ignore thumbnails created by windows and macos explorers

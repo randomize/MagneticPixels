@@ -16,7 +16,7 @@ shared_ptr<Level> MPix::LevelXML::Generate( tinyxml2::XMLElement* src )
 {
    auto fab = LevelGenerator::getInstance()->CreateEmpty();
 
-   // <lvl id="12344" w="0" name="Training 1" pan="0" >
+   // <lvl id="12344" w="0" name="Training 1" >
 
    // Identifier - required
    if ( src->QueryUnsignedAttribute("id", &fab->levelID) != XML_NO_ERROR ) return nullptr;
@@ -24,43 +24,17 @@ shared_ptr<Level> MPix::LevelXML::Generate( tinyxml2::XMLElement* src )
    // World - required
    if ( src->QueryUnsignedAttribute("w", &fab->world) != XML_NO_ERROR ) return nullptr;
 
-   // autopan optional, default = false
-   int i = 0;
-   src->QueryIntAttribute("pan", &i);
-   if (i) {
-      fab->auto_pan = true;
-   } else {
-      fab->auto_pan = false;
-   }
-
    // Name - optional, default = "Noname"
    auto n =  src->Attribute("name");
    if (n) {
       fab->name = n;
    }
 
-   // Loading viewport
-   auto vp = src->FirstChildElement("vp");
-   assert(vp);
-   //  <vp tx="3" ty="5" bx="-4" by="-6" />
-
-   int tx = 3;
-   int ty = 5;
-   vp->QueryIntAttribute("tx", &tx);
-   vp->QueryIntAttribute("ty", &ty);
-   fab->viewport.TR = Coordinates(tx,ty);
-   int bx = -4;
-   int by = -6;
-   vp->QueryIntAttribute("bx", &bx);
-   vp->QueryIntAttribute("by", &by);
-   fab->viewport.BL = Coordinates(bx,by);
-
    // Loading solution
    // TODO: implemen loading/saving
-   //auto sol = vp->NextSiblingElement("sol");
 
    // Loading pixel field
-   auto fld = vp->NextSiblingElement("fld");
+   auto fld = src->FirstChildElement("fld");
    if ( fld == nullptr ) {
       EM_LOG_ERROR("No field `fld` tag, level " + fab->GetID() + " load failed ");
       return nullptr;
@@ -96,20 +70,12 @@ bool MPix::LevelXML::Store( shared_ptr<Level> src, tinyxml2::XMLPrinter* dst )
 {
    dst->OpenElement("lvl");
 
-   // Basic attributes(id, name, pan)
+   // Basic attributes(id, name)
    dst->PushAttribute("id", src->GetID());
    dst->PushAttribute("w", src->GetWorld());
    dst->PushAttribute("name", src->GetName().c_str());
-   dst->PushAttribute("pan",  src->AutoPan() ? 1 : 0);
 
-   //  Viewport
-   dst->OpenElement("vp");
-   auto vp = src->GetViewport();
-   dst->PushAttribute("tx", vp.TR.x);
-   dst->PushAttribute("ty", vp.TR.y);
-   dst->PushAttribute("bx", vp.BL.x);
-   dst->PushAttribute("by", vp.BL.y);
-   dst->CloseElement(); // vp
+   // TODO: Solution if any
 
    // Field
    FieldXML::Store(src->GetField(), dst);

@@ -14,6 +14,6 @@ int main(int argc, char **argv)
     // create the application instance
     AppDelegate app;
     EGLView eglView;
-    eglView.init("TestCPP",960,640);
+    eglView.init("TestCPP",640,960);
     return Application::getInstance()->run();
 }

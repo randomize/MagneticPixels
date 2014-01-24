@@ -12,10 +12,7 @@ MPix::EditorData::EditorData()
 {
    // Let's have some nullptr goals =)
    goals.resize(4);
-   viewport.BL = Coordinates(-4,-6);
-   viewport.TR = Coordinates(3,5);
    name = "Unnamed";
-   autopan = true;
 }
 
 

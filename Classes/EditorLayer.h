@@ -28,7 +28,7 @@ namespace MPix {
    {
    public:
 
-      bool init() override;  
+      bool init() override;
       CREATE_FUNC(EditorLayer);
 
    public:
@@ -39,13 +39,10 @@ namespace MPix {
       // Creates new level, based on current EditorData in me
       shared_ptr<Level> CreateLevel();
 
-      // -------- Touch delegates -------------------------------------------------
+      // -------- Touch control -------------------------------------------------
 
-      bool     onTouchBegan( Touch *touch, Event *event) override;
-      void onTouchCancelled( Touch *touch, Event *event) override;
-      void     onTouchEnded( Touch *touch, Event *event) override;
-      void     onTouchMoved( Touch *touch, Event *event) override;
-      ErrorCode onBGFG();
+      void TouchEnable();
+      void TouchDisable();
 
       // ---------- Pixel works ---------------------------------------------------
 
@@ -58,20 +55,16 @@ namespace MPix {
       void EraseTopPixel();
       void EraseGoal();
       void EraseEverything();
+
       // Views
       void InsertPixelView( shared_ptr<Pixel> px );
       void InsertWallView( shared_ptr<Pixel> px );
       void InsertGoalView( PixelColor color );
 
-      // UpdateViewport
-      void UpdateViewport();
-      void FixPosition();
-
       // Control
       void RenameLevel(string newname);
       const string& GetLevelName();
-      bool TogglePan();
-       
+
    private:
 
       // ----------- Logical Storage -----------------------------------------------------------
@@ -90,9 +83,16 @@ namespace MPix {
       unordered_map<Coordinates, shared_ptr<PixelView>> walls;
       unordered_map<Coordinates, shared_ptr<GoalView>> tasks;
       unordered_map<Coordinates, Node*> marks;
-      Node* vp_marks[4];
 
       // --------- Touching ------------------------------------------------------------
+
+      // Handlers
+      bool     onTouchBegan( Touch *touch, Event *event);
+      void onTouchCancelled( Touch *touch, Event *event);
+      void     onTouchEnded( Touch *touch, Event *event);
+      void     onTouchMoved( Touch *touch, Event *event);
+      ErrorCode onBGFG();
+
 
       enum class TouchState {
          WAITING_TOUCH = 0,
@@ -103,7 +103,7 @@ namespace MPix {
       };
 
       TouchState st;
-      Touch *first_touch, *second_touch; 
+      Touch *first_touch, *second_touch;
       Point pos;
       float scale;
       bool dragging;
@@ -116,12 +116,11 @@ namespace MPix {
       // Helpers
       void MoveCursor(Coordinates pos);
 
-      // Called when tap received 
+      // Called when tap received
       void GestureTapPoint(Coordinates pos);
 
       // Puts mark with number there
       void PutMark(Coordinates pos, int value);
-      void RemoveMark(Coordinates pos);
    };
 
 }

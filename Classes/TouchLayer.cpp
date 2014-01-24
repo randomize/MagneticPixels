@@ -8,23 +8,33 @@ using namespace MPix;
 // constants
 namespace TouchConstants {
 
+   const float MAX_TIMEOUT = 1.5f;
+
+   // Tapping ===============================================================
+
    // If all paints of gesture lay in this circle gesture is considered a tap
    const float TAP_RADIUS_MAX = 10.0f;
 
    // Gesture recognition works only if gesture boundary is at least of this size
    const float GESTURE_BOUNDARY_MIN = 40.0f;
 
+
+   // Shaking ==============================================================
+
+   // Sets maximum angle that is considered acute when looking for shake
+   const float ACUTE_ANGLE_MAX = PI_FLOAT / 6;
+
+   // Sets number of acute angles in stroke to be considered as shake
+   const int MIN_ACUTE_TO_BE_SHAKE = 4;
+
+   // Noise threshold, min points in stroke to ve recognized as shake
+   const int MIN_SHAKE_ACCEPT_SAMPLES = 32;
+
+
+   // Circle ===============================================================
+
    // Min radius of circle
    const float CIRCLE_RAD = 150.0f; 
-
-   // Min ratio of circle
-   const float MINRATIO = 0.5f;
-
-   // Sets maximum angle to be considered acute
-   const float ACUTE_ANGLE_MAX = PI_FLOAT / 5;
-
-   // Shake speed limit
-   const float SHAKE_SPEED = 40.0f;
 
    // Threshold of fitness (percent of radius)
    const float CIRCLE_THRESH = 25.0f; 
@@ -38,7 +48,10 @@ namespace TouchConstants {
 }
 
 
-MPix::TouchLayer::TouchLayer()
+MPix::TouchLayer::TouchLayer():
+   ps(Point::ZERO),
+   pe(Point::ZERO),
+   n_acute_angles(0)
 {
     CmdDidEnterBG::listners["TouchLayer"] = std::bind( &TouchLayer::onBGFG, this );
     CmdWillEnterFG::listners["TouchLayer"] = std::bind( &TouchLayer::onBGFG, this );
@@ -52,11 +65,11 @@ MPix::TouchLayer::~TouchLayer()
 
 bool TouchLayer::init()
 {
-   st = TouchLayer::WAITING_TOUCH; 
-//   setKeypadEnabled(true);
+
+
+   // Draw a grid and gray pixel
 
    auto dn = DrawNode::create();
-   // Draw a grid and gray pixel
    auto cl = Color4F(0.5f, 0.5f, 0.5f, 0.5f);
    const int size = 90;
    for (int i=0; i < size*2+1; ++i){
@@ -73,13 +86,13 @@ bool TouchLayer::init()
    }
    addChild(dn);
 
+   // Jic
+   ResetState();
+
    return true;
 }
 
-ErrorCode TouchLayer::onBGFG() {
-   ResetState();
-   return ErrorCode::RET_OK;
-}
+/////////////////////////////////////////////////////////////////////////////////////////
 
 bool TouchLayer::onTouchBegan( Touch *touch, Event *event )
 {
@@ -89,22 +102,34 @@ bool TouchLayer::onTouchBegan( Touch *touch, Event *event )
    switch (st)
    {
    case MPix::TouchLayer::WAITING_TOUCH:
+
       ps = this->convertTouchToNodeSpace(touch);
+
       st = ONE_TOUCH_RECORDING;
-      sequence.push_back(posOnScreen);
+      sequence.clear();
       n_acute_angles = 0;
+
+      sequence.push_back(posOnScreen);
+
+      // Start couning
       unscheduleAllSelectors();
-      scheduleOnce(schedule_selector(TouchLayer::onTimeoutElapsed), 1.5f);
+      scheduleOnce(schedule_selector(TouchLayer::onTimeoutElapsed), TouchConstants::MAX_TIMEOUT);
+
       return true;
+
    case MPix::TouchLayer::ONE_TOUCH_RECORDING:
+
       sequence.clear();
       st = ZOOMING_AND_PANING;
       // TODO: Fix parameters
       return true;
+
    case MPix::TouchLayer::ZOOMING_AND_PANING:
       return false;
+
    default:
       return false;
+
    }
 
    return false;
@@ -121,13 +146,14 @@ void TouchLayer::onTouchMoved( Touch *touch, Event *event )
    case MPix::TouchLayer::WAITING_TOUCH:
       assert(false);
       break;
+
    case MPix::TouchLayer::ONE_TOUCH_RECORDING:
       {
          pe = this->convertTouchToNodeSpace(touch);
          sequence.push_back(posOnScreen);
 
          auto sz = sequence.size();
-         if ( sequence.size() >= 3 ) {
+         if ( sz >= 3 ) {
             // Taking two vectors
             Point v1 = sequence[sz-3] - sequence[sz-2];
             Point v2 = sequence[sz-1] - sequence[sz-2];
@@ -137,7 +163,7 @@ void TouchLayer::onTouchMoved( Touch *touch, Event *event )
             if ( fabs(angle) <= TouchConstants::ACUTE_ANGLE_MAX )
                n_acute_angles++;
 
-            if ( n_acute_angles >= 3 ) {
+            if ( n_acute_angles >= TouchConstants::MIN_ACUTE_TO_BE_SHAKE && sz >= TouchConstants::MIN_SHAKE_ACCEPT_SAMPLES  ) {
                GestureShake();
             }
 
@@ -146,12 +172,16 @@ void TouchLayer::onTouchMoved( Touch *touch, Event *event )
       }
       break;
    case MPix::TouchLayer::ZOOMING_AND_PANING:
+
       // TODO: make zoom and pan, based on fixed parameters and current delthas
       break;
+
    case MPix::TouchLayer::IGNORING:
       break;
+
    default:
       break;
+
    }
 
 }
@@ -194,78 +224,109 @@ void TouchLayer::onTouchEnded( Touch *touch, Event *event )
 
 }
 
-void MPix::TouchLayer::draw()
-{
+/////////////////////////////////////////////////////////////////////////////////
 
-#ifdef MPIX_DEVELOPERS_BUILD
-
-   if (st == ONE_TOUCH_RECORDING && sequence.size() >= 2) {
-      DrawPrimitives::setDrawColor4F(1.0f, 0.0f, 1.0f, 1.0f);
-      DrawPrimitives::setPointSize(10);
-      DrawPrimitives::drawLine(ps,pe);
-      DrawPrimitives::setDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
-      DrawPrimitives::drawPoint(ps);
-      DrawPrimitives::drawPoint(pe);
-   }
-
-#endif
-
-}
 
 void MPix::TouchLayer::GestureTapPoint( Point p )
 {
    p = Director::getInstance()->convertToGL(p);
    p = this->convertToNodeSpace(p);
    Coordinates pos = ScreenToLogic(p);
-   EM_LOG_DEBUG("Sending a tap at: " + pos);
+   EM_LOG_DEBUG("Got a tap at: " + pos);
 
    GameplayManager::getInstance().PostCommand(new CmdGameplayClick(pos));
 }
 
 void MPix::TouchLayer::GestureSwipe( Direction dir )
 {
-   EM_LOG_DEBUG("Sending a swype to " + dir);
+   EM_LOG_DEBUG("Got a swype to " + dir);
    GameplayManager::getInstance().PostCommand(new CmdGameplayMove(dir));
 }
 
 void MPix::TouchLayer::GestureLongSwipe( Direction dir )
 {
-   EM_LOG_DEBUG("Sending a long swype to " + dir);
-   GameplayManager::getInstance().PostCommand(new CmdGameplayMoveFast(dir));
+   EM_LOG_DEBUG("Got a long swype to " + dir);
 }
 
 void MPix::TouchLayer::GestureShake()
 {
-   EM_LOG_DEBUG("Sending restart assembly");
+   EM_LOG_DEBUG("Got a shake");
    GameplayManager::getInstance().PostCommand(new CmdGameplayRestartAssembly);
 }
 
 void MPix::TouchLayer::GestureRotateCW()
 {
-   EM_LOG_DEBUG("Sending redo move in assembly");
+   EM_LOG_DEBUG("Got a CW circle");
    GameplayManager::getInstance().PostCommand(new CmdGameplayRedoMove);
 }
 
 void MPix::TouchLayer::GestureRotateCCW()
 {
-   EM_LOG_DEBUG("Sending undo move in assembly");
+   EM_LOG_DEBUG("Got a CCW circle");
    GameplayManager::getInstance().PostCommand(new CmdGameplayUndoMove);
 }
 
+
+////////////////////////////////////////////////////////////////////////////////////////////
+
+void MPix::TouchLayer::ResetState()
+{
+   sequence.clear();
+   st = WAITING_TOUCH;
+   n_acute_angles = 0;
+}
+
+void MPix::TouchLayer::onTimeoutElapsed( float )
+{
+   if ( st == ONE_TOUCH_RECORDING ) {
+      sequence.clear();
+      st = IGNORING;
+   }
+}
+
+void TouchLayer::onEnter()
+{
+   Layer::onEnter();
+
+   // Register touch
+   TouchEnable();
+
+}
+
+ErrorCode TouchLayer::onBGFG() {
+   ResetState();
+   return ErrorCode::RET_OK;
+}
+
+
 EmbossLib::ErrorCode MPix::TouchLayer::TouchEnable()
 {
-   this->setTouchMode(Touch::DispatchMode::ONE_BY_ONE);
-   this->setTouchEnabled(true);
+   EM_LOG_DEBUG("Touch layer touches on");
+   auto listener = EventListenerTouchOneByOne::create();
+   listener->setSwallowTouches(true);
+   listener->onTouchBegan     = CC_CALLBACK_2(TouchLayer::onTouchBegan, this);
+   listener->onTouchMoved     = CC_CALLBACK_2(TouchLayer::onTouchMoved, this);
+   listener->onTouchEnded     = CC_CALLBACK_2(TouchLayer::onTouchEnded, this);
+   listener->onTouchCancelled = CC_CALLBACK_2(TouchLayer::onTouchCancelled, this);
+
+   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
    ResetState();
+
    return ErrorCode::RET_OK;
 }
 
 EmbossLib::ErrorCode MPix::TouchLayer::TouchDisable()
 {
+   EM_LOG_DEBUG("Touch layer touches off");
+
+   _eventDispatcher->removeEventListeners(EventListener::Type::TOUCH_ONE_BY_ONE);
+
    ResetState();
-   this->setTouchEnabled(false);
    return ErrorCode::RET_OK;
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////
 
 void MPix::TouchLayer::AnalyseSequence()
 {
@@ -345,7 +406,7 @@ void MPix::TouchLayer::AnalyseSequence()
       Point v1 = *p2 - *p1;
 
       float nangle = fabs(v1.getAngle());
-      float nlen = v1.getLength();
+      // float nlen = v1.getLength();
       allAngles.push_back(nangle);
 
       avgRadius += (avgCenter-(*p2)).getLength() ;
@@ -401,7 +462,7 @@ void MPix::TouchLayer::AnalyseSequence()
    float ang = leadAng * 4 / M_PI + 9/2.0f;
    int p = (int)floor(ang) % 8; // 0 .. 7 
 
-   Direction di;
+   Direction di = Direction::DIR_UNKNOWN;
    switch (p)
    {
    case 0:
@@ -429,6 +490,7 @@ void MPix::TouchLayer::AnalyseSequence()
       di = Direction::DIR_DOWNLEFT;
       break;
    default:
+      assert(false);
       break;
    }
 
@@ -442,40 +504,4 @@ void MPix::TouchLayer::AnalyseSequence()
 
 }
 
-void MPix::TouchLayer::ResetState()
-{
-   sequence.clear();
-   st = WAITING_TOUCH;
-}
-
-void MPix::TouchLayer::onTimeoutElapsed( float )
-{
-   if ( st == ONE_TOUCH_RECORDING ) {
-      sequence.clear();
-      st = IGNORING;
-   }
-}
-
-
-/*
-void MPix::TouchLayer::onBackClicked()
-{
-   GameStateManager::getInstance()->SwitchToExit();
-}*/
-
-
-
-void TouchLayer::onEnter()
-{
-   Layer::onEnter();
-   // Register touch
-   TouchEnable();
-}
-
-void TouchLayer::onExit()
-{
-   Layer::onExit();
-   // Unregister touch
-   TouchDisable();
-}
 
