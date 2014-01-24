@@ -32,8 +32,9 @@ namespace MPix {
       void onEnter() override;
       void onExit() override;
 
-   private: // Helpers
+   private: 
 
+      // Handlers
       void SelectedLevel(unsigned int id);
       void SelectedWorld(int id);
       void BackToWorlds();
@@ -43,7 +44,21 @@ namespace MPix {
       Menu* world_m; // World menu
       Menu* level_m; // Level menu
 
+      // Touch handlers
+      bool     onTouchBegan( Touch *touch, Event *event);
+      void onTouchCancelled( Touch *touch, Event *event);
+      void     onTouchEnded( Touch *touch, Event *event);
+      void     onTouchMoved( Touch *touch, Event *event);
 
+      // Current state
+      enum class State {
+         WAIT,
+         SCROLL
+      } state;
+
+      // Scrollable layer with worlds
+      Layer* worlds_layer;
+      Point initial_pos;
 
    };
 

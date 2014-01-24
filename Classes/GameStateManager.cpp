@@ -78,7 +78,13 @@ void MPix::GameStateManager::SwitchToTestGame( void )
 
 void GameStateManager::SwitchToSelector( void )
 {
-   SwitchScene(LevelSelector::create());
+   assert(currentState); 
+
+   // Animating transition
+   auto newState = LevelSelector::create();
+   Director::getInstance()->replaceScene( TransitionSlideInR::create(0.25f, newState ));
+
+   currentState = newState;
 }
 
 void GameStateManager::SwitchToMenu( void )

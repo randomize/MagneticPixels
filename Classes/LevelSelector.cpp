@@ -9,18 +9,27 @@
 
 using namespace MPix;
 
+
 //====---------------------------------------------======//
 
+const int Z_BACKGROUND = 1;
+const int Z_WORLDS_LAYER = 2;
+const int Z_UPPER_PANE = 3;
 
-MPix::LevelSelector::LevelSelector()
+const float UPPER_PANE_HEIGHT = 100.0f;
+
+//====---------------------------------------------======//
+
+MPix::LevelSelector::LevelSelector():
+   world_m(nullptr),
+   level_m(nullptr),
+   state(State::WAIT),
+   worlds_layer(nullptr)
 {
-   level_m = nullptr;
-   world_m = nullptr;
 }
 
 MPix::LevelSelector::~LevelSelector()
 {
-
 }
 
 bool MPix::LevelSelector::init()
@@ -32,7 +41,41 @@ bool MPix::LevelSelector::init()
       return false;
    }
 
-   auto & lm = LevelManager::getInstance();
+   auto d = Director::getInstance();
+   auto fullSize = d->getWinSize();
+   auto halfSize =  fullSize / 2.0f;
+   auto visibleSize = d->getVisibleSize();
+   auto visibleOrigin = d->getVisibleOrigin();
+   auto center = Point(halfSize.width, halfSize.height);
+
+   auto upperLeft  = Point(visibleOrigin.x, visibleOrigin.y + visibleSize.height);
+   auto upperRight = Point(upperLeft.x + visibleSize.width, upperLeft.y);
+
+
+   // Background
+   auto bg1 = Sprite::create("bg/04.jpg");
+   bg1->setScale(visibleSize.height / bg1->getContentSize().height);
+   bg1->setPosition(center);
+   addChild(bg1, Z_BACKGROUND);
+
+
+   // Upper pane
+   auto pn = DrawNode::create();
+   Point p[4] = {
+      upperLeft,
+      upperRight,
+      upperRight + Point(0, -UPPER_PANE_HEIGHT),
+      upperLeft  + Point(0, -UPPER_PANE_HEIGHT)
+   };
+   pn->drawPolygon(p, 4, Color4F(1, 1, 1, 0.3f), 0, Color4F(0, 0, 0, 0));
+   addChild(pn, Z_UPPER_PANE);
+
+
+   // Scrollable layer with worlds
+   worlds_layer = LayerColor::create(Color4B::GRAY);
+   addChild(worlds_layer, Z_WORLDS_LAYER);
+
+   auto& lm = LevelManager::getInstance();
 
    // Create worlds menu
    MenuItemFont::setFontSize(64);
@@ -61,8 +104,18 @@ bool MPix::LevelSelector::init()
 
    auto s = Director::getInstance()->getWinSize();
    menu->setPosition(Point(s.width/2, s.height/2));
-   addChild(menu);
+   worlds_layer->addChild(menu, 1);
    world_m = menu;
+
+   // Register touch
+   auto listener = EventListenerTouchOneByOne::create();
+   listener->setSwallowTouches(false);
+   listener->onTouchBegan     = CC_CALLBACK_2(LevelSelector::onTouchBegan, this);
+   listener->onTouchMoved     = CC_CALLBACK_2(LevelSelector::onTouchMoved, this);
+   listener->onTouchEnded     = CC_CALLBACK_2(LevelSelector::onTouchEnded, this);
+   listener->onTouchCancelled = CC_CALLBACK_2(LevelSelector::onTouchCancelled, this);
+   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
    return true;
 
 }
@@ -126,7 +179,7 @@ void MPix::LevelSelector::SelectedWorld( int wid )
    auto s = Director::getInstance()->getWinSize();
    menu->setPosition(Point(s.width/2, s.height/2));
 
-   addChild(menu);
+   worlds_layer->addChild(menu, 1);
    level_m = menu;
 
 }
@@ -150,4 +203,42 @@ void MPix::LevelSelector::BackToWorlds()
 void MPix::LevelSelector::BackToMainMenu()
 {
    GameStateManager::getInstance().SwitchToMenu();
+}
+
+bool MPix::LevelSelector::onTouchBegan(Touch *touch, Event *event)
+{
+   EM_LOG_DEBUG("Touch began");
+   switch (state)
+   {
+   case State::WAIT:
+      state = State::SCROLL;
+      initial_pos = worlds_layer->getPosition();
+      return true;
+   case State::SCROLL:
+      return false;
+   default:
+      assert(false);
+      return false;
+   }
+}
+
+void MPix::LevelSelector::onTouchCancelled(Touch *touch, Event *event)
+{
+   state = State::WAIT;
+}
+
+void MPix::LevelSelector::onTouchEnded(Touch *touch, Event *event)
+{
+   EM_LOG_DEBUG("Touch ended");
+   state = State::WAIT;
+   // TODO: start boucing animation
+}
+
+void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
+{
+   EM_LOG_DEBUG("Touch moved");
+   // Update position
+   auto new_position = initial_pos + Point(touch->getLocationInView().x, 0);
+   worlds_layer->setPosition(new_position);
+
 }
