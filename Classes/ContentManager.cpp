@@ -65,7 +65,7 @@ void MPix::ContentManager::CreateAnimations()
    arm_man->addArmatureFileInfo("magnetic_mimics.png", "magnetic_mimics.plist", "magnetic_mimics.xml");
    auto texture = t_cache->addImage("magnetic_mimics.png");
    texture->setAliasTexParameters();
-   resources.emplace("magnetic_0", "magnetic_0");
+   resources.emplace("magnetic_mimics", "magnetic_0");
    resources.emplace("socoban_0", "magnetic_0");
 
 }
@@ -76,10 +76,12 @@ void MPix::ContentManager::CreateSprites()
 
    // Scene objects // TODO: merge to one sprite sheet
    //cache->addSpriteFramesWithFile("scene.plist");
-   resources.emplace("wall_pixel", "wall.png");
+   resources.emplace("wall_element", "wall.png");
    resources.emplace("goal_bg", "pixel_goal.png");
    resources.emplace("magnetic_bg_smash", "magnetic_bg_smash.png");
    resources.emplace("magnetic_bg_norm", "magnetic_bg_norm.png");
+   resources.emplace("pitfall_bg", "pitfall_pixel.png");
+   resources.emplace("cactus_bg", "needle_small.png");
 
    // UI Objects
    //cache->addSpriteFramesWithFile("ui.plist");
@@ -147,15 +149,20 @@ HSVSprite* MPix::ContentManager::GetHSVSprite(const string& name)
    auto it = resources.find(name);
    if (it == resources.end())
    {
-       fab = HSVSprite::create("dummy.png");
-       EM_LOG_WARNING("Not found resource " + name);
+      fab = HSVSprite::create("dummy.png");
+      EM_LOG_WARNING("Not found resource " + name);
+      assert(fab);
    }
    else
    {
       fab = HSVSprite::create(it->second);
+      if (fab == nullptr) {
+         fab = HSVSprite::create("dummy.png");
+         EM_LOG_WARNING("Not found resource " + name);
+         assert(fab);
+      }
    }
 
-   assert(fab);
    return fab;
 }
 

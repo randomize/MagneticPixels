@@ -41,7 +41,7 @@ void MPix::MagneticView::Build( shared_ptr<Pixel> model )
    zzz = SleepingZets::create();
 
    // Animated face
-   mimics = cm.GetAnimation("magnetic_0");
+   mimics = cm.GetAnimation("magnetic_mimics");
 
    // Colored background
    bg = cm.GetHSVSprite("magnetic_bg_norm");

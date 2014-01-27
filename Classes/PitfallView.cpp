@@ -1,6 +1,6 @@
 #include "PitfallView.h"
 #include "Pitfall.h"
-#include "ColorBox.h"
+#include "ContentManager.h"
 
 using namespace MPix;
 
@@ -24,9 +24,8 @@ void MPix::PitfallView::Build( shared_ptr<Pixel> model )
 
    pixel = std::dynamic_pointer_cast<Pitfall>(model);
 
-   auto cb = ColorBox::create();
-   cb->SetColor(Color4F(0,0,0,1));
-   cb->setPosition(-MPIX_CELL_SIZE_HALF_P);
+   auto cb = ContentManager::getInstance().GetSimpleSprite("pitfall_bg");
+   cb->setOpacity(rand() % 56 + 200);
 
    contents->addChild(cb);
 }

@@ -20,7 +20,7 @@ namespace MPix {
 
    // Forward dependencies
    class SokobanPixel;
-   class EMAnimation;
+   class HSVSprite;
 
    // SokobanPixelView
    class SokobanPixelView : PixelView
@@ -30,23 +30,11 @@ namespace MPix {
       EM_NODE_CHILD(SokobanPixelView);
       SokobanPixelView();
 
-      bool Update( CmdUIUpdatePixelView::Reason reason ) override;
       void Build( shared_ptr<Pixel> model ) override;
-
-      // Base update reasons implementation
-      void PixelCreated() override;
-      void PixelAccepted() override;
-      void PixelReset() override;
-      void PixelDied() override;
-      void PixelResurrect() override;
-
-      // Own update reasons
-      virtual void PixelSmiled();
-      virtual void PixelUnsmiled();
 
    protected:
 
-      EMAnimation* body;
+      HSVSprite*   body;
 
    private:
 

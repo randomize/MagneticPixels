@@ -58,17 +58,17 @@ shared_ptr<Level> LevelGenerator::CreateTestLevel()
    n = new CactusDynamic(CactusDynamic::NeedleType::MOVER, Direction::DIR_RIGHT);
    f->InsertPixel(n, -5, -5);
 
-   // Sokoban
+   // Sokobans
    n = new SokobanPixel(PixelColor::BLUE);
-   f->InsertPixel(n, 4, 4);
-
-   // Sokoban
+   f->InsertPixel(n, 3, 3);
    n = new SokobanPixel(PixelColor::BLUE);
-   f->InsertPixel(n, 5, 5);
+   f->InsertPixel(n, 2, 2);
 
-   // Pitfall
+   // Pitfalls
    n = new Pitfall();
    f->InsertPixel(n, -3, 2);
+   n = new Pitfall();
+   f->InsertPixel(n, -4, 2);
 
    n = new StonePixel();
    f->InsertPixel(n, -2, 1);

@@ -1,6 +1,7 @@
 #include "CactusView.h"
 #include "CactusDynamic.h"
 #include "Shake.h"
+#include "ContentManager.h"
 
 using namespace MPix;
 
@@ -13,8 +14,7 @@ void MPix::CactusView::Build( shared_ptr<Pixel> model )
 {
    PixelView::Build(model);
 
-
-   bg = Sprite::create("needle_small.png");
+   bg = ContentManager::getInstance().GetSimpleSprite("cactus_bg");
 
    contents->addChild(bg,0);
 }
