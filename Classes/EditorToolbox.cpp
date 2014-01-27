@@ -144,20 +144,16 @@ void MPix::EditorToolbox::CloseToolbox()
 
 void MPix::EditorToolbox::TouchDisable()
 {
-   EM_LOG_DEBUG("Editor toolbox layer touches on");
-   auto listener = EventListenerTouchOneByOne::create();
-   listener->setSwallowTouches(true);
-   listener->onTouchBegan     = CC_CALLBACK_2(EditorToolbox::onTouchBegan, this);
-   // listener->onTouchMoved     = CC_CALLBACK_2(EditorLayer::onTouchMoved, this);
-   // listener->onTouchEnded     = CC_CALLBACK_2(EditorLayer::onTouchEnded, this);
-   // listener->onTouchCancelled = CC_CALLBACK_2(EditorLayer::onTouchCancelled, this);
-
-   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+   _eventDispatcher->removeEventListeners(EventListener::Type::TOUCH_ONE_BY_ONE);
 }
 
 void MPix::EditorToolbox::TouchEnable()
 {
-   _eventDispatcher->removeEventListeners(EventListener::Type::TOUCH_ONE_BY_ONE);
+   EM_LOG_DEBUG("Editor toolbox layer touches on");
+   auto listener = EventListenerTouchOneByOne::create();
+   listener->setSwallowTouches(false);
+   listener->onTouchBegan     = CC_CALLBACK_2(EditorToolbox::onTouchBegan, this);
+   _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
 
