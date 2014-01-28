@@ -48,7 +48,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
    director->setDisplayStats(false);
 #endif
 
-   bool cocos_fits_width = frameSize.width / frameSize.height < DESIGN_WIDTH / DESIGN_HEIGHT;
+   bool cocos_fits_width = frameSize.width / frameSize.height > DESIGN_WIDTH / DESIGN_HEIGHT;
    float screen_cell_size;
 
    // In NO_BORDER mode cocos fits width or height depending on ratio;
@@ -67,7 +67,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
    list<std::pair<int, string>> resolutions;
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
    resolutions = { 
       { 40,  "iOS/40" },
       { 80,  "iOS/80" },
@@ -75,7 +75,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
       { 171, "iOS/171" }
    };
 #endif
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
    resolutions = { 
       { 40,  "Android/40" },
       { 60,  "Android/60" },

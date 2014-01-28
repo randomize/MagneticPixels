@@ -52,6 +52,7 @@ namespace MPix {
       // Life and dead methods
       bool IsAlive() const;
       State GetLiveState() const { return life; }
+      void Kill(State cause);
       void Kill(const Context& context, State cause);
       void Kill(const Context& context, const IKilling& killer);
       bool KilledBy( const IKilling& k ) const;

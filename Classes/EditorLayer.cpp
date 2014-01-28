@@ -21,7 +21,7 @@ using namespace MPix;
 
 // constants
 const float TAP_THRESHOLD = 10.0f;
-const float LONG_TAP_TIMEOUT = 2.0f;
+const float LONG_TAP_TIMEOUT = 1.0f;
 
 MPix::EditorLayer::EditorLayer() :
    touch_events(nullptr),

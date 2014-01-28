@@ -82,14 +82,24 @@ void GameStateManager::SwitchToSelector( void )
 
    // Animating transition
    auto newState = LevelSelector::create();
-   Director::getInstance()->replaceScene( TransitionSlideInR::create(0.25f, newState ));
+   //Director::getInstance()->replaceScene( TransitionSlideInR::create(0.25f, newState ));
+   Director::getInstance()->replaceScene( TransitionCrossFade::create(0.25f, newState ));
 
    currentState = newState;
 }
 
 void GameStateManager::SwitchToMenu( void )
 {
-   SwitchScene(MenuMain::create());
+   if (currentState->GetName() == string("LevelSelector")) // Animating transition
+   {
+      auto newState = MenuMain::create();
+      Director::getInstance()->replaceScene(TransitionCrossFade::create(0.25f, newState));
+      currentState = newState;
+   }
+   else  // Plain switch
+   {
+      SwitchScene(MenuMain::create());
+   }
 }
 
 void MPix::GameStateManager::SwitchToResults( void )

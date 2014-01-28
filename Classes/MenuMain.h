@@ -25,9 +25,10 @@ namespace MPix {
    public: //  === State interface =====================
 
       EM_GAME_STATE(MenuMain);
-      MenuMain();
-      ~MenuMain();
+
       bool init() override;
+
+      void onEnter() override;
 
    private: // Helpers
 

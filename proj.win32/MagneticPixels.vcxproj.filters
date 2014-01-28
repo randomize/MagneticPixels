@@ -249,9 +249,6 @@
     <ClCompile Include="..\Classes\LevelXML.cpp">
       <Filter>Classes\Serialization</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MagneticView.cpp">
-      <Filter>Classes\Views\PixelViews</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\RepeatedSprite.cpp">
       <Filter>Classes\Extensions</Filter>
     </ClCompile>
@@ -359,6 +356,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\PixelView.cpp">
       <Filter>Classes\Views\PixelViews</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CuteBlocksLogo.cpp">
+      <Filter>Classes\Extensions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -560,9 +560,6 @@
     <ClInclude Include="..\Classes\LevelXML.h">
       <Filter>Classes\Serialization</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagneticView.h">
-      <Filter>Classes\Views\PixelViews</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\RepeatedSprite.h">
       <Filter>Classes\Extensions</Filter>
     </ClInclude>
@@ -680,6 +677,10 @@
     <ClInclude Include="..\Classes\Pitfall.h">
       <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\CuteBlocksLogo.h">
+      <Filter>Classes\Extensions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MagneticView.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

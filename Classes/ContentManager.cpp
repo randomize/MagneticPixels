@@ -213,6 +213,24 @@ void MPix::ContentManager::RemoveNode(const string& node_name)
    nodes.erase(node_name);
 }
 
+string MPix::ContentManager::GetBaseFont()
+{
+   return "fonts/Exo2-Medium.ttf";
+}
+
+string MPix::ContentManager::GetBaseFontLight()
+{
+   return "fonts/Exo2-Light.ttf";
+}
+
+string MPix::ContentManager::GetLogoFont()
+{
+   return "fonts/Exo2-Thin.ttf";
+}
+
+
+
+
 
 
 

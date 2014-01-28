@@ -145,6 +145,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\ColorBox.cpp" />
     <ClCompile Include="..\Classes\ContentManager.cpp" />
     <ClCompile Include="..\Classes\Context.cpp" />
+    <ClCompile Include="..\Classes\CuteBlocksLogo.cpp" />
     <ClCompile Include="..\Classes\EditorData.cpp" />
     <ClCompile Include="..\Classes\EditorLayer.cpp" />
     <ClCompile Include="..\Classes\EditorMain.cpp" />
@@ -190,7 +191,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagneticDiagonalPixel.cpp" />
     <ClCompile Include="..\Classes\MagneticPixel.cpp" />
     <ClCompile Include="..\Classes\MagneticPixelView.cpp" />
-    <ClCompile Include="..\Classes\MagneticView.cpp" />
     <ClCompile Include="..\Classes\MenuMain.cpp" />
     <ClCompile Include="..\Classes\MPix.cpp" />
     <ClCompile Include="..\Classes\Pitfall.cpp" />
@@ -244,6 +244,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\ColorBox.h" />
     <ClInclude Include="..\Classes\ContentManager.h" />
     <ClInclude Include="..\Classes\Context.h" />
+    <ClInclude Include="..\Classes\CuteBlocksLogo.h" />
     <ClInclude Include="..\Classes\EditorData.h" />
     <ClInclude Include="..\Classes\EditorLayer.h" />
     <ClInclude Include="..\Classes\EditorMain.h" />

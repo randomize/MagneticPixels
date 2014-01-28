@@ -15,8 +15,10 @@ using namespace MPix;
 const int Z_BACKGROUND = 1;
 const int Z_WORLDS_LAYER = 2;
 const int Z_UPPER_PANE = 3;
+const int Z_UPPER_PANE_FONT = 4;
 
 const float UPPER_PANE_HEIGHT = 100.0f;
+const float UPPER_PANE_FONT = 64.0f;
 
 //====---------------------------------------------======//
 
@@ -72,17 +74,43 @@ bool MPix::LevelSelector::init()
 
 
    // Scrollable layer with worlds
-   worlds_layer = LayerColor::create(Color4B::GRAY);
+   //worlds_layer = LayerColor::create(Color4B::GRAY);
+   worlds_layer = Layer::create();
    addChild(worlds_layer, Z_WORLDS_LAYER);
 
    auto& lm = LevelManager::getInstance();
 
    // Create worlds menu
-   MenuItemFont::setFontSize(64);
    auto ids = lm.GetWorldsIDs();
+   auto ids_cout = ids.size();
+   assert(ids_cout);
+
+   current_index = 0;
+   title_lables.reserve(ids_cout);
+   indexed_ids.reserve(ids_cout);
+
+   MenuItemFont::setFontSize(64);
    auto menu = Menu::create();
+
    for (auto id : ids ) {
+
+      // Setting up search maps
+      ids_indexes.emplace(id, indexed_ids.size());
+      indexed_ids.push_back(id);
+
+      // Take world
       auto w = lm.GetWorldByID(id);
+      assert(w);
+
+      // Create Label, place and hide them all
+      auto label = LabelTTF::create(w->GetName(), "fonts/Exo2-Light.ttf", UPPER_PANE_FONT);
+      label->setPosition((upperLeft + upperRight)/2 + Point(0, -UPPER_PANE_HEIGHT/2.0));
+      label->setOpacity(0);
+      label->setColor(Color3B::BLACK);
+      title_lables.emplace(id, label);
+      addChild(label, Z_UPPER_PANE_FONT);
+
+
       auto item = MenuItemFont::create(
          (w->GetName() + " (" + ToString(w->GetLevelCount()) + ")").c_str(),
          [&](Object *sender) {
@@ -91,8 +119,10 @@ bool MPix::LevelSelector::init()
          }
       );
       item->setTag(id);
+      item->setColor(Color3B::BLACK);
       menu->addChild(item);
    }
+
    // Add default back button
    auto back = MenuItemFont::create(
       LocalUTF8Char("Back"),
@@ -115,6 +145,9 @@ bool MPix::LevelSelector::init()
    listener->onTouchEnded     = CC_CALLBACK_2(LevelSelector::onTouchEnded, this);
    listener->onTouchCancelled = CC_CALLBACK_2(LevelSelector::onTouchCancelled, this);
    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+   // Reveal current title label
+   title_lables[indexed_ids[current_index]]->runAction(FadeIn::create(1.0f));
 
    return true;
 

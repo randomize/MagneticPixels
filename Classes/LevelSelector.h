@@ -60,6 +60,12 @@ namespace MPix {
       Layer* worlds_layer;
       Point initial_pos;
 
+      // UI misc helper constants
+      unordered_map<int,Node*> title_lables; // ID -> label
+      unordered_map<int, int>   ids_indexes; // ID -> index
+      vector<int> indexed_ids;               // Index -> ID
+      int current_index;                     // Selected world index
+
    };
 
 }

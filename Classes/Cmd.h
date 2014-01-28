@@ -43,6 +43,7 @@ namespace MPix {
          CREATED,  // any pixel - created
          CHANGED,  // any pixel - changed
          WAKE,     // ams pixel - when added to asm
+         PLAY_IDLE, // perform random idle action
          ASLEEP,   // ams pixel - when removed from asm (undo)
          RESET,    // pixel - when reset happens, move home and asleep after
          DIED,     // pixel - when lost from assembly

@@ -55,6 +55,12 @@ namespace MPix {
 
       EMAnimation* GetAnimation(const string& name);
 
+      // =========== Font management =====================================
+
+      string GetBaseFont(); 
+      string GetBaseFontLight();
+      string GetLogoFont();
+
       // =========== GFX helpers ==========================================
       // If some state wants to pass some (data)node to another they use 
       // these methods, ContentManager acts as middle-man 

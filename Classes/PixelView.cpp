@@ -134,14 +134,10 @@ void MPix::PixelView::PixelResurrect()
 
 void MPix::PixelView::PixelKilled()
 {
-   // Do nothing
 }
-
-
 
 void MPix::PixelView::PixelChanged()
 {
-   // Do nothing
 }
 
 
