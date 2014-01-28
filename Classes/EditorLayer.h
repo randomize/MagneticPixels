@@ -86,6 +86,8 @@ namespace MPix {
 
       // --------- Touching ------------------------------------------------------------
 
+      EventListener* touch_events;
+
       // Handlers
       bool     onTouchBegan( Touch *touch, Event *event);
       void onTouchCancelled( Touch *touch, Event *event);
@@ -93,23 +95,19 @@ namespace MPix {
       void     onTouchMoved( Touch *touch, Event *event);
       ErrorCode onBGFG();
 
-
       enum class TouchState {
          WAITING_TOUCH = 0,
          ONE_TOUCH,
          ZOOMING,
-         SELECTING_TOOL,
          IGNORING,
-      };
+      } st;
 
-      TouchState st;
-      Touch *first_touch, *second_touch;
+      Touch first_touch, second_touch;
       Point pos;
       float scale;
+      float start_dist;
       bool dragging;
-
-      // ---------- Viewprt ------------------------------------------------------------
-      Point initial_pos;
+      double timestamp;
 
    private: // Internal
 
@@ -118,6 +116,9 @@ namespace MPix {
 
       // Called when tap received
       void GestureTapPoint(Coordinates pos);
+
+      // Called when long tap received
+      void GestureLongTapPoint(Coordinates pos);
 
       // Puts mark with number there
       void PutMark(Coordinates pos, int value);

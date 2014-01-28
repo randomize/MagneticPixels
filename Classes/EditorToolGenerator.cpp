@@ -14,15 +14,15 @@
 
 using namespace MPix;
 
-#define PUT_TO(A, B) (A)->Insert(v.size()); v.push_back(B)
+#define PUT_TO(A, B) (A)->Insert(v.size()); v.emplace_back(B)
 
-vector<EditorTool*> MPix::EditorToolGenerator::GenerateDefaultSet()
+vector<shared_ptr<EditorTool>> MPix::EditorToolGenerator::GenerateDefaultSet()
 {
-   vector<EditorTool*> v;
+   vector<shared_ptr<EditorTool>> v;
    EditorTool* fab;
 
    auto root = new EditorFolderTool("Choose category");
-   v.push_back(root);
+   v.emplace_back(root);
 
    //////////////////////////////////////////////////////////////////////////
    // Core category 

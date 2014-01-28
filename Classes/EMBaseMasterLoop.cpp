@@ -7,8 +7,13 @@
 
 using namespace MPix;
 
+double MPix::EMBaseMasterLoop::time_runs = 0.0;
 //====---------------------------------------------======//
 
+MPix::EMBaseMasterLoop::EMBaseMasterLoop()
+{
+   EM_LOG_INFO("==== Magnetic pixels master loop constructed =====");
+}
 
 void MPix::EMBaseMasterLoop::InitGame()
 {
@@ -26,7 +31,7 @@ void MPix::EMBaseMasterLoop::RunGame()
    // Init sound
    SoundManager::getInstance();
 
-   // Init gamepleyman
+   // Init game manager
    GameplayManager::getInstance();
 
    // LoadData levels and worlds // TODO: delay load
@@ -39,20 +44,28 @@ void MPix::EMBaseMasterLoop::RunGame()
    GameStateManager::getInstance().SwitchToStart();
 }
 
-MPix::EMBaseMasterLoop::EMBaseMasterLoop()
-{
-   EM_LOG_INFO("==== Magnetic pixels master loop constructed =====");
-}
 
 void MPix::EMBaseMasterLoop::MasterTick(float t)
 {
    //EM_LOG_INFO("==== Magnetic pixels master tick =====");
+   time_runs += t;
 
    GameStateManager::getInstance().Tick(t);
+
    SoundManager::getInstance().UpdateSoundSystem(t);
 }
 
 void MPix::EMBaseMasterLoop::update( float t )
 {
    MasterTick(t);
+}
+
+void MPix::EMBaseMasterLoop::PrintTime()
+{
+   EM_LOG_ERROR("Time is: " + time_runs);
+}
+
+double MPix::EMBaseMasterLoop::GetTime()
+{
+   return time_runs;
 }

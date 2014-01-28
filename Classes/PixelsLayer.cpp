@@ -36,6 +36,7 @@ MPix::PixelsLayer::~PixelsLayer()
 {
    // Removing all views
    Clear();
+
    // Unregister
    CmdUICreateViews::listners.erase("PixelsLayer");
 }

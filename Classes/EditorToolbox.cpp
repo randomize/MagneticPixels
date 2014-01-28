@@ -11,33 +11,12 @@
 
 using namespace MPix;
 
-MPix::EditorToolbox::EditorToolbox()
-{
-   // Create all tools(Allocates memory, returns RAW pointer array)
-   tools = EditorToolGenerator::GenerateDefaultSet();
-}
-
-MPix::EditorToolbox::~EditorToolbox()
-{
-   // Deallocate memory for tools, and remove all tools
-   for (auto t : tools) {
-      delete t;
-   }
-   tools.clear();
-}
 
 bool EditorToolbox::init()
 {
+   touch_events = nullptr;
 
-   // Markup
-  /* for (int x = -2; x <= 2; x+=2 )
-      for (int y = -4; y <= 4; y+=2 ) {
-         auto cb = ColorBox::create();
-         cb->SetColor(Color4F(1,1,1,0.6f));
-         cb->setPosition(LogicToScreen(x, y));
-         addChild(cb);
-      }*/
-
+   tools = EditorToolGenerator::GenerateDefaultSet();
 
    for (auto t : tools) {
       t->BindContents(this);
@@ -68,10 +47,10 @@ bool EditorToolbox::onTouchBegan( Touch *touch, Event *event )
    return false;
 }
 
-void MPix::EditorToolbox::onShow()
+void MPix::EditorToolbox::PrepareTools()
 {
    if (last_used) {
-      auto n = static_cast<EditorFolderTool*>(root_tool);
+      auto n = dynamic_pointer_cast<EditorFolderTool>(root_tool);
       n->Insert(last_used);
       if (n->Count() == 16) {
          int sz = 16 - root_tool_size;
@@ -104,7 +83,7 @@ void MPix::EditorToolbox::GotClick(Coordinates p)
       LoadTool(tools[it->second], it->second);
 }
 
-void MPix::EditorToolbox::LoadTool( EditorTool* tool, int id)
+void MPix::EditorToolbox::LoadTool( shared_ptr<EditorTool> tool, int id)
 {
    tool->Chosen();
    tool_name->setString(tool->GetName());
@@ -129,11 +108,18 @@ void MPix::EditorToolbox::LoadTool( EditorTool* tool, int id)
       }
    }
 
-   if (current_tool->onSelected(Editor)) {
+   if (current_tool->onSelected(p_editor_layer)) {
       CloseToolbox();
       last_used = id;
    }
 
+}
+
+void MPix::EditorToolbox::ReuseLastTool()
+{
+   if (current_tool && current_tool->Childs() == nullptr) {
+      current_tool->onSelected(p_editor_layer);
+   }
 }
 
 
@@ -144,16 +130,23 @@ void MPix::EditorToolbox::CloseToolbox()
 
 void MPix::EditorToolbox::TouchDisable()
 {
-   _eventDispatcher->removeEventListeners(EventListener::Type::TOUCH_ONE_BY_ONE);
+   _eventDispatcher->removeEventListener(touch_events);
+   touch_events = nullptr;
 }
 
 void MPix::EditorToolbox::TouchEnable()
 {
    EM_LOG_DEBUG("Editor toolbox layer touches on");
+
+   assert(touch_events == nullptr); // Ensures Enable/Disable matching
+
    auto listener = EventListenerTouchOneByOne::create();
-   listener->setSwallowTouches(false);
+   listener->setSwallowTouches(true);
    listener->onTouchBegan     = CC_CALLBACK_2(EditorToolbox::onTouchBegan, this);
+
    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+   touch_events = listener;
 }
+
 
 

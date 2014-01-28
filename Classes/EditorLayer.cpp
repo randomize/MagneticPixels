@@ -15,16 +15,17 @@
 #include "Level.h"
 #include "LevelGenerator.h"
 #include "EditorData.h"
-
-
+#include "EMBaseMasterLoop.h"
 
 using namespace MPix;
 
 // constants
 const float TAP_THRESHOLD = 10.0f;
+const float LONG_TAP_TIMEOUT = 2.0f;
 
-
-MPix::EditorLayer::EditorLayer()
+MPix::EditorLayer::EditorLayer() :
+   touch_events(nullptr),
+   st(TouchState::WAITING_TOUCH)
 {
     CmdDidEnterBG::listners["EditorLayer"] = std::bind( &EditorLayer::onBGFG, this );
     CmdWillEnterFG::listners["EditorLayer"] = std::bind( &EditorLayer::onBGFG, this );
@@ -50,7 +51,6 @@ MPix::EditorLayer::~EditorLayer()
 bool EditorLayer::init()
 {
    cursor = Coordinates(0, 0);
-   st = TouchState::WAITING_TOUCH;
 
    auto box = ColorBox::create();
    box->SetColor(Color4F::WHITE);
@@ -67,10 +67,13 @@ bool EditorLayer::init()
    this->cursor_node = box;
 
    auto dn = DrawNode::create();
-   // Draw a grid and gray pixel
-   auto cl = Color4F(0.5f, 0.5f, 0.5f, 1.0f);
-   const int size = 90;
-   for (int i=0; i < size*2+1; ++i){
+
+   // Draw a grid (size x size)
+   auto cl = Color4F(0.0f, 0.1f, 0.0f, 1.0f);
+   const int size = 10;
+
+   for (int i = 0; i < size * 2 + 1; ++i)
+   {
       dn->drawSegment(
          LogicToScreen(Coordinates(-size, i-size)),
          LogicToScreen(Coordinates(size, i-size)),
@@ -82,8 +85,31 @@ bool EditorLayer::init()
          0.5f,
          cl);
    }
-   addChild(dn);
 
+   // Draw center circle rad R
+   const float R = 10.0f;
+   const int N_GON = 32;
+   vector<Point> points;
+   points.resize(N_GON);
+   for (int i = 0; i < N_GON; ++i)
+   {
+      points[i].x = R * cos(2 * M_PI / N_GON * i);
+      points[i].y = R * sin(2 * M_PI / N_GON * i);
+   }
+   dn->drawPolygon(points.data(), N_GON, Color4F::RED, 0, Color4F::BLACK);
+
+   // Draw boundary
+   vector<Point> p = {
+      LogicToScreen(Coordinates(-4,  6)),
+      LogicToScreen(Coordinates( 4,  6)),
+      LogicToScreen(Coordinates( 4, -6)),
+      LogicToScreen(Coordinates(-4, -6))
+   };
+   dn->drawPolygon(p.data(), p.size(), Color4F(0, 0, 0, 0), 1.0f, Color4F::RED);
+
+   addChild(dn, 0);
+
+   // Load editor data if any exists
    if (editor_data) {
 
       for (auto px : editor_data->GetAllPixels() ) {
@@ -102,9 +128,6 @@ bool EditorLayer::init()
       }
    }
 
-   cursor = Coordinates(0, 0);
-
-
    return true;
 }
 
@@ -115,23 +138,28 @@ ErrorCode EditorLayer::onBGFG() {
 
 bool EditorLayer::onTouchBegan( Touch *touch, Event *event )
 {
+
    switch (st)
    {
    case TouchState::WAITING_TOUCH:
       pos = this->getPosition();
-      first_touch = touch;
+      first_touch = *touch;
       st = TouchState::ONE_TOUCH;
       dragging = false;
+      timestamp = EMBaseMasterLoop::GetTime();
       return true;
    case TouchState::ONE_TOUCH:
-      second_touch = touch;
+      second_touch = *touch;
+      start_dist = (touch->getLocationInView() - first_touch.getLocationInView()).getLength();
       pos = this->getPosition();
       scale = this->getScale();
       st = TouchState::ZOOMING;
       return true;
-   case TouchState::ZOOMING:
+   case TouchState::ZOOMING:  // When pinch zoom : ignore additional touches coming
+   case TouchState::IGNORING: // Just ignore new ones
       return false;
-   default:
+   default:                   // Default should not be used in normal scenario
+      assert(false);
       return false;
    }
 
@@ -145,7 +173,8 @@ void EditorLayer::onTouchMoved( Touch *touch, Event *event )
    {
    case TouchState::WAITING_TOUCH:
       break;
-   case TouchState::ONE_TOUCH: {
+   case TouchState::ONE_TOUCH: 
+   {
       if (!dragging) {
          if ( (touch->getStartLocationInView() - touch->getLocationInView()).getLength() > TAP_THRESHOLD ) {
             dragging = true;
@@ -157,13 +186,31 @@ void EditorLayer::onTouchMoved( Touch *touch, Event *event )
       this->setPosition(pos + dir);
       break;
    }
-   case TouchState::ZOOMING:
-      // TODO: make zoom, now DISKOTEKA!
-      //this->setVisible(!this->isVisible());
+   case TouchState::ZOOMING: 
+   {
+      float new_scale = scale;
+
+      if (touch->getID() == first_touch.getID()) {
+         float current_dist = (touch->getLocationInView() - second_touch.getLocationInView()).getLength();
+         new_scale = current_dist * scale / start_dist;
+      }
+      else if (touch->getID() == second_touch.getID()) {
+         float current_dist = (touch->getLocationInView() - first_touch.getLocationInView()).getLength();
+         new_scale = current_dist * scale / start_dist;
+      }
+      else {
+         assert(false);
+      }
+
+      this->setScale(new_scale);
+      this->setPosition(pos * new_scale);
+
       break;
-   case TouchState::IGNORING:
+   }
+   case TouchState::IGNORING:  // Ignore everything
       break;
    default:
+      assert(false);
       break;
    }
 
@@ -178,31 +225,36 @@ void EditorLayer::onTouchCancelled( Touch *touch, Event *event )
 void EditorLayer::onTouchEnded( Touch *touch, Event *event )
 {
    //EM_LOG_WARNING("Ended");
-   auto pScrEnd = touch->getLocationInView();
-   auto pScrStart = touch->getStartLocationInView();
+   //auto pScrEnd = touch->getLocationInView();
+   //auto pScrStart = touch->getStartLocationInView();
 
    switch (st)
    {
    case TouchState::WAITING_TOUCH:
       break;
    case TouchState::ONE_TOUCH:
-      if ( (pScrEnd-pScrStart).getLength() < TAP_THRESHOLD )
-         GestureTapPoint( ScreenToLogic(this->convertTouchToNodeSpace(touch)) );
-      first_touch = nullptr;
+      if ( ! dragging  )
+      {
+         if (EMBaseMasterLoop::GetTime() - timestamp < LONG_TAP_TIMEOUT) {
+            GestureTapPoint(ScreenToLogic(this->convertTouchToNodeSpace(touch)));
+         }
+         else {
+            GestureLongTapPoint(ScreenToLogic(this->convertTouchToNodeSpace(touch)));
+         }
+      }
       st = TouchState::WAITING_TOUCH;
       break;
    case TouchState::ZOOMING:
-      // here are two touches,  but user released only one
+      // here are two touches,  but user released only one ...
       st = TouchState::IGNORING;
       break;
    case TouchState::IGNORING:
-      // Well noooow we can switch to waiting
+      // ... but now we can switch to waiting
       st = TouchState::WAITING_TOUCH;
       break;
    default:
       break;
    }
-
 
 }
 
@@ -215,8 +267,15 @@ void MPix::EditorLayer::GestureTapPoint( Coordinates p )
       return;
    }
 
+   GameStateManager::getInstance().CurrentState()->Execute(new CmdEditorAction(CmdEditorAction::EditorAction::ED_DRAW_WITH_LAST_TOOL));
+
+}
+
+void MPix::EditorLayer::GestureLongTapPoint(Coordinates pos)
+{
    GameStateManager::getInstance().CurrentState()->Execute(new CmdEditorAction(CmdEditorAction::EditorAction::ED_SHOW_TOOLS));
 }
+
 
 void MPix::EditorLayer::MoveCursor( Coordinates pos )
 {
@@ -256,7 +315,7 @@ void MPix::EditorLayer::InsertWallView( shared_ptr<Pixel> px )
 {
    auto view = PixelView::create(px);
    view->Build(px);
-   view->BindContents(this, 1);
+   view->BindContents(this, 2);
    //view->setPosition( LogicToScreen(cursor));
    view->Update(CmdUIUpdatePixelView::Reason::CREATED);
    walls[cursor] = view;
@@ -264,9 +323,10 @@ void MPix::EditorLayer::InsertWallView( shared_ptr<Pixel> px )
 
 void MPix::EditorLayer::InsertGoalView( PixelColor color )
 {
-   // Bad thing
-   // TODO: Implement class TaskView!!!
-   // for now - create goal view with single task and put to screen
+   // For simplicity:
+   //  not using common goal view for now, but instead
+   //  create goal view with single task and put to screen 
+   //  for each task. Visually it is the same.
    auto g = make_shared<Goal>();
    g->AddTask(cursor, color);
    auto gv = make_shared<GoalView>();
@@ -397,6 +457,9 @@ const string& MPix::EditorLayer::GetLevelName()
 void MPix::EditorLayer::TouchEnable()
 {
    EM_LOG_DEBUG("Editor touch layer touches on");
+
+   assert(touch_events == nullptr); // Ensures Enable/Disable matching
+
    auto listener = EventListenerTouchOneByOne::create();
    listener->setSwallowTouches(true);
    listener->onTouchBegan     = CC_CALLBACK_2(EditorLayer::onTouchBegan, this);
@@ -405,13 +468,17 @@ void MPix::EditorLayer::TouchEnable()
    listener->onTouchCancelled = CC_CALLBACK_2(EditorLayer::onTouchCancelled, this);
 
    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+   touch_events = listener;
 
+   st = TouchState::WAITING_TOUCH;
 }
 
 void MPix::EditorLayer::TouchDisable()
 {
-   _eventDispatcher->removeEventListeners(EventListener::Type::TOUCH_ONE_BY_ONE);
+   _eventDispatcher->removeEventListener(touch_events);
+   touch_events = nullptr;
 }
+
 
 
 

@@ -28,6 +28,10 @@ namespace MPix {
       // Method called once the game started
       void RunGame();
 
+      // Test
+      static void PrintTime();
+      static double GetTime();
+
    private:
 
       // Called on each frame
@@ -35,6 +39,9 @@ namespace MPix {
 
       // 
       void MasterTick(float t);
+
+      // Timer
+      static double time_runs;
 
    };
 

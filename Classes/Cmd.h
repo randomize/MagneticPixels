@@ -299,7 +299,7 @@ namespace MPix {
    // ============= Editor commands ====================
 
    struct CmdEditorAction : public Command {
-      enum class EditorAction { ED_SHOW_TOOLS, ED_HIDE_TOOLS };
+      enum class EditorAction { ED_SHOW_TOOLS, ED_HIDE_TOOLS, ED_DRAW_WITH_LAST_TOOL };
       CmdEditorAction (EditorAction act) {
          for (auto f : listners) {
             toExec.push_back(std::bind( f.second, act));
