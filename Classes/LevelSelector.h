@@ -58,13 +58,31 @@ namespace MPix {
 
       // Scrollable layer with worlds
       Layer* worlds_layer;
-      Point initial_pos;
+      Point initial_pos, initial_touch;
 
-      // UI misc helper constants
+      // Worlds
       unordered_map<int,Node*> title_lables; // ID -> label
       unordered_map<int, int>   ids_indexes; // ID -> index
       vector<int> indexed_ids;               // Index -> ID
       int current_index;                     // Selected world index
+      vector<float> indexed_positions;        // Index -> Worlds Layer X coord
+
+      // Levels
+      //unordered_map<int,Node*> title_lables; // ID -> label
+
+      // Flip world actions
+      void NextWorld();
+      void PrewWorld();
+
+      enum class Gesture {
+         TO_NEXT,
+         TO_PREW,
+         SAME
+      } gesture_action;
+
+      // Saved geometry
+      Size fullSize, halfSize, visibleSize;
+      Point lowerLeft, lowerRight, centerPoint, upperLeft, upperRight;
 
    };
 

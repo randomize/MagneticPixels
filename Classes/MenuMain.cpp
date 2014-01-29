@@ -12,11 +12,11 @@ using namespace MPix;
 
 const int Z_BACKGROUND = 1;
 const int Z_MENU = 2;
-const int Z_UPPER_PANE = 3;
+const int Z_PANELS = 3;
 const int Z_UPPER_PANE_FONT = 4;
 const int Z_OVERLAY = 5;
 
-const float UPPER_PANE_HEIGHT = 200.0f;
+const float PANEL_HEIGHT = 200.0f;
 const float MENU_FONT_SIZE = 76.0f;
 
 //====---------------------------------------------======//
@@ -86,26 +86,26 @@ void MPix::MenuMain::onEnter()
    Point p[4] = {
       upperLeft,
       upperRight,
-      upperRight + Point(0, -UPPER_PANE_HEIGHT),
-      upperLeft  + Point(0, -UPPER_PANE_HEIGHT)
+      upperRight + Point(0, -PANEL_HEIGHT),
+      upperLeft  + Point(0, -PANEL_HEIGHT)
    };
    pn->drawPolygon(p, 4, Color4F(1, 1, 1, 0.3f), 0, Color4F(0, 0, 0, 0));
-   addChild(pn, Z_UPPER_PANE);
+   addChild(pn, Z_PANELS);
 
    // Logo
    auto title_label = CuteBlocksLogo::create();
-   title_label->setPosition((upperLeft + upperRight) / 2 + Point(0, -UPPER_PANE_HEIGHT / 2.0));
+   title_label->setPosition((upperLeft + upperRight) / 2 + Point(0, -PANEL_HEIGHT / 2.0));
    addChild(title_label, Z_UPPER_PANE_FONT);
 
    // 3. Main menu
    auto menu = Menu::create();
-   menu->setPosition(center);
+   menu->setPosition(Point::ZERO);
    addChild(menu, Z_MENU);
 
    MenuItemLabel* item = nullptr;
    LabelTTF* label = nullptr;
 
-   label = createMenuItem("Play", 1.2f);
+   label = createMenuItem("Play", 1.4f);
    item = MenuItemLabel::create(label, [&](Object *sender) {
       ToSelector();
    }); 
@@ -140,11 +140,21 @@ void MPix::MenuMain::onEnter()
    });
    menu->addChild(item);
 #endif
-   menu->alignItemsVertically();
+   //menu->alignItemsVertically();
+   auto init_pos = visibleOrigin + Point(visibleSize.width / 5, visibleSize.height - PANEL_HEIGHT - 50);
 
+   bool one = true;
+   for (auto c : menu->getChildren()) {
+      c->setAnchorPoint(Point(0, 1));
+      c->setPosition(init_pos);
+      init_pos += Point(0, -90);
+      if (one) {
+         init_pos += Point(0, -40);
+         one = false;
+      }
+   }
 
    // Version string
-
    string vers(MPIX_VERSION);
 
 #ifdef MPIX_DEVELOPERS_BUILD

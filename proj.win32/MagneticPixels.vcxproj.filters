@@ -360,6 +360,15 @@
     <ClCompile Include="..\Classes\CuteBlocksLogo.cpp">
       <Filter>Classes\Extensions</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\SplashState.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CreditsState.cpp">
+      <Filter>Classes\States</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\LevelView.cpp">
+      <Filter>Classes\Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -681,6 +690,15 @@
       <Filter>Classes\Extensions</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MagneticView.h" />
+    <ClInclude Include="..\Classes\SplashState.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CreditsState.h">
+      <Filter>Classes\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\LevelView.h">
+      <Filter>Classes\Views</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

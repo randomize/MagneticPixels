@@ -4,6 +4,7 @@
 #include "GameplayManager.h"
 #include "GameStateManager.h"
 #include "LevelManager.h"
+#include "SettingsManager.h"
 
 using namespace MPix;
 
@@ -28,8 +29,13 @@ void MPix::EMBaseMasterLoop::RunGame()
    // Setup update
    Director::getInstance()->getScheduler()->scheduleUpdateForTarget(this, 0, false);
 
+   // Init settings
+   SettingsManager::getInstance().LoadSettings();
+
+   // Resources
+
    // Init sound
-   SoundManager::getInstance();
+   SoundManager::getInstance().InitSoundSystem();
 
    // Init game manager
    GameplayManager::getInstance();

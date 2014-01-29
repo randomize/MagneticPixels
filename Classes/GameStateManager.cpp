@@ -10,6 +10,7 @@
 #include "LevelSelector.h"
 #include "ResultsState.h"
 #include "EditorMenu.h"
+#include "SplashState.h"
 
 
 // Other managers
@@ -42,12 +43,7 @@ void GameStateManager::SwitchToStart( void )
    // Load resources
    ContentManager::getInstance().LoadResources();
 
-#ifdef MPIX_DEVELOPERS_BUILD
-   GameState* newState = MenuMain::create();
-#else
-   // TODO: splash state here later, fro now menu
-   //GameState* newState = SplashState::create();
-#endif
+   GameState* newState = SplashState::create();
 
    assert(newState);
    currentState = newState;

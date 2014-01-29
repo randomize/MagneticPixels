@@ -87,6 +87,8 @@ void MPix::ContentManager::CreateSprites()
    //cache->addSpriteFramesWithFile("ui.plist");
    //resources.emplace("goal_bg", "pixel_goal.png");
    //..
+   resources.emplace("level_border", "level_border.png");
+   resources.emplace("right_arrow", "right_arrow.png");
 
    // Editor
    cache->addSpriteFramesWithFile("ed.plist");

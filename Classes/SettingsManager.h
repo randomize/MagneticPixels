@@ -29,11 +29,20 @@ namespace MPix {
       // Get/Set language from settings state
       // Get/Set if was shown promotion and when it was shown
 
+      // Tries to read profile, or generates default one
+      void LoadSettings();
+
+      // Flushes data to user directory if any update
+      void SaveSettings();
+
+      int GetLastWorldIndex();
+
    protected:
 
    private:
-      // TODO: Some kind of DB, maybe cocos, maybe xml, maybe platform dependent
-      //CCUserDefault::
+
+      // Fortunately cocos provides this :)
+      UserDefault* db;
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
    
