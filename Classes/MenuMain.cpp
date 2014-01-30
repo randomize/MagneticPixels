@@ -1,10 +1,12 @@
 #include "MenuMain.h"
+
+#include "CuteBlocksLogo.h"
+
 #include "LevelManager.h"
 #include "GameplayManager.h"
 #include "GameStateManager.h"
 #include "ContentManager.h"
-
-#include "CuteBlocksLogo.h"
+#include "SettingsManager.h"
 
 using namespace MPix;
 
@@ -140,9 +142,16 @@ void MPix::MenuMain::onEnter()
    });
    menu->addChild(item);
 #endif
-   //menu->alignItemsVertically();
-   auto init_pos = visibleOrigin + Point(visibleSize.width / 5, visibleSize.height - PANEL_HEIGHT - 50);
 
+   label = createMenuItem("Credits");
+   item = MenuItemLabel::create(label, [&](Object *sender) {
+      ToCredits();
+   });
+   menu->addChild(item);
+
+
+   // Align items
+   auto init_pos = visibleOrigin + Point(visibleSize.width / 5, visibleSize.height - PANEL_HEIGHT - 50);
    bool one = true;
    for (auto c : menu->getChildren()) {
       c->setAnchorPoint(Point(0, 1));
@@ -158,7 +167,8 @@ void MPix::MenuMain::onEnter()
    string vers(MPIX_VERSION);
 
 #ifdef MPIX_DEVELOPERS_BUILD
-   vers += "dev ";
+   auto N_RUNS = SettingsManager::getInstance().GetKey(SettingsManager::Key::N_OF_RUNS);
+   vers += "dev, run #" + ToString(N_RUNS);
 #endif
 
    auto vlabel = LabelTTF::create(vers.c_str(), cm.GetBaseFont(), 24, Size::ZERO, TextHAlignment::RIGHT);
@@ -198,4 +208,10 @@ void MPix::MenuMain::ToSelector()
    GameStateManager::getInstance().SwitchToSelector();
 
 }
+
+void MPix::MenuMain::ToCredits()
+{
+   GameStateManager::getInstance().SwitchToCredits();
+}
+
 

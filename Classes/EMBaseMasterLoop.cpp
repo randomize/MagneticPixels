@@ -30,9 +30,13 @@ void MPix::EMBaseMasterLoop::RunGame()
    Director::getInstance()->getScheduler()->scheduleUpdateForTarget(this, 0, false);
 
    // Init settings
-   SettingsManager::getInstance().LoadSettings();
+   auto & st = SettingsManager::getInstance();
+   st.LoadSettings();
 
-   // Resources
+   // Increase number of runs of the game
+   auto n = st.GetKey(SettingsManager::Key::N_OF_RUNS);
+   st.SetKey(SettingsManager::Key::N_OF_RUNS, n + 1);
+   st.SaveSettings();
 
    // Init sound
    SoundManager::getInstance().InitSoundSystem();

@@ -36,6 +36,7 @@ namespace MPix {
       void ToTest();
       void ToSelector();
       void ToExit();
+      void ToCredits();
 
    };
 

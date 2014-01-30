@@ -18,6 +18,7 @@
 #include "GameplayManager.h"
 #include "LevelManager.h"
 #include "ContentManager.h"
+#include "CreditsState.h"
 
 using namespace MPix;
 
@@ -103,6 +104,10 @@ void MPix::GameStateManager::SwitchToResults( void )
    SwitchScene(ResultsState::create());
 }
 
+void MPix::GameStateManager::SwitchToCredits()
+{
+   SwitchScene(CreditsState::create());
+}
 
 
 
@@ -138,3 +143,4 @@ double MPix::GameStateManager::GetElapsedTime()
 {
    return timer;
 }
+

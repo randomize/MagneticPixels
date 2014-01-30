@@ -1,5 +1,6 @@
 #include "CreditsState.h"
 #include "ContentManager.h"
+#include "GameStateManager.h"
 
 using namespace MPix;
 
@@ -46,5 +47,14 @@ bool MPix::CreditsState::init()
 void MPix::CreditsState::onEnter()
 {
    Scene::onEnter();
+
+   runAction(
+      Sequence::createWithTwoActions(
+         DelayTime::create(2.0f),
+         CallFunc::create(
+            [](){ GameStateManager::getInstance().SwitchToMenu(); }
+         )
+      )
+   );
 
 }

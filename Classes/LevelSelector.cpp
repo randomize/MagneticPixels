@@ -120,7 +120,7 @@ void MPix::LevelSelector::onEnter()
    auto ids_cout = ids.size();
    assert(ids_cout);
 
-   current_index = SettingsManager::getInstance().GetLastWorldIndex();
+   current_index = SettingsManager::getInstance().GetKey(SettingsManager::Key::LAST_WORLD);
    title_lables.reserve(ids_cout);
    indexed_ids.reserve(ids_cout);
    indexed_positions.reserve(ids_cout);

@@ -22,12 +22,14 @@ namespace MPix {
    class SettingsManager
    {
    public:
-      // TODO: implement
-      // Get/Set levels progress
-      // Get/Set music on/off from settings state
-      // Get/Set ads on/off from iOS in APP 
-      // Get/Set language from settings state
-      // Get/Set if was shown promotion and when it was shown
+
+      enum class Key {
+         LAST_WORLD,
+         SOUND_ON,
+         MUSIC_ON,
+         CURRENT_LANG,
+         N_OF_RUNS
+      };
 
       // Tries to read profile, or generates default one
       void LoadSettings();
@@ -35,14 +37,42 @@ namespace MPix {
       // Flushes data to user directory if any update
       void SaveSettings();
 
-      int GetLastWorldIndex();
+      // General values - integers only
+      int GetKey(Key key);
+      void SetKey(Key key, int value);
 
-   protected:
+      // Level specific -1 = locked, 0 open, n - solved with n
+      void SetLevelStatus(unsigned int id, int state);
+      int GetLevelStatus(unsigned int id);
 
    private:
 
       // Fortunately cocos provides this :)
+      // Unfortunately it is stupid enough not to use caching :(
       UserDefault* db;
+
+   ////// Internal implementation ///////////////////////////////////////////////////////////////////
+
+      struct KeyHash
+      {
+         std::size_t operator()(const Key &p) const
+         {
+            return static_cast<std::size_t>(p);
+         }
+      };
+
+      struct SettingValue {
+         SettingValue(bool is_dirty, int value, const string& db_key) :
+            is_dirty(is_dirty),
+            value(value),
+            db_key(db_key)
+         {}
+         bool is_dirty;    // Cached value needs to be saved
+         int value;        // Current value
+         string db_key;    // String key for cocos db
+      };
+
+      unordered_map<Key, SettingValue, KeyHash> m_key_vals;
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
    
