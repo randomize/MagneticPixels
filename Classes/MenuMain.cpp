@@ -195,7 +195,7 @@ void MPix::MenuMain::ToExit()
 void MPix::MenuMain::ToTest()
 {
    // Load test level
-   auto lvl = LevelManager::getInstance().GetTestLevel();
+   auto lvl = LevelManager::getInstance().GetPlayableTestLevel();
    GameplayManager::getInstance().LoadLevel(lvl);
 
    // And play it

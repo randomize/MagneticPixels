@@ -24,6 +24,7 @@ namespace MPix {
    enum class PixelColor;
    class GoalView;
    class Goal;
+   class View;
 
    // EditorTool interface
    class EditorTool
@@ -98,6 +99,7 @@ namespace MPix {
       void SubCur();
       const char* icon_frame;
       Node* icon;
+      shared_ptr<View> icon_view;
    };
 
    // EditorToolPixel has pixel in it and can place it to field

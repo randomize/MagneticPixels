@@ -142,13 +142,22 @@ bool EditorLayer::onTouchBegan( Touch *touch, Event *event )
    switch (st)
    {
    case TouchState::WAITING_TOUCH:
+   {
       pos = this->getPosition();
       first_touch = *touch;
+      auto pt = this->convertTouchToNodeSpace(touch);
       st = TouchState::ONE_TOUCH;
       dragging = false;
-      timestamp = EMBaseMasterLoop::GetTime();
+      this->runAction(
+         Sequence::createWithTwoActions(
+            DelayTime::create(1.0f),
+            CallFunc::create(CC_CALLBACK_0(EditorLayer::OnTimeOut, this, pt))
+         )
+       );
       return true;
+   }
    case TouchState::ONE_TOUCH:
+      this->stopAllActions();
       second_touch = *touch;
       start_dist = (touch->getLocationInView() - first_touch.getLocationInView()).getLength();
       pos = this->getPosition();
@@ -178,6 +187,7 @@ void EditorLayer::onTouchMoved( Touch *touch, Event *event )
       if (!dragging) {
          if ( (touch->getStartLocationInView() - touch->getLocationInView()).getLength() > TAP_THRESHOLD ) {
             dragging = true;
+            this->stopAllActions();
          }
          else return;
       }
@@ -233,14 +243,10 @@ void EditorLayer::onTouchEnded( Touch *touch, Event *event )
    case TouchState::WAITING_TOUCH:
       break;
    case TouchState::ONE_TOUCH:
+      this->stopAllActions();
       if ( ! dragging  )
       {
-         if (EMBaseMasterLoop::GetTime() - timestamp < LONG_TAP_TIMEOUT) {
-            GestureTapPoint(ScreenToLogic(this->convertTouchToNodeSpace(touch)));
-         }
-         else {
-            GestureLongTapPoint(ScreenToLogic(this->convertTouchToNodeSpace(touch)));
-         }
+         GestureTapPoint(ScreenToLogic(this->convertTouchToNodeSpace(touch)));
       }
       st = TouchState::WAITING_TOUCH;
       break;
@@ -478,6 +484,13 @@ void MPix::EditorLayer::TouchDisable()
    _eventDispatcher->removeEventListener(touch_events);
    touch_events = nullptr;
 }
+
+void MPix::EditorLayer::OnTimeOut(Point p)
+{
+   GestureLongTapPoint(ScreenToLogic(p));
+   st = TouchState::IGNORING;
+}
+
 
 
 

@@ -97,11 +97,8 @@ shared_ptr<Level> LevelGenerator::CreateTestLevel()
    shape->AddTask(Coordinates(1, -1), PixelColor::RED);
    shape->AddTask(Coordinates(1, 0), PixelColor::RED);
    shape->AddTask(Coordinates(2, -1), PixelColor::GREEN);
-   fab->goals->InsertGoal(shape);
-   shape = make_shared<Goal>();
    shape->AddTask(Coordinates(2, 1), PixelColor::BLUE);
    fab->goals->InsertGoal(shape);
-
 
    return fab;
 }

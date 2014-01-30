@@ -116,7 +116,7 @@ void MPix::LevelSelector::onEnter()
    auto& lm = LevelManager::getInstance();
 
    // Create worlds menu
-   auto ids = lm.GetWorldsIDs();
+   auto& ids = lm.GetWorldIDs();
    auto ids_cout = ids.size();
    assert(ids_cout);
 
@@ -133,7 +133,7 @@ void MPix::LevelSelector::onEnter()
    for (auto id : ids ) {
 
       // Setting up search maps
-      auto i = indexed_ids.size();
+      int i = indexed_ids.size();
 
       indexed_ids.push_back(id);
       ids_indexes.emplace(id, i);
@@ -152,21 +152,25 @@ void MPix::LevelSelector::onEnter()
       title_lables.emplace(id, label);
       addChild(label, Z_UPPER_PANE_FONT);
 
-      auto cur_center = Point(base_offset, 0) + centerPoint;
+      Point cur_center = Point(base_offset, 0) + centerPoint;
       //auto cur_center = Point(base_offset, -UPPER_PANE_HEIGHT / 2) + center;
 
       int j = 0;
-      for (auto lvl_id : lm.GetLevelsInWorld(id)) {
+      for (auto lvl_id : lm.GetLevelsByWorldID(id)) {
          // Create view
-         auto level_button = LevelView::create(lvl_id);
+         auto level_button = LevelView::create(lvl_id, j);
          
          int row = j / LEVEL_BUTTON_COLS_COUNT;
          int col = j % LEVEL_BUTTON_COLS_COUNT;
 
-         auto pos = Point(col * level_pane_spacing_x, row * -level_pane_spacing_y);
-         auto shift = Point(-level_pane_w / 2, level_pane_h / 2);
+         Point pos{ col * level_pane_spacing_x, row * -level_pane_spacing_y };
+         Point shift{ -level_pane_w / 2, level_pane_h / 2 };
 
          level_button->setPosition(cur_center + pos + shift); 
+         level_button->setAnchorPoint({0.5f, 0.5f});
+
+         level_button->setScale(0.1f);
+         level_button->runAction(Sequence::createWithTwoActions(DelayTime::create(j*0.15f), ScaleTo::create(0.4f, 1.0f)));
 
          j++; // counting level index
 
@@ -233,7 +237,7 @@ void MPix::LevelSelector::onExit()
 
 void MPix::LevelSelector::SelectedLevel( unsigned int id )
 {
-   auto lvl = LevelManager::getInstance().GetLevelByID(id);
+   auto lvl = LevelManager::getInstance().GetPlayableLevelByID(id);
    GameplayManager::getInstance().LoadLevel(lvl);
 
    // And play it
@@ -250,11 +254,11 @@ void MPix::LevelSelector::SelectedWorld( int wid )
 
    MenuItemFont::setFontSize(48);
 
-   auto ids = lm.GetLevelsInWorld(wid);
+   auto ids = lm.GetLevelsByWorldID(wid);
    auto menu = Menu::create();
 
    for (auto id : ids ) {
-      string n = lm.GetLevelNameByID(id) + " (id=" + ToString(id) + ")";
+      string n = lm.GetNameByLevelID(id) + " (id=" + ToString(id) + ")";
       auto item = MenuItemFont::create(
          n.c_str(),
          [&](Object *sender) {

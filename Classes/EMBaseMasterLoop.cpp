@@ -44,10 +44,11 @@ void MPix::EMBaseMasterLoop::RunGame()
    // Init game manager
    GameplayManager::getInstance();
 
-   // LoadData levels and worlds // TODO: delay load
+   // LoadData levels and worlds
    auto ret = LevelManager::getInstance().LoadData();
 
    if (ret != ErrorCode::RET_OK ) {
+      EM_LOG_ERROR("Levels not loaded, game will exit now");
       return;
    }
 

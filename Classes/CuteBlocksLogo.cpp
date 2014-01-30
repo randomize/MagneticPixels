@@ -49,7 +49,7 @@ bool MPix::CuteBlocksLogo::init()
    runAction(
       RepeatForever::create(
          Sequence::createWithTwoActions(
-            DelayTime::create(5.0),
+            DelayTime::create(4.5),
             CallFunc::create(CC_CALLBACK_0(CuteBlocksLogo::UpdateIdle, this))
          )
       )

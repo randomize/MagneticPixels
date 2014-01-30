@@ -65,11 +65,11 @@ void MPix::EditorMenu::BuildWorldsMenu()
    auto &lm = LevelManager::getInstance();
    MenuItemFont::setFontSize(64);
 
-   auto ids = lm.GetWorldsIDs();
+   auto &ids = lm.GetWorldIDs();
    auto menu = Menu::create();
    for (auto id : ids ) {
       auto item = MenuItemFont::create(
-         (lm.GetWorldNameByID(id) + " (" + ToString(lm.GetWorldLevelCountByID(id)) + ")").c_str(),
+         (lm.GetNameByWorldID(id) + " (" + ToString(lm.GetLevelCountByWorldID(id)) + ")").c_str(),
          [&](Object *sender) {
          auto it = static_cast<MenuItemFont*>(sender);
          SelectedWorld( it->getTag() );
@@ -101,11 +101,11 @@ void MPix::EditorMenu::BuildLevelsMenu( int w )
    confirmed = 0;
    MenuItemFont::setFontSize(48);
 
-   auto ids = lm.GetLevelsInWorld(w);
+   auto ids = lm.GetLevelsByWorldID(w);
    auto menu = Menu::create();
 
    for (auto id : ids ) {
-      string n = lm.GetLevelNameByID(id) + " (id=" + ToString(id) + ")";
+      string n = lm.GetNameByLevelID(id) + " (id=" + ToString(id) + ")";
       auto item = MenuItemFont::create(
          n.c_str(),
          [&](Object *sender) {
@@ -215,7 +215,7 @@ void MPix::EditorMenu::SelectedLast()
 {
    auto & lm = LevelManager::getInstance();
 
-   auto lvl = lm.GetLastLevel();
+   auto lvl = lm.GetPlayableLastLevel();
    if (!lvl)
       lvl = lm.GetEmpty();
     
@@ -272,7 +272,7 @@ void MPix::EditorMenu::SelectedLevel( unsigned int id )
    // Depending on mode
 
    if (mode == Mode::EDIT) {
-      auto lvl = lm.GetLevelByID(id);
+      auto lvl = lm.GetPlayableLevelByID(id);
       assert(lvl);
       lm.SetEditorsLevel(lvl);
       GameStateManager::getInstance().SwitchToEditor();

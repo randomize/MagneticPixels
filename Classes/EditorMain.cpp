@@ -185,7 +185,7 @@ void MPix::EditorMain::TestLevel()
    auto lvl = editor->CreateLevel();
    if (lvl) {
       LevelManager::getInstance().SetEditorsLevel(lvl);
-      auto l = LevelManager::getInstance().GetEditorsLevel();
+      auto l = LevelManager::getInstance().GetPlayableEditorsLevel();
       GameplayManager::getInstance().LoadLevel(l);
       GameStateManager::getInstance().SwitchToTestGame();
    } else {

@@ -69,7 +69,7 @@ void MPix::ResultsState::ToReplay()
 {
    GameplayManager::getInstance().Reset();
 
-   auto lvl = LevelManager::getInstance().GetLastLevel();
+   auto lvl = LevelManager::getInstance().GetPlayableLastLevel();
    GameplayManager::getInstance().LoadLevel(lvl);
 
    GameStateManager::getInstance().SwitchToGame();
@@ -79,7 +79,7 @@ void MPix::ResultsState::ToNext()
 {
    GameplayManager::getInstance().Reset();
 
-   auto lvl = LevelManager::getInstance().GetNextLevel();
+   auto lvl = LevelManager::getInstance().GetPlayableNextLevel();
    GameplayManager::getInstance().LoadLevel(lvl);
 
    GameStateManager::getInstance().SwitchToGame();

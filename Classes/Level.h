@@ -30,10 +30,11 @@ namespace MPix {
       shared_ptr<Level> Dublicate();
 
       enum class State {
-         IS_LOCKED = 0,
-         IS_OPEN,
-         IS_SOLVED,
-         IS_PLAYING
+         IS_LOCKED = 0, // Is locked
+         IS_OPEN,       // Is unlocked but no result
+         IS_SOLVED,     // Result in stars is actual
+         IS_PLAYABLE,   // Returned from LevelManager::Get** method
+         IS_PLAYING     // Loaded in GameplayManager
       };
 
       // G/S for world, setts when loaded from XML

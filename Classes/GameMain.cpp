@@ -32,7 +32,6 @@ MPix::GameMain::~GameMain()
 
 bool GameMain::init()
 {
-   EM_LOG_ERROR("init");
 
    // 1. super init first
    if ( !Scene::init() )
@@ -132,7 +131,7 @@ void MPix::GameMain::BtnHnadler(Object* sender)
    switch(id) {
    case 101: {
       GameplayManager::getInstance().Reset();
-      auto lvl = LevelManager::getInstance().GetLastLevel();
+      auto lvl = LevelManager::getInstance().GetPlayableLastLevel();
       GameplayManager::getInstance().LoadLevel(lvl);
       pixels->Reset();
       ResetLocks();

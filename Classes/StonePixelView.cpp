@@ -1,6 +1,7 @@
 #include "StonePixelView.h"
 #include "StonePixel.h"
 #include "GameStateManager.h"
+#include "ContentManager.h"
 
 using namespace MPix;
 
@@ -28,7 +29,9 @@ void MPix::StonePixelView::Build( shared_ptr<Pixel> model )
 
    pixel = std::dynamic_pointer_cast<StonePixel>(model);
 
-   auto cb = Sprite::create("stone_pixel.png");
+   auto & cm = ContentManager::getInstance();
+
+   auto cb = cm.GetSimpleSprite("stone_bg");
 
    contents->addChild(cb);
 }

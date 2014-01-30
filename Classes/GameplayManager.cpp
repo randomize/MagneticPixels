@@ -147,6 +147,7 @@ ErrorCode GameplayManager::LoadLevel( shared_ptr<Level> level )
    // Asserting nonempty level with field in it
    assert(level);
    assert( ! level->GetField()->IsEmpty() );
+   assert(level->GetState() == Level::State::IS_PLAYABLE);
 
    this->level = level;
    SwitchState(State::READY);

@@ -107,7 +107,8 @@ namespace MPix {
       float scale;
       float start_dist;
       bool dragging;
-      double timestamp;
+
+      void OnTimeOut(Point p);
 
    private: // Internal
 

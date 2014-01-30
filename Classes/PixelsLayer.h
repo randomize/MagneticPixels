@@ -20,6 +20,7 @@ namespace MPix {
    class PixelView;
    class GoalView;
    class Pixel;
+   class Goal;
    class Level;
    class AssemblyView;
 
@@ -51,7 +52,12 @@ namespace MPix {
 
    private: // Helpers
 
+      // Create pixel view to this pixel and put to view manager
       ErrorCode CreateViewForPixel(shared_ptr<Pixel> p);
+
+      // Create gloa view to this gloa and put to view manager
+      ErrorCode CreateViewForGoal(shared_ptr<Goal> g);
+
       void Clear();
 
    };
