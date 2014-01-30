@@ -19,6 +19,7 @@ namespace MPix {
    class BaseStorage {
    public:
       virtual void Clear() {}
+      virtual ~BaseStorage() {}
    };
 
    // Each storage for one type

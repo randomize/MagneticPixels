@@ -15,7 +15,7 @@
 namespace MPix {
 
    // Forward dependencies
-   class Level;
+   //class Level;
    class GoalView;
 
 
@@ -29,12 +29,15 @@ namespace MPix {
 
       bool initWithId(int lvl_id, int label_number);
 
+      unsigned GetLevelID() const;
+
    protected:
 
    private:
 
-      shared_ptr<Level> level;
+      //shared_ptr<Level> level;
       shared_ptr<GoalView> gv;
+      unsigned level_id;
 
    };
 

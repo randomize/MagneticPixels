@@ -43,8 +43,11 @@ bool MPix::LevelView::initWithId(int lvl_id, int label_number)
    auto & lm = LevelManager::getInstance();
    auto & cm = ContentManager::getInstance();
 
-   level = lm.GetLevelByID(lvl_id);
+   auto level = lm.GetLevelByID(lvl_id);
    assert(level);
+
+   level_id = level->GetID();
+   assert(level_id == lvl_id); // Who knows, JIC ;)
 
    auto lvl = level->GetName() + " " + ToString(label_number);
 
@@ -115,11 +118,18 @@ bool MPix::LevelView::initWithId(int lvl_id, int label_number)
    gv = make_shared<GoalView>();
    gv->Build(goal);
    gv->setPosition(center);
+   // TODO: Render and bake to rendertexture! save some CPU life ;)
    gv->BindContents(g_node);
    gv->Update(CmdUIUpdateGoalView::Reason::CREATED);
 
    return true;
 }
+
+unsigned MPix::LevelView::GetLevelID() const
+{
+   return level_id;
+}
+
 
 
 

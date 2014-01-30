@@ -7,7 +7,7 @@
 USING_NS_CC;
 
 // not really useful, but I like clean default constructors
-Shake::Shake() : m_strength_x(0), m_strength_y(0), m_initial_x(0), m_initial_y(0)
+Shake::Shake() :  m_initial_x(0), m_initial_y(0), m_strength_x(0), m_strength_y(0)
 {
 }
 

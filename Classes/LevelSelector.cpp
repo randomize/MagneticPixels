@@ -29,6 +29,8 @@ const float FLIP_PAGE_TRESHOLD_PERCENT = 0.25; // 1/4 away from center => flip
 const int LEVEL_BUTTON_COLS_COUNT = 3;
 const int LEVEL_BUTTON_ROWS_COUNT = 5;
 
+const float BUTTON_TOUCH_RADIUS = 40.0f;
+
 /*
 const float LEVEL_BUTTON_COLS_SPACING = 180.0f;
 const float LEVEL_BUTTON_ROWS_SPACING = 150.0f;
@@ -124,6 +126,7 @@ void MPix::LevelSelector::onEnter()
    title_lables.reserve(ids_cout);
    indexed_ids.reserve(ids_cout);
    indexed_positions.reserve(ids_cout);
+   indexed_views.reserve(ids_cout);
 
    float level_pane_spacing_x = (visibleSize.width + 80) / (LEVEL_BUTTON_COLS_COUNT + 1);
    float level_pane_spacing_y = (visibleSize.height - 2 * PANEL_HEIGHT + 80) / (LEVEL_BUTTON_ROWS_COUNT + 1);
@@ -155,6 +158,9 @@ void MPix::LevelSelector::onEnter()
       Point cur_center = Point(base_offset, 0) + centerPoint;
       //auto cur_center = Point(base_offset, -UPPER_PANE_HEIGHT / 2) + center;
 
+      vector<LevelView*> world_buttons;
+      world_buttons.reserve(15);
+
       int j = 0;
       for (auto lvl_id : lm.GetLevelsByWorldID(id)) {
          // Create view
@@ -169,14 +175,16 @@ void MPix::LevelSelector::onEnter()
          level_button->setPosition(cur_center + pos + shift); 
          level_button->setAnchorPoint({0.5f, 0.5f});
 
-         level_button->setScale(0.1f);
-         level_button->runAction(Sequence::createWithTwoActions(DelayTime::create(j*0.15f), ScaleTo::create(0.4f, 1.0f)));
+         level_button->setScale(0.02f);
+         level_button->runAction(Sequence::createWithTwoActions(DelayTime::create(j*0.10f), ScaleTo::create(0.4f, 1.0f)));
 
          j++; // counting level index
 
          worlds_layer->addChild(level_button);
-
+         world_buttons.push_back(level_button);
       }
+
+      indexed_views.push_back(world_buttons);
 
    }
 
@@ -308,19 +316,40 @@ void MPix::LevelSelector::BackToMainMenu()
    GameStateManager::getInstance().SwitchToMenu();
 }
 
+/////////////////// TOUCH HANDLING ////////////////////////////////////////////////////
+
 bool MPix::LevelSelector::onTouchBegan(Touch *touch, Event *event)
 {
-   EM_LOG_DEBUG("Touch began");
    switch (state)
    {
    case State::WAIT:
+   {
+      initial_touch = convertTouchToNodeSpace(touch);
+      auto button = GetViewAtPoint(initial_touch);
+      if (button) { // Touched button
+
+         // Save current button
+         m_cur_button = button;
+
+         // Scale it little bit
+         m_cur_button->stopAllActions();
+         m_cur_button->runAction(ScaleTo::create(0.3f, 1.1f));
+
+         // goto button state
+         state = State::BUTTON;
+
+         return true;
+      }
       state = State::SCROLL;
       initial_pos = worlds_layer->getPosition();
-      initial_touch = convertTouchToNodeSpace(touch);
       gesture_action = Gesture::SAME;
       worlds_layer->stopAllActions();
       return true;
+   }
    case State::SCROLL:
+   case State::BUTTON:
+   case State::IGNORING:
+   case State::ANIMATING:
       return false;
    default:
       assert(false);
@@ -335,36 +364,111 @@ void MPix::LevelSelector::onTouchCancelled(Touch *touch, Event *event)
 
 void MPix::LevelSelector::onTouchEnded(Touch *touch, Event *event)
 {
-   state = State::WAIT;
-   switch (gesture_action) {
-   case Gesture::TO_NEXT:
-      NextWorld();
-      break;
-   case Gesture::TO_PREW:
-      PrewWorld();
-      break;
-   default:
-      auto p = indexed_positions[current_index];
-      worlds_layer->runAction(EaseBounceOut::create(MoveTo::create(0.6f, Point(p,0))));
-      break;
+   if (state == State::BUTTON) // Finger not left radius and went up => button click
+   {
+
+      // Click
+      m_cur_button->stopAllActions();
+      m_cur_button->runAction(ScaleTo::create(0.1f, 1));
+
+      SelectedLevel(m_cur_button->GetLevelID());
+
+      // Back to default
+      state = State::WAIT;
+   }
+   else if (state == State::SCROLL)
+   {
+      switch (gesture_action) {
+      case Gesture::TO_NEXT:
+         NextWorld();
+         return;
+      case Gesture::TO_PREW:
+         PrewWorld();
+         return;
+      default:
+         auto p = indexed_positions[current_index];
+         worlds_layer->runAction(
+            Sequence::create(
+               EaseBounceOut::create(
+                  MoveTo::create(0.6f, Point(p,0))
+               ),
+               CallFunc::create(
+                  [this](){
+                     state = State::WAIT;
+                  }
+               ),
+               nullptr
+            )
+         );
+         state = State::ANIMATING;
+         return;
+      }
+   } 
+   else if (state == State::IGNORING)
+   {
+      state = State::WAIT;
    }
 }
 
 void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
 {
-   // Update position
-   auto pos = convertTouchToNodeSpace(touch) - initial_touch;
-   auto new_position =  initial_pos + Point(pos.x, 0);
-   worlds_layer->setPosition(new_position);
+   switch (state)
+   {
+   case State::SCROLL:
+   {
+      // Update position
+      auto pos = convertTouchToNodeSpace(touch) - initial_touch;
+      auto new_position = initial_pos + Point(pos.x, 0);
+      worlds_layer->setPosition(new_position);
+
+      // Update gesture
+      // TODO:
+
+      break;
+   }
+   case State::WAIT:
+   case State::BUTTON:
+   {
+      auto pos = convertTouchToNodeSpace(touch) - initial_touch;
+      if (pos.getLengthSq() > BUTTON_TOUCH_RADIUS*BUTTON_TOUCH_RADIUS) {
+         EM_LOG_DEBUG("Touch left button");
+         state = State::IGNORING;
+         m_cur_button->stopAllActions();
+         m_cur_button->runAction(ScaleTo::create(0.15f, 1));
+      }
+      break;
+   }
+   case State::IGNORING:
+   case State::ANIMATING:
+      break;
+   default:
+      assert(false);
+      break;
+   }
 
 }
 
 void MPix::LevelSelector::NextWorld()
 {
+   EM_LOG_DEBUG("Next world");
 
 }
 
 void MPix::LevelSelector::PrewWorld()
 {
+   EM_LOG_DEBUG("Prew world");
 
+}
+
+LevelView* MPix::LevelSelector::GetViewAtPoint(Point touch_pos)
+{
+   int j = 0;
+   for (auto v : indexed_views[current_index]) {
+      if ((touch_pos - v->getPosition()).getLengthSq() < BUTTON_TOUCH_RADIUS*BUTTON_TOUCH_RADIUS) {
+         EM_LOG_DEBUG("Matched buttton with id " + j);
+         return v;
+      }
+      j++;
+   }
+   return nullptr;
 }

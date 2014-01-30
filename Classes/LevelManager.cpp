@@ -80,8 +80,8 @@ ErrorCode LevelManager::LoadData()
    assert(first_lvl);
    first_lvl->SetState(Level::State::IS_OPEN);
    
-   auto & st = SettingsManager::getInstance();
    // TODO: Load user data of solved levels atars etc from st;
+   //auto & st = SettingsManager::getInstance();
 
    return ErrorCode::RET_OK;
 }

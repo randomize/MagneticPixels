@@ -79,7 +79,7 @@ void MPix::GameTest::CreateButtons()
       "save.png",  // 104
       "menu.png"    // 105
    };
-   for (int i = 0; i < sizeof(names)/sizeof(names[0]); ++i) {
+   for (unsigned i = 0; i < sizeof(names)/sizeof(names[0]); ++i) {
       auto btn = MenuItemImage::create( names[i], names[i], CC_CALLBACK_1(GameTest::BtnHnadler, this));
       btn->setTag(base_tag + i);
       btn->setPosition(Point(
