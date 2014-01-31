@@ -29,6 +29,7 @@ bool MPix::EMAnimation::initWithArmatureName( const string& arm_name )
          return false;
       }
       armature->setBlendFunc(BlendFunc::ALPHA_NON_PREMULTIPLIED);
+      armature->getAnimation()->setSpeedScale(0.75f); // FIXME: actually something wrong with dragonbones export, animations are a bit faster
       armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_3(EMAnimation::animationNext, this));
       addChild(armature);
 

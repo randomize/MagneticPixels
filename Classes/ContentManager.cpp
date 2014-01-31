@@ -235,6 +235,35 @@ string MPix::ContentManager::GetLogoFont()
    return "fonts/Exo2-Thin.ttf";
 }
 
+Sprite* MPix::ContentManager::GetScrollingBG(int index, bool scrolling)
+{
+   assert(index >= 1 && index <= 5);
+   Size fullSize = Director::getInstance()->getWinSize();
+   Size halfSize =  fullSize / 2.0f;
+   Size visibleSize = Director::getInstance()->getVisibleSize();
+   auto center = Point(halfSize.width, halfSize.height);
+   
+   string name("bg/0" + ToString(index) + ".jpg");
+   auto bg1 = Sprite::create(name.c_str());
+   float scale = visibleSize.height / bg1->getContentSize().height;
+   float swing = bg1->getContentSize().width / 2 * scale - visibleSize.width/2;
+   bg1->setScale(scale);
+   bg1->setPosition(center);
+   if (scrolling) {
+      bg1->runAction(
+         RepeatForever::create(
+            Sequence::create(
+               MoveTo::create(2, center + Point(swing, 0)),
+               MoveTo::create(2, center - Point(swing, 0)),
+               nullptr
+            )
+         )
+      );
+   }
+   return bg1;
+}
+
+
 
 
 

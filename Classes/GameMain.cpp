@@ -54,26 +54,9 @@ bool GameMain::init()
    // content = 1
    //   pixels = 1
    //   touch = 2
-   
-   string name("bg/0" + ToString(rand() % 5 + 1) + ".jpg");
-   auto bg1 = Sprite::create(name.c_str());
-   float scale = visibleSize.height / bg1->getContentSize().height;
-   float swing = bg1->getContentSize().width / 2 * scale - visibleSize.width/2;
-   bg1->setScale(scale);
-   bg1->setPosition(center);
-   bg1->runAction(
-      RepeatForever::create(
-         Sequence::create(
-            MoveTo::create(2, center + Point(swing, 0)),
-            MoveTo::create(2, center - Point(swing, 0)),
-            nullptr
-         )
-      )
-   );
-
 
    bg = Layer::create();
-   bg->addChild(bg1, 1);
+   bg->addChild(ContentManager::getInstance().GetScrollingBG(rand() % 5 + 1), 1);
    addChild(bg, 0);
 
    pixels = PixelsLayer::create();

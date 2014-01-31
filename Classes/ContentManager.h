@@ -51,6 +51,8 @@ namespace MPix {
       Sprite* GetSimpleSprite(const string& name);
       HSVSprite* GetHSVSprite(const string& name);
 
+      Sprite* GetScrollingBG(int index, bool isScrolling = true);
+
       // =========== Animation management ==========================================
 
       EMAnimation* GetAnimation(const string& name);

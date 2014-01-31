@@ -65,23 +65,10 @@ void MPix::MenuMain::onEnter()
    auto upperRight = Point(upperLeft.x + visibleSize.width, upperLeft.y);
 
 
-   // Background
-   auto bg = Sprite::create("bg/04.jpg");
-   bg->setScale(visibleSize.height / bg->getContentSize().height);
-   bg->setPosition(center);
-   bg->runAction(
-      RepeatForever::create(
-         Sequence::create(
-            MoveTo::create(2, center + Point(400, 0)),
-            MoveTo::create(2, center - Point(400, 0)),
-            nullptr
-         )
-      )
-   );
-   addChild(bg, Z_BACKGROUND);
+   // 2. Background
+   addChild(cm.GetScrollingBG(4), Z_BACKGROUND);
 
-
-   // 2. Upper panel
+   // 3. Upper panel
 
    // BG
    auto pn = DrawNode::create();
@@ -99,7 +86,7 @@ void MPix::MenuMain::onEnter()
    title_label->setPosition((upperLeft + upperRight) / 2 + Point(0, -PANEL_HEIGHT / 2.0));
    addChild(title_label, Z_UPPER_PANE_FONT);
 
-   // 3. Main menu
+   // 4. Main menu
    auto menu = Menu::create();
    menu->setPosition(Point::ZERO);
    addChild(menu, Z_MENU);
