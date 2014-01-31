@@ -74,16 +74,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
       { 85,  "iOS/85" },
       { 171, "iOS/171" }
    };
-#endif
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
    resolutions = { 
       { 40,  "Android/40" },
       { 60,  "Android/60" },
       { 135, "Android/135" },
       { 180, "Android/180" }
    };
-#endif
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+#else // On other platforms just use all
    resolutions = { 
       { 40,  "Android/40" },
       { 60,  "Android/60" },
@@ -94,6 +92,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
       { 180, "Android/180" }
    };
 #endif
+
+   assert(resolutions.empty() == false);
 
    // Setup resources directory
    vector<string> v;
