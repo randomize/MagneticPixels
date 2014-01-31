@@ -689,7 +689,6 @@
     <ClInclude Include="..\Classes\CuteBlocksLogo.h">
       <Filter>Classes\Extensions</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MagneticView.h" />
     <ClInclude Include="..\Classes\SplashState.h">
       <Filter>Classes\States</Filter>
     </ClInclude>

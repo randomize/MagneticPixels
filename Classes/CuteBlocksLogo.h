@@ -27,6 +27,8 @@ namespace MPix {
 
       static CuteBlocksLogo* create();
 
+   protected:
+
       bool init() override;
 
    private:

@@ -36,11 +36,12 @@ namespace MPix {
       void Build( shared_ptr<Pixel> model ) override;
 
       // Base update reasons implementation
-      void PixelCreated() override;
-      void PixelAccepted() override;
-      void PixelReset() override;
-      void PixelDied() override;
-      void PixelResurrect() override;
+      virtual void PixelCreated() override;
+      virtual void PixelAccepted() override;
+      virtual void PixelReset() override;
+      virtual void PixelDied() override;
+      virtual void PixelResurrect() override;
+      virtual void PixelIdleTrick() override;
 
       // Own update reasons
       virtual void PixelCanFallOn();

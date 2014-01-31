@@ -25,19 +25,24 @@ namespace MPix {
    {
    public:
 
-      static LevelView* create(int lvl_id, int label_number);
-
-      bool initWithId(int lvl_id, int label_number);
+      static LevelView* create(int unsigned, int label_number);
 
       unsigned GetLevelID() const;
 
+      void PlayLockedAnimation();
+
    protected:
+
+      bool initWithId(int unsigned, int label_number);
 
    private:
 
-      //shared_ptr<Level> level;
-      shared_ptr<GoalView> gv;
+      // Associated level id
       unsigned level_id;
+
+      // Presentation parts
+      shared_ptr<GoalView> m_goal_view;
+      Sprite* m_lock;
 
    };
 

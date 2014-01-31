@@ -11,7 +11,7 @@ using namespace MPix;
 MPix::EMAnimation* MPix::EMAnimation::create( const string& arm_name )
 {
    auto fab = new EMAnimation;
-   if (fab->init(arm_name)) {
+   if (fab->initWithArmatureName(arm_name)) {
       fab->autorelease();
       return fab;
    }
@@ -19,34 +19,42 @@ MPix::EMAnimation* MPix::EMAnimation::create( const string& arm_name )
    return nullptr;
 }
 
-bool MPix::EMAnimation::init( const string& arm_name )
+bool MPix::EMAnimation::initWithArmatureName( const string& arm_name )
 {
-   armature = Armature::create(arm_name);
-   assert(armature);
-   this->setCascadeOpacityEnabled(true);
-   armature->setBlendFunc(BlendFunc::ALPHA_NON_PREMULTIPLIED);
-   armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_3(EMAnimation::animationNext, this ));
-   islocking = false;
-   isplaying = true;
-   addChild(armature);
-   return true;
+   if (Node::init()) {
+
+      armature = Armature::create(arm_name);
+      if (armature == nullptr) {
+         EM_LOG_ERROR("Cannot create " + arm_name + " armature ");
+         return false;
+      }
+      armature->setBlendFunc(BlendFunc::ALPHA_NON_PREMULTIPLIED);
+      armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_3(EMAnimation::animationNext, this));
+      addChild(armature);
+
+      this->setCascadeOpacityEnabled(true);
+      islocking = false;
+      isplaying = true;
+      return true;
+   }
+   return false;
 }
 
-void MPix::EMAnimation::Play( const char* name )
+void MPix::EMAnimation::Play( const string& name )
 {
-   ani_queue.push_back(make_pair(false, string(name)));
+   ani_queue.push_back(make_pair(false, name));
    if (!isplaying)
       ProcessOne();
 }
 
-void MPix::EMAnimation::PlayLocked( const char* name )
+void MPix::EMAnimation::PlayLocked( const string& name )
 {
-   ani_queue.push_back(make_pair(true, string(name)));
+   ani_queue.push_back(make_pair(true, name));
    if (!isplaying)
       ProcessOne();
 }
 
-void MPix::EMAnimation::PlayNow( const char* name )
+void MPix::EMAnimation::PlayNow( const string& name )
 {
    if (islocking) {
       islocking = false;

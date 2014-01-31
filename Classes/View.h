@@ -10,7 +10,7 @@
 #ifndef VIEW_H_
 #define VIEW_H_
 
-#include "EMBase.h"
+#include "MPix.h"
 
 namespace MPix {
 
@@ -31,7 +31,7 @@ namespace MPix {
       // This method called most likely by target itself makes this view contents displayed on target
       // this can be done direct by childing, or through a BatchNode medium
       virtual void BindContents( Node* target, int recommendedOrder );
-      virtual void BindContents( Node* target);
+      virtual void BindContents( Node* target );
 
       // Contents may be acquired with this method
       virtual Node* GetContents();

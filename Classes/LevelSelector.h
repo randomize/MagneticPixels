@@ -11,6 +11,7 @@
 #define LEVELSELECTOR_H_
 
 #include "EMBase.h"
+#include "MPix.h"
 #include "GameState.h"
 
 namespace MPix {
@@ -26,30 +27,23 @@ namespace MPix {
    public: //  === State interface =====================
 
       EM_GAME_STATE(LevelSelector);
-      LevelSelector();
-      ~LevelSelector();
-      bool init() override;
 
       void onEnter() override;
       void onExit() override;
 
+   protected:
+
+      bool init() override;
+
    private: 
 
       // Handlers
+
+      // Loads level with given id does to game main sate
       void SelectedLevel(unsigned int id);
-      void SelectedWorld(int id);
-      void BackToWorlds();
+
+      // Returns to main menu state
       void BackToMainMenu();
-
-      // Data
-      Menu* world_m; // World menu
-      Menu* level_m; // Level menu
-
-      // Touch handlers
-      bool     onTouchBegan( Touch *touch, Event *event);
-      void onTouchCancelled( Touch *touch, Event *event);
-      void     onTouchEnded( Touch *touch, Event *event);
-      void     onTouchMoved( Touch *touch, Event *event);
 
       // Current state
       enum class State {
@@ -63,13 +57,17 @@ namespace MPix {
       // Scrollable layer with worlds
       Layer* worlds_layer;
       Point initial_pos, initial_touch;
+      void ElasticBounceToCurrentWorld();
+      Point NormalizePozition(Point pos);
 
       // Worlds
       unordered_map<int,Node*> title_lables; // ID -> label
       unordered_map<int, int>   ids_indexes; // ID -> index
       vector<int> indexed_ids;               // Index -> ID
+      vector<float> indexed_positions;       // Index -> Worlds Layer X coord
+
       int current_index;                     // Selected world index
-      vector<float> indexed_positions;        // Index -> Worlds Layer X coord
+      int world_count;                       // Number of worlds
 
       // Levels
       vector<vector<LevelView*>> indexed_views; // World ID -> level index -> Button(LevelView)
@@ -78,11 +76,25 @@ namespace MPix {
       void NextWorld();
       void PrewWorld();
 
+      // Arrow Buttons
+      void UpdateButtons();
+      Node* prew_button;
+      Node* next_button;
+
       // Saved geometry
       Size fullSize, halfSize, visibleSize;
       Point lowerLeft, lowerRight, centerPoint, upperLeft, upperRight;
 
       //////////////// TOUCH HANDLING
+
+      // Touch callbacks
+      bool     onTouchBegan( Touch *touch, Event *event);
+      void onTouchCancelled( Touch *touch, Event *event);
+      void     onTouchEnded( Touch *touch, Event *event);
+      void     onTouchMoved( Touch *touch, Event *event);
+
+      // Idling helps not to recalculate to much of data on each on move
+      int indling_couner;
 
       enum class Gesture {
          TO_NEXT,
@@ -90,11 +102,24 @@ namespace MPix {
          SAME
       } gesture_action;
 
+      /////////////// LEVEL BUTTONS
+
+      // Current clicked level button
+      LevelView* m_cur_button;
 
       // Helper method, searches for tap match, nullptr if not found
       LevelView* GetViewAtPoint(Point touch_pos);
 
-      LevelView* m_cur_button;
+#ifdef MPIX_DEVELOPERS_BUILD
+
+      // Super open on triple click
+      unsigned last_locked, pre_last_locked;
+
+#endif
+
+      ///////////// Init Helpers
+      void CreateLevelButtons();
+      void CreateArrowButtons();
 
    };
 

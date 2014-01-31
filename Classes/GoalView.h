@@ -10,7 +10,6 @@
 #ifndef PIXELSHAPEVIEW_H_
 #define PIXELSHAPEVIEW_H_
 
-#include "EMBase.h"
 #include "MPix.h"
 #include "Cmd.h"
 #include "View.h"

@@ -69,3 +69,22 @@ void MPix::ViewManager::Clear()
    this->goals.clear();
 }
 
+void MPix::ViewManager::RunIdleUpdateOnRandomPixel()
+{
+   const float RATE = 0.2f;
+
+   int sz = pixels.size();
+   int lim = RATE * sz;
+
+   for (auto& p : pixels) {
+      if (rand() % sz < lim) {
+         auto reason = CmdUIUpdatePixelView::Reason::IDLE_TRICK;
+         if ( p.second->Update(reason) == false ) {
+            EM_LOG_WARNING("Pixel View #" + p.first + " not handled update reason #" + static_cast<int>(reason)) ;
+         }
+      }
+   }
+
+}
+
+

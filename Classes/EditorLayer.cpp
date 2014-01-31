@@ -20,8 +20,8 @@
 using namespace MPix;
 
 // constants
-const float TAP_THRESHOLD = 10.0f;
-const float LONG_TAP_TIMEOUT = 1.0f;
+const float TAP_THRESHOLD = 20.0f;
+const float LONG_TAP_TIMEOUT = 0.5f;
 
 MPix::EditorLayer::EditorLayer() :
    touch_events(nullptr),
@@ -148,26 +148,33 @@ bool EditorLayer::onTouchBegan( Touch *touch, Event *event )
       auto pt = this->convertTouchToNodeSpace(touch);
       st = TouchState::ONE_TOUCH;
       dragging = false;
+
+      // Start long tap timer
       this->runAction(
          Sequence::createWithTwoActions(
-            DelayTime::create(1.0f),
+            DelayTime::create(LONG_TAP_TIMEOUT),
             CallFunc::create(CC_CALLBACK_0(EditorLayer::OnTimeOut, this, pt))
          )
        );
       return true;
    }
    case TouchState::ONE_TOUCH:
+   {
+      // Remove timer for long tap
       this->stopAllActions();
+
+      // Save positions and scale and prepare for zoom
       second_touch = *touch;
       start_dist = (touch->getLocationInView() - first_touch.getLocationInView()).getLength();
       pos = this->getPosition();
       scale = this->getScale();
       st = TouchState::ZOOMING;
       return true;
+   }
    case TouchState::ZOOMING:  // When pinch zoom : ignore additional touches coming
    case TouchState::IGNORING: // Just ignore new ones
       return false;
-   default:                   // Default should not be used in normal scenario
+   default:                   // Default should not be reached in normal scenario
       assert(false);
       return false;
    }

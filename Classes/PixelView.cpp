@@ -63,8 +63,11 @@ bool MPix::PixelView::Update( CmdUIUpdatePixelView::Reason reason )
    case MPix::CmdUIUpdatePixelView::Reason::RESURRECT:
       PixelResurrect();
       break;
-   case MPix::CmdUIUpdatePixelView::Reason::KILLED:
-      PixelKilled();
+   case MPix::CmdUIUpdatePixelView::Reason::KILLED_SOMEONE:
+      PixelKilledSomeone();
+      break;
+   case MPix::CmdUIUpdatePixelView::Reason::IDLE_TRICK:
+      PixelIdleTrick();
       break;
    default:
       return false;
@@ -132,13 +135,18 @@ void MPix::PixelView::PixelResurrect()
    contents->runAction(m_act);
 }
 
-void MPix::PixelView::PixelKilled()
+void MPix::PixelView::PixelKilledSomeone()
 {
 }
 
 void MPix::PixelView::PixelChanged()
 {
 }
+
+void MPix::PixelView::PixelIdleTrick()
+{
+}
+
 
 
 

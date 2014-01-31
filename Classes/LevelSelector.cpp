@@ -24,33 +24,19 @@ const int Z_OVERLAY = 5;
 const float PANEL_HEIGHT = 100.0f;
 const float UPPER_PANE_FONT = 64.0f;
 
-const float FLIP_PAGE_TRESHOLD_PERCENT = 0.25; // 1/4 away from center => flip
+const float FLIP_PAGE_TRESHOLD_PERCENT = 0.15f; //  => flip
 
 const int LEVEL_BUTTON_COLS_COUNT = 3;
 const int LEVEL_BUTTON_ROWS_COUNT = 5;
 
 const float BUTTON_TOUCH_RADIUS = 40.0f;
 
-/*
-const float LEVEL_BUTTON_COLS_SPACING = 180.0f;
-const float LEVEL_BUTTON_ROWS_SPACING = 150.0f;
+const int IDLING_RATE = 2; // Use only each 2rd
 
-const float LEVEL_BUTTON_WIDTH  = (LEVEL_BUTTON_COLS_COUNT - 1) * LEVEL_BUTTON_COLS_SPACING;
-const float LEVEL_BUTTON_HEIGHT = (LEVEL_BUTTON_ROWS_COUNT - 1) * LEVEL_BUTTON_ROWS_SPACING;
-*/
+const float PANEL_LABEL_FADE = 0.6f;
+
 //====---------------------------------------------======//
 
-MPix::LevelSelector::LevelSelector():
-   world_m(nullptr),
-   level_m(nullptr),
-   state(State::WAIT),
-   worlds_layer(nullptr)
-{
-}
-
-MPix::LevelSelector::~LevelSelector()
-{
-}
 
 bool MPix::LevelSelector::init()
 {
@@ -60,6 +46,11 @@ bool MPix::LevelSelector::init()
    {
       return false;
    }
+
+   // Init members
+   state = State::WAIT;
+   worlds_layer = nullptr;
+   world_count = 0;
 
    auto d = Director::getInstance();
 
@@ -110,38 +101,88 @@ void MPix::LevelSelector::onEnter()
    addChild(pn, Z_PANELS);
 
 
+   // Levels buttons, worlds labels and worlds_layer
+   CreateLevelButtons();
+
+   // Register touch
+   auto touch_listener = EventListenerTouchOneByOne::create();
+   touch_listener->setSwallowTouches(false);
+   touch_listener->onTouchBegan     = CC_CALLBACK_2(LevelSelector::onTouchBegan, this);
+   touch_listener->onTouchMoved     = CC_CALLBACK_2(LevelSelector::onTouchMoved, this);
+   touch_listener->onTouchEnded     = CC_CALLBACK_2(LevelSelector::onTouchEnded, this);
+   touch_listener->onTouchCancelled = CC_CALLBACK_2(LevelSelector::onTouchCancelled, this);
+   _eventDispatcher->addEventListenerWithSceneGraphPriority(touch_listener, this);
+
+   // Register back button
+   auto back_listener = EventListenerKeyboard::create();
+   back_listener->onKeyReleased = [this](EventKeyboard::KeyCode k, Event*) {
+      if (k == EventKeyboard::KeyCode::KEY_BACKSPACE) {
+         BackToMainMenu();
+      }
+   };
+   _eventDispatcher->addEventListenerWithSceneGraphPriority(back_listener, this);
+
+
+   CreateArrowButtons();
+
+   UpdateButtons();
+}
+
+void MPix::LevelSelector::onExit()
+{
+   Scene::onExit();
+   SettingsManager::getInstance().SetKey(SettingsManager::Key::LAST_WORLD, current_index);
+   SettingsManager::getInstance().SaveSettings();
+}
+
+void MPix::LevelSelector::SelectedLevel( unsigned int id )
+{
+
+   // Take level
+   auto lvl = LevelManager::getInstance().GetPlayableLevelByID(id);
+   GameplayManager::getInstance().LoadLevel(lvl);
+
+   // And play it
+   GameStateManager::getInstance().SwitchToGame();
+
+}
+
+void MPix::LevelSelector::BackToMainMenu()
+{
+   GameStateManager::getInstance().SwitchToMenu();
+}
+
+void MPix::LevelSelector::CreateLevelButtons()
+{
+   auto& lm = LevelManager::getInstance();
+
    // Scrollable layer with worlds
-   //worlds_layer = LayerColor::create(Color4B::GRAY);
    worlds_layer = Layer::create();
    addChild(worlds_layer, Z_WORLDS_LAYER);
 
-   auto& lm = LevelManager::getInstance();
-
    // Create worlds menu
    auto& ids = lm.GetWorldIDs();
-   auto ids_cout = ids.size();
-   assert(ids_cout);
+   world_count = ids.size();
+   assert(world_count);
 
    current_index = SettingsManager::getInstance().GetKey(SettingsManager::Key::LAST_WORLD);
-   title_lables.reserve(ids_cout);
-   indexed_ids.reserve(ids_cout);
-   indexed_positions.reserve(ids_cout);
-   indexed_views.reserve(ids_cout);
+   title_lables.reserve(world_count);
+   indexed_ids.reserve(world_count);
+   indexed_positions.reserve(world_count);
+   indexed_views.reserve(world_count);
 
    float level_pane_spacing_x = (visibleSize.width + 80) / (LEVEL_BUTTON_COLS_COUNT + 1);
    float level_pane_spacing_y = (visibleSize.height - 2 * PANEL_HEIGHT + 80) / (LEVEL_BUTTON_ROWS_COUNT + 1);
    float level_pane_w = (LEVEL_BUTTON_COLS_COUNT - 1) * level_pane_spacing_x;
    float level_pane_h = (LEVEL_BUTTON_ROWS_COUNT - 1) * level_pane_spacing_y;
 
+   int i = 0; // World indexer
    for (auto id : ids ) {
-
-      // Setting up search maps
-      int i = indexed_ids.size();
 
       indexed_ids.push_back(id);
       ids_indexes.emplace(id, i);
       float base_offset = i * visibleSize.width;
-      indexed_positions.push_back(base_offset);
+      indexed_positions.push_back(-base_offset);
 
       // Take world
       auto w = lm.GetWorldByID(id);
@@ -161,7 +202,7 @@ void MPix::LevelSelector::onEnter()
       vector<LevelView*> world_buttons;
       world_buttons.reserve(15);
 
-      int j = 0;
+      int j = 0; // Level indexer
       for (auto lvl_id : lm.GetLevelsByWorldID(id)) {
          // Create view
          auto level_button = LevelView::create(lvl_id, j);
@@ -182,138 +223,19 @@ void MPix::LevelSelector::onEnter()
 
          worlds_layer->addChild(level_button);
          world_buttons.push_back(level_button);
-      }
+
+      } // Levels for
 
       indexed_views.push_back(world_buttons);
 
-   }
+      i++; // counting world index
 
-   // Register touch
-   auto touch_listener = EventListenerTouchOneByOne::create();
-   touch_listener->setSwallowTouches(false);
-   touch_listener->onTouchBegan     = CC_CALLBACK_2(LevelSelector::onTouchBegan, this);
-   touch_listener->onTouchMoved     = CC_CALLBACK_2(LevelSelector::onTouchMoved, this);
-   touch_listener->onTouchEnded     = CC_CALLBACK_2(LevelSelector::onTouchEnded, this);
-   touch_listener->onTouchCancelled = CC_CALLBACK_2(LevelSelector::onTouchCancelled, this);
-   _eventDispatcher->addEventListenerWithSceneGraphPriority(touch_listener, this);
-
-   // Register back button
-   auto back_listener = EventListenerKeyboard::create();
-   back_listener->onKeyReleased = [this](EventKeyboard::KeyCode k, Event*) {
-      if (k == EventKeyboard::KeyCode::KEY_BACKSPACE) {
-         BackToMainMenu();
-      }
-   };
-   _eventDispatcher->addEventListenerWithSceneGraphPriority(back_listener, this);
+   } // Worlds for
 
    // Reveal current title label
-   title_lables[indexed_ids[current_index]]->runAction(FadeIn::create(1.0f));
+   title_lables[indexed_ids[current_index]]->runAction(FadeIn::create(PANEL_LABEL_FADE));
    worlds_layer->setPosition(indexed_positions[current_index], 0);
 
-
-   auto buttons = Menu::create();
-   buttons->setPosition(0, 0);
-
-   auto bt_s1 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
-   auto bt_s2 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
-   //bt_s1->setPosition(upperRight.x - 20, center.y);
-   //bt_s2->setPosition(upperRight.x - 20, center.y);
-   bt_s1->setOpacity(200);
-   auto bt = MenuItemSprite::create(bt_s1, bt_s2, [this](Object*) { NextWorld(); });
-   bt->setPosition(upperRight.x - 40, centerPoint.y);
-   buttons->addChild(bt);
-
-   bt_s1 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
-   bt_s2 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
-   //bt_s1->setPosition(upperLeft.x + 20, center.y);
-   //bt_s2->setPosition(upperLeft.x + 20, center.y);
-   bt_s1->setOpacity(200);
-   bt = MenuItemSprite::create(bt_s1, bt_s2, [this](Object*) { PrewWorld(); });
-   bt->setPosition(upperLeft.x + 40, centerPoint.y);
-   bt->setRotation(180);
-   bt_s1->setOpacity(220);
-   buttons->addChild(bt);
-
-   addChild(buttons, Z_OVERLAY);
-}
-
-void MPix::LevelSelector::onExit()
-{
-   Scene::onExit();
-
-}
-
-void MPix::LevelSelector::SelectedLevel( unsigned int id )
-{
-   auto lvl = LevelManager::getInstance().GetPlayableLevelByID(id);
-   GameplayManager::getInstance().LoadLevel(lvl);
-
-   // And play it
-   GameStateManager::getInstance().SwitchToGame();
-
-}
-
-void MPix::LevelSelector::SelectedWorld( int wid )
-{
-   world_m->setEnabled(false);
-   world_m->runAction( FadeOut::create(0.4f) );
-   // Create levels menu
-   auto & lm = LevelManager::getInstance();
-
-   MenuItemFont::setFontSize(48);
-
-   auto ids = lm.GetLevelsByWorldID(wid);
-   auto menu = Menu::create();
-
-   for (auto id : ids ) {
-      string n = lm.GetNameByLevelID(id) + " (id=" + ToString(id) + ")";
-      auto item = MenuItemFont::create(
-         n.c_str(),
-         [&](Object *sender) {
-         auto it = static_cast<MenuItemFont*>(sender);
-         SelectedLevel( (unsigned) it->getTag() );
-         }
-      );
-      item->setTag((int)id);
-      item->setColor(Color3B::GREEN);
-      menu->addChild(item);
-   }
-   // Add default back button
-   auto back = MenuItemFont::create(
-      LocalUTF8Char("Back"),
-      [&](Object *sender) {
-         BackToWorlds();
-      }
-   ); menu->addChild(back);
-   menu->alignItemsVertically();
-
-   auto s = Director::getInstance()->getWinSize();
-   menu->setPosition(Point(s.width/2, s.height/2));
-
-   worlds_layer->addChild(menu, 1);
-   level_m = menu;
-
-}
-
-void MPix::LevelSelector::BackToWorlds()
-{
-   world_m->setEnabled(true);
-   world_m->runAction( FadeIn::create(0.4f) );
-
-   level_m->setEnabled(false);
-   level_m->runAction( 
-    Sequence::create(
-      FadeOut::create(0.4f),
-      RemoveSelf::create(),
-      nullptr
-    )
-   );
-
-}
-
-void MPix::LevelSelector::BackToMainMenu()
-{
-   GameStateManager::getInstance().SwitchToMenu();
 }
 
 /////////////////// TOUCH HANDLING ////////////////////////////////////////////////////
@@ -325,22 +247,28 @@ bool MPix::LevelSelector::onTouchBegan(Touch *touch, Event *event)
    case State::WAIT:
    {
       initial_touch = convertTouchToNodeSpace(touch);
-      auto button = GetViewAtPoint(initial_touch);
-      if (button) { // Touched button
+      if (worlds_layer->getNumberOfRunningActions() == 0) { // Disable buttons while animating 
+         auto button = GetViewAtPoint(initial_touch);
+         if (button) { // Touched button
 
-         // Save current button
-         m_cur_button = button;
+            // Save current button
+            m_cur_button = button;
 
-         // Scale it little bit
-         m_cur_button->stopAllActions();
-         m_cur_button->runAction(ScaleTo::create(0.3f, 1.1f));
+            // Scale it little bit
+            m_cur_button->stopAllActions();
+            m_cur_button->runAction(ScaleTo::create(0.3f, 1.1f));
 
-         // goto button state
-         state = State::BUTTON;
+            // goto button state
+            state = State::BUTTON;
 
-         return true;
+            return true;
+         }
+      }
+      if (indexed_positions[current_index] - worlds_layer->getPositionX() > 50.0) { // Too far to be catched
+         return false;
       }
       state = State::SCROLL;
+      indling_couner = 0;
       initial_pos = worlds_layer->getPosition();
       gesture_action = Gesture::SAME;
       worlds_layer->stopAllActions();
@@ -371,7 +299,24 @@ void MPix::LevelSelector::onTouchEnded(Touch *touch, Event *event)
       m_cur_button->stopAllActions();
       m_cur_button->runAction(ScaleTo::create(0.1f, 1));
 
-      SelectedLevel(m_cur_button->GetLevelID());
+      auto id = m_cur_button->GetLevelID();
+
+      if (LevelManager::getInstance().GetLockedByLevelID(id) == false) {
+         SelectedLevel(id);
+      }
+      else
+      {
+#ifdef MPIX_DEVELOPERS_BUILD
+         if (last_locked == id && last_locked == pre_last_locked) {
+            SelectedLevel(last_locked);
+         }
+         else {
+            pre_last_locked = last_locked;
+            last_locked = id;
+         }
+#endif // MPIX_DEVELOPERS_BUILD
+         m_cur_button->PlayLockedAnimation();
+      }
 
       // Back to default
       state = State::WAIT;
@@ -386,21 +331,7 @@ void MPix::LevelSelector::onTouchEnded(Touch *touch, Event *event)
          PrewWorld();
          return;
       default:
-         auto p = indexed_positions[current_index];
-         worlds_layer->runAction(
-            Sequence::create(
-               EaseBounceOut::create(
-                  MoveTo::create(0.6f, Point(p,0))
-               ),
-               CallFunc::create(
-                  [this](){
-                     state = State::WAIT;
-                  }
-               ),
-               nullptr
-            )
-         );
-         state = State::ANIMATING;
+         ElasticBounceToCurrentWorld();
          return;
       }
    } 
@@ -419,22 +350,43 @@ void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
       // Update position
       auto pos = convertTouchToNodeSpace(touch) - initial_touch;
       auto new_position = initial_pos + Point(pos.x, 0);
-      worlds_layer->setPosition(new_position);
+      worlds_layer->setPosition(NormalizePozition(new_position));
 
-      // Update gesture
-      // TODO:
+      if (indling_couner == 0) 
+      {
+         float threshold = visibleSize.width * FLIP_PAGE_TRESHOLD_PERCENT;
+         // Update gesture
+         if (pos.x > 0) {
+            gesture_action = pos.x > threshold ? Gesture::TO_PREW : Gesture::SAME;
+         } else {
+            gesture_action = pos.x < -threshold ? Gesture::TO_NEXT : Gesture::SAME;
+         }
+         indling_couner = IDLING_RATE;
+      }
+      else {
+         indling_couner--;
+         assert(indling_couner >= 0);
+      }
 
       break;
    }
    case State::WAIT:
    case State::BUTTON:
    {
-      auto pos = convertTouchToNodeSpace(touch) - initial_touch;
+      auto pos = convertTouchToNodeSpace(touch) - m_cur_button->getPosition();
       if (pos.getLengthSq() > BUTTON_TOUCH_RADIUS*BUTTON_TOUCH_RADIUS) {
          EM_LOG_DEBUG("Touch left button");
-         state = State::IGNORING;
+         //state = State::IGNORING;
          m_cur_button->stopAllActions();
          m_cur_button->runAction(ScaleTo::create(0.15f, 1));
+
+         // Back to scroll
+         initial_touch = convertTouchToNodeSpace(touch);
+         state = State::SCROLL;
+         indling_couner = 0;
+         initial_pos = worlds_layer->getPosition();
+         gesture_action = Gesture::SAME;
+         worlds_layer->stopAllActions();
       }
       break;
    }
@@ -452,12 +404,32 @@ void MPix::LevelSelector::NextWorld()
 {
    EM_LOG_DEBUG("Next world");
 
+   if (current_index < world_count-1) {
+      title_lables[indexed_ids[current_index]]->stopAllActions();
+      title_lables[indexed_ids[current_index]]->runAction(FadeOut::create(0.1f));
+      current_index++;
+      title_lables[indexed_ids[current_index]]->stopAllActions();
+      title_lables[indexed_ids[current_index]]->runAction(FadeIn::create(PANEL_LABEL_FADE));
+   }
+
+   UpdateButtons();
+   ElasticBounceToCurrentWorld();
 }
 
 void MPix::LevelSelector::PrewWorld()
 {
    EM_LOG_DEBUG("Prew world");
 
+   if (current_index > 0) {
+      title_lables[indexed_ids[current_index]]->stopAllActions();
+      title_lables[indexed_ids[current_index]]->runAction(FadeOut::create(0.1f));
+      current_index--;
+      title_lables[indexed_ids[current_index]]->stopAllActions();
+      title_lables[indexed_ids[current_index]]->runAction(FadeIn::create(PANEL_LABEL_FADE));
+   }
+
+   UpdateButtons();
+   ElasticBounceToCurrentWorld();
 }
 
 LevelView* MPix::LevelSelector::GetViewAtPoint(Point touch_pos)
@@ -471,4 +443,77 @@ LevelView* MPix::LevelSelector::GetViewAtPoint(Point touch_pos)
       j++;
    }
    return nullptr;
+}
+
+void MPix::LevelSelector::ElasticBounceToCurrentWorld()
+{
+   auto p = indexed_positions[current_index];
+   worlds_layer->stopAllActions();
+   worlds_layer->runAction(
+      Sequence::create(
+         EaseBounceOut::create(
+            MoveTo::create(0.5f, Point(p,0))
+         ),
+         CallFunc::create(
+            [this](){
+               state = State::WAIT;
+            }
+         ),
+         nullptr
+      )
+   );
+   //state = State::ANIMATING;
+   state = State::WAIT;
+}
+
+cocos2d::Point MPix::LevelSelector::NormalizePozition(Point pos)
+{
+   if (pos.x > indexed_positions[0]) {
+      pos.x = indexed_positions[0];
+   }
+   if (pos.x < indexed_positions[world_count-1]) {
+      pos.x = indexed_positions[world_count-1];
+   }
+   return pos;
+}
+
+void MPix::LevelSelector::UpdateButtons()
+{
+   prew_button->setVisible(true);
+   next_button->setVisible(true);
+
+   if (current_index == 0) {
+      prew_button->setVisible(false);
+   }
+
+   if (current_index == world_count - 1){
+      next_button->setVisible(false);
+   }
+
+}
+
+void MPix::LevelSelector::CreateArrowButtons()
+{
+   auto buttons = Menu::create();
+   buttons->setPosition(0, 0);
+
+   auto bt_s1 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
+   auto bt_s2 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
+   bt_s1->setOpacity(200);
+   auto bt = MenuItemSprite::create(bt_s1, bt_s2, [this](Object*) { NextWorld(); });
+   bt->setPosition(upperRight.x - 40, centerPoint.y);
+   buttons->addChild(bt);
+   next_button = bt;
+
+   bt_s1 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
+   bt_s2 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
+   bt_s1->setOpacity(200);
+   bt = MenuItemSprite::create(bt_s1, bt_s2, [this](Object*) { PrewWorld(); });
+   bt->setPosition(upperLeft.x + 40, centerPoint.y);
+   bt->setRotation(180);
+   bt_s1->setOpacity(220);
+   buttons->addChild(bt);
+   prew_button = bt;
+
+   addChild(buttons, Z_OVERLAY);
 }

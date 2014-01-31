@@ -29,8 +29,8 @@ MPix::LevelStorage::~LevelStorage()
 EmbossLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> &worlds, unordered_map<unsigned int, shared_ptr<Level>> &levels )
 {
 
-   ssize_t size = 0;
-   char* pLevelData = nullptr;
+  // ssize_t size = 0;
+   //char* pLevelData = nullptr;
 
    // Logic of loading:
    // Release version:
@@ -42,53 +42,57 @@ EmbossLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> &wor
    //       reads /res/levelMap to pLevelData
    //       copies to /writable/levelMap for next time
 
+   Data data;
+   tinyxml2::XMLDocument doc;
+
 #ifdef MPIX_DEVELOPERS_BUILD
-   auto wpath = FileUtils::getInstance()->getWritablePath();
-   string wname = wpath + levelMap;
-   auto wfile = fopen(wname.c_str(), "rb");
-   if ( wfile != nullptr ) {
-      //Init pLevelData with contents
-      fseek(wfile,0,SEEK_END);
-      size = ftell(wfile);
-      fseek(wfile,0,SEEK_SET);
-      pLevelData = new char[size];
-      size = fread(pLevelData, sizeof(char), size, wfile);
-      fclose(wfile);
+
+   // Try to find writible levelMap
+   auto writeLevelMap = FileUtils::getInstance()->getWritablePath() + levelMap;
+
+   if ( FileUtils::getInstance()->isFileExist(writeLevelMap) ) {
+
+      data = CCFileUtils::getInstance()->getDataFromFile(writeLevelMap);
+
+      if (data.isNull()) {
+         EM_LOG_ERROR("FATAL : Writable " + levelMap + " exists at\n" + writeLevelMap + "\nbut is empty or inaccessible" );
+         return ErrorCode::RET_FAIL;
+      }
    } 
    else  // carefully, code continues outside of #endif intentionally, logic described above
 #endif
    {
-   // Load file levelMap from /res 
-      string fullPath = CCFileUtils::getInstance()->fullPathForFilename(levelMap);
-      pLevelData = (char*) CCFileUtils::getInstance()->getFileData(fullPath.c_str() , "rb", &size);
-#ifdef MPIX_DEVELOPERS_BUILD
-      wfile = fopen(wname.c_str(), "wb");
-      fwrite(pLevelData, sizeof(char), size, wfile);
-      fclose(wfile);
-#endif
+      // Load file levelMap from /res 
+      string resLevelsFile = CCFileUtils::getInstance()->fullPathForFilename(levelMap);
+
+      data = CCFileUtils::getInstance()->getDataFromFile(resLevelsFile);
+
+      if (data.isNull()) {
+         EM_LOG_ERROR("FATAL : Can't load " + levelMap);
+         return ErrorCode::RET_FAIL;
+      }
    }
 
-   if ( pLevelData == nullptr || size == 0 ) {
-      EM_LOG_ERROR("FATAL : Can't load "+levelMap);
-      return ErrorCode::RET_FAIL;
-   }
-
-   tinyxml2::XMLDocument doc;
-   doc.Parse(pLevelData, size);
+   doc.Parse((char*)data.getBytes(), data.getSize()); // TODO: remove reallocation
 
    if (doc.Error()) {
       EM_LOG_ERROR("FATAL : Can't parse "+levelMap);
       EM_LOG_ERROR("TIXML reports : \n " + doc.GetErrorStr1() + " \n"  + doc.GetErrorStr2() );
-      delete[] pLevelData;
       return ErrorCode::RET_FAIL;
    }
+
+
+#ifdef MPIX_DEVELOPERS_BUILD
+   doc.SaveFile(writeLevelMap.c_str(), false);
+#endif
+
+
 
    //Check if root is present
    auto root = doc.FirstChildElement("mpix");
    if ( !root )
    {
       EM_LOG_ERROR("Can't find root element with name `mpix` in file " + levelMap);
-      delete[] pLevelData;
       return ErrorCode::RET_FAIL;
    }
 
@@ -100,7 +104,6 @@ EmbossLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> &wor
    if ( !wsection )
    {
       EM_LOG_ERROR("Can't find element with name `worlds` in file " + levelMap);
-      delete[] pLevelData;
       return ErrorCode::RET_FAIL;
    }
 
@@ -136,7 +139,6 @@ EmbossLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> &wor
    if ( !lsection )
    {
       EM_LOG_ERROR("Can't find element with name `levels` in file " + levelMap);
-      delete[] pLevelData;
       return ErrorCode::RET_FAIL;
    }
 
@@ -181,9 +183,6 @@ EmbossLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> &wor
       lvl = lvl->NextSiblingElement("lvl");
    }
 
-
-   // Free mem
-   delete[] pLevelData;
 
    EM_LOG_INFO("LevelStorage : Loaded " + world_counter + " worlds, "+lvl_counter + " levels ");
    if (err_counter) {

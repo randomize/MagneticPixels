@@ -262,6 +262,7 @@ void MPix::MagneticPixelView::PixelWake()
 void MPix::MagneticPixelView::PixelAsleep()
 {
    mimics->PlayNow("asleep");
+   mimics->Play("sleeping");
    zzz->Show();
 }
 
@@ -292,6 +293,16 @@ void MPix::MagneticPixelView::PixelCanFallOff()
    auto sq = ScaleTo::create(0.2f,1.0f);
    contents->runAction(sq);
 }
+
+void MPix::MagneticPixelView::PixelIdleTrick()
+{
+   if (pixel->IsInAssembly() && pixel->IsAlive()) {
+      string s("idle_" + ToString(rand() % 8));
+      mimics->Play(s);
+   }
+
+}
+
 
 
 

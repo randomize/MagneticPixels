@@ -10,7 +10,7 @@
 #ifndef IMAGEVIEW_H_
 #define IMAGEVIEW_H_
 
-#include "EMBase.h"
+#include "MPix.h"
 #include "View.h"
 
 namespace MPix {

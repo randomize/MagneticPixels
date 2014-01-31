@@ -22,7 +22,7 @@ const float MAX_GOAL_DIM = 70.0f;
 
 //====---------------------------------------------======//
 
-LevelView* MPix::LevelView::create(int lvl_id, int label_number)
+LevelView* MPix::LevelView::create(unsigned lvl_id, int label_number)
 {
    auto fab = new LevelView;
    if (fab->initWithId(lvl_id, label_number)) {
@@ -34,7 +34,7 @@ LevelView* MPix::LevelView::create(int lvl_id, int label_number)
 }
 
 
-bool MPix::LevelView::initWithId(int lvl_id, int label_number)
+bool MPix::LevelView::initWithId(unsigned lvl_id, int label_number)
 {
    if (!init()) {
       return false;
@@ -59,12 +59,12 @@ bool MPix::LevelView::initWithId(int lvl_id, int label_number)
    name->setPosition(0, -60.0f);
    addChild(name, Z_NAME);
 
-   auto lock = cm.GetSimpleSprite("level_lock");
-   lock->setPosition(0, 0);
-   lock->setPosition(35, 35);
-   lock->setScale(0.5f);
-   lock->setVisible( level->GetState() == Level::State::IS_LOCKED );
-   addChild(lock, Z_LOCK);
+   m_lock = cm.GetSimpleSprite("level_lock");
+   m_lock->setPosition(0, 0);
+   m_lock->setPosition(35, 35);
+   m_lock->setScale(0.5f);
+   m_lock->setVisible( level->GetState() == Level::State::IS_LOCKED );
+   addChild(m_lock, Z_LOCK);
 
    auto g_node = Node::create();
    g_node->setCascadeColorEnabled(true);
@@ -115,12 +115,13 @@ bool MPix::LevelView::initWithId(int lvl_id, int label_number)
 
    g_node->setScale( MAX_GOAL_DIM / fitter );
 
-   gv = make_shared<GoalView>();
-   gv->Build(goal);
-   gv->setPosition(center);
+   m_goal_view = make_shared<GoalView>();
+   m_goal_view->Build(goal);
+   m_goal_view->setPosition(center);
    // TODO: Render and bake to rendertexture! save some CPU life ;)
-   gv->BindContents(g_node);
-   gv->Update(CmdUIUpdateGoalView::Reason::CREATED);
+
+   m_goal_view->BindContents(g_node);
+   m_goal_view->Update(CmdUIUpdateGoalView::Reason::CREATED);
 
    return true;
 }
@@ -129,6 +130,23 @@ unsigned MPix::LevelView::GetLevelID() const
 {
    return level_id;
 }
+
+void MPix::LevelView::PlayLockedAnimation()
+{
+   m_lock->runAction(
+      Repeat::create(
+         Sequence::create(
+            RotateTo::create(0.04f, -30),
+            RotateTo::create(0.04f, 0),
+            RotateTo::create(0.04f, 30),
+            RotateTo::create(0.04f, 0),
+            nullptr
+         ),
+         3
+      )
+  );
+}
+
 
 
 

@@ -42,6 +42,8 @@ namespace MPix {
       // Get Pixel view
       shared_ptr<PixelView> GetPixelViewByID(int id);
 
+      // Performing idle actions
+      void RunIdleUpdateOnRandomPixel();
 
    private:
 

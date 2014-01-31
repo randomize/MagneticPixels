@@ -302,7 +302,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagneticDiagonalPixel.h" />
     <ClInclude Include="..\Classes\MagneticPixel.h" />
     <ClInclude Include="..\Classes\MagneticPixelView.h" />
-    <ClInclude Include="..\Classes\MagneticView.h" />
     <ClInclude Include="..\Classes\MenuMain.h" />
     <ClInclude Include="..\Classes\MPix.h" />
     <ClInclude Include="..\Classes\Pitfall.h" />

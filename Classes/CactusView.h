@@ -25,7 +25,7 @@ namespace MPix {
       void Build( shared_ptr<Pixel> model ) override;
 
       void PixelCreated() override;
-      void PixelKilled() override;
+      void PixelKilledSomeone() override;
       void PixelDied() override;
       void PixelResurrect() override;
 

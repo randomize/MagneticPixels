@@ -17,7 +17,7 @@
 #define MPIX_DEVELOPERS_BUILD
 
 // Version string
-#define MPIX_VERSION "v0.1"
+#define MPIX_VERSION "v0.2"
 
 
 

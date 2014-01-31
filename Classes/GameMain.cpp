@@ -8,17 +8,14 @@
 #include "GameStateManager.h"
 #include "LevelManager.h"
 #include "ContentManager.h"
+#include "ViewManager.h"
 
 using namespace MPix;
 using namespace std::placeholders;
 
 // Constants
-int const MPix::GameMain::GAMEPLAY_TICK_RATIO = 6;
-
-// UI Z orders
-int const MPix::GameMain::Z_PIXEL_MIMICS = 5;
-int const MPix::GameMain::Z_PIXEL_BG = 4;
-int const MPix::GameMain::Z_WALLS = 10;
+int const GAMEPLAY_TICK_RATIO = 6;
+int const IDLE_TRICKS_TICK_RATIO = 100;
 
 MPix::GameMain::GameMain()
 {
@@ -47,6 +44,7 @@ bool GameMain::init()
    Size halfSize =  fullSize / 2.0f;
    Size visibleSize = Director::getInstance()->getVisibleSize();
    // Point origin = Director::getInstance()->getVisibleOrigin();
+   auto center = Point(halfSize.width, halfSize.height);
 
    float contentScale = (visibleSize.height/fullSize.height * visibleSize.width/fullSize.width);
 
@@ -57,9 +55,22 @@ bool GameMain::init()
    //   pixels = 1
    //   touch = 2
    
-   auto bg1 = Sprite::create("bg/02.jpg");
-   bg1->setScale(visibleSize.height / bg1->getContentSize().height);
-   bg1->setPosition(halfSize.width, halfSize.height);
+   string name("bg/0" + ToString(rand() % 5 + 1) + ".jpg");
+   auto bg1 = Sprite::create(name.c_str());
+   float scale = visibleSize.height / bg1->getContentSize().height;
+   float swing = bg1->getContentSize().width / 2 * scale - visibleSize.width/2;
+   bg1->setScale(scale);
+   bg1->setPosition(center);
+   bg1->runAction(
+      RepeatForever::create(
+         Sequence::create(
+            MoveTo::create(2, center + Point(swing, 0)),
+            MoveTo::create(2, center - Point(swing, 0)),
+            nullptr
+         )
+      )
+   );
+
 
    bg = Layer::create();
    bg->addChild(bg1, 1);
@@ -122,6 +133,7 @@ void MPix::GameMain::CreateButtons()
       menu->addChild(btn);
    }
    this->addChild(menu, 3);
+   menu->setScale(Director::getInstance()->getContentScaleFactor()); // FIXME
 }
 
 void MPix::GameMain::BtnHnadler(Object* sender)
@@ -160,15 +172,13 @@ void MPix::GameMain::BtnHnadler(Object* sender)
 ErrorCode GameMain::Tick( float t )
 {
 
-   static int cnt = 0;
-
    GameState::Tick(t);
 
-   cnt++;
+   logic_tick++;
    // Frame skipper
-   if (cnt > GAMEPLAY_TICK_RATIO) {
+   if (logic_tick > GAMEPLAY_TICK_RATIO) {
 
-      cnt = 0;
+      logic_tick = 0;
 
       // Keep calling GameplayManager command until UI gets busy or commands end
       ErrorCode ret = ErrorCode::RET_OK;
@@ -176,6 +186,15 @@ ErrorCode GameMain::Tick( float t )
          ret = GameplayManager::getInstance().ProcessOneCommand();
       }
 
+   }
+
+   views_tick++;
+
+   if (views_tick > IDLE_TRICKS_TICK_RATIO) {
+
+      views_tick = 0;
+
+      ViewManager::getInstance().RunIdleUpdateOnRandomPixel();
    }
 
    return ErrorCode::RET_OK;

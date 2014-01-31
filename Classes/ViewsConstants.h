@@ -31,6 +31,11 @@ namespace MPix {
 
       namespace Zorders {
 
+      // UI Elements Z order constants
+      static int const WALLS = 10;
+      static int const PIXEL_BG = 4;
+      static int const PIXEL_MIMICS = 5;
+
       }
 
 

@@ -52,9 +52,10 @@ namespace MPix {
          CANFALL,  // asm pixel - can fall
          CANTFALL, // asm pixel - can't fall
          TAPPED,   // any puxel - tap on pixel
+         IDLE_TRICK, // any pixel - show something
          SMILED,   // colorful pixel - when on goal
          UNSMILED, // colorful pixel - when leaves goal
-         KILLED,   // killer pixel - when kills
+         KILLED_SOMEONE,   // killer pixel - when kills
          BLOCKING  // mover pixel - when move cannot be performed
       };
       CmdUIUpdatePixelView(int pieceID, Reason whyUpdate) {

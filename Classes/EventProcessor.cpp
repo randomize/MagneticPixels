@@ -161,7 +161,7 @@ void PixelEventPacket::Dispatch()
       break;
    case PixelEvent::KILLED:
       EM_LOG_DEBUG(" Pixel ["+ id + "] => Killed someone " );
-      GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::KILLED));
+      GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::KILLED_SOMEONE));
       break;
 
    default:

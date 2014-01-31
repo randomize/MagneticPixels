@@ -29,7 +29,7 @@ void MPix::CactusView::PixelCreated()
    bg->runAction(sq);
 }
 
-void MPix::CactusView::PixelKilled()
+void MPix::CactusView::PixelKilledSomeone()
 {
    auto m_act = Shake::createWithStrength(0.8f, 0.0, 5.0f);
    RunLockingAction(bg, m_act);

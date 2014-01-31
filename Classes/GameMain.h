@@ -56,20 +56,14 @@ namespace MPix {
 
       void BtnHnadler(Object* sender);
 
+      int logic_tick = 0;
+      int views_tick = 0;
+
    private: // Commands
 
       // Handles CmdGameFinished
       ErrorCode onCmdGameFinished();
 
-   public: // General UI game constants
-
-      // Defines logic tick ratio
-      static int const GAMEPLAY_TICK_RATIO;
-
-      // UI Elements Z order constants
-      static int const Z_WALLS;
-      static int const Z_PIXEL_BG;
-      static int const Z_PIXEL_MIMICS;
 
    };
 

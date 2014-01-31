@@ -52,7 +52,8 @@ namespace MPix {
       virtual void PixelDied();
       virtual void PixelResurrect();
       virtual void PixelChanged();
-      virtual void PixelKilled();
+      virtual void PixelKilledSomeone();
+      virtual void PixelIdleTrick();
 
       shared_ptr<Pixel> model;
 
