@@ -2,13 +2,14 @@
 #include "GameStateManager.h"
 #include "GameplayManager.h"
 #include "Cmd.h"
+#include "EMBaseMasterLoop.h"
 
 using namespace MPix;
 
 // constants
 namespace TouchConstants {
 
-   const float MAX_TIMEOUT = 1.5f;
+   const float MAX_GESTURE_TIMEOUT = 1.0f;
 
    // Tapping ===============================================================
 
@@ -22,13 +23,16 @@ namespace TouchConstants {
    // Shaking ==============================================================
 
    // Sets maximum angle that is considered acute when looking for shake
-   const float ACUTE_ANGLE_MAX = PI_FLOAT / 6;
+   const float ACUTE_ANGLE_MAX = PI_FLOAT / 5;
+
+   // Max len to be counted as acute
+   const float ACUTE_COUNTER_VECTOR_MAX_LEN = 0.1f;
 
    // Sets number of acute angles in stroke to be considered as shake
    const int MIN_ACUTE_TO_BE_SHAKE = 4;
 
-   // Noise threshold, min points in stroke to ve recognized as shake
-   const int MIN_SHAKE_ACCEPT_SAMPLES = 32;
+   // Noise threshold, min points in stroke to be recognized as shake
+   const int MIN_SHAKE_ACCEPT_SAMPLES = 10;
 
 
    // Circle ===============================================================
@@ -44,6 +48,10 @@ namespace TouchConstants {
 
    // Percent of fitted points required to be circle
    const float CIRCLENESS_CRITERIA = 65.0f; 
+
+
+   // Slipping touches
+   const int IDLING_RATE = 2; // Use only each 2rd
 
 }
 
@@ -98,6 +106,7 @@ bool TouchLayer::onTouchBegan( Touch *touch, Event *event )
 {
 
    auto posOnScreen = touch->getLocationInView();
+   //EM_LOG_DEBUG("== BEGAN == " + posOnScreen);
 
    switch (st)
    {
@@ -111,9 +120,9 @@ bool TouchLayer::onTouchBegan( Touch *touch, Event *event )
 
       sequence.push_back(posOnScreen);
 
-      // Start couning
-      unscheduleAllSelectors();
-      scheduleOnce(schedule_selector(TouchLayer::onTimeoutElapsed), TouchConstants::MAX_TIMEOUT);
+      timestamp = EMBaseMasterLoop::GetTime();
+
+      idling_counter = 0;
 
       return true;
 
@@ -149,6 +158,14 @@ void TouchLayer::onTouchMoved( Touch *touch, Event *event )
 
    case MPix::TouchLayer::ONE_TOUCH_RECORDING:
       {
+         if (idling_counter != 0) {
+            idling_counter--;
+            assert(idling_counter >= 0);
+            return;
+         }
+
+         idling_counter = TouchConstants::IDLING_RATE;
+
          pe = this->convertTouchToNodeSpace(touch);
          sequence.push_back(posOnScreen);
 
@@ -158,13 +175,25 @@ void TouchLayer::onTouchMoved( Touch *touch, Event *event )
             Point v1 = sequence[sz-3] - sequence[sz-2];
             Point v2 = sequence[sz-1] - sequence[sz-2];
 
+            // Assure that vectors have enough length
+            if (v1.getLength() < TouchConstants::ACUTE_COUNTER_VECTOR_MAX_LEN
+               || v2.getLength() < TouchConstants::ACUTE_COUNTER_VECTOR_MAX_LEN)
+               return;
+
+
             // Calculating angle between
             float angle = v1.getAngle(v2);
-            if ( fabs(angle) <= TouchConstants::ACUTE_ANGLE_MAX )
+            if (fabs(angle) <= TouchConstants::ACUTE_ANGLE_MAX) {
                n_acute_angles++;
+               //EM_LOG_DEBUG("== MOVE == " + n_acute_angles + " sm " + sz);
+            }
 
-            if ( n_acute_angles >= TouchConstants::MIN_ACUTE_TO_BE_SHAKE && sz >= TouchConstants::MIN_SHAKE_ACCEPT_SAMPLES  ) {
-               GestureShake();
+            if (EMBaseMasterLoop::GetTime() - timestamp < TouchConstants::MAX_GESTURE_TIMEOUT * 2) {
+               if (n_acute_angles >= TouchConstants::MIN_ACUTE_TO_BE_SHAKE && sz >= TouchConstants::MIN_SHAKE_ACCEPT_SAMPLES) {
+                  GestureShake();
+                  st = IGNORING;
+               }
+               //EM_LOG_DEBUG("========= " + posOnScreen);
             }
 
          }
@@ -196,6 +225,7 @@ void TouchLayer::onTouchEnded( Touch *touch, Event *event )
 {
 
    auto posOnScreen = touch->getLocationInView();
+   //EM_LOG_DEBUG("== END == " + posOnScreen);
 
    switch (st)
    {
@@ -204,9 +234,11 @@ void TouchLayer::onTouchEnded( Touch *touch, Event *event )
       break;
    case MPix::TouchLayer::ONE_TOUCH_RECORDING:
       assert(touch->getID() == 0); // must be that one
-      sequence.push_back(posOnScreen);
-      pe = this->convertTouchToNodeSpace(touch);
-      AnalyseSequence();
+      if (EMBaseMasterLoop::GetTime() - timestamp < TouchConstants::MAX_GESTURE_TIMEOUT) {
+         sequence.push_back(posOnScreen);
+         pe = this->convertTouchToNodeSpace(touch);
+         AnalyseSequence();
+      }
       sequence.clear();
       st = WAITING_TOUCH;
       break;
@@ -215,7 +247,7 @@ void TouchLayer::onTouchEnded( Touch *touch, Event *event )
       st = IGNORING;
       break;
    case MPix::TouchLayer::IGNORING:
-      // Well noooow we can switch to waiting
+      // Well now we can switch to waiting
       st = WAITING_TOUCH;
       break;
    default:
@@ -274,14 +306,6 @@ void MPix::TouchLayer::ResetState()
    sequence.clear();
    st = WAITING_TOUCH;
    n_acute_angles = 0;
-}
-
-void MPix::TouchLayer::onTimeoutElapsed( float )
-{
-   if ( st == ONE_TOUCH_RECORDING ) {
-      sequence.clear();
-      st = IGNORING;
-   }
 }
 
 void TouchLayer::onEnter()
@@ -429,7 +453,7 @@ void MPix::TouchLayer::AnalyseSequence()
       float fitnessPercent = fitness/float(n) * 100.0f;
       EM_LOG_DEBUG( " Fitness circle " + fitnessPercent );
       if ( fitnessPercent >= TouchConstants::CIRCLENESS_CRITERIA ) {
-         GestureRotateCCW();
+         //GestureRotateCCW(); // FIXME : circle is to unstable
          return;
       }
    }

@@ -29,10 +29,12 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     MPix::TestClass::PerformTests();
 
+    const float FACTOR = 1.0;// 135 andir = 1.5
+
     // create the application instance
     AppDelegate app;
     EGLView eglView;
-    eglView.init("MagneticPixels", 640*1.0, 960*1.0);
+    eglView.init("MagneticPixels", 640*FACTOR, 960*FACTOR);
     //eglView.init("MagneticPixels", 320, 480);
     auto retVal = Application::getInstance()->run();
     FreeConsole();

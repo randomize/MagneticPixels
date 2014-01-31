@@ -296,12 +296,21 @@ void MPix::MagneticPixelView::PixelCanFallOff()
 
 void MPix::MagneticPixelView::PixelIdleTrick()
 {
-   if (pixel->IsInAssembly() && pixel->IsAlive()) {
+   if (pixel->IsInAssembly() && pixel->IsAlive() && pixel->IsSmiling() == false) {
       string s("idle_" + ToString(rand() % 8));
       mimics->Play(s);
    }
 
 }
+
+void MPix::MagneticPixelView::PixelTapped()
+{
+   if ( pixel->IsInAssembly() && pixel->IsAlive() && pixel->IsSmiling() == false ) {
+      mimics->Play("idle_5"); // Blink
+   }
+
+}
+
 
 
 

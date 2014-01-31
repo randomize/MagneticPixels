@@ -250,7 +250,16 @@ ErrorCode GameplayManager::ClickAtPoint( Coordinates position )
    {
       // Check if click is on assembly
       if (px && px->IsInAssembly()) {
-         EndAssembling();
+
+         // Possible will end assembling
+         if (EndAssembling() == ErrorCode::RET_FAIL)
+         {
+            // Send tap anyway
+            context.PostEvent(PixelEvent::TAPPED, px->GetID());
+         }
+
+         UpdateUI();
+
          return ErrorCode::RET_OK;
       }
    }
@@ -483,7 +492,6 @@ ErrorCode GameplayManager::EndAssembling()
       return ErrorCode::RET_OK;
    } 
 
-   UpdateUI();
 
    return ErrorCode::RET_OK;
 

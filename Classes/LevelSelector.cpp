@@ -268,7 +268,7 @@ bool MPix::LevelSelector::onTouchBegan(Touch *touch, Event *event)
          return false;
       }
       state = State::SCROLL;
-      indling_couner = 0;
+      idling_counter = 0;
       initial_pos = worlds_layer->getPosition();
       gesture_action = Gesture::SAME;
       worlds_layer->stopAllActions();
@@ -352,7 +352,7 @@ void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
       auto new_position = initial_pos + Point(pos.x, 0);
       worlds_layer->setPosition(NormalizePozition(new_position));
 
-      if (indling_couner == 0) 
+      if (idling_counter == 0) 
       {
          float threshold = visibleSize.width * FLIP_PAGE_TRESHOLD_PERCENT;
          // Update gesture
@@ -361,11 +361,11 @@ void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
          } else {
             gesture_action = pos.x < -threshold ? Gesture::TO_NEXT : Gesture::SAME;
          }
-         indling_couner = IDLING_RATE;
+         idling_counter = IDLING_RATE;
       }
       else {
-         indling_couner--;
-         assert(indling_couner >= 0);
+         idling_counter--;
+         assert(idling_counter >= 0);
       }
 
       break;
@@ -383,7 +383,7 @@ void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
          // Back to scroll
          initial_touch = convertTouchToNodeSpace(touch);
          state = State::SCROLL;
-         indling_couner = 0;
+         idling_counter = 0;
          initial_pos = worlds_layer->getPosition();
          gesture_action = Gesture::SAME;
          worlds_layer->stopAllActions();

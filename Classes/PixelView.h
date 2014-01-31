@@ -54,6 +54,7 @@ namespace MPix {
       virtual void PixelChanged();
       virtual void PixelKilledSomeone();
       virtual void PixelIdleTrick();
+      virtual void PixelTapped();
 
       shared_ptr<Pixel> model;
 

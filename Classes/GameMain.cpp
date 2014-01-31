@@ -116,6 +116,7 @@ void MPix::GameMain::CreateButtons()
       menu->addChild(btn);
    }
    this->addChild(menu, 3);
+   menu->setAnchorPoint(Point(1, 0));
    menu->setScale(Director::getInstance()->getContentScaleFactor()); // FIXME
 }
 

@@ -42,6 +42,7 @@ namespace MPix {
       virtual void PixelDied() override;
       virtual void PixelResurrect() override;
       virtual void PixelIdleTrick() override;
+      virtual void PixelTapped() override;
 
       // Own update reasons
       virtual void PixelCanFallOn();

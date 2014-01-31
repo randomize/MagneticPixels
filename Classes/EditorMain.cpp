@@ -113,6 +113,8 @@ void EditorMain::onEnter()
       menu->addChild(btn);
    }
    this->addChild(menu, 4);
+   menu->setAnchorPoint(Point(1, 0));
+   menu->setScale(Director::getInstance()->getContentScaleFactor()); // FIXME
 
    lvl_name = LabelTTF::create(editor->GetLevelName().c_str(), "Arial", 36);
    lvl_name->setColor(Color3B::BLACK);

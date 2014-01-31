@@ -94,7 +94,7 @@ namespace MPix {
       void     onTouchMoved( Touch *touch, Event *event);
 
       // Idling helps not to recalculate to much of data on each on move
-      int indling_couner;
+      int idling_counter;
 
       enum class Gesture {
          TO_NEXT,

@@ -69,6 +69,9 @@ bool MPix::PixelView::Update( CmdUIUpdatePixelView::Reason reason )
    case MPix::CmdUIUpdatePixelView::Reason::IDLE_TRICK:
       PixelIdleTrick();
       break;
+   case MPix::CmdUIUpdatePixelView::Reason::TAPPED:
+      PixelTapped();
+      break;
    default:
       return false;
    }
@@ -146,6 +149,11 @@ void MPix::PixelView::PixelChanged()
 void MPix::PixelView::PixelIdleTrick()
 {
 }
+
+void MPix::PixelView::PixelTapped()
+{
+}
+
 
 
 

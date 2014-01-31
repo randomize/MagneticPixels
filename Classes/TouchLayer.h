@@ -51,7 +51,6 @@ namespace MPix {
 
       // ---------- listners ----------------------------------------------
        ErrorCode onBGFG();
-       void onTimeoutElapsed(float);
 
    private:
 
@@ -66,6 +65,10 @@ namespace MPix {
 
       Point ps, pe;
       int n_acute_angles;
+
+      double timestamp;
+
+      int idling_counter;
 
       // --------- Zooming and panning ----------------------------------- // TODO
       // p1, p2, ps1, ps2 ... etc
