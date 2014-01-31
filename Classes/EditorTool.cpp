@@ -267,8 +267,8 @@ const char * MakeEraserName(MPix::EditorToolEraser::Type t) {
    return "WTF";
 }
 
-MPix::EditorToolEraser::EditorToolEraser( Type t ):
-   EditorTool(MakeEraserName(t)), t(t), icon(nullptr)
+MPix::EditorToolEraser::EditorToolEraser( Type type ):
+   EditorTool(MakeEraserName(type)), icon(nullptr), t(type)
 {
 }
 
