@@ -18,7 +18,7 @@ void MPix::WallPixelView::Build( shared_ptr<Pixel> model )
    auto & borset = pixel->GetShape();
    for (auto a : borset)
    {
-      auto pp = ContentManager::getInstance().GetSimpleSprite("wall_pixel");
+      auto pp = ContentManager::getInstance().GetSimpleSprite("wall_element");
       switch (a) 
       {
       case Direction::DIR_UP:

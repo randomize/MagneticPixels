@@ -50,6 +50,9 @@ namespace MPix {
       // Editor Menu
       void SwitchToEditorMenu(void);
 
+      // Credits scene
+      void SwitchToCredits();
+
    public: ////// Common interface ////////////////////////////////////////////////////////////////////////
 
       // Informations

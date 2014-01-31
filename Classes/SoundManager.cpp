@@ -48,6 +48,12 @@ EmbossLib::ErrorCode MPix::SoundManager::UpdateSoundSystem( float deltha )
    return ErrorCode::RET_OK;
 }
 
+void MPix::SoundManager::InitSoundSystem()
+{
+   // Any kind of preparation here
+}
+
+
 ErrorCode SoundManager::PauseEngine()
 {
    SimpleAudioEngine::getInstance()->pauseBackgroundMusic();

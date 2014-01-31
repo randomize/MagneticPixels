@@ -23,15 +23,15 @@ namespace MPix {
       World(int id);
       World(int id, const char* name);
 
-      const string& GetName() { return name; }
+      const string& GetName();
 
-      int GetID() { return id; }
+      int GetID();
       int GetLevelCount() { return levels.size(); }
 
       void AddLevel(unsigned id);
       void EraseLevel(unsigned id);
 
-      list<unsigned> & GetLevels() { return levels; }
+      const list<unsigned> & GetLevels() { return levels; }
 
    private:
 

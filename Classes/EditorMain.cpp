@@ -25,6 +25,9 @@ ErrorCode EditorActionHandler(EditorMain* that, CmdEditorAction::EditorAction ac
    case MPix::CmdEditorAction::EditorAction::ED_HIDE_TOOLS:
       that->HideToolBox();
       break;
+   case CmdEditorAction::EditorAction::ED_DRAW_WITH_LAST_TOOL:
+      that->ReuseLastTool();
+      break;
    default:
       break;
    }
@@ -85,7 +88,7 @@ void EditorMain::onEnter()
    tb->setPosition(halfSize.width-MPIX_CELL_SIZE_HALF, halfSize.height-MPIX_CELL_SIZE_HALF);
    tb->setScale(contentScale);
    tb->setVisible(false);
-   tb->Editor = editor;
+   tb->p_editor_layer = editor;
    addChild(tb, 3);
 
 
@@ -109,13 +112,13 @@ void EditorMain::onEnter()
          );
       menu->addChild(btn);
    }
-   this->addChild(menu, 3);
+   this->addChild(menu, 4);
 
    lvl_name = LabelTTF::create(editor->GetLevelName().c_str(), "Arial", 36);
    lvl_name->setColor(Color3B::BLACK);
    auto sx = lvl_name->getContentSize();
    lvl_name->setPosition(origin +Point(sx.width, sx.height));
-   addChild(lvl_name, 4);
+   addChild(lvl_name, 5);
 
 }
 
@@ -182,7 +185,7 @@ void MPix::EditorMain::TestLevel()
    auto lvl = editor->CreateLevel();
    if (lvl) {
       LevelManager::getInstance().SetEditorsLevel(lvl);
-      auto l = LevelManager::getInstance().GetEditorsLevel();
+      auto l = LevelManager::getInstance().GetPlayableEditorsLevel();
       GameplayManager::getInstance().LoadLevel(l);
       GameStateManager::getInstance().SwitchToTestGame();
    } else {
@@ -210,7 +213,7 @@ void MPix::EditorMain::ShowToolBox()
    editor->TouchDisable();
    tb->TouchEnable();
    tb->setVisible(true);
-   tb->onShow();
+   tb->PrepareTools();
 }
 
 void MPix::EditorMain::HideToolBox()
@@ -240,5 +243,11 @@ void MPix::EditorMain::Renamer( string lname )
    editor->RenameLevel(lname);
    lvl_name->setString(lname.c_str());
 }
+
+void MPix::EditorMain::ReuseLastTool()
+{
+   tb->ReuseLastTool();
+}
+
 
 

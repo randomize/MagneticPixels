@@ -10,7 +10,7 @@ using namespace MPix;
 EM_NODE_CHILD_CPP(WallPixel);
 
 
-MPix::WallPixel::WallPixel( int sh /*= 0*/ ) :
+MPix::WallPixel::WallPixel( int sh ) :
    Pixel(10)
 {
    SetShapeInt(sh);

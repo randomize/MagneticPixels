@@ -10,6 +10,7 @@
 #include "LevelSelector.h"
 #include "ResultsState.h"
 #include "EditorMenu.h"
+#include "SplashState.h"
 
 
 // Other managers
@@ -17,6 +18,7 @@
 #include "GameplayManager.h"
 #include "LevelManager.h"
 #include "ContentManager.h"
+#include "CreditsState.h"
 
 using namespace MPix;
 
@@ -42,12 +44,7 @@ void GameStateManager::SwitchToStart( void )
    // Load resources
    ContentManager::getInstance().LoadResources();
 
-#ifdef MPIX_DEVELOPERS_BUILD
-   GameState* newState = MenuMain::create();
-#else
-   // TODO: splash state here later, fro now menu
-   //GameState* newState = SplashState::create();
-#endif
+   GameState* newState = SplashState::create();
 
    assert(newState);
    currentState = newState;
@@ -82,14 +79,24 @@ void GameStateManager::SwitchToSelector( void )
 
    // Animating transition
    auto newState = LevelSelector::create();
-   Director::getInstance()->replaceScene( TransitionSlideInR::create(0.25f, newState ));
+   //Director::getInstance()->replaceScene( TransitionSlideInR::create(0.25f, newState ));
+   Director::getInstance()->replaceScene( TransitionCrossFade::create(0.25f, newState ));
 
    currentState = newState;
 }
 
 void GameStateManager::SwitchToMenu( void )
 {
-   SwitchScene(MenuMain::create());
+   if (currentState->GetName() == string("LevelSelector")) // Animating transition
+   {
+      auto newState = MenuMain::create();
+      Director::getInstance()->replaceScene(TransitionCrossFade::create(0.25f, newState));
+      currentState = newState;
+   }
+   else  // Plain switch
+   {
+      SwitchScene(MenuMain::create());
+   }
 }
 
 void MPix::GameStateManager::SwitchToResults( void )
@@ -97,6 +104,10 @@ void MPix::GameStateManager::SwitchToResults( void )
    SwitchScene(ResultsState::create());
 }
 
+void MPix::GameStateManager::SwitchToCredits()
+{
+   SwitchScene(CreditsState::create());
+}
 
 
 
@@ -132,3 +143,4 @@ double MPix::GameStateManager::GetElapsedTime()
 {
    return timer;
 }
+

@@ -61,10 +61,10 @@ const char* MPix::EditorTool::GetName()
 //////////////////////////////////////////////////////////////////////////
 // Folder
 
-MPix::EditorFolderTool::EditorFolderTool( const char* name, const char* ii /*= "ed_magnet.png"*/ ) :
+MPix::EditorFolderTool::EditorFolderTool( const char* name, const char* icon_name /*= nullptr*/ ) :
    EditorTool(name),
    cur(-2,4),
-   icon_frame(ii),
+   icon_frame(icon_name),
    icon(nullptr)
 {
 }
@@ -142,9 +142,34 @@ void MPix::EditorFolderTool::Show( Coordinates where )
 void MPix::EditorFolderTool::BindContents( Node * target )
 {
    EditorTool::BindContents(target);
-   if (icon_frame) {
-      icon = Sprite::createWithSpriteFrameName(icon_frame);
-   } else {
+
+   if (icon_frame) // Specified logo
+   {
+      icon = Node::create();
+
+      if (string("Goal") == icon_frame) // Oh dear, so bad code.. goal as logo
+      {
+         auto shape = make_shared<Goal>();
+         shape->AddTask(Coordinates(0, 0), PixelColor::RED);
+         auto gv = make_shared<GoalView>();
+         gv->Build(shape);
+         gv->BindContents(icon);
+         gv->setPosition(-MPIX_CELL_SIZE_HALF_P);
+         icon_view = gv;
+      }
+      else // Pixel name as logo
+      {
+         auto px = shared_ptr<Pixel>(Pixel::create(icon_frame));
+         auto view = PixelView::create(px);
+         view->Build(px);
+         view->BindContents(icon);
+         view->setPosition(Point(0,0));
+         icon_view = view;
+      }
+
+   }
+   else // No logo
+   { 
       auto b = ColorBox::create();
       b->setAnchorPoint(Point(0.5f,0.5f));
       b->SetColor(Color4F(0.8f,0.8f,0.8f,0.8f));
@@ -157,8 +182,12 @@ void MPix::EditorFolderTool::BindContents( Node * target )
 
 MPix::EditorFolderTool::~EditorFolderTool()
 {
+   // To avoid memory corruption if icon_view was used:
+   if (icon_view) {
+      icon_view.reset(); // View will be destroyed, destructor will clenup contents form icon node which is still present
+   }
+   // Then it is safe to kill icon's parent, later it will die
    if (icon) {
-      //icon->getParent()->removeChild(icon); // Kinda tricky but better then GetBathcNode bla bla again
       icon->removeFromParent();
    }
 }
@@ -202,6 +231,7 @@ void MPix::EditorToolPixel::Show( Coordinates where )
    EditorTool::Show(where);
    view->setPosition(LogicToScreen(where) + MPIX_CELL_SIZE_HALF_P);
    view->setVisible(true);
+   view->Update(CmdUIUpdatePixelView::Reason::CREATED); 
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -232,6 +262,7 @@ void MPix::EditorGoalTool::Show( Coordinates where )
    EditorTool::Show(where);
    gv->setPosition(LogicToScreen(where));
    gv->setVisible(true);
+   gv->Update(CmdUIUpdateGoalView::Reason::CREATED);
 }
 
 void MPix::EditorGoalTool::BindContents( Node * target )
@@ -313,7 +344,7 @@ void MPix::EditorToolEraser::Show( Coordinates where )
 void MPix::EditorToolEraser::BindContents( Node * target )
 {
    EditorTool::BindContents(target);
-   icon = Sprite::createWithSpriteFrameName("ed_erase.png");
+   icon = ContentManager::getInstance().GetSimpleSprite("trash_can");
    target->addChild(icon);
 }
 

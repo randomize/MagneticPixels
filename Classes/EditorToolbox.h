@@ -26,36 +26,37 @@ namespace MPix {
    {
    public:
 
-      EditorToolbox();
-      ~EditorToolbox();
+      bool init() override;
 
       CREATE_FUNC(EditorToolbox);
 
-      bool init() override;
+      void PrepareTools();
+      void ReuseLastTool();
 
-      void onShow();
+      EditorLayer* p_editor_layer;
 
-      void BuildAllTools();
-
-      EditorLayer* Editor;
-
+      // Touch control for toolbox
       void TouchEnable();
       void TouchDisable();
 
-
    private:
 
-      EditorTool* current_tool;
-      EditorTool* root_tool;
+      void CloseToolbox();
+      void GotClick(Coordinates p);
+      void LoadTool(shared_ptr<EditorTool> tool, int id);
+
+      vector<shared_ptr<EditorTool>> tools;
+
+      shared_ptr<EditorTool> current_tool;
+      shared_ptr<EditorTool> root_tool;
       int root_tool_size;
       int last_used;
-      void GotClick(Coordinates p);
-      void LoadTool(EditorTool* too, int id);
-      void CloseToolbox();
-      vector<EditorTool*> tools;
+
       LabelTTF* tool_name;
 
-      bool onTouchBegan( Touch *touch, Event *event) override;
+      // Touch system
+      bool onTouchBegan( Touch *touch, Event *event ) override;
+      EventListener* touch_events;
 
    };
 

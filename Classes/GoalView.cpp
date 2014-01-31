@@ -17,6 +17,8 @@ void GoalView::Build( shared_ptr<Goal> model )
 {
    goal = model;
    contents = Node::create();
+   contents->setCascadeOpacityEnabled(true);
+   contents->setCascadeColorEnabled(true);
 
    for (auto p : goal->GetTasks() ) {
       auto p1 = LogicToScreen(p.first.x, p.first.y) + MPIX_CELL_SIZE_HALF_P;

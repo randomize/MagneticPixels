@@ -33,7 +33,6 @@ namespace MPix {
          IDLE,       // Idle state means no level is loaded
          READY,      // Level is loaded, waiting to begin
          PLAYING,    // Game is playing, pixels sleep
-         PLAYING_FAST,  // A pixel waken, fast move mode
          PAUSED,    // Game is paused by ingame menu
          FINISHED   // Game is finished, shown results
       };

@@ -5,7 +5,7 @@
         <world name="Hard"/>
     </worlds>
     <levels>
-        <lvl id="12345" w="1" name="Training 2" pan="1">
+        <lvl id="12345" w="1" name="Training 2">
             <fld>
                 <w x="1" y="3" s="2"/>
                 <w x="0" y="3" s="3"/>
@@ -21,7 +21,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="5641" w="2" name="Noname" pan="1">
+        <lvl id="5641" w="2" name="Noname">
             <fld>
                 <m x="-1" y="1" c="2"/>
                 <m x="1" y="-2" c="2"/>
@@ -43,7 +43,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="12986" w="3" name="Noname" pan="1">
+        <lvl id="12986" w="3" name="Noname">
             <fld>
                 <m x="1" y="3" c="3"/>
                 <m x="-1" y="-1" c="2"/>
@@ -68,7 +68,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="23179" w="2" name="Noname" pan="1">
+        <lvl id="23179" w="2" name="Noname">
             <fld>
                 <m x="-1" y="-5" c="2"/>
                 <m x="-2" y="-4" c="2"/>
@@ -90,7 +90,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="443" w="0" name="Noname" pan="1">
+        <lvl id="443" w="0" name="Noname">
             <fld>
                 <m x="1" y="1" c="2"/>
                 <c x="0" y="1" t="0" d="0"/>
@@ -142,13 +142,11 @@
                     <p x="1" y="-1" c="2"/>
                     <p x="2" y="-1" c="3"/>
                     <p x="1" y="0" c="2"/>
-                </g>
-                <g>
                     <p x="2" y="1" c="4"/>
                 </g>
             </gl>
         </lvl>
-        <lvl id="12610" w="0" name="Noname" pan="1">
+        <lvl id="12610" w="0" name="Noname">
             <fld>
                 <C x="0" y="1"/>
                 <m x="-1" y="-2" c="2"/>
@@ -159,7 +157,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="15236" w="0" name="Noname" pan="1">
+        <lvl id="15236" w="0" name="Noname">
             <fld>
                 <m x="-1" y="1" c="2"/>
                 <s x="1" y="1" c="2"/>
@@ -173,7 +171,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="22536" w="0" name="Noname" pan="1">
+        <lvl id="22536" w="0" name="Noname">
             <fld>
                 <c x="0" y="1" t="0" d="0"/>
                 <c x="-3" y="-5" t="1" d="0"/>
@@ -225,13 +223,11 @@
                     <p x="1" y="-1" c="2"/>
                     <p x="0" y="-1" c="2"/>
                     <p x="1" y="0" c="2"/>
-                </g>
-                <g>
                     <p x="2" y="1" c="4"/>
                 </g>
             </gl>
         </lvl>
-        <lvl id="28299" w="0" name="Noname" pan="1">
+        <lvl id="28299" w="0" name="Noname">
             <fld>
                 <p x="0" y="0"/>
                 <S x="-2" y="0"/>
@@ -248,7 +244,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="6463" w="0" name="Noname" pan="1">
+        <lvl id="6463" w="0" name="Noname">
             <fld>
                 <m x="0" y="0" c="2"/>
             </fld>
@@ -258,7 +254,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="5140" w="3" name="Some Stones" pan="1">
+        <lvl id="5140" w="3" name="Some Stones">
             <fld>
                 <S x="-1" y="0"/>
                 <S x="0" y="0"/>
@@ -271,7 +267,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="14228" w="0" name="SokobanPixel" pan="1">
+        <lvl id="14228" w="0" name="SokobanPixel">
             <fld>
                 <s x="0" y="0" c="4"/>
                 <m x="1" y="1" c="2"/>
@@ -299,7 +295,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="17212" w="0" name="Bug" pan="1">
+        <lvl id="17212" w="0" name="Bug">
             <fld>
                 <p x="-3" y="0"/>
                 <s x="-2" y="0" c="4"/>
@@ -323,7 +319,7 @@
                 </g>
             </gl>
         </lvl>
-        <lvl id="27405" w="0" name="Surround" pan="1">
+        <lvl id="27405" w="0" name="Surround">
             <fld>
                 <S x="0" y="0"/>
                 <m x="-3" y="0" c="4"/>
@@ -348,6 +344,49 @@
                     <p x="1" y="1" c="4"/>
                     <p x="0" y="1" c="4"/>
                     <p x="-1" y="1" c="4"/>
+                </g>
+            </gl>
+        </lvl>
+        <lvl id="9141" w="0" name="Noname">
+            <fld>
+                <m x="-2" y="1" c="2"/>
+                <m x="-2" y="-1" c="2"/>
+            </fld>
+            <gl>
+                <g>
+                    <p x="0" y="0" c="2"/>
+                    <p x="-1" y="2" c="2"/>
+                </g>
+            </gl>
+        </lvl>
+        <lvl id="31268" w="0" name="cactusHell">
+            <fld>
+                <C x="0" y="0"/>
+                <C x="-2" y="2"/>
+                <C x="1" y="2"/>
+                <C x="-2" y="-1"/>
+                <C x="1" y="-1"/>
+                <C x="-1" y="-3"/>
+                <C x="0" y="-4"/>
+                <C x="-2" y="-2"/>
+                <C x="0" y="3"/>
+                <m x="-4" y="1" c="2"/>
+                <S x="-3" y="1"/>
+            </fld>
+            <gl>
+                <g>
+                    <p x="2" y="1" c="2"/>
+                </g>
+            </gl>
+        </lvl>
+        <lvl id="19838" w="0" name="Danger">
+            <fld>
+                <m x="0" y="0" c="2"/>
+                <c x="-3" y="0" t="0" d="6"/>
+            </fld>
+            <gl>
+                <g>
+                    <p x="-1" y="0" c="2"/>
                 </g>
             </gl>
         </lvl>

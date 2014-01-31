@@ -82,6 +82,7 @@
 
    #pragma clang diagnostic push
    #pragma clang diagnostic ignored "-Wall"
+   #pragma clang diagnostic ignored "-Wextra"
    #include <cocos2d.h>
    #include <cocos-ext.h>
    #include <cocostudio/CocoStudio.h>
@@ -100,6 +101,7 @@
 
    #pragma GCC diagnostic push
    #pragma GCC diagnostic ignored "-Wall"
+   #pragma GCC diagnostic ignored "-Wextra"
    #include "cocos2d.h"
    #include "extensions/cocos-ext.h"
    #include "editor-support/cocostudio/CocoStudio.h"
@@ -168,7 +170,14 @@ namespace EmbossLib {
       return ss.str();
    }
 
+   // Own PI constant is a musthave for any project :)
    const float PI_FLOAT = 3.141592654f;
+
+   // Photoshop like OpenGL blend modes for cocos
+   const BlendFunc MULTIPLY_FAKE = { GL_ZERO, GL_SRC_COLOR };
+   const BlendFunc SCREEN = { GL_ONE, GL_ONE_MINUS_SRC_COLOR };
+   const BlendFunc SCREEN2 = { GL_ONE_MINUS_DST_COLOR, GL_ONE };
+   const BlendFunc LINEAR_DODGE = { GL_ONE, GL_ONE };
 
 } // namespace EmbossLib 
 

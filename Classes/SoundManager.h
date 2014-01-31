@@ -26,6 +26,9 @@ namespace MPix {
    {
    public:
 
+      // Must be called on startup
+      void InitSoundSystem();
+
       ErrorCode PlayInBackground( const string& name);
       ErrorCode PlaySoundSync( const string& name);
       ErrorCode PlaySoundDelayed( const string& name, float delay); // after delays::seconds

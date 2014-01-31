@@ -16,6 +16,7 @@
 namespace MPix {
 
    // Forward dependencies
+   class LevelView;
 
 
    // LevelSelector
@@ -53,12 +54,47 @@ namespace MPix {
       // Current state
       enum class State {
          WAIT,
-         SCROLL
+         BUTTON,
+         IGNORING,
+         SCROLL,
+         ANIMATING
       } state;
 
       // Scrollable layer with worlds
       Layer* worlds_layer;
-      Point initial_pos;
+      Point initial_pos, initial_touch;
+
+      // Worlds
+      unordered_map<int,Node*> title_lables; // ID -> label
+      unordered_map<int, int>   ids_indexes; // ID -> index
+      vector<int> indexed_ids;               // Index -> ID
+      int current_index;                     // Selected world index
+      vector<float> indexed_positions;        // Index -> Worlds Layer X coord
+
+      // Levels
+      vector<vector<LevelView*>> indexed_views; // World ID -> level index -> Button(LevelView)
+
+      // Flip world actions
+      void NextWorld();
+      void PrewWorld();
+
+      // Saved geometry
+      Size fullSize, halfSize, visibleSize;
+      Point lowerLeft, lowerRight, centerPoint, upperLeft, upperRight;
+
+      //////////////// TOUCH HANDLING
+
+      enum class Gesture {
+         TO_NEXT,
+         TO_PREW,
+         SAME
+      } gesture_action;
+
+
+      // Helper method, searches for tap match, nullptr if not found
+      LevelView* GetViewAtPoint(Point touch_pos);
+
+      LevelView* m_cur_button;
 
    };
 

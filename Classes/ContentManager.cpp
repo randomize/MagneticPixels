@@ -65,7 +65,7 @@ void MPix::ContentManager::CreateAnimations()
    arm_man->addArmatureFileInfo("magnetic_mimics.png", "magnetic_mimics.plist", "magnetic_mimics.xml");
    auto texture = t_cache->addImage("magnetic_mimics.png");
    texture->setAliasTexParameters();
-   resources.emplace("magnetic_0", "magnetic_0");
+   resources.emplace("magnetic_mimics", "magnetic_0");
    resources.emplace("socoban_0", "magnetic_0");
 
 }
@@ -74,20 +74,29 @@ void MPix::ContentManager::CreateSprites()
 {
    SpriteFrameCache* cache = SpriteFrameCache::getInstance();
 
-   // Scene objects // TODO: merge to one sprite sheet
-   //cache->addSpriteFramesWithFile("scene.plist");
-   resources.emplace("wall_pixel", "wall.png");
+   // Scene objects
+   // TODO: merge object to one sprite sheet atlas
+   //cache->addSpriteFramesWithFile("pixels.plist");
+   resources.emplace("wall_element", "wall.png");
    resources.emplace("goal_bg", "pixel_goal.png");
    resources.emplace("magnetic_bg_smash", "magnetic_bg_smash.png");
    resources.emplace("magnetic_bg_norm", "magnetic_bg_norm.png");
+   resources.emplace("pitfall_bg", "pitfall_pixel.png");
+   resources.emplace("cactus_bg", "needle_small.png");
+   resources.emplace("bomber_bg", "bomber_bg.png");
+   resources.emplace("stone_bg", "stone_pixel.png");
 
    // UI Objects
+   // TODO: merge UI sprites to one sprite sheet atlas
    //cache->addSpriteFramesWithFile("ui.plist");
    //resources.emplace("goal_bg", "pixel_goal.png");
-   //..
+   resources.emplace("level_border", "level_border.png");
+   resources.emplace("right_arrow", "right_arrow.png");
+   resources.emplace("level_lock", "small_lock.png");
+   resources.emplace("scroll_indicator", "small_dot.png");
 
    // Editor
-   cache->addSpriteFramesWithFile("ed.plist");
+   resources.emplace("trash_can", "trash_can.png");
 }
 
 void MPix::ContentManager::CreateShaders()
@@ -147,15 +156,20 @@ HSVSprite* MPix::ContentManager::GetHSVSprite(const string& name)
    auto it = resources.find(name);
    if (it == resources.end())
    {
-       fab = HSVSprite::create("dummy.png");
-       EM_LOG_WARNING("Not found resource " + name);
+      fab = HSVSprite::create("dummy.png");
+      EM_LOG_WARNING("Not found resource " + name);
+      assert(fab);
    }
    else
    {
       fab = HSVSprite::create(it->second);
+      if (fab == nullptr) {
+         fab = HSVSprite::create("dummy.png");
+         EM_LOG_WARNING("Not found resource " + name);
+         assert(fab);
+      }
    }
 
-   assert(fab);
    return fab;
 }
 
@@ -205,6 +219,24 @@ void MPix::ContentManager::RemoveNode(const string& node_name)
    n->release();
    nodes.erase(node_name);
 }
+
+string MPix::ContentManager::GetBaseFont()
+{
+   return "fonts/Exo2-Medium.ttf";
+}
+
+string MPix::ContentManager::GetBaseFontLight()
+{
+   return "fonts/Exo2-Light.ttf";
+}
+
+string MPix::ContentManager::GetLogoFont()
+{
+   return "fonts/Exo2-Thin.ttf";
+}
+
+
+
 
 
 

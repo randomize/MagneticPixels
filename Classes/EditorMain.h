@@ -62,6 +62,7 @@ namespace MPix {
 
       void ShowToolBox();
       void HideToolBox();
+      void ReuseLastTool();
 
    };
 

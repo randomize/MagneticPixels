@@ -43,6 +43,7 @@ namespace MPix {
          CREATED,  // any pixel - created
          CHANGED,  // any pixel - changed
          WAKE,     // ams pixel - when added to asm
+         PLAY_IDLE, // perform random idle action
          ASLEEP,   // ams pixel - when removed from asm (undo)
          RESET,    // pixel - when reset happens, move home and asleep after
          DIED,     // pixel - when lost from assembly
@@ -299,7 +300,7 @@ namespace MPix {
    // ============= Editor commands ====================
 
    struct CmdEditorAction : public Command {
-      enum class EditorAction { ED_SHOW_TOOLS, ED_HIDE_TOOLS };
+      enum class EditorAction { ED_SHOW_TOOLS, ED_HIDE_TOOLS, ED_DRAW_WITH_LAST_TOOL };
       CmdEditorAction (EditorAction act) {
          for (auto f : listners) {
             toExec.push_back(std::bind( f.second, act));

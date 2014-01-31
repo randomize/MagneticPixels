@@ -1,97 +1,177 @@
 #include "MenuMain.h"
+
+#include "CuteBlocksLogo.h"
+
 #include "LevelManager.h"
 #include "GameplayManager.h"
 #include "GameStateManager.h"
+#include "ContentManager.h"
+#include "SettingsManager.h"
 
 using namespace MPix;
 
 //====---------------------------------------------======//
 
-MPix::MenuMain::MenuMain()
-{
+const int Z_BACKGROUND = 1;
+const int Z_MENU = 2;
+const int Z_PANELS = 3;
+const int Z_UPPER_PANE_FONT = 4;
+const int Z_OVERLAY = 5;
+
+const float PANEL_HEIGHT = 200.0f;
+const float MENU_FONT_SIZE = 76.0f;
+
+//====---------------------------------------------======//
+
+LabelTTF* createMenuItem(const char* text, float fact = 1.0f) {
+   auto & cm = ContentManager::getInstance();
+   auto label = LabelTTF::create(LocalUTF8Char(text), cm.GetBaseFont(), MENU_FONT_SIZE * fact, Size::ZERO, TextHAlignment::LEFT);
+   assert(label);
+   label->setColor(Color3B::BLACK);
+   return label;
 }
 
-MPix::MenuMain::~MenuMain()
-{
-}
+
+//====---------------------------------------------======//
 
 bool MPix::MenuMain::init()
 {
 
-   // 1. super init first
    if ( !Scene::init() )
    {
       return false;
    }
 
-   MenuItemFont::setFontSize(64);
-   MenuItemFont::setFontName("fonts/Exo2-Medium.ttf");
+   return true;
+
+}
+
+void MPix::MenuMain::onEnter()
+{
+
+   Scene::onEnter();
+
+   // 1. Some metrics vars
+   auto d = Director::getInstance();
+   auto & cm = ContentManager::getInstance();
+
+   auto fullSize = d->getWinSize();
+   auto halfSize =  fullSize / 2.0f;
+   auto visibleSize = d->getVisibleSize();
+   auto visibleOrigin = d->getVisibleOrigin();
+   auto center = Point(halfSize.width, halfSize.height);
+
+   auto upperLeft  = Point(visibleOrigin.x, visibleOrigin.y + visibleSize.height);
+   auto upperRight = Point(upperLeft.x + visibleSize.width, upperLeft.y);
+
+
+   // Background
+   auto bg = Sprite::create("bg/04.jpg");
+   bg->setScale(visibleSize.height / bg->getContentSize().height);
+   bg->setPosition(center);
+   bg->runAction(
+      RepeatForever::create(
+         Sequence::create(
+            MoveTo::create(2, center + Point(400, 0)),
+            MoveTo::create(2, center - Point(400, 0)),
+            nullptr
+         )
+      )
+   );
+   addChild(bg, Z_BACKGROUND);
+
+
+   // 2. Upper panel
+
+   // BG
+   auto pn = DrawNode::create();
+   Point p[4] = {
+      upperLeft,
+      upperRight,
+      upperRight + Point(0, -PANEL_HEIGHT),
+      upperLeft  + Point(0, -PANEL_HEIGHT)
+   };
+   pn->drawPolygon(p, 4, Color4F(1, 1, 1, 0.3f), 0, Color4F(0, 0, 0, 0));
+   addChild(pn, Z_PANELS);
+
+   // Logo
+   auto title_label = CuteBlocksLogo::create();
+   title_label->setPosition((upperLeft + upperRight) / 2 + Point(0, -PANEL_HEIGHT / 2.0));
+   addChild(title_label, Z_UPPER_PANE_FONT);
+
+   // 3. Main menu
    auto menu = Menu::create();
+   menu->setPosition(Point::ZERO);
+   addChild(menu, Z_MENU);
 
-   MenuItemFont* item = nullptr;
+   MenuItemLabel* item = nullptr;
+   LabelTTF* label = nullptr;
 
-#ifdef MPIX_DEVELOPERS_BUILD
-   item = MenuItemFont::create(LocalUTF8Char("Editor"), [&](Object *sender) {
-      ToEditor();
-   }); item->setColor(Color3B::BLACK); menu->addChild(item);
-
-   item = MenuItemFont::create(LocalUTF8Char("Test level"), [&](Object *sender) {
-      ToTest();
-   }); item->setColor(Color3B::BLACK); menu->addChild(item);
-
-#endif
-
-   item = MenuItemFont::create(LocalUTF8Char("Play"), [&](Object *sender) {
+   label = createMenuItem("Play", 1.4f);
+   item = MenuItemLabel::create(label, [&](Object *sender) {
       ToSelector();
-   }); item->setColor(Color3B::BLACK); menu->addChild(item);
-
-   item = MenuItemFont::create(LocalUTF8Char("Exit"), [&](Object *sender) {
-      ToExit();
-   }); item->setColor(Color3B::BLACK); menu->addChild(item);
+   }); 
+   menu->addChild(item);
 
 #ifdef MPIX_DEVELOPERS_BUILD
-   item = MenuItemFont::create(LocalUTF8Char("Crash"), [&](Object *sender) {
-      assert(false);
-   }); item->setColor(Color3B::RED); menu->addChild(item);
+   label = createMenuItem("Editor");
+   item = MenuItemLabel::create(label, [&](Object *sender) {
+      ToEditor();
+   });
+   menu->addChild(item);
+
+   label = createMenuItem("Play test");
+   item = MenuItemLabel::create(label, [&](Object *sender) {
+      ToTest();
+   });
+   menu->addChild(item);
+
 #endif
 
-   menu->alignItemsVertically();
+   label = createMenuItem("Exit");
+   item = MenuItemLabel::create(label, [&](Object *sender) {
+      ToExit();
+   });
+   menu->addChild(item);
 
-   // Get center
-   auto s = Director::getInstance()->getWinSize();
-   Point center(s.width / 2, s.height / 2);
+#ifdef MPIX_DEVELOPERS_BUILD
+   label = createMenuItem("Crash");
+   label->setColor(Color3B::RED);
+   item = MenuItemLabel::create(label, [&](Object *sender) {
+      assert(false);
+   });
+   menu->addChild(item);
+#endif
 
-   /* int i=0;
-   //Node* child;
-   auto pArray = menu->getChildren();
-   Object* pObject = nullptr;
-   CCARRAY_FOREACH(pArray, pObject)
-   {
-   if(pObject == nullptr)
-   break;
+   label = createMenuItem("Credits");
+   item = MenuItemLabel::create(label, [&](Object *sender) {
+      ToCredits();
+   });
+   menu->addChild(item);
 
-   auto child = static_cast<Node*>(pObject);
 
-   auto dstPoint = child->getPosition();
-   int offset = (int) (s.width/2 + 50);
-   if( i % 2 == 0)
-   offset = -offset;
+   // Align items
+   auto init_pos = visibleOrigin + Point(visibleSize.width / 5, visibleSize.height - PANEL_HEIGHT - 50);
+   bool one = true;
+   for (auto c : menu->getChildren()) {
+      c->setAnchorPoint(Point(0, 1));
+      c->setPosition(init_pos);
+      init_pos += Point(0, -90);
+      if (one) {
+         init_pos += Point(0, -40);
+         one = false;
+      }
+   }
 
-   child->setPosition( Point( dstPoint.x + offset, dstPoint.y) );
-   child->runAction( EaseElasticOut::create(MoveBy::create(2, Point(dstPoint.x - offset,0)), 0.35f) );
-   i++;
-   }*/
-
-   menu->setPosition(center);
-   addChild(menu, 2);
-
+   // Version string
    string vers(MPIX_VERSION);
 
 #ifdef MPIX_DEVELOPERS_BUILD
-   vers += "dev ";
+   auto N_RUNS = SettingsManager::getInstance().GetKey(SettingsManager::Key::N_OF_RUNS);
+   vers += "dev, run #" + ToString(N_RUNS);
 #endif
 
-   auto vlabel = LabelTTF::create(vers.c_str(), "Arial", 36, Size::ZERO, TextHAlignment::RIGHT);
+   auto vlabel = LabelTTF::create(vers.c_str(), cm.GetBaseFont(), 24, Size::ZERO, TextHAlignment::RIGHT);
    vlabel->setAnchorPoint(Point(1,0));
    auto orig = Director::getInstance()->getVisibleOrigin();
    auto sz = Director::getInstance()->getVisibleSize();
@@ -99,21 +179,6 @@ bool MPix::MenuMain::init()
    addChild(vlabel, 2);
 
 
-   auto bg = Sprite::create("bg/01.jpg");
-   bg->setScale(0.64f);
-   bg->setPosition(center);
-   bg->runAction(
-      RepeatForever::create(
-         Sequence::create(
-            MoveTo::create(5, center + Point(400, 0)),
-            MoveTo::create(5, center - Point(400, 0)),
-            nullptr
-         )
-      )
-   );
-   addChild(bg, 1);
-
-   return true;
 
 }
 
@@ -130,7 +195,7 @@ void MPix::MenuMain::ToExit()
 void MPix::MenuMain::ToTest()
 {
    // Load test level
-   auto lvl = LevelManager::getInstance().GetTestLevel();
+   auto lvl = LevelManager::getInstance().GetPlayableTestLevel();
    GameplayManager::getInstance().LoadLevel(lvl);
 
    // And play it
@@ -143,3 +208,10 @@ void MPix::MenuMain::ToSelector()
    GameStateManager::getInstance().SwitchToSelector();
 
 }
+
+void MPix::MenuMain::ToCredits()
+{
+   GameStateManager::getInstance().SwitchToCredits();
+}
+
+

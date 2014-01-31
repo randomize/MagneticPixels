@@ -24,3 +24,13 @@ void MPix::World::EraseLevel( unsigned lvl_id )
 {
    levels.remove(lvl_id);
 }
+
+const string& MPix::World::GetName()
+{
+   return name;
+}
+
+int MPix::World::GetID()
+{
+   return id;
+}

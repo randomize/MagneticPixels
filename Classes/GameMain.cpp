@@ -32,7 +32,6 @@ MPix::GameMain::~GameMain()
 
 bool GameMain::init()
 {
-   EM_LOG_ERROR("init");
 
    // 1. super init first
    if ( !Scene::init() )
@@ -113,7 +112,7 @@ void MPix::GameMain::CreateButtons()
       "shake.png",  // 103
       "menu.png"    // 104
    };
-   for (int i = 0; i < sizeof(names)/sizeof(names[0]); ++i) {
+   for (unsigned i = 0; i < sizeof(names)/sizeof(names[0]); ++i) {
       auto btn = MenuItemImage::create( names[i], names[i], CC_CALLBACK_1(GameMain::BtnHnadler, this));
       btn->setTag(base_tag + i);
       btn->setPosition(Point(
@@ -132,7 +131,7 @@ void MPix::GameMain::BtnHnadler(Object* sender)
    switch(id) {
    case 101: {
       GameplayManager::getInstance().Reset();
-      auto lvl = LevelManager::getInstance().GetLastLevel();
+      auto lvl = LevelManager::getInstance().GetPlayableLastLevel();
       GameplayManager::getInstance().LoadLevel(lvl);
       pixels->Reset();
       ResetLocks();

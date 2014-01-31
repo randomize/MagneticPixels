@@ -56,6 +56,7 @@ namespace MPix {
       Pixel(int z = 0);
       virtual ~Pixel();
       virtual shared_ptr<Pixel> Dublicate();
+      static Pixel* create(const string& pixel_type_name);
 
       // -------- Setters ------------------------------------------
 

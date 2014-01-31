@@ -36,6 +36,7 @@ MPix::PixelsLayer::~PixelsLayer()
 {
    // Removing all views
    Clear();
+
    // Unregister
    CmdUICreateViews::listners.erase("PixelsLayer");
 }
@@ -55,15 +56,10 @@ EmbossLib::ErrorCode MPix::PixelsLayer::CreateAllViews()
    assert(activeContext->goals);
    assert(activeContext->field);
 
-   //  Create goals, for now here
-   for (int id = 0; id < activeContext->goals->GoalsCount(); ++id) {  
-      auto g = activeContext->goals->GetGoalByID(id+1);
-      auto gv = make_shared<GoalView>();
-      gv->Build(g);
-      ViewManager::getInstance().AddGoalView(id+1,gv);
-      gv->BindContents(this);
-      gv->Update(CmdUIUpdateGoalView::Reason::CREATED);
-   }
+   // Only one goal per layer in current version of game
+   assert(activeContext->goals->GoalsCount() == 1);
+   auto g = activeContext->goals->GetGoalByID(1);
+   CreateViewForGoal(g);
 
    // TODO: can use field map instead of ID's to determine pixel stacks and put them to StackView
    // Create also pixel views
@@ -98,6 +94,17 @@ EmbossLib::ErrorCode MPix::PixelsLayer::CreateViewForPixel( shared_ptr<Pixel> p 
    view->BindContents(this);
    return ErrorCode::RET_OK;
 }
+
+EmbossLib::ErrorCode MPix::PixelsLayer::CreateViewForGoal(shared_ptr<Goal> g)
+{
+   auto gv = make_shared<GoalView>();
+   gv->Build(g);
+   ViewManager::getInstance().AddGoalView(g->GetID(), gv);
+   gv->BindContents(this);
+   gv->Update(CmdUIUpdateGoalView::Reason::CREATED);
+   return ErrorCode::RET_OK;
+}
+
 
 ////////// Assembly ////////////////////////////////////////////////////////////////
 

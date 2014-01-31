@@ -163,6 +163,8 @@ namespace MPix {
       Goals();
       shared_ptr<Goals> Dublicate();
 
+      static const int FIRST_GOAL = 1;
+
       //////////////////////////////////////////////////////////////////////////
       // History support
 

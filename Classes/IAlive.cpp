@@ -50,6 +50,13 @@ void MPix::IAlive::Kill( const Context& context, const IKilling& killer )
    Kill(context, GetStateByKiller(killer));
 }
 
+void MPix::IAlive::Kill(State cause)
+{
+   assert(IsAlive()); // Killing dead is bad
+   life = cause;
+}
+
+
 //====---------------------------------------------======//
 
 void MPix::IAlive::PopSnapshots( const Context& context, int n )

@@ -14,36 +14,36 @@
 
 using namespace MPix;
 
-#define PUT_TO(A, B) (A)->Insert(v.size()); v.push_back(B)
+#define PUT_TO(A, B) (A)->Insert(v.size()); v.emplace_back(B)
 
-vector<EditorTool*> MPix::EditorToolGenerator::GenerateDefaultSet()
+vector<shared_ptr<EditorTool>> MPix::EditorToolGenerator::GenerateDefaultSet()
 {
-   vector<EditorTool*> v;
+   vector<shared_ptr<EditorTool>> v;
    EditorTool* fab;
 
    auto root = new EditorFolderTool("Choose category");
-   v.push_back(root);
+   v.emplace_back(root);
 
    //////////////////////////////////////////////////////////////////////////
    // Core category 
 
-   auto mag = new EditorFolderTool("Magnetic Pixel", "ed_magnet.png");
+   auto mag = new EditorFolderTool("Magnetic Pixel", "magneticpixel");
    PUT_TO(root, mag);
 
-   auto needl = new EditorFolderTool("Cactus Pixel", "ed_needle.png");
+   auto needl = new EditorFolderTool("Cactus Pixel", "cactusstatic");
    PUT_TO(root, needl);
 
-   auto wall = new EditorFolderTool("Wall Pixel", "ed_walll.png");
+   auto wall = new EditorFolderTool("Wall Pixel", "wallpixel");
    PUT_TO(root, wall);
 
-   auto goal = new EditorFolderTool("Goal", "ed_goal.png");
+   auto goal = new EditorFolderTool("Goal", "Goal");
    PUT_TO(root, goal);
 
 
-   auto eraser = new EditorFolderTool("Erase", "ed_erase.png" );
+   auto eraser = new EditorFolderTool("Erase");
    PUT_TO(root, eraser);
 
-   auto stn = new EditorFolderTool("Sokoban pixels");
+   auto stn = new EditorFolderTool("Sokoban pixels", "sokobanpixel");
    PUT_TO(root, stn);
 
    auto msc = new EditorFolderTool("Misc pixels");
@@ -67,7 +67,7 @@ vector<EditorTool*> MPix::EditorToolGenerator::GenerateDefaultSet()
    // Dynamics
    for (auto typ : EnumRanger<CactusDynamic::NeedleType>() ) {
       auto name = CactusDynamic::TypeToString(typ);
-      auto ndyn = new EditorFolderTool(name, "ed_needle.png");
+      auto ndyn = new EditorFolderTool(name, "cactusdynamic");
       PUT_TO(needl, ndyn);
       for (auto d : EnumRanger<Direction>(DirectionType::ALL)) {
          auto pn = make_shared<CactusDynamic>(typ, d);
@@ -93,21 +93,6 @@ vector<EditorTool*> MPix::EditorToolGenerator::GenerateDefaultSet()
       fab = new EditorGoalTool(name.c_str(), col, 0);
       PUT_TO(goal, fab);
    }
-
-   const int n = 3;
-   EditorFolderTool  **goals = new EditorFolderTool*[n];
-
-   for (int k = 0; k < 3; ++k) {
-      goals[k] = new EditorFolderTool( ("Additional Goal" + ToString(k+1)).c_str(), "ed_goal.png");
-      PUT_TO(goal, goals[k]);
-      for (auto col : EnumRanger<PixelColor>() ) {
-         string name = "Goal ";
-         name += PixelColorToStr(col);
-         fab = new EditorGoalTool(name.c_str(), col, k+1);
-         PUT_TO(goals[k], fab);
-      }
-   }
-   delete [] goals;
 
    //////////////////////////////////////////////////////////////////////////
    // Erasers

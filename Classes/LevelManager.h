@@ -30,45 +30,69 @@ namespace MPix {
       };
 
       //////////////////////////////////////////////////////////////////////////
-      // Level acquire methods
+      // Level acquire methods, return NEW level objects, ready to be played
 
       // Returns empty new level
       shared_ptr<Level> GetEmpty();
 
       // Debugging method, returns test level
-      shared_ptr<Level> GetTestLevel();
+      shared_ptr<Level> GetPlayableTestLevel();
 
       // Returns level object by ID, new one! but holding old copy or info for quick build again
-      shared_ptr<Level> GetLevelByID(unsigned int levelID);
+      shared_ptr<Level> GetPlayableLevelByID(unsigned int levelID);
 
       // Returns here last returned level =)
-      shared_ptr<Level> GetLastLevel();
+      shared_ptr<Level> GetPlayableLastLevel();
 
       // Store level for editing between sessions/test runs
-      shared_ptr<Level> GetEditorsLevel();
+      shared_ptr<Level> GetPlayableEditorsLevel();
 
-      // Return level next to last ;)
-      shared_ptr<Level> GetNextLevel();
+      // Return level next to last ;) returns nullptr on game end
+      shared_ptr<Level> GetPlayableNextLevel();
 
+      //////////////////////////////////////////////////////////////////////////
       // Misc info about levels
-      int GetLevelStarsByID(unsigned int levelID);
-      const string& GetLevelNameByID(unsigned int levelID);
+
+      // Stars 0 - 3 int
+      int GetStarsByLevelID(unsigned int levelID);
+
+      // Is it locked or not
+      bool GetLockedByLevelID(unsigned int levelID);
+
+      // Returns levels name
+      const string& GetNameByLevelID(unsigned int levelID);
+
+      // Return level by id, WARNING: it will be unplayable and it is alive lm's level
+      shared_ptr<Level> GetLevelByID(unsigned int levelID);
+
 
       //////////////////////////////////////////////////////////////////////////
       // Worlds
 
       // Get all worlds ids
-      vector<int> GetWorldsIDs(void) ;
-
-      // Get all levels in world
-      vector<unsigned int> GetLevelsInWorld(int wID);
+      const vector<int>& GetWorldIDs(void) ;
 
       // Get concrete world
       shared_ptr<World> GetWorldByID(int wID);
 
-      // Misc info about worlds
-      const string& GetWorldNameByID(int wID);
-      int GetWorldLevelCountByID(int wID);
+      // Get worlds name
+      const string& GetNameByWorldID(int wID);
+
+      // Get worlds level count
+      int GetLevelCountByWorldID(int wID);
+
+      // Get worlds first level id
+      unsigned GetFirstLevelByWorldID(int wID);
+
+      // Get worlds last level id
+      unsigned GetLastLevelByWorldID(int wID);
+
+      // Get worlds next level id
+      unsigned GetNextLevelByWorldID(int wID, unsigned levelID);
+
+      // Get all levels in world
+      vector<unsigned int> GetLevelsByWorldID(int wID);
+
 
       //////////////////////////////////////////////////////////////////////////
       // For level editor
@@ -89,6 +113,9 @@ namespace MPix {
       // Delete given level
       void DeleteLevelByID(unsigned int levelID);
 
+      // Shorthand for common procedure of level preparing
+      shared_ptr<Level> DupeLastAndMakePlayable();
+
    private:
 
       //////////////////////////////////////////////////////////////////////////
@@ -96,11 +123,12 @@ namespace MPix {
 
       // Map holds all levels with assigned ID's
       unordered_map<unsigned int, shared_ptr<Level>> levels;
+
+      // Ordered list of worlds
       list<shared_ptr<World>> worlds;
-      unordered_map<int,shared_ptr<World>> worlds_map;
 
       // State of level manager
-      State st;
+      State state;
 
       // Holds null or currently editing level
       shared_ptr<Level> ed_lvl;
@@ -111,12 +139,18 @@ namespace MPix {
       //////////////////////////////////////////////////////////////////////////
       // Helpers
 
-      // Return level by id
-      shared_ptr<Level> FindLevel(unsigned int levelID);
 
       // Clear levels and worlds maps
       ErrorCode ResetData();
 
+      //////////////////////////////////////////////////////////////////////////
+      // Caches and optimizations
+
+      // Searchmap for mapping ID => world
+      unordered_map<int,shared_ptr<World>> worlds_map;
+
+      // Cached list of worlds id's
+      vector<int> worlds_ids;
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
    

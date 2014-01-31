@@ -40,7 +40,10 @@ namespace MPix {
 
       // ------- Creations interface ----------------------------------
 
-      WallPixel(int sh = 0);
+      // Default value for shape is taken from random generator :)
+      // Shape is an integer sum of POT directions:
+      // 1 + 2 + 4 + 8
+      WallPixel(int shape = 14);
 
       // ----- Implements IWallInterface ------------------------------------------
 

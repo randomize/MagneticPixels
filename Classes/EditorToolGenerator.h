@@ -24,7 +24,7 @@ namespace MPix {
    public:
 
    // Generates all default tools
-   static vector<EditorTool*> GenerateDefaultSet();
+   static vector<shared_ptr<EditorTool>> GenerateDefaultSet();
 
    };
 

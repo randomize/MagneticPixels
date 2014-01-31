@@ -5,12 +5,13 @@
 #include "LevelGenerator.h"
 
 #include "LevelStorage.h"
+#include "SettingsManager.h"
 
 using namespace MPix;
 
 LevelManager::LevelManager()
 {
-   st = State::EMPTY;
+   state = State::EMPTY;
    EM_LOG_INFO("[ LevelManager initialized ]");
 }
 
@@ -22,14 +23,14 @@ EmbossLib::ErrorCode MPix::LevelManager::ResetData()
    worlds_map.clear();
    last_lvl = nullptr;
    ed_lvl = GetEmpty();
-   st = State::EMPTY;
+   state = State::EMPTY;
    return ErrorCode::RET_OK;
 }
 
 ErrorCode LevelManager::LoadData()
 {
 
-   if (st == State::LOADED)
+   if (state == State::LOADED)
    {
       ResetData();
    }
@@ -38,54 +39,140 @@ ErrorCode LevelManager::LoadData()
 
    auto ret = LevelStorage::getInstance()->GetLevels(worlds, levels); 
 
-   if (ret == ErrorCode::RET_OK ) {
-      worlds_map.reserve(worlds.size());
-      for (auto w : worlds) {
-         worlds_map.emplace(w->GetID(), w);
-      }
-      EM_LOG_INFO("LevelManager loaded " + worlds.size() + " worlds with " + levels.size() + " levels");
-   } else {
+   auto ws = worlds.size();
+   auto ls = levels.size();
+
+   if (ret != ErrorCode::RET_OK || ws == 0 || ls == 0 ) {
       EM_LOG_ERROR("LevelManager failed levels load, resetting");
       ResetData();
+      return ErrorCode::RET_FAIL;
    }
 
-   return ret;
+   EM_LOG_INFO("LevelManager loaded " + worlds.size() + " worlds with " + levels.size() + " levels");
+
+   // Setting up searchmap
+   worlds_map.reserve(worlds.size());
+   worlds_ids.reserve(worlds.size());
+   for (auto w : worlds) {
+
+      int id = w->GetID();
+
+#ifndef MPIX_DEVELOPERS_BUILD
+      if (id == 0) 
+         continue; // Skip editors world in release
+#endif
+      worlds_map.emplace(id, w);
+      worlds_ids.push_back(id); 
+   }
+
+   // Filling in data about levels using settings
+
+   // Set defaults
+   for (auto & l : levels) {
+      l.second->SetState(Level::State::IS_LOCKED);
+   }
+
+   // Open first level of first world
+   auto first_lvl_id = GetFirstLevelByWorldID(worlds_ids.front());
+   auto it = levels.find(first_lvl_id);
+   assert(it != levels.end());
+   auto first_lvl = it->second;
+   assert(first_lvl);
+   first_lvl->SetState(Level::State::IS_OPEN);
+   
+   // TODO: Load user data of solved levels atars etc from st;
+   //auto & st = SettingsManager::getInstance();
+
+   return ErrorCode::RET_OK;
 }
+
+//////////// LEVELS MANAGEMENT ////////////////////////////////////////////////////////////////////
 
 shared_ptr<Level> MPix::LevelManager::GetEmpty()
 {
    return LevelGenerator::getInstance()->CreateEmpty();
 }
 
-shared_ptr<Level> LevelManager::GetLevelByID(unsigned  int levelID )
+shared_ptr<Level> LevelManager::GetPlayableLevelByID(unsigned  int levelID )
 {
-   auto l = FindLevel(levelID);
+   auto lvl = GetLevelByID(levelID);
 
-   if (l == nullptr) { 
+   if (lvl == nullptr) { 
       EM_LOG_ERROR("> Not found Level " + levelID);
       return nullptr;
    }
 
    EM_LOG_DEBUG("> Requested level " + levelID);
-   last_lvl = l;
-   return last_lvl->Dublicate();
+   last_lvl = lvl;
+   return DupeLastAndMakePlayable();
 }
 
-shared_ptr<Level> LevelManager::GetTestLevel()
+shared_ptr<Level> LevelManager::GetPlayableTestLevel()
 {
    last_lvl = LevelGenerator::getInstance()->CreateTestLevel();
-   return last_lvl->Dublicate();
+   return DupeLastAndMakePlayable();
 }
 
-shared_ptr<Level> MPix::LevelManager::GetEditorsLevel()
+shared_ptr<Level> MPix::LevelManager::GetPlayableEditorsLevel()
 {
-   if (ed_lvl) {
-      last_lvl = ed_lvl;
-      return last_lvl->Dublicate();
+   if (ed_lvl == nullptr) {
+      return nullptr;
+   }
+
+   last_lvl = ed_lvl;
+   return DupeLastAndMakePlayable();
+}
+
+shared_ptr<Level> MPix::LevelManager::GetPlayableLastLevel()
+{
+   if (last_lvl == nullptr) {
+      return nullptr;
+   }
+
+   return DupeLastAndMakePlayable();
+}
+
+shared_ptr<Level> MPix::LevelManager::GetPlayableNextLevel()
+{
+   assert(worlds_ids.empty() == false);
+
+   if (last_lvl == nullptr) // Return first (fallback) if no recent level
+   {
+      auto lvl = GetLevelByID(GetFirstLevelByWorldID(worlds_ids.front()));
+      assert(lvl);
+      last_lvl = lvl;
+      return DupeLastAndMakePlayable();
+   }
+
+   auto last_id = last_lvl->GetID();
+   auto w_id = last_lvl->GetWorld();
+   unsigned next_id;
+
+   if (last_id == GetLastLevelByWorldID(w_id)) // last level was the last one in its world
+   {
+      // Find next world if exists
+      auto it = find(worlds_ids.begin(), worlds_ids.end(), w_id);
+      assert(it != worlds_ids.end());
+      ++it;
+      if (it == worlds_ids.end()) // No next
+      {
+         return nullptr;
+      }
+      next_id = GetFirstLevelByWorldID(*it);
    }
    else
-      return nullptr;
+   {
+      next_id = GetNextLevelByWorldID(w_id, last_id);
+   }
+
+   auto lvl = GetLevelByID(next_id);
+   assert(lvl);
+   last_lvl = lvl;
+   return DupeLastAndMakePlayable();
 }
+
+/////////////////////////////////////////////////////////////////////////////////
+
 
 void MPix::LevelManager::SetEditorsLevel( shared_ptr<Level> l )
 {
@@ -98,36 +185,26 @@ shared_ptr<Level> MPix::LevelManager::EditorGetCurrentLevel()
    return ed_lvl;
 }
 
-shared_ptr<Level> MPix::LevelManager::GetLastLevel()
+int MPix::LevelManager::GetStarsByLevelID( unsigned int levelID )
 {
-   if (last_lvl)
-      return last_lvl->Dublicate();
-   else 
-      return nullptr;
+   return GetLevelByID(levelID)->GetStars();
 }
 
-int MPix::LevelManager::GetLevelStarsByID( unsigned int levelID )
+const string& MPix::LevelManager::GetNameByLevelID( unsigned int levelID )
 {
-   return FindLevel(levelID)->GetStars();
+   return GetLevelByID(levelID)->GetName();
 }
 
-const string& MPix::LevelManager::GetLevelNameByID( unsigned int levelID )
+bool MPix::LevelManager::GetLockedByLevelID(unsigned int levelID)
 {
-   return FindLevel(levelID)->GetName();
+   return GetLevelByID(levelID)->GetState() == Level::State::IS_LOCKED ;
 }
 
-vector<int> MPix::LevelManager::GetWorldsIDs( void )
+//////////// WORLDS MANAGEMENT ////////////////////////////////////////////////////////////////////
+
+const vector<int>& MPix::LevelManager::GetWorldIDs( void )
 {
-   vector<int> fab;
-   fab.reserve(worlds_map.size());
-   for (auto w : worlds_map ) {
-#ifndef MPIX_DEVELOPERS_BUILD
-      if (w.first == 0) 
-         continue; // Skip editors world in release
-#endif
-      fab.push_back(w.first);
-   }
-   return fab;
+   return worlds_ids;
 }
 
 shared_ptr<World> MPix::LevelManager::GetWorldByID( int wID )
@@ -141,7 +218,7 @@ shared_ptr<World> MPix::LevelManager::GetWorldByID( int wID )
    return p->second;
 }
 
-vector<unsigned int> MPix::LevelManager::GetLevelsInWorld( int wID )
+vector<unsigned int> MPix::LevelManager::GetLevelsByWorldID( int wID )
 {
    auto w = GetWorldByID(wID);
    assert(w);
@@ -153,17 +230,52 @@ vector<unsigned int> MPix::LevelManager::GetLevelsInWorld( int wID )
    return fab;
 }
 
-const string& MPix::LevelManager::GetWorldNameByID( int wID )
+const string& MPix::LevelManager::GetNameByWorldID( int wID )
 {
-   return GetWorldByID(wID)->GetName();
+   auto w = GetWorldByID(wID);
+   assert(w);
+   return w->GetName();
 }
 
-int MPix::LevelManager::GetWorldLevelCountByID( int wID )
+int MPix::LevelManager::GetLevelCountByWorldID( int wID )
 {
-   return GetWorldByID(wID)->GetLevelCount();
+   auto w = GetWorldByID(wID);
+   assert(w);
+   return w->GetLevelCount();
 }
 
-shared_ptr<Level> MPix::LevelManager::FindLevel( unsigned int levelID )
+unsigned MPix::LevelManager::GetFirstLevelByWorldID(int wID)
+{
+   auto w = GetWorldByID(wID);
+   assert(w && w->GetLevels().empty() == false);
+   return w->GetLevels().front();
+}
+
+unsigned MPix::LevelManager::GetLastLevelByWorldID(int wID)
+{
+   auto w = GetWorldByID(wID);
+   assert(w && w->GetLevels().empty() == false);
+   return w->GetLevels().back();
+}
+
+unsigned MPix::LevelManager::GetNextLevelByWorldID(int wID, unsigned levelID)
+{
+   auto w = GetWorldByID(wID);
+   assert(w);
+
+   auto & levels = w->GetLevels();
+   assert(levels.empty() == false);
+   
+   auto it = find(levels.begin(), levels.end(), levelID);
+   assert(it != levels.end());
+   ++it;
+   assert(it != levels.end());
+   return *it;
+}
+
+//////////////////////// INTERNAL //////////////////////////////////////////////
+
+shared_ptr<Level> MPix::LevelManager::GetLevelByID( unsigned int levelID )
 {
    auto p = levels.find(levelID);
    if( p != end(levels) ) {
@@ -171,6 +283,15 @@ shared_ptr<Level> MPix::LevelManager::FindLevel( unsigned int levelID )
    }
    return nullptr;
 }
+
+shared_ptr<Level> MPix::LevelManager::DupeLastAndMakePlayable()
+{
+   auto fab = last_lvl->Dublicate();
+   fab->SetState(Level::State::IS_PLAYABLE);
+   return fab;
+}
+
+/////////////////////////// EDITOR FUNCTIONS ////////////////////////////////////
 
 void MPix::LevelManager::StoreLevel( shared_ptr<Level> level )
 {
@@ -220,11 +341,9 @@ void MPix::LevelManager::SaveEditorsLevel()
    StoreLevel(ed_lvl);
 }
 
-shared_ptr<Level> MPix::LevelManager::GetNextLevel()
-{
-   auto l = GetLastLevel();
-   // TODO: get id and find next, or next world
-   return GetLastLevel();
-}
+
+
+
+
 
 

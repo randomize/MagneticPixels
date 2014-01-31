@@ -52,6 +52,13 @@ shared_ptr<Pixel> MPix::Pixel::Dublicate()
    return shared_ptr<Pixel>(fab);
 }
 
+Pixel* MPix::Pixel::create(const string& pixel_type_name)
+{
+   auto p = Factory()->NewNodeByName(pixel_type_name);
+   assert(p);
+   return static_cast<Pixel*>(p);
+}
+
 bool MPix::operator<( const shared_ptr<Pixel>& lhs, const shared_ptr<Pixel>& rhs )
 {
    return lhs->z < rhs->z;
