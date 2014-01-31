@@ -46,12 +46,18 @@ void MPix::SplashState::onEnter()
 
    this->runAction(
       Sequence::createWithTwoActions(
-         DelayTime::create(0.3f),
+         DelayTime::create(0.2f),
          CallFunc::create(
             []() {
+               // Load resources
+               ContentManager::getInstance().LoadResources();
+
+               // Swithc
                GameStateManager::getInstance().SwitchToMenu();
             }
          )
       )
    );
+
+
 }

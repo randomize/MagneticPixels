@@ -87,6 +87,9 @@ namespace MPix {
       // List of resources
       unordered_map<string, string> resources;
 
+      // List of animations
+      unordered_map<string, string> animations;
+
       // List of saved nodes
       unordered_map<string, Node*> nodes;
 

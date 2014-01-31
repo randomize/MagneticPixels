@@ -302,13 +302,17 @@ void MPix::LevelSelector::onTouchEnded(Touch *touch, Event *event)
       auto id = m_cur_button->GetLevelID();
 
       if (LevelManager::getInstance().GetLockedByLevelID(id) == false) {
+         state = State::IGNORING;
          SelectedLevel(id);
+         return;
       }
       else
       {
 #ifdef MPIX_DEVELOPERS_BUILD
          if (last_locked == id && last_locked == pre_last_locked) {
+            state = State::IGNORING;
             SelectedLevel(last_locked);
+            return;
          }
          else {
             pre_last_locked = last_locked;

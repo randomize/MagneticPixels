@@ -52,6 +52,7 @@ void MPix::ContentManager::LoadResources()
    CreateShaders();
    CreateAnimations();
    CreateSprites();
+
 }
 
 void MPix::ContentManager::CreateAnimations()
@@ -65,8 +66,7 @@ void MPix::ContentManager::CreateAnimations()
    arm_man->addArmatureFileInfo("magnetic_mimics.png", "magnetic_mimics.plist", "magnetic_mimics.xml");
    auto texture = t_cache->addImage("magnetic_mimics.png");
    texture->setAliasTexParameters();
-   resources.emplace("magnetic_mimics", "magnetic_0");
-   resources.emplace("socoban_0", "magnetic_0");
+   animations.emplace("magnetic_mimics", "magnetic_0");
 
 }
 
@@ -97,6 +97,27 @@ void MPix::ContentManager::CreateSprites()
 
    // Editor
    resources.emplace("trash_can", "trash_can.png");
+
+   // BG
+   resources.emplace("bg_1", "bg/01.jpg");
+   resources.emplace("bg_2", "bg/02.jpg");
+   resources.emplace("bg_3", "bg/03.jpg");
+   resources.emplace("bg_4", "bg/04.jpg");
+   resources.emplace("bg_5", "bg/05.jpg");
+
+   // Preload all
+   auto t_cache = Director::getInstance()->getTextureCache();
+   for (auto& s : resources) {
+      auto texture = t_cache->addImage(s.second);
+      if (texture) {
+         auto sz = texture->getContentSizeInPixels();
+         EM_LOG_DEBUG("Cached: " + s.second + " [ " + sz.width + ", " + sz.height + "]");
+      }
+      else {
+         EM_LOG_WARNING("Not found texture: " + s.second);
+      }
+   }
+
 }
 
 void MPix::ContentManager::CreateShaders()
@@ -175,14 +196,14 @@ HSVSprite* MPix::ContentManager::GetHSVSprite(const string& name)
 
 EMAnimation* MPix::ContentManager::GetAnimation(const string& name)
 {
-   EM_LOG_DEBUG("Loading HSV sprite resource: " + name);
+   EM_LOG_DEBUG("Loading animation: " + name);
 
    EMAnimation* fab = nullptr;
 
-   auto it = resources.find(name);
-   if (it == resources.end())
+   auto it = animations.find(name);
+   if (it == animations.end())
    {
-       EM_LOG_WARNING("Not found resource " + name);
+       EM_LOG_WARNING("Not found animation " + name);
        assert(false);
    }
    else
@@ -243,8 +264,10 @@ Sprite* MPix::ContentManager::GetScrollingBG(int index, bool scrolling)
    Size visibleSize = Director::getInstance()->getVisibleSize();
    auto center = Point(halfSize.width, halfSize.height);
    
-   string name("bg/0" + ToString(index) + ".jpg");
-   auto bg1 = Sprite::create(name.c_str());
+   string name("bg_" + ToString(index) );
+   auto bg1 = GetSimpleSprite(name.c_str());
+   assert(bg1);
+
    float scale = visibleSize.height / bg1->getContentSize().height;
    float swing = bg1->getContentSize().width / 2 * scale - visibleSize.width/2;
    bg1->setScale(scale);

@@ -41,9 +41,6 @@ void GameStateManager::SwitchToExit( void )
 void GameStateManager::SwitchToStart( void )
 {
 
-   // Load resources
-   ContentManager::getInstance().LoadResources();
-
    GameState* newState = SplashState::create();
 
    assert(newState);
