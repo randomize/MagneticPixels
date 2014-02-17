@@ -165,6 +165,8 @@ namespace MPix {
 
       static const int FIRST_GOAL = 1;
 
+      ErrorCode SendCreateEvents(const Context& context);
+
       //////////////////////////////////////////////////////////////////////////
       // History support
 

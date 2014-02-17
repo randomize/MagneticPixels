@@ -101,7 +101,6 @@ EmbossLib::ErrorCode MPix::PixelsLayer::CreateViewForGoal(shared_ptr<Goal> g)
    gv->Build(g);
    ViewManager::getInstance().AddGoalView(g->GetID(), gv);
    gv->BindContents(this);
-   gv->Update(CmdUIUpdateGoalView::Reason::CREATED);
    return ErrorCode::RET_OK;
 }
 

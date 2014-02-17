@@ -27,6 +27,7 @@ GameplayManager::GameplayManager()
         CmdGameplayUndoMove::listners["GameplayManager"] = std::bind(&GameplayManager::UndoMove,         this);
  CmdGameplayRestartAssembly::listners["GameplayManager"] = std::bind(&GameplayManager::CancelAssembly,  this);
          CmdGameplayGrowAsm::listners["GameplayManager"] = std::bind(&GameplayManager::GrowAssembly,     this);
+       CmdGameplayFirstMove::listners["GameplayManager"] = std::bind(&GameplayManager::FirstMove,     this);
 
    EM_LOG_INFO("[ GameplayManager initialized ]");
 
@@ -172,6 +173,7 @@ ErrorCode GameplayManager::Play()
    context.goals = level->GetGoals();
    context.assembly = make_shared<Assembly>();
    context.moveNumber = 0;
+   context.solutionPhases = 0;
 
    // Saving first snapshot index = 0;
    context.field->InitSnapshots(context);
@@ -184,17 +186,25 @@ ErrorCode GameplayManager::Play()
    // Send Gui command to create pixel views and goal views
    GameStateManager::getInstance().CurrentState()->Execute(new CmdUICreateViews());
 
-   // Check lost 
-   context.field->WorldCheckForLost(context);
-
    context.field->SendCreateEvents(context);
-   //context.goals->SendCreateEvents(context);
+   context.goals->SendCreateEvents(context);
+
+   PostPriorityCommand(new CmdGameplayFirstMove());
+
+   UpdateUI();
+
+   return ErrorCode::RET_OK;
+}
+
+ErrorCode GameplayManager::FirstMove()
+{
+   // Check lost on load
+   context.field->WorldCheckForLost(context);
 
    // Update goals
    CheckForSolution();
 
    UpdateUI();
-
    return ErrorCode::RET_OK;
 }
 
@@ -587,7 +597,6 @@ EmbossLib::ErrorCode MPix::GameplayManager::SendUIAcceptSolution()
    // TODO: play happy sound, and effect
    return ErrorCode::RET_OK;
 }
-
 
 
 

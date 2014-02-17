@@ -57,6 +57,9 @@ namespace MPix {
       // Current move number, counting from last assembly, zero if not assembling
       int moveNumber;
 
+      // Number of solving phases
+      int solutionPhases;
+
    public: 
 
       // ================= Field helpers ======================

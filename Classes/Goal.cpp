@@ -458,6 +458,15 @@ void MPix::Goals::ResetSolution( const Context& context )
    }
 }
 
+EmbossLib::ErrorCode MPix::Goals::SendCreateEvents(const Context& context)
+{
+   for (auto g : goals) {
+      context.PostEvent(GoalEvent::CREATED, g->GetID(), Coordinates(0, 0));
+   }
+   return ErrorCode::RET_OK;
+}
+
+
 int Goals::FindMatchingGoal( Coordinates pos, PixelColor color ) const
 {
    for (auto g : goals) {

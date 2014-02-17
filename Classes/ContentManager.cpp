@@ -258,26 +258,31 @@ string MPix::ContentManager::GetLogoFont()
 
 Sprite* MPix::ContentManager::GetScrollingBG(int index, bool scrolling)
 {
+   const float SCROLLING_SPEED = 4.0f;
    assert(index >= 1 && index <= 5);
    Size fullSize = Director::getInstance()->getWinSize();
    Size halfSize =  fullSize / 2.0f;
    Size visibleSize = Director::getInstance()->getVisibleSize();
    auto center = Point(halfSize.width, halfSize.height);
    
+   // Create
    string name("bg_" + ToString(index) );
    auto bg1 = GetSimpleSprite(name.c_str());
    assert(bg1);
 
+   // Setup
    float scale = visibleSize.height / bg1->getContentSize().height;
    float swing = bg1->getContentSize().width / 2 * scale - visibleSize.width/2;
    bg1->setScale(scale);
    bg1->setPosition(center);
+
+   // Run scrolling actions
    if (scrolling) {
       bg1->runAction(
          RepeatForever::create(
             Sequence::create(
-               MoveTo::create(2, center + Point(swing, 0)),
-               MoveTo::create(2, center - Point(swing, 0)),
+               MoveTo::create(SCROLLING_SPEED, center + Point(swing, 0)),
+               MoveTo::create(SCROLLING_SPEED, center - Point(swing, 0)),
                nullptr
             )
          )

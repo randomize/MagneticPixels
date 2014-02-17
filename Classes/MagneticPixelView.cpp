@@ -44,8 +44,12 @@ void MPix::MagneticPixelView::Build( shared_ptr<Pixel> model )
 
    // Colored background
    bg = cm.GetHSVSprite("magnetic_bg_norm");
-   bg->SetHSV(PixelColorToHSV(pixel->GetColor()));
-   //bg->setScale(0.25f);
+   const float COLOR_VARIACE = 0.04f; // %
+   auto color = PixelColorToHSV(pixel->GetColor());
+   color.saturation += RandomFloat(-COLOR_VARIACE, COLOR_VARIACE);
+   color.value      += RandomFloat(-COLOR_VARIACE, COLOR_VARIACE);
+   color.hue        += RandomFloat(-COLOR_VARIACE, COLOR_VARIACE);
+   bg->SetHSV(color);
 
    // Dead state
    smash = cm.GetHSVSprite("magnetic_bg_smash");
@@ -119,7 +123,7 @@ void MPix::MagneticPixelView::PixelCreated()
          RotateTo::create(0.3f, 0),
          nullptr
       ),
-      CallFunc::create([&]() { 
+      CallFunc::create([=]() { 
          mimics->setVisible(true);
          mimics->PlayNow("create");
          mimics->Play("sleeping");
@@ -164,7 +168,7 @@ void MPix::MagneticPixelView::PixelDied()
       auto sq = Sequence::create(
          DelayTime::create(0.2f),
          Hide::create(),
-         CallFunc::create( [&]() {
+         CallFunc::create( [=]() {
             bg->setVisible(false);
             smash->setOpacity(255);
             smash->runAction(FadeOut::create(0.5f));
@@ -178,7 +182,7 @@ void MPix::MagneticPixelView::PixelDied()
    {
       auto sq = Sequence::create(
          Hide::create(),
-         CallFunc::create( [&]() {
+         CallFunc::create( [=]() {
             bg->setVisible(false);
             smash->setOpacity(255);
             smash->runAction(FadeOut::create(0.5f));
@@ -221,7 +225,7 @@ void MPix::MagneticPixelView::PixelResurrect()
          RotateTo::create(0.2f, 0),
          nullptr
       ),
-      CallFunc::create([&]() { 
+      CallFunc::create([=]() { 
          mimics->setVisible(true);
          mimics->PlayNow("create");
          if ( pixel->IsSmiling() ) {

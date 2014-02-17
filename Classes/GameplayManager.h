@@ -62,6 +62,9 @@ namespace MPix {
       ErrorCode UndoMove();
       ErrorCode CancelAssembly();
 
+      // Occurs once after Play called and all views created and played animations
+      ErrorCode FirstMove();
+
    private: // Helper funs
 
       ErrorCode StartAssembling(shared_ptr<IAssembled> pixel);

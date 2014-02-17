@@ -248,7 +248,7 @@ bool MPix::LevelSelector::onTouchBegan(Touch *touch, Event *event)
    {
       initial_touch = convertTouchToNodeSpace(touch);
       if (worlds_layer->getNumberOfRunningActions() == 0) { // Disable buttons while animating 
-         auto button = GetViewAtPoint(initial_touch);
+         auto button = GetViewAtPoint(worlds_layer->convertTouchToNodeSpace(touch));
          if (button) { // Touched button
 
             // Save current button
@@ -452,22 +452,27 @@ LevelView* MPix::LevelSelector::GetViewAtPoint(Point touch_pos)
 void MPix::LevelSelector::ElasticBounceToCurrentWorld()
 {
    auto p = indexed_positions[current_index];
+   state = State::WAIT;
    worlds_layer->stopAllActions();
+
+   if (p != worlds_layer->getPositionX())
+   {
    worlds_layer->runAction(
       Sequence::create(
          EaseBounceOut::create(
             MoveTo::create(0.5f, Point(p,0))
          ),
-         CallFunc::create(
-            [this](){
-               state = State::WAIT;
-            }
-         ),
+         //CallFunc::create(
+            //[this](){
+               //state = State::WAIT;
+            //}
+         //),
          nullptr
       )
    );
    //state = State::ANIMATING;
-   state = State::WAIT;
+   }
+   
 }
 
 cocos2d::Point MPix::LevelSelector::NormalizePozition(Point pos)

@@ -153,7 +153,7 @@ namespace EmbossLib {
        return ErrorCode::RET_FAIL;
    }
 
-    inline void ScaleToSize(Node* node, cocos2d::Size size )
+   inline void ScaleToSize(Node* node, cocos2d::Size size )
    {
        auto contentSize = node->getContentSize();
        float xScale = size.width / contentSize.width;
@@ -178,6 +178,23 @@ namespace EmbossLib {
    const BlendFunc SCREEN = { GL_ONE, GL_ONE_MINUS_SRC_COLOR };
    const BlendFunc SCREEN2 = { GL_ONE_MINUS_DST_COLOR, GL_ONE };
    const BlendFunc LINEAR_DODGE = { GL_ONE, GL_ONE };
+
+   // Random numbers
+
+   // Return [0..0.999999] random number
+   inline float RandomFloat() {
+      return float(rand()) / RAND_MAX;
+   };
+
+   // Return [0..max) random
+   inline float RandomFloat(float max) {
+      return float(rand()) / RAND_MAX * max;
+   };
+
+   // Return [min, max)
+   inline float RandomFloat(float min, float max) {
+      return float(rand()) / RAND_MAX * (max - min) + min;
+   };
 
 } // namespace EmbossLib 
 

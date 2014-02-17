@@ -23,10 +23,11 @@ void MPix::CactusView::Build( shared_ptr<Pixel> model )
 void MPix::CactusView::PixelCreated()
 {
    bg->setScale(0.01f);
-   auto m_act = ScaleTo::create(0.4f, 1.0f);
-   auto pause = DelayTime::create(rand()%100 / 100.0f * 2);
-   auto sq = Sequence::createWithTwoActions(pause, m_act);
-   bg->runAction(sq);
+   auto sq = Sequence::createWithTwoActions(
+      ScaleTo::create(0.4f, 1.0f),
+      DelayTime::create(rand() % 100 / 100.0f)
+   );
+   RunLockingAction(bg, sq);
 }
 
 void MPix::CactusView::PixelKilledSomeone()

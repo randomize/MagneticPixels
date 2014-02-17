@@ -190,9 +190,8 @@ EmbossLib::ErrorCode MPix::GameMain::FinishedGame()
    Size visibleSize = Director::getInstance()->getVisibleSize();
    auto rt = RenderTexture::create(visibleSize.width, visibleSize.height);
    rt->beginWithClear(1, 0, 0, 1);
-   DrawPrimitives::drawCircle(Point::ZERO, 100, 180, 32, false);
    // TODO: WTF is wrong
-   bg->visit();
+   this->visit();
    rt->end();
 
    // Store to content manager

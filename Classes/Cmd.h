@@ -248,6 +248,16 @@ namespace MPix {
       static unordered_map<string,function<ErrorCode(Direction)>> listners;
    };
 
+   // First move
+   struct CmdGameplayFirstMove : public Command {
+      CmdGameplayFirstMove() {
+         for (auto f : listners) {
+            toExec.push_back(std::bind( f.second ));
+         }
+      }
+      static unordered_map<string,function<ErrorCode(void)>> listners;
+   };
+
    // Grow
    struct CmdGameplayGrowAsm : public Command {
       CmdGameplayGrowAsm () {
