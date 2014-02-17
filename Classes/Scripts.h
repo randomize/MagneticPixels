@@ -3,8 +3,7 @@
 //
 //  Created:     2014/02/01
 //  Author:      Mihailenco E. at Emboss Games, 2014
-//  Description: Predefined scripts used in game
-//  // TODO: Replace with lua
+//  Description: Script fabrics
 //
 //===---------------------------------------------------------===//
 
@@ -17,14 +16,27 @@
 namespace MPix {
 
    // Forward dependencies
+   class Script;
 
-
-   // Scripts
-
-   class Scripts
+   // Hardcoded C++ Scripts version
+   class CppScripts
    {
    public:
 
+      static unordered_map<unsigned, shared_ptr<Script>> GetScripts();
+
+   protected:
+
+   private:
+
+   };
+
+   // Lua scripts
+   // TODO: implement
+   class LuaScripts
+   {
+
+      static unordered_map<unsigned, shared_ptr<Script>> GetScripts();
 
    protected:
 

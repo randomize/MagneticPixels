@@ -77,12 +77,6 @@ void MPix::PixelsLayer::Clear()
    // Cleaning views, they should remove everything from BatchNodes
    ViewManager::getInstance().Clear();
 
-   // Ensure that no one left a node on pixels layer
-   auto n = this->getChildrenCount();
-   if (n != 0) {
-      removeAllChildren();
-      EM_LOG_WARNING(" Pixels layer was not cleared fully by views, removing " + ToString(n) + " children");
-   }
 }
 
 EmbossLib::ErrorCode MPix::PixelsLayer::CreateViewForPixel( shared_ptr<Pixel> p )

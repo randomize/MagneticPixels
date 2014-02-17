@@ -80,6 +80,7 @@ namespace MPix {
       shared_ptr<IColorful> GetTopColorful(Coordinates pos);
       shared_ptr<IWallPixel> GetWallAt(Coordinates pos);
 
+      shared_ptr<Pixel> GetPixelByTag(int tag);
 
       template<class T> bool GetPixelsAt( forward_list<shared_ptr<T>> &list, Coordinates pos ) ;
 
@@ -109,6 +110,9 @@ namespace MPix {
 
       // Also possible to search by coordinates, can have collisions
       unordered_map<Coordinates,forward_list<int>> map;
+
+      // Tag map
+      unordered_map<int, unsigned> tags;
 
       //////////////////////////////////////////////////////////////////////////
       // Optimizations:

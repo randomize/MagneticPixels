@@ -94,13 +94,20 @@ bool MPix::PixelXML::Store( shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst )
 
 // ======================= Fuck polymorphism : For here usage only special methods ==================
 
+void PushCommon(shared_ptr<Pixel> src, tinyxml2::XMLPrinter* dst) {
+   dst->PushAttribute("x", src->GetPos().x);
+   dst->PushAttribute("y", src->GetPos().y);
+   if (src->GetTag() != -1) {
+      dst->PushAttribute("g", src->GetTag());
+   }
+}
+
 
 bool MPix::PixelXML::StoreMagneticPixelToXML(shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst)
 {
    auto pix = dynamic_pointer_cast<MagneticPixel>(src);
    dst->OpenElement("m");
-   dst->PushAttribute("x", pix->GetPos().x);
-   dst->PushAttribute("y", pix->GetPos().y);
+   PushCommon(src, dst);
    dst->PushAttribute("c", static_cast<int>(pix->GetColor()));
    dst->CloseElement();
    return true;
@@ -110,8 +117,7 @@ bool MPix::PixelXML::StoreWallPixelToXML(shared_ptr<Pixel> src, tinyxml2::XMLPri
 {
    auto pix = dynamic_pointer_cast<WallPixel>(src);
    dst->OpenElement("w");
-   dst->PushAttribute("x", pix->GetPos().x);
-   dst->PushAttribute("y", pix->GetPos().y);
+   PushCommon(src, dst);
    dst->PushAttribute("s", pix->GetShapeInt());
    dst->CloseElement();
    return true;
@@ -121,8 +127,7 @@ bool MPix::PixelXML::StoreDynamicCactusToXML(shared_ptr<Pixel> src, tinyxml2::XM
 {
    auto pix = dynamic_pointer_cast<CactusDynamic>(src);
    dst->OpenElement("c");
-   dst->PushAttribute("x", pix->GetPos().x);
-   dst->PushAttribute("y", pix->GetPos().y);
+   PushCommon(src, dst);
    dst->PushAttribute("t", static_cast<int>(pix->GetNeedleType()));
    dst->PushAttribute("d", static_cast<int>(pix->GetWay()));
    dst->CloseElement();
@@ -133,8 +138,7 @@ bool MPix::PixelXML::StoreStaticCactusToXML( shared_ptr<Pixel> src, tinyxml2::XM
 {
    auto pix = dynamic_pointer_cast<CactusStatic>(src);
    dst->OpenElement("C");
-   dst->PushAttribute("x", pix->GetPos().x);
-   dst->PushAttribute("y", pix->GetPos().y);
+   PushCommon(src, dst);
    dst->CloseElement();
    return true;
 }
@@ -143,8 +147,7 @@ bool MPix::PixelXML::StorePitfallToXML( shared_ptr<Pixel> src, tinyxml2::XMLPrin
 {
    auto pix = dynamic_pointer_cast<Pitfall>(src);
    dst->OpenElement("p");
-   dst->PushAttribute("x", pix->GetPos().x);
-   dst->PushAttribute("y", pix->GetPos().y);
+   PushCommon(src, dst);
    dst->CloseElement();
    return true;
 }
@@ -153,8 +156,7 @@ bool MPix::PixelXML::StoreSokobanPixelToXML( shared_ptr<Pixel> src, tinyxml2::XM
 {
    auto pix = dynamic_pointer_cast<SokobanPixel>(src);
    dst->OpenElement("s");
-   dst->PushAttribute("x", pix->GetPos().x);
-   dst->PushAttribute("y", pix->GetPos().y);
+   PushCommon(src, dst);
    dst->PushAttribute("c", static_cast<int>(pix->GetColor()));
    dst->CloseElement();
    return true;
@@ -164,8 +166,7 @@ bool MPix::PixelXML::StoreStonePixelToXML( shared_ptr<Pixel> src, tinyxml2::XMLP
 {
    auto pix = dynamic_pointer_cast<StonePixel>(src);
    dst->OpenElement("S");
-   dst->PushAttribute("x", pix->GetPos().x);
-   dst->PushAttribute("y", pix->GetPos().y);
+   PushCommon(src, dst);
    dst->CloseElement();
    return true;
 }
@@ -173,28 +174,46 @@ bool MPix::PixelXML::StoreStonePixelToXML( shared_ptr<Pixel> src, tinyxml2::XMLP
 
 // ======================= Fuck polymorphism : For here usage only special methods ==================
 
+
+void QueryCommon(Pixel& px, tinyxml2::XMLElement* src) {
+
+   int x; 
+   
+   if (src->QueryIntAttribute("x", &x) != XML_NO_ERROR) {
+      EM_LOG_ERROR("Coordinateless pixel detected ");
+   }
+
+   int y; 
+   
+   if (src->QueryIntAttribute("y", &y) != XML_NO_ERROR) {
+      EM_LOG_ERROR("Coordinateless pixel detected ");
+   }
+
+   int t; 
+   
+   if (src->QueryIntAttribute("g", &t) == XML_NO_ERROR) {
+      px.SetTag(t);
+   }
+
+   px.SetPos(Coordinates(x,y));
+
+}
+
 shared_ptr<Pixel> MPix::PixelXML::GenMagneticPixelFromXML( tinyxml2::XMLElement* src )
 {
-
-   int x; if (src->QueryIntAttribute("x", &x) != XML_NO_ERROR) return nullptr;
-   int y; if (src->QueryIntAttribute("y", &y) != XML_NO_ERROR) return nullptr;
    int c; if (src->QueryIntAttribute("c", &c) != XML_NO_ERROR) return nullptr;
-
    auto px = make_shared<MagneticPixel>( static_cast<PixelColor>(c) );
-   px->SetPos(Coordinates(x,y));
+   QueryCommon(*px, src);
    return px;
-
 }
 
 shared_ptr<Pixel> MPix::PixelXML::GenWallPixelFromXML( tinyxml2::XMLElement* src )
 {
 
-   int x; if (src->QueryIntAttribute("x", &x) != XML_NO_ERROR) return nullptr;
-   int y; if (src->QueryIntAttribute("y", &y) != XML_NO_ERROR) return nullptr;
    int s; if (src->QueryIntAttribute("s", &s) != XML_NO_ERROR) return nullptr;
 
    auto px = make_shared<WallPixel>(s);
-   px->SetPos(Coordinates(x,y));
+   QueryCommon(*px, src);
    return px;
 
 }
@@ -202,57 +221,41 @@ shared_ptr<Pixel> MPix::PixelXML::GenWallPixelFromXML( tinyxml2::XMLElement* src
 shared_ptr<Pixel> MPix::PixelXML::GenDynamicCactusFromXML( tinyxml2::XMLElement* src )
 {
 
-   int x; if (src->QueryIntAttribute("x", &x) != XML_NO_ERROR) return nullptr;
-   int y; if (src->QueryIntAttribute("y", &y) != XML_NO_ERROR) return nullptr;
    int t; if (src->QueryIntAttribute("t", &t) != XML_NO_ERROR) return nullptr;
    int d; if (src->QueryIntAttribute("d", &d) != XML_NO_ERROR) return nullptr;
 
    auto px = make_shared<CactusDynamic>(static_cast<CactusDynamic::NeedleType>(t), static_cast<Direction>(d));
-   px->SetPos(Coordinates(x,y));
+   QueryCommon(*px, src);
    return px;
 
 }
 
 shared_ptr<Pixel> MPix::PixelXML::GenStaticCactusFromXML( tinyxml2::XMLElement* src )
 {
-   int x; if (src->QueryIntAttribute("x", &x) != XML_NO_ERROR) return nullptr;
-   int y; if (src->QueryIntAttribute("y", &y) != XML_NO_ERROR) return nullptr;
-
    auto px = make_shared<CactusStatic>();
-   px->SetPos(Coordinates(x,y));
+   QueryCommon(*px, src);
    return px;
 }
 
 shared_ptr<Pixel> MPix::PixelXML::GenPitfallFromXML( tinyxml2::XMLElement* src )
 {
-   int x; if (src->QueryIntAttribute("x", &x) != XML_NO_ERROR) return nullptr;
-   int y; if (src->QueryIntAttribute("y", &y) != XML_NO_ERROR) return nullptr;
-
    auto px = make_shared<Pitfall>();
-   px->SetPos(Coordinates(x,y));
+   QueryCommon(*px, src);
    return px;
-
 }
 
 shared_ptr<Pixel> MPix::PixelXML::GenSokobanPixelFromXML( tinyxml2::XMLElement* src )
 {
-   int x; if (src->QueryIntAttribute("x", &x) != XML_NO_ERROR) return nullptr;
-   int y; if (src->QueryIntAttribute("y", &y) != XML_NO_ERROR) return nullptr;
    int c; if (src->QueryIntAttribute("c", &c) != XML_NO_ERROR) return nullptr;
-
    auto px = make_shared<SokobanPixel>( static_cast<PixelColor>(c) );
-   px->SetPos(Coordinates(x,y));
+   QueryCommon(*px, src);
    return px;
-
 }
 
 shared_ptr<Pixel> MPix::PixelXML::GenStonePixelFromXML( tinyxml2::XMLElement* src )
 {
-   int x; if (src->QueryIntAttribute("x", &x) != XML_NO_ERROR) return nullptr;
-   int y; if (src->QueryIntAttribute("y", &y) != XML_NO_ERROR) return nullptr;
-
    auto px = make_shared<StonePixel>();
-   px->SetPos(Coordinates(x,y));
+   QueryCommon(*px, src);
    return px;
 }
 

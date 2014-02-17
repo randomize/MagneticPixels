@@ -60,6 +60,14 @@ namespace MPix {
       // Number of solving phases
       int solutionPhases;
 
+   public:
+
+      // Saves context
+      void PushContextSnapshots();
+
+      // Restores context
+      void PopContextSnapshots(size_t number_of = 1);
+
    public: 
 
       // ================= Field helpers ======================
@@ -75,6 +83,9 @@ namespace MPix {
 
       // Group of methods returning list of all pixels at position with given interface
       template<class T> bool GetPixelsAt(forward_list<shared_ptr<T>> &list, Coordinates pos) const;
+
+      // Return pixel by its tag
+      shared_ptr<Pixel> GetPixelByTag(int tag) const;
 
       // ================= Assembly helpers ======================
 

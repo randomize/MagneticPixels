@@ -56,6 +56,8 @@ namespace MPix {
 
       FieldState st;
 
+      EventListener* toucher;
+
       // -------- Gesture with one touch ------------------------------------------
 
       // Here is gesture stored (SCREEN coordinates)

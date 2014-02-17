@@ -64,6 +64,7 @@ namespace MPix {
       inline void SetState(State s) { st = s; }
       inline void SetID(int id) { this->id = id; }
       inline void SetZ(int z) { this->z = z; }
+      inline void SetTag(int t) { this->tag = t; }
 
       // -------- Informations -----------------------------------
 
@@ -73,6 +74,7 @@ namespace MPix {
       //inline Coordinates GetOriginalPos() const  { return original_pos; }
       inline State GetState() const  { return st; }
       inline int GetZ() const { return z; }
+      inline int GetTag() const { return tag; }
 
       virtual PixelType GetType() const = 0;
 
@@ -110,6 +112,9 @@ namespace MPix {
 
       // ID will be set only by field in which pixels are put, shown to children
       int id;
+
+      // Tag is used for scripting
+      int tag;
 
    };
 

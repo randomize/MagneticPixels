@@ -244,7 +244,7 @@ void GoalEventPacket::Dispatch()
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateGoalView(id, task, CmdUIUpdateGoalView::Reason::HIGHLIGHT));
       break;
    case GoalEvent::CREATED:
-      EM_LOG_DEBUG(" Goal ["+ id + "]" + task + " => Undo Unhighlight " );
+      EM_LOG_DEBUG(" Goal ["+ id + "]" + task + " => Goal Create " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateGoalView(id, task, CmdUIUpdateGoalView::Reason::CREATED));
       break;
    default:

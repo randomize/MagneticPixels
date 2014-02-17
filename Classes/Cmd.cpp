@@ -19,7 +19,9 @@ unordered_map<string,function<ErrorCode(int)>> MPix::CmdUIRemovePixel::listners;
 unordered_map<string,function<ErrorCode(int,Coordinates)>> MPix::CmdUIMovePixel::listners;
 unordered_map<string,function<ErrorCode(int,Direction)>> MPix::CmdUIHighlightPixel::listners;
 unordered_map<string,function<ErrorCode(float,Point)>> MPix::CmdUIContentTransform::listners;
+
 unordered_map<string,function<ErrorCode()>> MPix::CmdUIGameFinished::listners;
+unordered_map<string, function<ErrorCode(const string&, bool, Point)>> MPix::CmdUIShowNotification::listners;
 
 // SoundManager commands
 unordered_map<string,function<ErrorCode(const string&)>> MPix::CmdPlaySound::listners;
@@ -38,5 +40,6 @@ unordered_map<string,function<ErrorCode(void)>> MPix::CmdGameplayGrowAsm::listne
 
 // Editor commands
 unordered_map<string,function<ErrorCode(CmdEditorAction::EditorAction)>> MPix::CmdEditorAction::listners;
+
 
 

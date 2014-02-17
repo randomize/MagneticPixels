@@ -37,22 +37,32 @@ namespace MPix {
          FINISHED   // Game is finished, shown results
       };
 
-
-      // Informers
+      // Current state getter
       State GetState(void) const;
-      const Context & GetContext();
 
-      // Global controllers - take effect immediately
-      ErrorCode ProcessOneCommand();
+      // Active context getter
+      const Context & GetContext() const;
+
+   public:  // Global controllers - take effect immediately
+
+      // Loads new level
       ErrorCode LoadLevel(shared_ptr<Level> target);
+
+      // Reset should be called when before new level loaded
+      // Cleanups manager and sets state to Idle, returns RET_OK
       ErrorCode Reset();
+
+      // Inits context and starts game with loaded level
       ErrorCode Play();
 
-      // Game controllers - schedule as commands, executed on ProcessOneCommand when UI is not busy
+   public:
+
+      // Command system: two schedulers and ProcessOneCommand executor
+      ErrorCode ProcessOneCommand();
       ErrorCode PostCommand(Command* cmd);
       ErrorCode PostPriorityCommand(Command* cmd);
 
-   private: // Commands
+   private: // Commands handlers
 
       ErrorCode ClickAtPoint(Coordinates position);
       ErrorCode MoveAssembly(Direction whereMove);
@@ -72,10 +82,6 @@ namespace MPix {
       ErrorCode UpdateUI();
 
       ErrorCode CheckForSolution();
-
-      // Pushing and pooping snapshot for undo system
-      ErrorCode PushContextSnapshots();
-      ErrorCode PopContextSnapshots(int count = 1);
 
       // Checking lose status
       ErrorCode CheckLoseStatus();

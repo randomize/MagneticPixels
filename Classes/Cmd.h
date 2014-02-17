@@ -185,6 +185,15 @@ namespace MPix {
       static unordered_map<string,function<ErrorCode()>> listners;
    };
 
+   struct CmdUIShowNotification : public Command {
+      CmdUIShowNotification (const string& message, bool boundled = false, Point pos = Point()) {
+         for (auto f : listners) {
+            toExec.push_back(std::bind( f.second, message, boundled, pos));
+         }
+      }
+      static unordered_map<string,function<ErrorCode(const string&, bool, Point)>> listners;
+   };
+
    // =========== Sound manager commands =========================
 
    struct CmdPlaySound : public Command {

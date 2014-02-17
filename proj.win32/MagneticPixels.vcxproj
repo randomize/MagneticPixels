@@ -205,6 +205,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\RepeatedSprite.cpp" />
     <ClCompile Include="..\Classes\ResultsState.cpp" />
     <ClCompile Include="..\Classes\RoundMark.cpp" />
+    <ClCompile Include="..\Classes\Script.cpp" />
+    <ClCompile Include="..\Classes\ScriptManager.cpp" />
+    <ClCompile Include="..\Classes\Scripts.cpp" />
     <ClCompile Include="..\Classes\SettingsManager.cpp" />
     <ClCompile Include="..\Classes\Shake.cpp" />
     <ClCompile Include="..\Classes\SimpleInputDialog.cpp" />
@@ -315,6 +318,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\RepeatedSprite.h" />
     <ClInclude Include="..\Classes\ResultsState.h" />
     <ClInclude Include="..\Classes\RoundMark.h" />
+    <ClInclude Include="..\Classes\Script.h" />
+    <ClInclude Include="..\Classes\ScriptManager.h" />
+    <ClInclude Include="..\Classes\Scripts.h" />
     <ClInclude Include="..\Classes\SettingsManager.h" />
     <ClInclude Include="..\Classes\Shake.h" />
     <ClInclude Include="..\Classes\SimpleInputDialog.h" />

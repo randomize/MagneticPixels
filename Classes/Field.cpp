@@ -44,7 +44,8 @@ MPix::Field::Field( const Field& oth ) :
    map(oth.map),
    kind_map(oth.kind_map),
    state_map(oth.state_map),
-   type_map(oth.type_map)
+   type_map(oth.type_map),
+   tags(oth.tags)
 {
    id_map.reserve(oth.id_map.size());
    for (auto p : oth.id_map) {
@@ -198,6 +199,9 @@ ErrorCode MPix::Field::InsertPixel( shared_ptr<Pixel> p )
    // Type map
    type_map[p->GetType()].emplace(id);
 
+   // Tag map
+   if (p->GetTag() != -1)
+      tags.emplace(p->GetTag(), id);
 
    // Kind map
 
@@ -523,6 +527,16 @@ void MPix::Field::UpdateStateMap( Pixel::State was, Pixel::State now, int id )
    state_map[was].erase(id);
    state_map[now].emplace(id);
 }
+
+shared_ptr<Pixel> MPix::Field::GetPixelByTag(int tag)
+{
+   auto it = tags.find(tag);
+   if (it != tags.end())
+      return GetPixelByID(it->second);
+   else
+      return nullptr;
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////

@@ -14,6 +14,7 @@
 #include "Field.h"
 #include "EventProcessor.h"
 #include "Level.h"
+#include "ScriptManager.h"
 
 using namespace MPix;
 
@@ -43,7 +44,7 @@ GameplayManager::State MPix::GameplayManager::GetState( void ) const
    return st;
 }
 
-const Context & MPix::GameplayManager::GetContext()
+const Context & MPix::GameplayManager::GetContext() const
 {
    return context;
 }
@@ -138,7 +139,6 @@ ErrorCode GameplayManager::PostPriorityCommand( Command* cmd )
 
 ErrorCode GameplayManager::LoadLevel( shared_ptr<Level> level )
 {
-   EM_LOG_INFO("GameplayManager->LoadLevel()");
 
    if (st != State::IDLE) {
       EM_LOG_WARNING("GameplayManager is not IDLE, level cant be loaded, need reset");
@@ -150,7 +150,12 @@ ErrorCode GameplayManager::LoadLevel( shared_ptr<Level> level )
    assert( ! level->GetField()->IsEmpty() );
    assert(level->GetState() == Level::State::IS_PLAYABLE);
 
+   EM_LOG_INFO("LOADING LEVEL #" + level->GetID());
+
    this->level = level;
+
+   ScriptManager::getInstance().LoadScript(level->GetID());
+
    SwitchState(State::READY);
 
    return ErrorCode::RET_OK;
@@ -158,7 +163,7 @@ ErrorCode GameplayManager::LoadLevel( shared_ptr<Level> level )
 
 ErrorCode GameplayManager::Play()
 {
-   EM_LOG_INFO("GameplayManager->Play()");
+   EM_LOG_INFO("PLAY");
 
    assert(level);
    SwitchState(State::PLAYING);
@@ -179,9 +184,7 @@ ErrorCode GameplayManager::Play()
    context.field->InitSnapshots(context);
    context.assembly->InitSnapshots(context);
    context.goals->InitSnapshots(context);
-
-   // Push first snapshot
-   PushContextSnapshots();
+   context.PushContextSnapshots();
 
    // Send Gui command to create pixel views and goal views
    GameStateManager::getInstance().CurrentState()->Execute(new CmdUICreateViews());
@@ -198,23 +201,20 @@ ErrorCode GameplayManager::Play()
 
 ErrorCode GameplayManager::FirstMove()
 {
-   // Check lost on load
    context.field->WorldCheckForLost(context);
 
-   // Update goals
+   ScriptManager::getInstance().OnFirstMove(context);
+
    CheckForSolution();
 
    UpdateUI();
+
    return ErrorCode::RET_OK;
 }
 
 ErrorCode GameplayManager::Reset()
 {
-   EM_LOG_INFO("GameplayManager->Reset()");
-
-   // Called when other level should be loaded
-   // Cleanups level and sets state to Idle
-   // Reset always have success
+   EM_LOG_INFO("RESET");
 
    // Break reference to level
    level.reset();
@@ -243,6 +243,11 @@ ErrorCode GameplayManager::ClickAtPoint( Coordinates position )
    EM_LOG_DEBUG("ClickAtPoint");
 
    assert(st == State::PLAYING);
+
+   // Break on script disallow clicking
+   if (ScriptManager::getInstance().OnPlayerClicked(context, position) == false) {
+      return ErrorCode::RET_FAIL;
+   }
 
    // TODO: click pixels, for fun, cactus can react too, if assembling sleeppy can react with(vorchanie)
    auto px = context.field->GetTopAssembleAt(position);
@@ -295,8 +300,8 @@ ErrorCode MPix::GameplayManager::StartAssembling( shared_ptr<IAssembled> pixel )
    // Save move number when started
    context.assembly->SetMoveNumber(context.moveNumber);
 
-   // Take snapshot (Call it STASM);
-   PushContextSnapshots();
+   // Take snapshot
+   context.PushContextSnapshots();
    context.moveNumber++;
 
    // Put pixel to assembly
@@ -316,6 +321,11 @@ ErrorCode GameplayManager::MoveAssembly(Direction d)
 
    EM_LOG_INFO("GameplayManager->MoveAssembly()");
 
+   // Break on script disallow clicking
+   if (ScriptManager::getInstance().OnPlayerMove(context, d) == false) {
+      return ErrorCode::RET_FAIL;
+   }
+
    if (context.assembly->IsEmpty()) {
       SendUINeedWakePixelFirst();
       return ErrorCode::RET_FAIL;
@@ -331,7 +341,7 @@ ErrorCode GameplayManager::MoveAssembly(Direction d)
       EM_LOG_INFO("Moving Assembly to " + d);
 
       // Saving what was
-      PushContextSnapshots();
+      context.PushContextSnapshots();
       context.moveNumber++;
 
       // Performing move in field
@@ -416,6 +426,7 @@ ErrorCode GameplayManager::GrowAssembly()
 
       } else {
          EM_LOG_DEBUG("Assembly last grow");
+         ScriptManager::getInstance().OnLastGrow(context);
       }
 
    } 
@@ -438,7 +449,7 @@ ErrorCode GameplayManager::UndoMove()
 
    // Undo one move and restore to snapshot
    context.moveNumber--;
-   PopContextSnapshots();
+   context.PopContextSnapshots();
 
    UpdateUI();
 
@@ -485,7 +496,7 @@ ErrorCode GameplayManager::EndAssembling()
       return ErrorCode::RET_FAIL;
    }
 
-   PushContextSnapshots();
+   context.PushContextSnapshots();
    context.moveNumber++;
 
    // Accept by all goals
@@ -509,22 +520,6 @@ ErrorCode GameplayManager::EndAssembling()
 
 //////////////////////////////////////////////////////////////////////////
 // Helpers
-
-ErrorCode MPix::GameplayManager::PushContextSnapshots()
-{
-   context.field->PushSnapshot(context);
-   context.assembly->PushSnapshot();
-   context.goals->PushSnapshot(context);
-   return ErrorCode::RET_OK;
-}
-
-ErrorCode MPix::GameplayManager::PopContextSnapshots( int count /*= 1*/ )
-{
-   context.field->PopSnapshots(context, count);
-   context.assembly->PopSnapshots(context, count);
-   context.goals->PopSnapshots(context, count);
-   return ErrorCode::RET_OK;
-}
 
 ErrorCode MPix::GameplayManager::CheckLoseStatus()
 {

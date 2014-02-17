@@ -334,6 +334,7 @@ EmbossLib::ErrorCode MPix::TouchLayer::TouchEnable()
    listener->onTouchCancelled = CC_CALLBACK_2(TouchLayer::onTouchCancelled, this);
 
    _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+   toucher = listener; // Save pointer for future Disabling
 
    ResetState();
 
@@ -344,7 +345,7 @@ EmbossLib::ErrorCode MPix::TouchLayer::TouchDisable()
 {
    EM_LOG_DEBUG("Touch layer touches off");
 
-   _eventDispatcher->removeEventListeners(EventListener::Type::TOUCH_ONE_BY_ONE);
+   _eventDispatcher->removeEventListener(toucher);
 
    ResetState();
    return ErrorCode::RET_OK;

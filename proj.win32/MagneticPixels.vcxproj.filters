@@ -70,6 +70,9 @@
     <Filter Include="Classes\Views\PixelViews\Derived">
       <UniqueIdentifier>{f4701bda-c61e-4f6b-847d-bb979e29dc19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Logic\Scipting">
+      <UniqueIdentifier>{73643cee-3ad6-4bf4-9d98-2af1afbc6f08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -368,6 +371,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\LevelView.cpp">
       <Filter>Classes\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ScriptManager.cpp">
+      <Filter>Classes\Singletons</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Scripts.cpp">
+      <Filter>Classes\Logic\Scipting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Script.cpp">
+      <Filter>Classes\Logic\Scipting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -697,6 +709,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\LevelView.h">
       <Filter>Classes\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ScriptManager.h">
+      <Filter>Classes\Singletons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Scripts.h">
+      <Filter>Classes\Logic\Scipting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Script.h">
+      <Filter>Classes\Logic\Scipting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

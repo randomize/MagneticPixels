@@ -12,6 +12,7 @@ Pixel::Pixel(int Z)
    st = State::ACTIVE;
    pos = Coordinates(0, 0);
    z = Z;
+   tag = -1;
 }
 
 Pixel::~Pixel()

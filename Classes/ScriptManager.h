@@ -12,11 +12,13 @@
 #define SCRIPTMANAGER_H_
 
 #include "EMBase.h"
+#include "MPix.h"
 
 namespace MPix {
 
    // Forward dependencies
    class Script;
+   class Context;
 
    // ScriptManager
 
@@ -24,15 +26,23 @@ namespace MPix {
    {
    public:
 
-      // Gameplay manager calls it on level start
+
+      // Searches for script for given level id, sets sefault if not found
       void LoadScript(unsigned id);
 
       // Callbacks
 
-      bool OnLoad();
-      bool OnUnload();
-      bool OnRestart();
+      // Called when level first loaded
+      void OnFirstMove( const Context& context );
 
+      // Called when player clicked
+      bool OnPlayerClicked( const Context& context, Coordinates where );
+
+      // Called when player tries to move assembly
+      bool OnPlayerMove( const Context& context, Direction where );
+
+      // Called after successfully last grow
+      void OnLastGrow(  const Context& context );
 
    private:
 
@@ -43,14 +53,15 @@ namespace MPix {
    
    public: 
    
-      static ScriptManager* getInstance() {
+      static ScriptManager& getInstance() {
          static ScriptManager theSingleInstance;
-         return &theSingleInstance;
+         return theSingleInstance;
       }
    
    private:
    
       ScriptManager();
+      ~ScriptManager();
       ScriptManager(ScriptManager& root){}
       ScriptManager& operator=(ScriptManager&){return *this;}
    

@@ -17,12 +17,13 @@ using namespace std::placeholders;
 int const GAMEPLAY_TICK_RATIO = 6;
 int const IDLE_TRICKS_TICK_RATIO = 100;
 
-MPix::GameMain::GameMain()
+GameMain::GameMain()
 {
    CmdUIGameFinished::listners["GameMain"] = std::bind( &GameMain::onCmdGameFinished, this );
+   CmdUIShowNotification::listners["GameMain"] = std::bind( &GameMain::onCmdShowNotification, this, _1, _2, _3 );
 }
 
-MPix::GameMain::~GameMain()
+GameMain::~GameMain()
 {
    CmdUIGameFinished::listners.erase("GameMain");
 }
@@ -40,13 +41,12 @@ bool GameMain::init()
    assert(GameplayManager::getInstance().GetState() == GameplayManager::State::READY);
 
    // Take some metrics
-   Size fullSize = Director::getInstance()->getWinSize();
-   Size halfSize =  fullSize / 2.0f;
-   Size visibleSize = Director::getInstance()->getVisibleSize();
-   // Point origin = Director::getInstance()->getVisibleOrigin();
-   auto center = Point(halfSize.width, halfSize.height);
-
-   float contentScale = (visibleSize.height/fullSize.height * visibleSize.width/fullSize.width);
+   m_full_size = Director::getInstance()->getWinSize();
+   m_half_size =  m_full_size / 2.0f;
+   m_visible_size = Director::getInstance()->getVisibleSize();
+   m_origin = Director::getInstance()->getVisibleOrigin();
+   m_center = Point(m_half_size.width, m_half_size.height);
+   m_content_scale = (m_visible_size.height/m_full_size.height * m_visible_size.width/m_full_size.width);
 
    // Create scene:
    // bg = 0
@@ -54,6 +54,9 @@ bool GameMain::init()
    // content = 1
    //   pixels = 1
    //   touch = 2
+   // UI: = 2
+   // Notifications = 3
+   
 
    bg = Layer::create();
    bg->addChild(ContentManager::getInstance().GetScrollingBG(rand() % 5 + 1), 1);
@@ -67,11 +70,30 @@ bool GameMain::init()
 
    // Content
    content = Node::create();
-   content->addChild(touch, 2);
    content->addChild(pixels, 1);
-   content->setScale(contentScale);
-   content->setPosition(halfSize.width, halfSize.height);
+   content->addChild(touch, 2);
+   content->setScale(m_content_scale);
+   content->setPosition(m_half_size.width, m_half_size.height);
    addChild(content, 1);
+
+   // Notificator =================================
+
+   // Background 
+   auto notification_bg = LayerColor::create(Color4B(255, 255, 255, 80));
+
+   // Content
+   notification_content = Node::create();
+   notification_content->setCascadeOpacityEnabled(true);
+   notification_content->setOpacityModifyRGB(true);
+
+   notification = Node::create();
+   notification->setOpacity(0);
+   notification->addChild(notification_bg, 0);
+   notification->addChild(notification_content, 1);
+   notification->setCascadeOpacityEnabled(true);
+   notification->setOpacityModifyRGB(true);
+   addChild(notification, 4);
+   notification_active = false;
 
    // Create buttons
    CreateButtons();
@@ -92,10 +114,8 @@ void GameMain::onExit()
    Scene::onExit();
 }
 
-void MPix::GameMain::CreateButtons()
+void GameMain::CreateButtons()
 {
-   Point origin = Director::getInstance()->getVisibleOrigin();
-   Size visibleSize = Director::getInstance()->getVisibleSize();
    // Create menu
    auto menu = Menu::create();
    menu->setPosition(Point::ZERO);
@@ -110,8 +130,8 @@ void MPix::GameMain::CreateButtons()
       auto btn = MenuItemImage::create( names[i], names[i], CC_CALLBACK_1(GameMain::BtnHnadler, this));
       btn->setTag(base_tag + i);
       btn->setPosition(Point(
-         origin.x + visibleSize.width - btn->getContentSize().width/2 * (2*i+1) ,
-         origin.y + btn->getContentSize().height/2)
+         m_origin.x + m_visible_size.width - btn->getContentSize().width/2 * (2*i+1) ,
+         m_origin.y + btn->getContentSize().height/2)
          );
       menu->addChild(btn);
    }
@@ -120,7 +140,7 @@ void MPix::GameMain::CreateButtons()
    menu->setScale(Director::getInstance()->getContentScaleFactor()); // FIXME
 }
 
-void MPix::GameMain::BtnHnadler(Object* sender)
+void GameMain::BtnHnadler(Object* sender)
 {
    auto id = (dynamic_cast<Node*>(sender))->getTag();
 
@@ -181,10 +201,16 @@ ErrorCode GameMain::Tick( float t )
       ViewManager::getInstance().RunIdleUpdateOnRandomPixel();
    }
 
+   if (notifications.empty() == false && notification_active == false) {
+      auto &n = notifications.front();
+      ShowNotification(n);
+      notifications.pop_front();
+   }
+
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::GameMain::FinishedGame()
+ErrorCode GameMain::FinishedGame()
 {
    // Get a snapshot render texture
    Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -207,10 +233,67 @@ EmbossLib::ErrorCode MPix::GameMain::FinishedGame()
 //////////////////////////////////////////////////////////////////////////
 // Commands handlers
 
-EmbossLib::ErrorCode MPix::GameMain::onCmdGameFinished()
+ErrorCode GameMain::onCmdGameFinished()
 {
    // Delegate to virtual method
    return FinishedGame();
 }
+
+
+EmbossLib::ErrorCode MPix::GameMain::onCmdShowNotification(const string& message, bool boundled, Point pos)
+{
+   EM_LOG_INFO("Pushing notification \""+ message +"\"");
+   notifications.push_back({ message, boundled, pos });
+   return ErrorCode::RET_OK;
+}
+
+void MPix::GameMain::onNotificationClick()
+{
+   notification->runAction(
+     Sequence::create(
+      FadeOut::create(1.5f),
+      CallFunc::create([this](){ notification_active = false; }),
+      nullptr
+     )
+   );
+}
+
+ErrorCode GameMain::ShowNotification(const Notification& n)
+{
+   notification_active = true;
+   auto listener = EventListenerTouchOneByOne::create();
+   notification_toucher = listener;
+   listener->setSwallowTouches(false);
+   listener->onTouchBegan = [this](Touch*, Event*)
+   { 
+      notification->getEventDispatcher()->removeEventListener(notification_toucher);
+      onNotificationClick();
+      return true;
+   };
+   notification->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, notification);
+
+   LabelTTF* label;
+   if (n.boundled) { // Issued by pixel
+      label = LabelTTF::create(n.message, ContentManager::getInstance().GetBaseFont(), 32.0f);
+      label->setPosition(n.pos);
+   }
+   else { // Issued by scene
+      label = LabelTTF::create(n.message, ContentManager::getInstance().GetBaseFont(), 32.0f);
+      //label->runAction(MoveTo::create(0.5f, m_center + Point(0, m_visible_size.height/4.0)));
+      label->setPosition(m_center + Point(0, m_visible_size.height/4.0));
+   }
+
+   label->setColor(Color3B::BLACK);
+   notification_content->removeAllChildren();
+   notification_content->addChild(label);
+   notification->runAction(
+     Sequence::create(
+      FadeIn::create(1.0f),
+      nullptr
+     )
+   );
+   return ErrorCode::RET_OK;
+}
+
 
 

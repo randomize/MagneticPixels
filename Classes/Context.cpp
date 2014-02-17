@@ -117,12 +117,30 @@ shared_ptr<IColorful> MPix::Context::GetColorfulAt( Coordinates pos ) const
    return nullptr;
 }
 
+void MPix::Context::PushContextSnapshots()
+{
+   field->PushSnapshot(*this);
+   assembly->PushSnapshot();
+   goals->PushSnapshot(*this);
+}
+
+void MPix::Context::PopContextSnapshots(size_t number_of)
+{
+   field->PopSnapshots(*this, number_of);
+   assembly->PopSnapshots(*this, number_of);
+   goals->PopSnapshots(*this, number_of);
+}
+
+shared_ptr<Pixel> MPix::Context::GetPixelByTag(int tag) const
+{
+   return field->GetPixelByTag(tag);
+}
 
 
 
 //////////////////////////////////////////////////////////////////////////
-// Stupid C++ j
-// 1) move templlate impl. to header -- Fuck placing implementation in header! I don't want Field.h dependency in header...
+// Stupid C++ (Or me)
+// 1) move template impl. to header -- Fuck placing implementation in header! I don't want Field.h dependency in header...
 // 2) Monkey copy paste this.. well at least works
 template bool MPix::Context::GetPixelsAt( forward_list<shared_ptr<IKilling>> &list, Coordinates pos ) const;
 template bool MPix::Context::GetPixelsAt( forward_list<shared_ptr<IMoveBlocker>> &list, Coordinates pos ) const;
