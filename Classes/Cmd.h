@@ -186,12 +186,12 @@ namespace MPix {
    };
 
    struct CmdUIShowNotification : public Command {
-      CmdUIShowNotification (const string& message, bool boundled = false, Point pos = Point()) {
+      CmdUIShowNotification (Node* contents) {
          for (auto f : listners) {
-            toExec.push_back(std::bind( f.second, message, boundled, pos));
+            toExec.push_back(std::bind( f.second, contents));
          }
       }
-      static unordered_map<string,function<ErrorCode(const string&, bool, Point)>> listners;
+      static unordered_map<string,function<ErrorCode(Node*)>> listners;
    };
 
    // =========== Sound manager commands =========================

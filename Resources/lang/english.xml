@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language name="English" original_name="English" strings="17" >
+	<s k="Menu">Menu</s>
+	<s k="Game">Game</s>
+	<s k="Play">Play</s>
+	<s k="Exit">Exit</s>
+	<s k="Test">Test</s>
+	<s k="Editor">Editor</s>
+	<s k="Back">Back</s>
+	<s k="Export">Export levels to</s>
+	<s k="New">New level</s>
+	<s k="Last">Last</s>
+	<s k="Edit">Edit level</s>
+	<s k="Delete">Delete level</s>
+	<s k="Crash">Crash</s>
+	<s k="Credits">Credits</s>
+	<s k="Test lvl">Test level</s>
+   <s k="Tutorial 1.1">Tap red sleepy block
+to wake it!</s>
+   <s k="Tutorial 1.2">Now use swipe gestures
+to move it to the goal</s>
+   <s k="Tutorial 1.3">Great! Tap happy block to accept
+it and finish the level</s>
+</language>

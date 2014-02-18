@@ -2,8 +2,9 @@
 
 namespace EMCore {
 
-   const string LocaleManager::implemented_langs[] = {
-      "lang/russian.xml" // Russian
+   const vector<string> LocaleManager::implemented_langs = {
+      "lang/russian.xml",
+      "lang/english.xml"
    };
 
    // Helper dictionary class
@@ -110,23 +111,6 @@ namespace EMCore {
       string original_name;
    };
 
-   // Special case -- English
-   class EngDictionary : public Dictionary {
-   public:
-      EngDictionary() { name ="English"; original_name="English"; }
-      static EngDictionary* create() {
-         return new EngDictionary();
-      }
-      virtual const string& Lookup(const string& s) override {
-         return s;
-      }
-      virtual const char* Lookup(const char* s) override {
-         return s;
-      }
-   };
-
-
-
    //////////////////////////////////////////////////////////////////////////
 
 
@@ -145,17 +129,20 @@ namespace EMCore {
          languages.emplace(fab->GetName(), fab);
          EM_LOG_INFO("Loaded: " + f + " with " + fab->GetSize() + " strings" );
       }
-      // Put English
-      auto en = EngDictionary::create();
-      languages.emplace(en->GetName(),en);
-
 
       // TODO: Take settings in account
 
       auto it = languages.find(GetCurrentLanguage());
       if (it == languages.end()) {
          EM_LOG_INFO("Selecting English language as default");
-         current = en;
+         auto it = languages.find(GetCurrentLanguage());
+         if (it == languages.end()) {
+            EM_LOG_WARNING("English xml not loaded, WTF?");
+            current = new Dictionary();
+         }
+         else {
+            current = it->second;
+         }
       } else {
          EM_LOG_INFO("Selecting " + it->first + " language");
          current = it->second;

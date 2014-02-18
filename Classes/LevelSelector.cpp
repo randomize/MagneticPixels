@@ -24,7 +24,7 @@ const int Z_OVERLAY = 5;
 const float PANEL_HEIGHT = 100.0f;
 const float UPPER_PANE_FONT = 64.0f;
 
-const float FLIP_PAGE_TRESHOLD_PERCENT = 0.15f; //  => flip
+const float FLIP_PAGE_TRESHOLD_PERCENT = 0.10f; //  => flip
 
 const int LEVEL_BUTTON_COLS_COUNT = 3;
 const int LEVEL_BUTTON_ROWS_COUNT = 5;
@@ -377,9 +377,9 @@ void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
    case State::WAIT:
    case State::BUTTON:
    {
-      auto pos = convertTouchToNodeSpace(touch) - m_cur_button->getPosition();
+      auto pos = worlds_layer->convertTouchToNodeSpace(touch) - m_cur_button->getPosition();
       if (pos.getLengthSq() > BUTTON_TOUCH_RADIUS*BUTTON_TOUCH_RADIUS) {
-         EM_LOG_DEBUG("Touch left button");
+         EM_LOG_DEBUG("Touch left the button");
          //state = State::IGNORING;
          m_cur_button->stopAllActions();
          m_cur_button->runAction(ScaleTo::create(0.15f, 1));

@@ -9,6 +9,7 @@
 #include "LevelManager.h"
 #include "ContentManager.h"
 #include "ViewManager.h"
+#include "EMBaseMasterLoop.h"
 
 using namespace MPix;
 using namespace std::placeholders;
@@ -20,7 +21,7 @@ int const IDLE_TRICKS_TICK_RATIO = 100;
 GameMain::GameMain()
 {
    CmdUIGameFinished::listners["GameMain"] = std::bind( &GameMain::onCmdGameFinished, this );
-   CmdUIShowNotification::listners["GameMain"] = std::bind( &GameMain::onCmdShowNotification, this, _1, _2, _3 );
+   CmdUIShowNotification::listners["GameMain"] = std::bind( &GameMain::onCmdShowNotification, this, _1 );
 }
 
 GameMain::~GameMain()
@@ -79,21 +80,31 @@ bool GameMain::init()
    // Notificator =================================
 
    // Background 
-   auto notification_bg = LayerColor::create(Color4B(255, 255, 255, 80));
+   notification_bg = LayerColor::create(Color4B(0, 0, 0, 89));
+   notification_bg->setVisible(false);
 
    // Content
-   notification_content = Node::create();
-   notification_content->setCascadeOpacityEnabled(true);
-   notification_content->setOpacityModifyRGB(true);
+   notification_content = nullptr;
+   notification_running = false;
 
    notification = Node::create();
-   notification->setOpacity(0);
    notification->addChild(notification_bg, 0);
-   notification->addChild(notification_content, 1);
-   notification->setCascadeOpacityEnabled(true);
-   notification->setOpacityModifyRGB(true);
+
+   // Create touch
+   auto listener = EventListenerTouchOneByOne::create();
+   notification_toucher = listener;
+   listener->setSwallowTouches(false);
+   listener->onTouchBegan = [this](Touch*, Event*)
+   { 
+      if (notification_content) {
+         onNotificationClick();
+         return false;
+      }
+      return false;
+   };
+   notification->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, notification);
    addChild(notification, 4);
-   notification_active = false;
+
 
    // Create buttons
    CreateButtons();
@@ -146,12 +157,21 @@ void GameMain::BtnHnadler(Object* sender)
 
    switch(id) {
    case 101: {
+
+      notification->removeAllChildren();
+      notification_bg = LayerColor::create(Color4B(0, 0, 0, 89));
+      notification_bg->setVisible(false);
+      notification->addChild(notification_bg, 0);
+      notification_content = nullptr;
+      notification_running = false;
+
       GameplayManager::getInstance().Reset();
       auto lvl = LevelManager::getInstance().GetPlayableLastLevel();
       GameplayManager::getInstance().LoadLevel(lvl);
       pixels->Reset();
       ResetLocks();
       GameplayManager::getInstance().Play();
+
       return;
    }
    case 102: {
@@ -201,7 +221,7 @@ ErrorCode GameMain::Tick( float t )
       ViewManager::getInstance().RunIdleUpdateOnRandomPixel();
    }
 
-   if (notifications.empty() == false && notification_active == false) {
+   if (notifications.empty() == false && notification_running == false) {
       auto &n = notifications.front();
       ShowNotification(n);
       notifications.pop_front();
@@ -240,53 +260,53 @@ ErrorCode GameMain::onCmdGameFinished()
 }
 
 
-EmbossLib::ErrorCode MPix::GameMain::onCmdShowNotification(const string& message, bool boundled, Point pos)
+EmbossLib::ErrorCode MPix::GameMain::onCmdShowNotification(Node* content)
 {
-   EM_LOG_INFO("Pushing notification \""+ message +"\"");
-   notifications.push_back({ message, boundled, pos });
+   // Stamp and put on queue
+   EM_LOG_INFO("Pushing notification");
+   notifications.push_back({ content, EMBaseMasterLoop::GetTime() });
    return ErrorCode::RET_OK;
 }
 
+//////////////////////////////////////////////////////////////////////////
+// Notifications
+
+// On hide
 void MPix::GameMain::onNotificationClick()
 {
-   notification->runAction(
+   notification_bg->setVisible(false);
+   notification_content->runAction(
      Sequence::create(
-      FadeOut::create(1.5f),
-      CallFunc::create([this](){ notification_active = false; }),
+      FadeOut::create(0.8f),
+      CallFunc::create([this](){ notification_running = false; }),
+      RemoveSelf::create(),
       nullptr
      )
    );
+   notification_content = nullptr;
 }
 
+// On show
 ErrorCode GameMain::ShowNotification(const Notification& n)
 {
-   notification_active = true;
-   auto listener = EventListenerTouchOneByOne::create();
-   notification_toucher = listener;
-   listener->setSwallowTouches(false);
-   listener->onTouchBegan = [this](Touch*, Event*)
-   { 
-      notification->getEventDispatcher()->removeEventListener(notification_toucher);
-      onNotificationClick();
-      return true;
-   };
-   notification->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, notification);
+   // Flag running
+   notification_running = true;
 
-   LabelTTF* label;
-   if (n.boundled) { // Issued by pixel
-      label = LabelTTF::create(n.message, ContentManager::getInstance().GetBaseFont(), 32.0f);
-      label->setPosition(n.pos);
-   }
-   else { // Issued by scene
-      label = LabelTTF::create(n.message, ContentManager::getInstance().GetBaseFont(), 32.0f);
-      //label->runAction(MoveTo::create(0.5f, m_center + Point(0, m_visible_size.height/4.0)));
-      label->setPosition(m_center + Point(0, m_visible_size.height/4.0));
-   }
+   // Show bg
+   notification_bg->setVisible(true);
 
-   label->setColor(Color3B::BLACK);
-   notification_content->removeAllChildren();
-   notification_content->addChild(label);
-   notification->runAction(
+   // Scale and place content
+   notification_content = n.content;
+   notification_content->setOpacity(0);
+   notification_content->setScale(m_content_scale);
+   notification_content->setPosition(m_half_size.width, m_half_size.height);
+
+   // Reparent
+   notification->addChild(notification_content, 1);
+   notification_content->release();
+
+   // Fade
+   notification_content->runAction(
      Sequence::create(
       FadeIn::create(1.0f),
       nullptr

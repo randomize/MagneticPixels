@@ -20,6 +20,10 @@ SoundManager::SoundManager()
    SimpleAudioEngine::getInstance()->setEffectsVolume(1);
    SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(1);
 
+
+   // TODO: load predefined packs
+
+
    EM_LOG_INFO("[ SoundManager initialized ]");
 
 }

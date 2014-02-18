@@ -4,7 +4,7 @@ using namespace MPix;
 
 // Only reserve memory
 
-// UI commands
+// UI views
 
 unordered_map<string,function<ErrorCode(int,CmdUIUpdatePixelView::Reason)>> MPix::CmdUIUpdatePixelView::listners;
 unordered_map<string,function<ErrorCode(int,MPix::Coordinates,CmdUIUpdateGoalView::Reason)>> MPix::CmdUIUpdateGoalView::listners;
@@ -20,8 +20,9 @@ unordered_map<string,function<ErrorCode(int,Coordinates)>> MPix::CmdUIMovePixel:
 unordered_map<string,function<ErrorCode(int,Direction)>> MPix::CmdUIHighlightPixel::listners;
 unordered_map<string,function<ErrorCode(float,Point)>> MPix::CmdUIContentTransform::listners;
 
+// UI main
 unordered_map<string,function<ErrorCode()>> MPix::CmdUIGameFinished::listners;
-unordered_map<string, function<ErrorCode(const string&, bool, Point)>> MPix::CmdUIShowNotification::listners;
+unordered_map<string, function<ErrorCode(Node*)>> MPix::CmdUIShowNotification::listners;
 
 // SoundManager commands
 unordered_map<string,function<ErrorCode(const string&)>> MPix::CmdPlaySound::listners;
@@ -40,6 +41,7 @@ unordered_map<string,function<ErrorCode(void)>> MPix::CmdGameplayGrowAsm::listne
 
 // Editor commands
 unordered_map<string,function<ErrorCode(CmdEditorAction::EditorAction)>> MPix::CmdEditorAction::listners;
+
 
 
 

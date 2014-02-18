@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<language name="Russian" original_name="Русский" strings="14" >
+<language name="Russian" original_name="Русский" strings="15" >
 	<s k="Menu">Меню</s>
 	<s k="Game">Игра</s>
 	<s k="Play">Играть</s>
@@ -7,11 +7,13 @@
 	<s k="Test">Тест</s>
 	<s k="Editor">Редактор</s>
 	<s k="Back">Назад</s>
-	<s k="Export levels to">Экспортировать уровни в</s>
-	<s k="New level">Новый уровень</s>
+	<s k="Export">Экспортировать уровни в</s>
+	<s k="New">Новый уровень</s>
 	<s k="Last">Последний</s>
 	<s k="Edit">Редактировать</s>
 	<s k="Delete">Удалить</s>
 	<s k="Crash">Упасть</s>
-	<s k="Test level">Тестовый уровень</s>
+	<s k="Credits">Об игре</s>
+	<s k="Test lvl">Тестовый уровень</s>
+   <s k="Tutorial 1.3">Отлично! Теперь кликните довольный\n блок чтобы завершить уровень</s>
 </language>

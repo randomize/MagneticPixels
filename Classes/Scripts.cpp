@@ -5,6 +5,8 @@
 #include "Cmd.h"
 #include "MPix.h"
 
+#include "ContentManager.h"
+
 
 #include "IColorful.h"
 #include "IAssembled.h"
@@ -15,13 +17,19 @@ using namespace MPix;
 
 // Helpers
 
-void ShowGlobalNotification(const string& message) {
-   auto c = new CmdUIShowNotification(message);
-   c->Execute();
-}
+void ShowSimpleNotification(const string& message, Point pos = Point::ZERO) {
+   auto notification_content = Node::create();
+   notification_content->setCascadeOpacityEnabled(true);
+   notification_content->setOpacityModifyRGB(true);
+   notification_content->retain();
 
-void ShowNotificationOnPixel(const string& message, const Pixel& px) {
-   auto c = new CmdUIShowNotification(message, true, LogicToScreen(px.GetPos()));
+   LabelTTF* label;
+   label = LabelTTF::create(message, ContentManager::getInstance().GetBaseFont(), 32.0f);
+   label->setPosition(pos);
+   label->setColor(Color3B::WHITE);
+   notification_content->addChild(label);
+
+   auto c = new CmdUIShowNotification(notification_content);
    c->Execute();
 }
 
@@ -41,7 +49,7 @@ public:
 
       on_first_move = [this]( const Context& context ) {
          step = 0;
-         ShowGlobalNotification(LocalUTF8Str("Tap on red sleepy block to wake it!"));
+         ShowSimpleNotification(LocalUTF8Str("Tutorial 1.1"));
       };
 
       on_last_grow = [this](const Context& context) {
@@ -53,7 +61,7 @@ public:
             auto pp = dynamic_pointer_cast<IAssembled>(px);
             if (pp && pp->IsInAssembly() == true) {
                step++;
-               ShowGlobalNotification(LocalUTF8Str("Now use swipe gestures\n to move it to the goal."));
+               ShowSimpleNotification(LocalUTF8Str("Tutorial 1.2"));
             }
             break;
          }
@@ -63,7 +71,7 @@ public:
             auto pp = dynamic_pointer_cast<IAssembled>(px);
             if (pp && pp->IsSmiling() == true) {
                step++;
-               ShowGlobalNotification(LocalUTF8Str("Great! Tap happy block to accept\n it and finish the level."));
+               ShowSimpleNotification(LocalUTF8Str("Tutorial 1.3"));
             }
             break;
          }

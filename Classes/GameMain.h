@@ -42,8 +42,6 @@ namespace MPix {
       PixelsLayer* pixels;
       TouchLayer* touch;
       Layer* bg;
-      Node* notification;
-      Node* notification_content;
        
       // Content holds pixels and touch layers, making easy to scroll/zoom
       Node* content;
@@ -57,12 +55,16 @@ namespace MPix {
       virtual ErrorCode FinishedGame();
 
    protected:
-      //Notification
+
+      // Notification system
+
+      Node* notification;
+      Node* notification_content;
+      Node* notification_bg;
 
       struct Notification {
-         string message;
-         bool boundled;
-         Point pos;
+         Node* content;
+         unsigned timestamp;
       };
 
       list<Notification> notifications;
@@ -73,7 +75,7 @@ namespace MPix {
       // Touch in notification
       void onNotificationClick();
       EventListener* notification_toucher;
-      bool notification_active;
+      bool notification_running;
 
    protected:
 
@@ -95,7 +97,7 @@ namespace MPix {
       ErrorCode onCmdGameFinished();
 
       // Handles CmdShowNotification
-      ErrorCode onCmdShowNotification(const string& message, bool boundled, Point pos);
+      ErrorCode onCmdShowNotification(Node* content);
 
    };
 

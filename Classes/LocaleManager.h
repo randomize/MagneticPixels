@@ -37,7 +37,7 @@ namespace EMCore {
       string locale;
 
       // FIXME: For now cocos has no EnumerateFilesInFolder function in FileUtils... hardcoding langs
-      static const string implemented_langs[];
+      static const vector<string> implemented_langs;
 
       const char* GetCurrentLanguage();
 

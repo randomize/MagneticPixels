@@ -107,7 +107,7 @@ void MPix::MenuMain::onEnter()
    });
    menu->addChild(item);
 
-   label = createMenuItem("Play test");
+   label = createMenuItem("Test lvl");
    item = MenuItemLabel::create(label, [&](Object *sender) {
       ToTest();
    });
