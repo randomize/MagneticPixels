@@ -31,7 +31,7 @@ MPix::PixelColor MPix::IColorful::GetColor() const
 
 string MPix::IColorful::GetColorAsString() const
 {
-   return PixelColorToStr(color);
+   return PixelColorToStr(GetColor());
 }
 
 void MPix::IColorful::Accept( const Context& context )

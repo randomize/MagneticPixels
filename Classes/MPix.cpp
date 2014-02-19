@@ -332,8 +332,8 @@ const char* MPix::PixelColorToStr( PixelColor pc )
 {
    switch (pc)
    {
-   case PixelColor::BLACK:
-      return "Black";
+   case PixelColor::WHITE:
+      return "White";
    case PixelColor::GRAY:
       return "Gray";
    case PixelColor::RED:
@@ -344,6 +344,12 @@ const char* MPix::PixelColorToStr( PixelColor pc )
       return "Blue";
    case PixelColor::YELLOW:
       return "Yellow";
+   case PixelColor::CYAN:
+      return "Cyan";
+   case PixelColor::PINK:
+      return "Pink";
+   case PixelColor::VIOLET:
+      return "Violet";
    default:
       return "Unknown";
    }
@@ -353,8 +359,8 @@ HSVColor MPix::PixelColorToHSV( PixelColor pc )
 {
    // Stored in HSV-shift format from red
    switch (pc) {
-   case PixelColor::BLACK:
-      return HSVColor(0, 0, 0);
+   case PixelColor::WHITE:
+      return HSVColor(0, 0, 1.75);
    case PixelColor::GRAY:
       return HSVColor(0, 0, 1.0f);
    case PixelColor::RED:
@@ -364,12 +370,47 @@ HSVColor MPix::PixelColorToHSV( PixelColor pc )
    case PixelColor::BLUE:
       return HSVColor(-3.43f, 1.0f, 0.98f);
    case PixelColor::YELLOW:
-      return HSVColor(-0.5f, 1.1f, 1.0f);
+      return HSVColor(-0.75f, 2.1f, 1.32f);
+   case PixelColor::PINK:
+      return HSVColor(0.38f, 0.94f, 1.12f);
+   case PixelColor::VIOLET:
+      return HSVColor(2.05f, 0.94f, 1.12f);
+   case PixelColor::CYAN:
+      return HSVColor(-3.1415f, 1.39f, 1.185f);
    default:
       return HSVColor(0.24f, 1.5f, 1.0f); // Fuchsia
    }
    return HSVColor(0.24f, 1.5f, 1.0f); // Fuchsia
 }
+
+cocos2d::Color3B MPix::PixelColorToRGB(PixelColor pc)
+{
+   // Stored in HSV-shift format from red
+   switch (pc) {
+   case PixelColor::WHITE:
+      return Color3B(255,255,255);
+   case PixelColor::GRAY:
+      return Color3B(100,100,100);
+   case PixelColor::RED:
+      return Color3B(255,0,0);
+   case PixelColor::GREEN:
+      return Color3B(0,255,0); // 60
+   case PixelColor::BLUE:
+      return Color3B(0,0,255);
+   case PixelColor::YELLOW:
+      return Color3B(255,255,0);
+   case PixelColor::PINK:
+      return Color3B(255,250,250);
+   case PixelColor::VIOLET:
+      return Color3B(200,20,250);
+   case PixelColor::CYAN:
+      return Color3B(0,255,255);
+   default:
+      return Color3B(255,0,255); // Fuchsia
+   }
+   return Color3B(255,0,255); // Fuchsia
+}
+
 
 //////////////////////////////////////////////////////////////////////////
 // Localization support shorthands

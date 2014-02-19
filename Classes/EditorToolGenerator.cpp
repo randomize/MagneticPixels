@@ -11,6 +11,8 @@
 #include "Pitfall.h"
 #include "SokobanPixel.h"
 #include "StonePixel.h"
+#include "MutantPixel.h"
+#include "BomberPixel.h"
 
 using namespace MPix;
 
@@ -117,10 +119,37 @@ vector<shared_ptr<EditorTool>> MPix::EditorToolGenerator::GenerateDefaultSet()
    fab = new EditorToolPixel( "Pitfall" , pf);
    PUT_TO(msc, fab);
 
-   // Pitfall
+   // Stone
    auto stp = make_shared<StonePixel>();
    fab = new EditorToolPixel( "Stone" , stp);
    PUT_TO(msc, fab);
+
+   // Mutants
+   auto muts = new EditorFolderTool("Mutants", "mutantpixel");
+   PUT_TO(msc, muts);
+
+   // Mutant
+   auto stm = make_shared<MutantPixel>();
+   fab = new EditorToolPixel( "Mutant def" , stm);
+   PUT_TO(muts, fab);
+   stm = make_shared<MutantPixel>(PixelColor::GREEN,PixelColor::RED); fab = new EditorToolPixel( "Mutant 1" , stm); PUT_TO(muts, fab);
+   stm = make_shared<MutantPixel>(PixelColor::YELLOW,PixelColor::BLUE); fab = new EditorToolPixel( "Mutant 1" , stm); PUT_TO(muts, fab);
+   stm = make_shared<MutantPixel>(PixelColor::VIOLET,PixelColor::RED); fab = new EditorToolPixel( "Mutant 1" , stm); PUT_TO(muts, fab);
+   stm = make_shared<MutantPixel>(PixelColor::CYAN,PixelColor::YELLOW); fab = new EditorToolPixel( "Mutant 1" , stm); PUT_TO(muts, fab);
+
+   // Bombs
+   auto boms = new EditorFolderTool("Bombers", "bomberpixel");
+   PUT_TO(msc, boms);
+
+   auto stb = make_shared<BomberPixel>();
+   fab = new EditorToolPixel( "Bomb 5 r" , stb);
+   PUT_TO(boms, fab);
+   stb = make_shared<BomberPixel>(PixelColor::YELLOW, 2);
+   fab = new EditorToolPixel( "Bomb 2 y" , stb);
+   PUT_TO(boms, fab);
+   stb = make_shared<BomberPixel>(PixelColor::YELLOW, 8);
+   fab = new EditorToolPixel( "Bomb 8 y" , stb);
+   PUT_TO(boms, fab);
 
    return v;
 

@@ -85,6 +85,7 @@ void MPix::ContentManager::CreateSprites()
    resources.emplace("cactus_bg", "needle_small.png");
    resources.emplace("bomber_bg", "bomber_bg.png");
    resources.emplace("stone_bg", "stone_pixel.png");
+   resources.emplace("mutant_dots", "mutant_color.png");
 
    // UI Objects
    // TODO: merge UI sprites to one sprite sheet atlas

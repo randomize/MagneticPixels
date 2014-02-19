@@ -381,6 +381,18 @@
     <ClCompile Include="..\Classes\Script.cpp">
       <Filter>Classes\Logic\Scipting</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\BomberPixelView.cpp">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MutantPixelView.cpp">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BomberPixel.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MutantPixel.cpp">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -718,6 +730,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Script.h">
       <Filter>Classes\Logic\Scipting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BomberPixelView.h">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MutantPixelView.h">
+      <Filter>Classes\Views\PixelViews\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BomberPixel.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MutantPixel.h">
+      <Filter>Classes\Logic\Pixel Models\PixelTypes\Derived</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

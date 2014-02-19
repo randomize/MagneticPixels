@@ -136,6 +136,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\Assembly.cpp" />
     <ClCompile Include="..\Classes\BadMagneticPixel.cpp" />
     <ClCompile Include="..\Classes\BehaviorManager.cpp" />
+    <ClCompile Include="..\Classes\BomberPixel.cpp" />
+    <ClCompile Include="..\Classes\BomberPixelView.cpp" />
     <ClCompile Include="..\Classes\CactusDynamic.cpp" />
     <ClCompile Include="..\Classes\CactusDynamicView.cpp" />
     <ClCompile Include="..\Classes\CactusStatic.cpp" />
@@ -195,6 +197,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\MagneticPixelView.cpp" />
     <ClCompile Include="..\Classes\MenuMain.cpp" />
     <ClCompile Include="..\Classes\MPix.cpp" />
+    <ClCompile Include="..\Classes\MutantPixel.cpp" />
+    <ClCompile Include="..\Classes\MutantPixelView.cpp" />
     <ClCompile Include="..\Classes\Pitfall.cpp" />
     <ClCompile Include="..\Classes\PitfallView.cpp" />
     <ClCompile Include="..\Classes\Pixel.cpp" />
@@ -241,6 +245,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\Assembly.h" />
     <ClInclude Include="..\Classes\BadMagneticPixel.h" />
     <ClInclude Include="..\Classes\BehaviorManager.h" />
+    <ClInclude Include="..\Classes\BomberPixel.h" />
+    <ClInclude Include="..\Classes\BomberPixelView.h" />
     <ClInclude Include="..\Classes\CactusDynamic.h" />
     <ClInclude Include="..\Classes\CactusDynamicView.h" />
     <ClInclude Include="..\Classes\CactusStatic.h" />
@@ -307,6 +313,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\MagneticPixelView.h" />
     <ClInclude Include="..\Classes\MenuMain.h" />
     <ClInclude Include="..\Classes\MPix.h" />
+    <ClInclude Include="..\Classes\MutantPixel.h" />
+    <ClInclude Include="..\Classes\MutantPixelView.h" />
     <ClInclude Include="..\Classes\Pitfall.h" />
     <ClInclude Include="..\Classes\PitfallView.h" />
     <ClInclude Include="..\Classes\Pixel.h" />

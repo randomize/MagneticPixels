@@ -19,6 +19,8 @@
 #include "Pitfall.h"
 #include "SokobanPixel.h"
 #include "StonePixel.h"
+#include "BomberPixel.h"
+#include "MutantPixel.h"
 
 using namespace MPix;
 
@@ -76,6 +78,13 @@ shared_ptr<Level> LevelGenerator::CreateTestLevel()
    f->InsertPixel(n, -2, 0);
    n = new StonePixel();
    f->InsertPixel(n, -2, -1);
+
+   // 2-3 0-3
+   n = new BomberPixel(PixelColor::GREEN);
+   f->InsertPixel(n, 2, -3);
+   n = new MutantPixel(PixelColor::BLUE, PixelColor::RED);
+   f->InsertPixel(n, 0, -3);
+
 
    // Magnetics
    n = new MagneticPixel(PixelColor::GREEN);

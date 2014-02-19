@@ -26,6 +26,7 @@ namespace MPix {
 
       // Register this pixel type to pixel factory
       EM_NODE_CHILD(MagneticDiagonalPixel);
+      PixelType GetType() const override { return PixelType::ASSEMBLY_PIX; }
 
    public:
 

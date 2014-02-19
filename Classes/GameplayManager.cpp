@@ -256,7 +256,7 @@ ErrorCode GameplayManager::ClickAtPoint( Coordinates position )
    if ( context.assembly->IsEmpty() )
    {
       // if clicked on asm pixel - wake it and start
-      if (px) {
+      if (px && px->canStartAssembly(context)) {
          StartAssembling(px);
          return ErrorCode::RET_OK;
       }
@@ -321,7 +321,7 @@ ErrorCode GameplayManager::MoveAssembly(Direction d)
 
    EM_LOG_INFO("GameplayManager->MoveAssembly()");
 
-   // Break on script disallow clicking
+   // Break on script disallow moving
    if (ScriptManager::getInstance().OnPlayerMove(context, d) == false) {
       return ErrorCode::RET_FAIL;
    }

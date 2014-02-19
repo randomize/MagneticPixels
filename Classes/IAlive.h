@@ -41,7 +41,8 @@ namespace MPix {
          KILLED_BY_PITTRAP,
          KILLED_BY_STONE,
          KILLED_BY_LASER,
-         KILLED_BY_HUNGRY_WOLF
+         KILLED_BY_HUNGRY_WOLF,
+         KILLED_BY_EXPLOSION
       };
 
       IAlive();

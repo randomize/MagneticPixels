@@ -50,8 +50,8 @@ namespace MPix {
 
 
       // Assembly presence
-      void AddToAssembly( const Context& context );
-      void RemoveFromAssembly( const Context& context );
+      virtual void AddToAssembly( const Context& context );
+      virtual void RemoveFromAssembly( const Context& context );
       bool IsInAssembly();
 
       // Falling possibility
@@ -71,7 +71,7 @@ namespace MPix {
       void SetGrowBehavior(shared_ptr<GrowBehavior> new_behavior);
       void SetGrowBehavior(const string& name);
 
-   private:
+   protected:
 
       Historical<bool> in_assembly;
 

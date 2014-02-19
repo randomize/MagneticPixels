@@ -206,18 +206,22 @@ namespace MPix {
    // Pixel color 
 
    enum class PixelColor {
-      BLACK = 0,
+      WHITE = 0,
       GRAY,
       RED,
       GREEN,
       BLUE,
       YELLOW,
+      VIOLET,
+      CYAN,
+      PINK,
       Last,
-      First=BLACK
+      First=WHITE
    };
 
    const char* PixelColorToStr(PixelColor pc);
    HSVColor PixelColorToHSV(PixelColor pc);
+   Color3B PixelColorToRGB(PixelColor pc);
    ostream& operator<<(ostream& oStream, const PixelColor& color);
 
 }
