@@ -85,6 +85,15 @@ namespace MPix {
 
    };
 
+   // Kind killer never kills 
+   class KillingKind : public KillingBehavior {
+   public:
+
+      EM_NODE_CHILD(KillingKind);
+      virtual bool tryKillThat(shared_ptr<IKilling> subject, const Context& context, int target) { return false; }
+
+   };
+
    // Kills at itself point, based on rankings
    class KillingAtPoint : public KillingBase {
    public:

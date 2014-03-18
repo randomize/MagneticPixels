@@ -16,6 +16,7 @@
 
 #include "AssembledMagneticBase.h"
 #include "IDynamic.h"
+#include "IKilling.h"
 
 namespace MPix {
 
@@ -38,12 +39,9 @@ namespace MPix {
       void PopSnapshots( const Context& context, int n ) override;
 
       bool canStartAssembly(const Context& context) override;
-      void updatePrelude(const Context& context) override;
+      void updateFinalize(const Context& context) override;
 
       int GetTime() { return time.GetValue();  }
-
-      //IAlive
-      bool canLive(const Context& context) override;
 
       //IAssembled
       void AddToAssembly(const Context& context) override;

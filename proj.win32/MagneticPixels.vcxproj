@@ -142,7 +142,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\CactusDynamicView.cpp" />
     <ClCompile Include="..\Classes\CactusStatic.cpp" />
     <ClCompile Include="..\Classes\CactusStaticView.cpp" />
-    <ClCompile Include="..\Classes\CactusView.cpp" />
     <ClCompile Include="..\Classes\Cmd.cpp" />
     <ClCompile Include="..\Classes\ColorBox.cpp" />
     <ClCompile Include="..\Classes\ContentManager.cpp" />
@@ -251,7 +250,6 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\CactusDynamicView.h" />
     <ClInclude Include="..\Classes\CactusStatic.h" />
     <ClInclude Include="..\Classes\CactusStaticView.h" />
-    <ClInclude Include="..\Classes\CactusView.h" />
     <ClInclude Include="..\Classes\Cmd.h" />
     <ClInclude Include="..\Classes\ColorBox.h" />
     <ClInclude Include="..\Classes\ContentManager.h" />

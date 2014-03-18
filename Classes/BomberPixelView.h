@@ -63,7 +63,8 @@ namespace MPix {
       Node* body;
       EMAnimation* mimics;
       HSVSprite* bg;
-      HSVSprite* bomb;
+      HSVSprite* bomb_eyes;
+      Sprite* bomb;
       HSVSprite* smash;
       LabelTTF* label;
 

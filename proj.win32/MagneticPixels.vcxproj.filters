@@ -144,9 +144,6 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CactusView.cpp">
-      <Filter>Classes\Views\PixelViews</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\IAlive.cpp">
       <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>
     </ClCompile>
@@ -469,9 +466,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Classes\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CactusView.h">
-      <Filter>Classes\Views\PixelViews</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\IAlive.h">
       <Filter>Classes\Logic\Pixel Models\Interfaces</Filter>

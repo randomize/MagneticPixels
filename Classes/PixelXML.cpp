@@ -8,6 +8,8 @@
 #include "Pitfall.h"
 #include "SokobanPixel.h"
 #include "StonePixel.h"
+#include "MutantPixel.h"
+#include "BomberPixel.h"
 
 using namespace MPix;
 using namespace tinyxml2;
@@ -48,6 +50,14 @@ shared_ptr<Pixel> MPix::PixelXML::Generate( tinyxml2::XMLElement* src )
       return GenStonePixelFromXML(src);
    }
 
+   if (strcmp(t,"M") == 0) {
+      return GenMutantFromXML(src);
+   }
+
+   if (strcmp(t,"b") == 0) {
+      return GenBomberFromXML(src);
+   }
+
    EM_LOG_ERROR("Pixel loading from XML failed, unknown type =`" + t + "`");
    return nullptr;
 
@@ -84,6 +94,14 @@ bool MPix::PixelXML::Store( shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst )
 
    if (t == StonePixel::GetClassTypeID()) {
       return StoreStonePixelToXML(src, dst);
+   }
+
+   if (t == BomberPixel::GetClassTypeID()) {
+      return StoreBomberToXML(src, dst);
+   }
+
+   if (t == MutantPixel::GetClassTypeID()) {
+      return StoreMutantToXML(src, dst);
    }
 
    EM_LOG_ERROR("Unknown pixel type " + t);
@@ -167,6 +185,35 @@ bool MPix::PixelXML::StoreStonePixelToXML( shared_ptr<Pixel> src, tinyxml2::XMLP
    auto pix = dynamic_pointer_cast<StonePixel>(src);
    dst->OpenElement("S");
    PushCommon(src, dst);
+   dst->CloseElement();
+   return true;
+}
+
+bool MPix::PixelXML::StoreBomberToXML(shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst)
+{
+   auto pix = dynamic_pointer_cast<BomberPixel>(src);
+   dst->OpenElement("b");
+   PushCommon(src, dst);
+   dst->PushAttribute("c", static_cast<int>(pix->GetColor()));
+   dst->PushAttribute("t", static_cast<int>(pix->GetTime()));
+   dst->CloseElement();
+   return true;
+}
+
+bool MPix::PixelXML::StoreMutantToXML(shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst)
+{
+   auto pix = dynamic_pointer_cast<MutantPixel>(src);
+   dst->OpenElement("M");
+   PushCommon(src, dst);
+   auto& cc = pix->GetColors();
+   size_t s = cc.size();
+   if (s <= 0 || s >= 20) return false;
+   string fab;
+   fab.resize(s, ' ');
+   for (size_t i = 0; i < s; i++) {
+      fab[i] = '0' + static_cast<int>(cc[i]);
+   }
+   dst->PushAttribute("c", fab.c_str());
    dst->CloseElement();
    return true;
 }
@@ -258,6 +305,34 @@ shared_ptr<Pixel> MPix::PixelXML::GenStonePixelFromXML( tinyxml2::XMLElement* sr
    QueryCommon(*px, src);
    return px;
 }
+
+shared_ptr<Pixel> MPix::PixelXML::GenBomberFromXML(tinyxml2::XMLElement* src)
+{
+   int c; if (src->QueryIntAttribute("c", &c) != XML_NO_ERROR) return nullptr;
+   int t; if (src->QueryIntAttribute("t", &t) != XML_NO_ERROR) return nullptr;
+   auto px = make_shared<BomberPixel>( static_cast<PixelColor>(c), t );
+   QueryCommon(*px, src);
+   return px;
+}
+
+shared_ptr<Pixel> MPix::PixelXML::GenMutantFromXML(tinyxml2::XMLElement* src)
+{
+   auto c = src->Attribute("c"); if (c==nullptr) return nullptr;
+   vector<PixelColor> vv;
+   while (*c != 0) {
+      char b = *c - '0';
+      assert(b >= 0 && b <= 9);
+      vv.push_back(static_cast<PixelColor>(b));
+      c++;
+   }
+   auto px = make_shared<MutantPixel>(vv);
+   QueryCommon(*px, src);
+   return px;
+}
+
+
+
+
 
 
 

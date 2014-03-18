@@ -11,7 +11,7 @@
 #define CACTUSDYNAMICVIEW_H_
 
 #include "EMBase.h"
-#include "CactusView.h"
+#include "PixelView.h"
 
 namespace MPix {
 
@@ -20,11 +20,12 @@ namespace MPix {
    class ArrowMark;
 
    // CactusDynamicView
-   class CactusDynamicView : public CactusView
+   class CactusDynamicView : public PixelView
    {
    public:
 
       EM_NODE_CHILD(CactusDynamicView);
+      CactusDynamicView();
 
       void Build( shared_ptr<Pixel> model ) override;
 
@@ -33,18 +34,19 @@ namespace MPix {
       void PixelChanged() override;
 
 
-   protected:
-
+      void PixelCreated() override;
+      void PixelKilledSomeone() override;
+      void PixelDied() override;
+      void PixelResurrect() override;
 
    private:
+
+      Sprite* bg;
 
       shared_ptr<CactusDynamic> pixel;
 
 #ifdef MPIX_DEVELOPERS_BUILD
       ArrowMark* mark;
-   public:
-      void PixelDied() override;
-      void PixelResurrect() override;
 #endif
 
    };

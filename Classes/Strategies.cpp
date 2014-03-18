@@ -32,6 +32,10 @@ bool MPix::AliveSimple::GotAnyKillerAt( int subject, const Context& context, Coo
 
 bool MPix::AliveSimple::canLive( shared_ptr<IAlive> subject, const Context& context )
 {
+   if (subject->IsAlive() == false) {
+      context.PostEvent(PixelEvent::DIED, subject->GetID());
+      return false;
+   }
    // Check my pos
    return GotAnyKillerAt(subject->GetID(), context, subject->GetPos()) == false;
 }
@@ -98,6 +102,7 @@ bool MPix::KillingBase::tryKillThat( shared_ptr<IKilling> subject, const Context
    return true;
 }
 
+EM_NODE_CHILD_CPP(KillingKind);
 
 EM_NODE_CHILD_CPP(KillingAtPoint);
 bool MPix::KillingAtPoint::tryKillThat( shared_ptr<IKilling> subject, const Context& context, int target )

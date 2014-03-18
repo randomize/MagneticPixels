@@ -34,6 +34,8 @@ namespace MPix {
       static bool StoreSokobanPixelToXML(shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst);
       static bool StoreStonePixelToXML(shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst);
       static bool StoreStaticCactusToXML(shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst);
+      static bool StoreBomberToXML(shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst);
+      static bool StoreMutantToXML(shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst);
 
       static shared_ptr<Pixel> GenMagneticPixelFromXML(tinyxml2::XMLElement* src);
       static shared_ptr<Pixel> GenWallPixelFromXML(tinyxml2::XMLElement* src);
@@ -42,6 +44,8 @@ namespace MPix {
       static shared_ptr<Pixel> GenSokobanPixelFromXML(tinyxml2::XMLElement* src);
       static shared_ptr<Pixel> GenStonePixelFromXML(tinyxml2::XMLElement* src);
       static shared_ptr<Pixel> GenStaticCactusFromXML(tinyxml2::XMLElement* src);
+      static shared_ptr<Pixel> GenBomberFromXML(tinyxml2::XMLElement* src);
+      static shared_ptr<Pixel> GenMutantFromXML(tinyxml2::XMLElement* src);
 
    };
 

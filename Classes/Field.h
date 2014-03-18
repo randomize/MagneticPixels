@@ -121,6 +121,7 @@ namespace MPix {
          MOVE_BLOCKER,
          ALIVE,
          DYNAMIC,
+         KILLER,
          Last,
          First = MOVE_BLOCKER
       };

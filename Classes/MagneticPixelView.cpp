@@ -61,6 +61,7 @@ void MPix::MagneticPixelView::Build( shared_ptr<Pixel> model )
    body->addChild(mimics, 2);
    body->addChild(smash, 3);
    body->setCascadeOpacityEnabled(true);
+   body->setCascadeColorEnabled(true);
 
    // Setup contents
    contents->addChild( zzz, 5);
@@ -162,7 +163,9 @@ void MPix::MagneticPixelView::PixelReset()
 void MPix::MagneticPixelView::PixelDied()
 {
    auto ast = pixel->GetLiveState();
-   if (ast == IAlive::State::KILLED_BY_NEEDLE) 
+   switch (ast)
+   {
+   case MPix::IAlive::State::KILLED_BY_NEEDLE:
    {
       mimics->PlayNow("die");
       auto sq = Sequence::create(
@@ -177,8 +180,20 @@ void MPix::MagneticPixelView::PixelDied()
          nullptr 
          );
       mimics->runAction(sq);
+      break;
    } 
-   else if (ast == IAlive::State::KILLED_BY_STONE ) 
+   case MPix::IAlive::State::KILLED_BY_PITTRAP:
+   {
+      auto m_act = Spawn::create( 
+         FadeOut::create(0.5f),
+         ScaleTo::create(0.5f, 0.01f),
+         RotateTo::create(0.5f, 180.0f),
+         nullptr
+       );
+      body->runAction(m_act);
+      break;
+   }
+   case MPix::IAlive::State::KILLED_BY_STONE:
    {
       auto sq = Sequence::create(
          Hide::create(),
@@ -191,20 +206,15 @@ void MPix::MagneticPixelView::PixelDied()
          nullptr 
          );
       mimics->runAction(sq);
+      break;
    }
-   else if (ast == IAlive::State::KILLED_BY_PITTRAP ) 
-   {
-      auto m_act = Spawn::create( 
-         FadeOut::create(0.5f),
-         ScaleTo::create(0.5f, 0.01f),
-         RotateTo::create(0.5f, 180.0f),
-         nullptr
-       );
-      body->runAction(m_act);
-   }
-   else 
-   {
+   case MPix::IAlive::State::KILLED_BY_EXPLOSION:
+      contents->setColor(Color3B::BLACK);
+      contents->runAction(FadeOut::create(0.5f));
+      break;
+   default:
       PixelView::PixelDied();
+      break;
    }
    zzz->Hide();
 }
@@ -214,6 +224,8 @@ void MPix::MagneticPixelView::PixelResurrect()
    zzz->Hide();
    smash->setOpacity(0);
    bg->setVisible(true);
+   contents->setOpacity(255);
+   contents->setColor(Color3B::WHITE);
 
    body->setScale(0.01f);
    body->setRotation(180.0f);

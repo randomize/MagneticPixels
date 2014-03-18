@@ -32,12 +32,16 @@ namespace MPix {
       void Build( shared_ptr<Pixel> model ) override;
 
       void PixelMoved() override;
-
-   protected:
+      void PixelTapped() override;
+      void PixelIdleTrick() override;
 
    private:
 
       shared_ptr<StonePixel> pixel;
+
+      Sprite* left_eye, *right_eye;
+
+      void ResetEyes();
 
    };
 

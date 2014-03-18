@@ -1,6 +1,8 @@
 #include "CactusDynamicView.h"
 #include "CactusDynamic.h"
 #include "ArrowMark.h"
+#include "Shake.h"
+#include "ContentManager.h"
 
 using namespace MPix;
 
@@ -8,7 +10,11 @@ EM_NODE_CHILD_CPP(CactusDynamicView);
 
 void MPix::CactusDynamicView::Build( shared_ptr<Pixel> model )
 {
-   CactusView::Build(model);
+   PixelView::Build(model);
+
+   bg = ContentManager::getInstance().GetSimpleSprite("cactus_bg");
+
+   contents->addChild(bg,0);
    pixel = std::dynamic_pointer_cast<CactusDynamic>(model);
 
 #ifdef MPIX_DEVELOPERS_BUILD
@@ -47,17 +53,79 @@ void MPix::CactusDynamicView::PixelChanged()
    // TODO: next move eyes show direction
 }
 
-#ifdef MPIX_DEVELOPERS_BUILD
+
+MPix::CactusDynamicView::CactusDynamicView()
+{
+   z_order = 5;
+}
+
+
+void MPix::CactusDynamicView::PixelCreated()
+{
+   bg->setScale(0.01f);
+   auto sq = Sequence::createWithTwoActions(
+      ScaleTo::create(0.4f, 1.0f),
+      DelayTime::create(rand() % 100 / 100.0f)
+   );
+   RunLockingAction(bg, sq);
+}
+
+void MPix::CactusDynamicView::PixelKilledSomeone()
+{
+   auto m_act = Shake::createWithStrength(0.8f, 0.0, 5.0f);
+   RunLockingAction(bg, m_act);
+}
+
 void MPix::CactusDynamicView::PixelDied()
 {
-   CactusView::PixelDied(); 
+#ifdef MPIX_DEVELOPERS_BUILD
    mark->setVisible(false);
+#endif
+   auto ast = pixel->GetLiveState();
+   switch (ast) {
+   case IAlive::State::KILLED_BY_PITTRAP: {
+      auto m_act = Spawn::create(
+         FadeOut::create(0.9f),
+         ScaleTo::create(0.7f, 0.001f),
+         RotateTo::create(0.5f, 180.0f),
+         nullptr
+         );
+      bg->runAction(m_act);
+      break;
+   }
+   case  IAlive::State::KILLED_BY_EXPLOSION:{
+      contents->setColor(Color3B::BLACK);
+      contents->runAction(FadeOut::create(0.5f));
+      break;
+   }
+   case IAlive::State::KILLED_BY_STONE: {
+      auto m_act = Spawn::create(
+         FadeOut::create(0.9f),
+         ScaleTo::create(0.7f, 0.1f),
+         RotateTo::create(0.5f, 180.0f),
+         nullptr
+         );
+      bg->runAction(m_act);
+      break;
+   }
+   default:
+      break;
+   }
 }
 
 void MPix::CactusDynamicView::PixelResurrect()
 {
-   CactusView::PixelResurrect(); 
-   mark->setVisible(true);
-}
-#endif
 
+#ifdef MPIX_DEVELOPERS_BUILD
+   mark->setVisible(true);
+#endif
+   contents->setOpacity(255);
+   contents->setColor(Color3B::WHITE);
+   bg->setRotation(0);
+   auto m_act = Spawn::create( 
+      FadeIn::create(0.5f),
+      ScaleTo::create(0.5f, 1.0f),
+      nullptr
+   );
+   bg->runAction(m_act);
+}

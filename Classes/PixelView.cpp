@@ -35,6 +35,8 @@ void MPix::PixelView::Build( shared_ptr<Pixel> model )
    assert(!contents);
    contents = Node::create();
    contents->setPosition(LogicToScreen(model->GetPos())+MPIX_CELL_SIZE_HALF_P);
+   contents->setCascadeColorEnabled(true);
+   contents->setCascadeOpacityEnabled(true);
    this->model = model;
 }
 

@@ -40,6 +40,7 @@ void MPix::MutantPixelView::Build( shared_ptr<Pixel> model )
 
    // Z letters
    zzz = SleepingZets::create();
+   //zzz->setGlobalZOrder(-1);
 
    // Animated face
    mimics = cm.GetAnimation("magnetic_mimics");
@@ -61,6 +62,7 @@ void MPix::MutantPixelView::Build( shared_ptr<Pixel> model )
    body->addChild(mimics, 3);
    body->addChild(smash, 4);
    body->setCascadeOpacityEnabled(true);
+   body->setCascadeColorEnabled(true);
 
    // Setup contents
    contents->addChild( zzz, 5);
@@ -165,7 +167,8 @@ void MPix::MutantPixelView::PixelReset()
 void MPix::MutantPixelView::PixelDied()
 {
    auto ast = pixel->GetLiveState();
-   if (ast == IAlive::State::KILLED_BY_NEEDLE) 
+   switch (ast) {
+   case IAlive::State::KILLED_BY_NEEDLE:
    {
       mimics->PlayNow("die");
       auto sq = Sequence::create(
@@ -181,8 +184,9 @@ void MPix::MutantPixelView::PixelDied()
          nullptr 
          );
       mimics->runAction(sq);
+      break;
    } 
-   else if (ast == IAlive::State::KILLED_BY_STONE ) 
+   case IAlive::State::KILLED_BY_STONE :
    {
       auto sq = Sequence::create(
          Hide::create(),
@@ -195,8 +199,9 @@ void MPix::MutantPixelView::PixelDied()
          nullptr 
          );
       mimics->runAction(sq);
+      break;
    }
-   else if (ast == IAlive::State::KILLED_BY_PITTRAP ) 
+   case IAlive::State::KILLED_BY_PITTRAP:
    {
       auto m_act = Spawn::create( 
          FadeOut::create(0.5f),
@@ -205,16 +210,25 @@ void MPix::MutantPixelView::PixelDied()
          nullptr
        );
       body->runAction(m_act);
+      break;
    }
-   else 
+   case IAlive::State::KILLED_BY_EXPLOSION: {
+      contents->setColor(Color3B::BLACK);
+      contents->runAction(FadeOut::create(0.5f));
+      break;
+   }
+   default:
    {
       PixelView::PixelDied();
+   }
    }
    zzz->Hide();
 }
 
 void MPix::MutantPixelView::PixelResurrect()
 {
+   contents->setOpacity(255);
+   contents->setColor(Color3B::WHITE);
    zzz->Hide();
    smash->setOpacity(0);
    bg->setVisible(true);
@@ -323,9 +337,9 @@ void MPix::MutantPixelView::PixelTapped()
 void MPix::MutantPixelView::PixelChanged()
 {
    bg->runAction(Sequence::create(
-      FadeTo::create(0.2, 50),
+      FadeTo::create(0.2f, 50),
       CallFunc::create([this]() {UpdateColors(); }),
-      FadeTo::create(0.2, 255),
+      FadeTo::create(0.2f, 255),
       nullptr
    ));
 }

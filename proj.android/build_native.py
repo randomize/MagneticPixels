@@ -39,6 +39,9 @@ def select_toolchain_version():
     ndk-r8e  -> use gcc4.7
     ndk-r9   -> use gcc4.8
     '''
+    '''print "The Selected NDK toolchain version was clang !"
+    os.environ['NDK_TOOLCHAIN_VERSION'] = 'clang'
+    return'''
 
     ndk_root = check_environment_variables()
     if os.path.isdir(os.path.join(ndk_root,"toolchains/arm-linux-androideabi-4.8")):

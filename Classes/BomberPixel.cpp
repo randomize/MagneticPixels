@@ -1,5 +1,6 @@
 #include "BomberPixel.h"
 #include "Context.h"
+#include "Ranking.h"
 
 using namespace MPix;
 
@@ -12,7 +13,7 @@ MPix::BomberPixel::BomberPixel( PixelColor color, int t ):
 {
    this->time = t;
 
-   // Bomb cannot be killed by cactus once is not disposed
+   // Bomb cannot be killed by cactus once is not disposed, but dropped to pit if on it
    SetAliveBehavior("alivesimple");
 
    // Blocked by any blocker
@@ -20,9 +21,11 @@ MPix::BomberPixel::BomberPixel( PixelColor color, int t ):
 
    // Simple blocker, blocks anythin on its point, and diagonals
    SetMoveBlockerBehavior("moveblockersimple");
+   ///SetMoveBlockerRan // TODO: !!!!!!!
 
    // Grows in 4 dirs
    SetGrowBehavior("magneticgrowstandard");
+
 }
 
 MPix::BomberPixel::~BomberPixel()
@@ -55,8 +58,9 @@ void MPix::BomberPixel::PopSnapshots(const Context& context, int n)
    AssembledMagneticBase::PopSnapshots(context, n);
    IDynamic::PopSnapshots(context, n);
    time.PopSnapshots(n);
-   if (IsInAssembly() == false) 
+   if (IsInAssembly() == false) {
       SetAliveBehavior("alivesimple");
+   }
    context.PostEvent(PixelEvent::CHANGED_DATA, GetID());
 }
 
@@ -65,25 +69,41 @@ bool MPix::BomberPixel::canStartAssembly(const Context& context)
    return false;
 }
 
-void MPix::BomberPixel::updatePrelude(const Context& context)
+// Recursive explode
+void RecursiveKill(const Context& context, BomberPixel& pp)
 {
-   if (IsInAssembly()) return;
+   for (auto d : EnumRanger<Direction>(DirectionType::ALL)) {
+      auto p = pp.GetPos() + d;
+      forward_list<shared_ptr<IAlive>> l;
+      auto got = context.GetPixelsAt<IAlive>(l, p);
+      if (got) {
+         for (auto p : l) {
+            if (p->IsAlive()) {
+               p->Kill(IAlive::State::KILLED_BY_EXPLOSION);
+               auto bb = dynamic_pointer_cast<BomberPixel>(p);
+               if (bb && bb->IsInAssembly() == false) { // Wow got bomb here !
+                  RecursiveKill(context, *bb);
+               }
+            }
+         }
+      }
+   }
+}
+
+void MPix::BomberPixel::updateFinalize(const Context& context)
+{
+   if (IsInAssembly() || IsAlive() == false) return;
+   time = time.GetValue() - 1;
    if (time > 0) {
-      time = time.GetValue() - 1;
       context.PostEvent(PixelEvent::CHANGED_DATA, GetID());
    }
-}
-
-bool MPix::BomberPixel::canLive(const Context& context)
-{
-   if (time == 0 && IsAlive()) {
+   else {
       Kill(context, IAlive::State::KILLED_BY_EXPLOSION);
-      return false;
+      RecursiveKill(context, *this);
    }
-   
-   return IAlive::canLive(context);
-
 }
+
+
 
 void MPix::BomberPixel::AddToAssembly(const Context& context)
 {

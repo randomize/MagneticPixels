@@ -9,12 +9,17 @@ using namespace MPix;
 EM_NODE_CHILD_CPP(MutantPixel);
 
 MPix::MutantPixel::MutantPixel( PixelColor colorA, PixelColor colorB ):
+   MutantPixel(vector<PixelColor>{colorA, colorB})
+{
+}
+
+MPix::MutantPixel::MutantPixel(const vector<PixelColor> colors):
    AssembledMagneticBase(PixelColor::RED)
 {
-   colors.push_back(colorA);
-   colors.push_back(colorB);
+   assert(colors.size() > 1);
    current_index = colors.size() - 1;
-   current = colorA;
+   current = colors.front();
+   this->colors = colors;
 
    // Magnetic can be killed by any killer
    SetAliveBehavior("alivestandard");
@@ -28,6 +33,7 @@ MPix::MutantPixel::MutantPixel( PixelColor colorA, PixelColor colorB ):
    // Grows in 4 dirs
    SetGrowBehavior("magneticgrowstandard");
 }
+
 
 MPix::MutantPixel::~MutantPixel()
 {
@@ -43,10 +49,12 @@ MPix::PixelColor MPix::MutantPixel::GetColor() const
 
 void MPix::MutantPixel::updatePrelude(const Context& context)
 {
-   current = GetNextColor();
-   IncrementColorIndex();
-   context.PostEvent(PixelEvent::CHANGED_DATA, GetID());
-   UpdateSmile(context);
+   if (IsInAssembly()) {
+      current = GetNextColor();
+      IncrementColorIndex();
+      context.PostEvent(PixelEvent::CHANGED_DATA, GetID());
+      UpdateSmile(context);
+   }
 }
 
 void MPix::MutantPixel::InitSnapshots(const Context& context)
@@ -82,7 +90,7 @@ void MPix::MutantPixel::PopSnapshots(const Context& context, int n)
    context.PostEvent(PixelEvent::CHANGED_DATA, GetID());
 }
 
-MPix::PixelColor MPix::MutantPixel::GetNextColor()
+MPix::PixelColor MPix::MutantPixel::GetNextColor() const
 {
    return colors[current_index];
 }
@@ -100,5 +108,6 @@ void MPix::MutantPixel::Move(const Context& context, Direction dir)
    IMovableStepper::Move(context, dir);
 
 }
+
 
 

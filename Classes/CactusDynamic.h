@@ -65,7 +65,7 @@ namespace MPix {
 
       // Dynamic
       void updatePrelude( const Context& context ) override;
-      void updatePostum( const Context& context ) override;
+      void updateAction( const Context& context ) override;
 
       // ----- Interface for Views ---------------------------------------
 

@@ -29,7 +29,8 @@ namespace MPix {
 
       // Called when it is time for world to update, split into prelude/postum
       virtual void updatePrelude(const Context& context) {}
-      virtual void updatePostum( const Context& context ) {}
+      virtual void updateAction( const Context& context ) {}
+      virtual void updateFinalize( const Context& context ) {}
 
       // Override specific history
       void InitSnapshots( const Context& context ) override {} // Stores no history

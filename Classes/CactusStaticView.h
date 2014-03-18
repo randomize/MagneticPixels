@@ -11,7 +11,7 @@
 #define CACTUS_STATIC_VIEW_H_
 
 #include "EMBase.h"
-#include "CactusView.h"
+#include "PixelView.h"
 
 namespace MPix {
 
@@ -19,20 +19,24 @@ namespace MPix {
    class CactusStatic;
 
    // CactusDynamicView
-   class CactusStaticView : public CactusView
+   class CactusStaticView : public PixelView
    {
    public:
 
       EM_NODE_CHILD(CactusStaticView);
+      CactusStaticView();
 
       void Build( shared_ptr<Pixel> model ) override;
 
       void PixelMoved() override;
-
-   protected:
+      void PixelCreated() override;
+      void PixelKilledSomeone() override;
+      void PixelDied() override;
+      void PixelResurrect() override;
 
    private:
 
+      Sprite* bg;
       shared_ptr<CactusStatic> pixel;
 
    };

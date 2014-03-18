@@ -46,20 +46,23 @@ namespace MPix {
       void PopSnapshots( const Context& context, int n ) override;
 
       // Self
-      PixelColor GetNextColor();
+      PixelColor GetNextColor() const;
       void Move(const Context& context, Direction dir) override;
 
    public:
 
       MutantPixel(PixelColor colorA = PixelColor::RED, PixelColor colorB = PixelColor::BLUE);
+      MutantPixel(const vector<PixelColor> colors);
       ~MutantPixel();
       void IncrementColorIndex();
+      const vector<PixelColor>& GetColors() const { return colors;  }
+      void SetColors(vector<PixelColor> &colors);
 
    protected:
 
       Historical<PixelColor> current;
       vector<PixelColor> colors;
-      Historical<int> current_index;
+      Historical<size_t> current_index;
 
    };
 

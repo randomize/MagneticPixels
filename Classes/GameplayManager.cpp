@@ -373,6 +373,8 @@ ErrorCode MPix::GameplayManager::AfterMoveAssembly( Direction d ) {
 
    EM_LOG_INFO("GameplayManager->AfterMoveAssembly()");
 
+   // Check for deaths in world, caused by player moved 
+   // assembly(stone kills cactus, stone fallso pit, sokoban spikes on cactus)
    context.field->WorldCheckForLost(context);
 
    // 1 - check life of moved assembly
@@ -407,6 +409,8 @@ ErrorCode GameplayManager::GrowAssembly()
 
    // Searching for dead pixels killed by cactus or pits
    auto ret = context.assembly->CheckForLost(context); 
+
+   // TODO: test if death of some can cause more deaths! pitfallbug teset
 
    // If all removed - do not try to grow
    if (!context.assembly->IsEmpty())
@@ -452,6 +456,8 @@ ErrorCode GameplayManager::UndoMove()
    context.PopContextSnapshots();
 
    UpdateUI();
+
+   CheckForSolution();
 
    return ErrorCode::RET_OK;
 

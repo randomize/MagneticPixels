@@ -103,6 +103,8 @@ ErrorCode MPix::Field::WorldMove( const Context& context )
 
    auto & dyn_ids = kind_map[PixelKind::DYNAMIC];
 
+   // Prelude:
+   // Cactuses make their decisions
    for (auto id : dyn_ids) {
       auto p = GetActivePixelByID(id);
       if (p) {
@@ -110,10 +112,21 @@ ErrorCode MPix::Field::WorldMove( const Context& context )
       }
    }
 
+   // Axtion:
+   // Cactuses move here
    for (auto id : dyn_ids) {
       auto p = GetActivePixelByID(id);
       if (p) {
-         dynamic_pointer_cast<IDynamic>(p)->updatePostum(context);
+         dynamic_pointer_cast<IDynamic>(p)->updateAction(context);
+      }
+   }
+
+   // Finalize:
+   // Bombs explode here
+   for (auto id : dyn_ids) {
+      auto p = GetActivePixelByID(id);
+      if (p) {
+         dynamic_pointer_cast<IDynamic>(p)->updateFinalize(context);
       }
    }
 
@@ -123,16 +136,30 @@ ErrorCode MPix::Field::WorldMove( const Context& context )
 EmbossLib::ErrorCode MPix::Field::WorldCheckForLost( const Context& context )
 {
    // Prepare list
-   auto & worldp = kind_map[PixelKind::ALIVE];
+   auto & world_alive = kind_map[PixelKind::ALIVE];
+   auto & world_killers = kind_map[PixelKind::KILLER];
+   auto & active = state_map[Pixel::State::ACTIVE];
 
+   // Take killers
+   auto ranked_k_list = std::list<int>(world_killers.begin(), world_killers.end());
 
-   // TODO: sorting will be more universal with cool compare functor
-   // 0 - severe killers
-   // 1 - simple killers 
-   // 2 victims etc
+   // Only alive one
+   ranked_k_list.remove_if(
+      [=](const int& v){ 
+         bool not_alive = world_alive.find(v) == world_alive.end();
+         bool not_active = active.find(v) == active.end();
+         return not_active || not_alive;
+      });
+
+   // Sort by rank
+   ranked_k_list.sort([this](const int& l, const int& r) {
+      auto pl = dynamic_pointer_cast<IKilling>(GetActivePixelByID(l));
+      auto pr = dynamic_pointer_cast<IKilling>(GetActivePixelByID(r));
+      return pl->getKillerRank() > pr->getKillerRank();
+   });
 
    // First check killers(cactus actually)
-   for (auto id : worldp) {
+   for (auto id : ranked_k_list) {
       auto p = GetActivePixelByID(id);
       if (p) {
 
@@ -149,7 +176,7 @@ EmbossLib::ErrorCode MPix::Field::WorldCheckForLost( const Context& context )
    }
 
    // Then check others
-   for (auto id : worldp) {
+   for (auto id : world_alive) {
       auto p = GetActivePixelByID(id);
       if (p) {
 
@@ -205,18 +232,10 @@ ErrorCode MPix::Field::InsertPixel( shared_ptr<Pixel> p )
 
    // Kind map
 
-   // Dynamic
-   auto d = dynamic_pointer_cast<IDynamic>(p);
-   if (d) kind_map[PixelKind::DYNAMIC].emplace(id);
-
-   // Alive
-   auto a = dynamic_pointer_cast<IAlive>(p);
-   if (a) kind_map[PixelKind::ALIVE].emplace(id);
-
-   // Move blocker 
-   auto mb = dynamic_pointer_cast<IMoveBlocker>(p);
-   if (mb) kind_map[PixelKind::MOVE_BLOCKER].emplace(id);
-
+   if (dynamic_pointer_cast<IDynamic>(p))     kind_map[PixelKind::DYNAMIC].emplace(id);
+   if (dynamic_pointer_cast<IAlive>(p))       kind_map[PixelKind::ALIVE].emplace(id);
+   if (dynamic_pointer_cast<IMoveBlocker>(p)) kind_map[PixelKind::MOVE_BLOCKER].emplace(id);
+   if (dynamic_pointer_cast<IKilling>(p))     kind_map[PixelKind::KILLER].emplace(id);
 
    return ErrorCode::RET_OK;
 }

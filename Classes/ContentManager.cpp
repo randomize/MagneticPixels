@@ -84,7 +84,9 @@ void MPix::ContentManager::CreateSprites()
    resources.emplace("pitfall_bg", "pitfall_pixel.png");
    resources.emplace("cactus_bg", "needle_small.png");
    resources.emplace("bomber_bg", "bomber_bg.png");
+   resources.emplace("bomber_eyes", "bomber_eyes.png");
    resources.emplace("stone_bg", "stone_pixel.png");
+   resources.emplace("stone_eye", "stone_pixel_eye.png");
    resources.emplace("mutant_dots", "mutant_color.png");
 
    // UI Objects

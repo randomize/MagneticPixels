@@ -142,7 +142,7 @@ void MPix::EditorMenu::BuildEditorsMenu()
    MenuItemFont* item = nullptr;
 
    // New
-   item = MenuItemFont::create(LocalUTF8Char("New level"), [&](Object *sender) {
+   item = MenuItemFont::create(LocalUTF8Char("New"), [&](Object *sender) {
       SelectedNewLevel();
    }); menu->addChild(item);
 
@@ -151,7 +151,7 @@ void MPix::EditorMenu::BuildEditorsMenu()
       SelectedLast();
    }); menu->addChild(item);
 
-   auto ss = LocalUTF8Str("Export levels to") + "\n" + LevelStorage::getInstance()->GetExportDir();
+   auto ss = LocalUTF8Str("Export") + "\n" + LevelStorage::getInstance()->GetExportDir();
    item = MenuItemFont::create(ss.c_str(), [&](Object *sender) {
       SelectedExportMap();
    }); menu->addChild(item); item->setScale(0.5f); item->setColor(Color3B::GREEN);

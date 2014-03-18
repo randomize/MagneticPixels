@@ -45,7 +45,7 @@ void CactusDynamic::updatePrelude( const Context& context )
    }
 }
 
-void MPix::CactusDynamic::updatePostum( const Context& context )
+void MPix::CactusDynamic::updateAction( const Context& context )
 {
    if (canMoveThis(context, way)) {
       Move(context, way);

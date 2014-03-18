@@ -18,6 +18,7 @@ namespace MPix {
    namespace KillersRanking
    {
       static const int PITFALL = 50;
+      static const int BOMB = 30;
       static const int STONE = 25;
       static const int CACTUS = 10;
       static const int FIRE = 5;
