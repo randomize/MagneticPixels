@@ -26,17 +26,19 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
    // initialize director
    auto director = Director::getInstance();
-   auto eglView = EGLView::getInstance();
-
-   director->setOpenGLView(eglView);
+   auto glview = director->getOpenGLView();
+   if(!glview) {
+       glview = GLView::create("Cpp Tests");
+       director->setOpenGLView(glview);
+   }
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-   eglView->setDesignResolutionSize(DESIGN_WIDTH, DESIGN_HEIGHT, ResolutionPolicy::SHOW_ALL);
+   glview->setDesignResolutionSize(DESIGN_WIDTH, DESIGN_HEIGHT, ResolutionPolicy::SHOW_ALL);
 #else
-   eglView->setDesignResolutionSize(DESIGN_WIDTH, DESIGN_HEIGHT, ResolutionPolicy::NO_BORDER );
+   glview->setDesignResolutionSize(DESIGN_WIDTH, DESIGN_HEIGHT, ResolutionPolicy::NO_BORDER );
 #endif
 
-   auto frameSize = eglView->getFrameSize();
+   auto frameSize = glview->getFrameSize();
    auto size = director->getWinSize();
    EM_LOG_DEBUG("Screen metrics: ");
    EM_LOG_DEBUG(" frameSize: " + frameSize.width + ", " + frameSize.height );

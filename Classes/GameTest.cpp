@@ -18,7 +18,7 @@ bool GameTest::init()
 }
 
 
-void MPix::GameTest::BtnHnadler(Object* sender)
+void MPix::GameTest::BtnHnadler(Ref* sender)
 {
    auto id = (dynamic_cast<Node*>(sender))->getTag();
 

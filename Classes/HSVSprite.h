@@ -29,12 +29,12 @@ namespace MPix {
       static HSVSprite* createWithSpriteFrameName( const string& frame_name );
 
       bool initWithTexture(Texture2D* texture, const Rect&  rect) override;
-      void draw() override;
+      virtual void draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated) override;
 
    protected:
 
       CustomCommand _renderCommand;
-      void onDraw();
+      void onDraw(const kmMat4 &transform, bool transformUpdated);
 
    };
 

@@ -28,18 +28,18 @@ MPix::HSVSpriteBatchNode::~HSVSpriteBatchNode()
 }
 
 
-void MPix::HSVSpriteBatchNode::listenBackToForeground( Object *obj )
+void MPix::HSVSpriteBatchNode::listenBackToForeground( Ref *obj )
 {
    setShaderProgram(NULL);
    initProgram();
 }
 
-void MPix::HSVSpriteBatchNode::draw()
+void HSVSpriteBatchNode::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
 {
 
    setUniforms();
 
-   SpriteBatchNode::draw();
+   SpriteBatchNode::draw(renderer, transform, transformUpdated);
 
 }
 

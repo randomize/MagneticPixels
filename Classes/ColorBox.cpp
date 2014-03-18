@@ -3,14 +3,14 @@
 
 using namespace MPix;
 
-void MPix::ColorBox::draw()
+void ColorBox::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
 {
     _customCommand.init(_globalZOrder);
-    _customCommand.func = CC_CALLBACK_0(ColorBox::onDraw, this);
-    Director::getInstance()->getRenderer()->addCommand(&_customCommand);
+    _customCommand.func = CC_CALLBACK_0(ColorBox::onDraw, this, transform, transformUpdated);
+    renderer->addCommand(&_customCommand);
 }
 
-ColorBox* MPix::ColorBox::create()
+ColorBox* ColorBox::create()
 {
    ColorBox *pRet = new ColorBox();
    pRet->autorelease();
@@ -21,24 +21,23 @@ ColorBox* MPix::ColorBox::create()
    return pRet;
 }
 
-void MPix::ColorBox::SetColor( Color4F col )
+void ColorBox::SetColor( Color4F col )
 {
    this->col = col;
 }
 
-void MPix::ColorBox::SetBorders( unsigned borders, Color4F col )
+void ColorBox::SetBorders( unsigned borders, Color4F col )
 {
    this->borders = borders;
    borders_col = col;
 }
 
-void MPix::ColorBox::onDraw()
+void ColorBox::onDraw(const kmMat4 &transform, bool transformUpdated)
 {
 
    // Setup matrices
-   kmMat4 oldMat;
-   kmGLGetMatrix(KM_GL_MODELVIEW, &oldMat);
-   kmGLLoadMatrix(&_modelViewTransform);
+   kmGLPushMatrix();
+   kmGLLoadMatrix(&transform);
 
 
    // Draw
@@ -65,5 +64,5 @@ void MPix::ColorBox::onDraw()
    }
 
    // Restore matrix
-   kmGLLoadMatrix(&oldMat);
+   kmGLPopMatrix();
 }

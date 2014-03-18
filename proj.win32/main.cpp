@@ -33,8 +33,8 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
     // create the application instance
     AppDelegate app;
-    EGLView eglView;
-    eglView.init("MagneticPixels", 640*FACTOR, 960*FACTOR);
+    //EGLView eglView;
+    //eglView.init("MagneticPixels", 640*FACTOR, 960*FACTOR);
     //eglView.init("MagneticPixels", 320, 480);
     auto retVal = Application::getInstance()->run();
     FreeConsole();

@@ -27,7 +27,7 @@ void MPix::EMBaseMasterLoop::RunGame()
    EM_LOG_INFO("==== Magnetic pixels master loop run =====");
 
    // Setup update
-   Director::getInstance()->getScheduler()->scheduleUpdateForTarget(this, 0, false);
+   Director::getInstance()->getScheduler()->scheduleUpdate(this, 0, false);
 
    // Init settings
    auto & st = SettingsManager::getInstance();

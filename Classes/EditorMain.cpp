@@ -151,7 +151,7 @@ ErrorCode EditorMain::ExecuteAsync( Command* cmd )
    return ErrorCode::RET_OK;
 }
 
-void MPix::EditorMain::BtnHnadler(Object* sender)
+void MPix::EditorMain::BtnHnadler(Ref* sender)
 {
    auto id = (dynamic_cast<Node*>(sender))->getTag();
 

@@ -12,10 +12,10 @@ using namespace MPix;
 // Stupid cocos listeners don't work with non-Object instances
 // I don't want to have ContentManager deriving Object class, so 
 // this little helper handles the situation
-class ListenerDelegate : public Object {
+class ListenerDelegate : public Ref {
 public:
 
-   void listenEnterForeground(Object* ) {
+   void listenEnterForeground(Ref* ) {
       callback();
    }
 
@@ -35,6 +35,7 @@ MPix::ContentManager::ContentManager()
       EVENT_COME_TO_FOREGROUND,
       nullptr
    );
+
 
 }
 

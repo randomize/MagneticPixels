@@ -39,7 +39,7 @@ namespace MPix {
       ErrorCode FinishedGame();
 
       // Different handler
-      void BtnHnadler(Object* sender);
+      void BtnHnadler(Ref* sender);
 
       // Different buttons
       void CreateButtons() override;

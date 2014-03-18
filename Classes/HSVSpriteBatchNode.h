@@ -27,11 +27,10 @@ namespace MPix {
       static HSVSpriteBatchNode* create(const char* fileImage, int capacity /* = DEFAULT_CAPACITY */);
       ~HSVSpriteBatchNode();
 
-      //bool initWithTexture(Texture2D* texture, int capacity) override;
-      void draw() override;
+      virtual void draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated) override;
 
       void initProgram();
-      void listenBackToForeground(Object *obj);
+      void listenBackToForeground(Ref *obj);
       void SetBlur(float f);
 
    protected:

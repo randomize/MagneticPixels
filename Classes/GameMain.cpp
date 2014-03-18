@@ -151,7 +151,7 @@ void GameMain::CreateButtons()
    menu->setScale(Director::getInstance()->getContentScaleFactor()); // FIXME
 }
 
-void GameMain::BtnHnadler(Object* sender)
+void GameMain::BtnHnadler(Ref* sender)
 {
    auto id = (dynamic_cast<Node*>(sender))->getTag();
 

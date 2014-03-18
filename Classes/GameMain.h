@@ -86,7 +86,7 @@ namespace MPix {
 
    protected:
 
-      void BtnHnadler(Object* sender);
+      void BtnHnadler(Ref* sender);
 
       int logic_tick = 0;
       int views_tick = 0;

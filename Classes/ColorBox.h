@@ -32,7 +32,7 @@ namespace MPix {
       };
 
       static ColorBox* create();
-      void draw() override;
+      virtual void draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated) override;
 
       void SetColor(Color4F col);
       void SetBorders(unsigned borders, Color4F col);
@@ -41,7 +41,7 @@ namespace MPix {
    private:
 
       // Actual drawing happens here
-      void onDraw();
+      void onDraw(const kmMat4 &transform, bool transformUpdated);
 
       // Drawing command for new cocos renderer
       CustomCommand _customCommand;

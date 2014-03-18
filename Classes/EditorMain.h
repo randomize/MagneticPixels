@@ -52,7 +52,7 @@ namespace MPix {
 
    private: // Internal helpers
 
-      void BtnHnadler(Object* sender);
+      void BtnHnadler(Ref* sender);
       void Renamer(string lname);
       void TestLevel ();
       void ShowHint(const string& text);

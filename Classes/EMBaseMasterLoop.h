@@ -32,10 +32,11 @@ namespace MPix {
       static void PrintTime();
       static double GetTime();
 
-   private:
-
       // Called on each frame
       void update(float t) override;
+
+   private:
+
 
       // 
       void MasterTick(float t);
