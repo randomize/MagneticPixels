@@ -1,6 +1,5 @@
 #include "EMAnimation.h"
 
-#include "HSVArmature.h"
 #include "GameStateManager.h"
 
 using namespace MPix;

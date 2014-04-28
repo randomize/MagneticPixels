@@ -18,7 +18,7 @@ unordered_map<string,function<ErrorCode(int)>> MPix::CmdUIAddPixel::listners;
 unordered_map<string,function<ErrorCode(int)>> MPix::CmdUIRemovePixel::listners;
 unordered_map<string,function<ErrorCode(int,Coordinates)>> MPix::CmdUIMovePixel::listners;
 unordered_map<string,function<ErrorCode(int,Direction)>> MPix::CmdUIHighlightPixel::listners;
-unordered_map<string,function<ErrorCode(float,Point)>> MPix::CmdUIContentTransform::listners;
+unordered_map<string,function<ErrorCode(float,Vector2)>> MPix::CmdUIContentTransform::listners;
 
 // UI main
 unordered_map<string,function<ErrorCode()>> MPix::CmdUIGameFinished::listners;

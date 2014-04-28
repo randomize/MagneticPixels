@@ -354,7 +354,7 @@ void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
       // Update position
       auto pos = convertTouchToNodeSpace(touch) - initial_touch;
       auto new_position = initial_pos + Vector2(pos.x, 0);
-      worlds_layer->setPosition(NormalizePozition(new_position));
+      worlds_layer->setPosition(NormalizePosition(new_position));
 
       if (idling_counter == 0) 
       {
@@ -475,7 +475,7 @@ void MPix::LevelSelector::ElasticBounceToCurrentWorld()
    
 }
 
-cocos2d::Point MPix::LevelSelector::NormalizePozition(Vector2 pos)
+Vector2 MPix::LevelSelector::NormalizePosition(Vector2 pos)
 {
    if (pos.x > indexed_positions[0]) {
       pos.x = indexed_positions[0];
@@ -509,7 +509,7 @@ void MPix::LevelSelector::CreateArrowButtons()
    auto bt_s1 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
    auto bt_s2 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
    bt_s1->setOpacity(200);
-   auto bt = MenuItemSprite::create(bt_s1, bt_s2, [this](Object*) { NextWorld(); });
+   auto bt = MenuItemSprite::create(bt_s1, bt_s2, [this](Ref*) { NextWorld(); });
    bt->setPosition(upperRight.x - 40, centerPoint.y);
    buttons->addChild(bt);
    next_button = bt;
@@ -517,7 +517,7 @@ void MPix::LevelSelector::CreateArrowButtons()
    bt_s1 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
    bt_s2 = ContentManager::getInstance().GetSimpleSprite("right_arrow");
    bt_s1->setOpacity(200);
-   bt = MenuItemSprite::create(bt_s1, bt_s2, [this](Object*) { PrewWorld(); });
+   bt = MenuItemSprite::create(bt_s1, bt_s2, [this](Ref*) { PrewWorld(); });
    bt->setPosition(upperLeft.x + 40, centerPoint.y);
    bt->setRotation(180);
    bt_s1->setOpacity(220);

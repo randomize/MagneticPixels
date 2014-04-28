@@ -58,7 +58,7 @@ namespace MPix {
       Layer* worlds_layer;
       Vector2 initial_pos, initial_touch;
       void ElasticBounceToCurrentWorld();
-      Vector2 NormalizePozition(Vector2 pos);
+      Vector2 NormalizePosition(Vector2 pos);
 
       // Worlds
       unordered_map<int,Node*> title_lables; // ID -> label

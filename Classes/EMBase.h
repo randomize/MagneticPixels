@@ -1,6 +1,6 @@
 /* 
    Main header for all my cocos games
-   by Mihailenco E, Emboss Games, 2013
+   by Mihailenco E, Emboss Games, 2013-2014
 */
 
 #pragma once

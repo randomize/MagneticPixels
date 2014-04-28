@@ -64,7 +64,7 @@ namespace MPix {
 
       struct Notification {
          Node* content;
-         unsigned timestamp;
+         double timestamp;
       };
 
       list<Notification> notifications;

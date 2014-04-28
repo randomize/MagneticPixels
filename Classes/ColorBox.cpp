@@ -35,10 +35,12 @@ void ColorBox::SetBorders( unsigned borders, Color4F col )
 void ColorBox::onDraw(const Matrix &transform, bool )
 {
 
-   // Setup matrices
-   kmGLPushMatrix();
-   kmGLLoadMatrix(&transform);
+   Director* director = Director::getInstance();
+   CCASSERT(nullptr != director, "Director is null when seting matrix stack");
+   director->pushMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+   director->loadMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW, transform);
 
+   CHECK_GL_ERROR_DEBUG();
 
    // Draw
    auto col = this->col;
@@ -63,6 +65,9 @@ void ColorBox::onDraw(const Matrix &transform, bool )
           DrawPrimitives::drawSolidRect(p00-p, p10+p, borders_col);
    }
 
-   // Restore matrix
-   kmGLPopMatrix();
+   CHECK_GL_ERROR_DEBUG();
+
+   //end draw
+   director->popMatrix(MATRIX_STACK_TYPE::MATRIX_STACK_MODELVIEW);
+
 }

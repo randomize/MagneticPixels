@@ -34,11 +34,11 @@ bool MPix::ResultsState::init()
 
    MenuItemFont* item = nullptr;
 
-   item = MenuItemFont::create("Replay", [&](Object *sender) {
+   item = MenuItemFont::create("Replay", [&](Ref *sender) {
       ToReplay();
    }); menu->addChild(item);
 
-   item = MenuItemFont::create("Next", [&](Object *sender) {
+   item = MenuItemFont::create("Next", [&](Ref *sender) {
       ToNext();
    }); menu->addChild(item);
 

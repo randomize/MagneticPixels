@@ -95,20 +95,20 @@ void MPix::MenuMain::onEnter()
    Label* label = nullptr;
 
    label = createMenuItem("Play", 1.4f);
-   item = MenuItemLabel::create(label, [&](Object *sender) {
+   item = MenuItemLabel::create(label, [&](Ref *sender) {
       ToSelector();
    }); 
    menu->addChild(item);
 
 #ifdef MPIX_DEVELOPERS_BUILD
    label = createMenuItem("Editor");
-   item = MenuItemLabel::create(label, [&](Object *sender) {
+   item = MenuItemLabel::create(label, [&](Ref *sender) {
       ToEditor();
    });
    menu->addChild(item);
 
    label = createMenuItem("Test lvl");
-   item = MenuItemLabel::create(label, [&](Object *sender) {
+   item = MenuItemLabel::create(label, [&](Ref *sender) {
       ToTest();
    });
    menu->addChild(item);
@@ -116,7 +116,7 @@ void MPix::MenuMain::onEnter()
 #endif
 
    label = createMenuItem("Exit");
-   item = MenuItemLabel::create(label, [&](Object *sender) {
+   item = MenuItemLabel::create(label, [&](Ref *sender) {
       ToExit();
    });
    menu->addChild(item);
@@ -124,14 +124,14 @@ void MPix::MenuMain::onEnter()
 #ifdef MPIX_DEVELOPERS_BUILD
    label = createMenuItem("Crash");
    label->setColor(Color3B::RED);
-   item = MenuItemLabel::create(label, [&](Object *sender) {
+   item = MenuItemLabel::create(label, [&](Ref *sender) {
       assert(false);
    });
    menu->addChild(item);
 #endif
 
    label = createMenuItem("Credits");
-   item = MenuItemLabel::create(label, [&](Object *sender) {
+   item = MenuItemLabel::create(label, [&](Ref *sender) {
       ToCredits();
    });
    menu->addChild(item);

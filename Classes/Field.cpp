@@ -42,10 +42,10 @@ Field::Field()
 
 MPix::Field::Field( const Field& oth ) :
    map(oth.map),
+   tags(oth.tags),
    kind_map(oth.kind_map),
    state_map(oth.state_map),
-   type_map(oth.type_map),
-   tags(oth.tags)
+   type_map(oth.type_map)
 {
    id_map.reserve(oth.id_map.size());
    for (auto p : oth.id_map) {
@@ -198,7 +198,7 @@ EmbossLib::ErrorCode MPix::Field::WorldCheckForLost( const Context& context )
 
 ///////// informers /////////////////////////////////////////////////////////////////
 
-const bool Field::IsEmpty() const
+bool Field::IsEmpty() const
 {
    return id_map.empty();
 }

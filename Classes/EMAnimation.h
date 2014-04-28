@@ -14,9 +14,6 @@
 
 namespace MPix {
 
-   // Forwards
-   class HSVArmature;
-
    // Animation
    class EMAnimation : public Node
    {

@@ -38,11 +38,11 @@ bool MPix::SimpleInputDialog::initWithRequast( const char* req /*= "Input, pleas
 
    MenuItemFont::setFontSize(36);
    auto m = Menu::create();
-   auto yes = MenuItemFont::create("OK", [&](Object *sender) {
+   auto yes = MenuItemFont::create("OK", [&](Ref *sender) {
       OnOK();
    });
    yes->setTag(101);
-   auto no = MenuItemFont::create("CANCEL", [&](Object *sender) {
+   auto no = MenuItemFont::create("CANCEL", [&](Ref *sender) {
       OnCancel();
    });
    no->setTag(102);

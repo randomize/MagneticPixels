@@ -15,11 +15,13 @@ EM_NODE_CHILD_CPP(BomberPixelView);
 
 
 MPix::BomberPixelView::BomberPixelView():
-   bomb(nullptr),
    body(nullptr),
    mimics(nullptr),
    bg(nullptr),
-   smash(nullptr)
+   bomb_eyes(nullptr),
+   bomb(nullptr),
+   smash(nullptr),
+   label(nullptr)
 {
    z_order = 11;
 }

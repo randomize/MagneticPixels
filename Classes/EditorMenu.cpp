@@ -70,7 +70,7 @@ void MPix::EditorMenu::BuildWorldsMenu()
    for (auto id : ids ) {
       auto item = MenuItemFont::create(
          (lm.GetNameByWorldID(id) + " (" + ToString(lm.GetLevelCountByWorldID(id)) + ")").c_str(),
-         [&](Object *sender) {
+         [&](Ref *sender) {
          auto it = static_cast<MenuItemFont*>(sender);
          SelectedWorld( it->getTag() );
          }
@@ -81,7 +81,7 @@ void MPix::EditorMenu::BuildWorldsMenu()
    // Add default back button
    auto back = MenuItemFont::create(
       LocalUTF8Char("Back"),
-      [&](Object *sender) {
+      [&](Ref *sender) {
          BackToEditorMenu();
       }
    ); menu->addChild(back);
@@ -108,7 +108,7 @@ void MPix::EditorMenu::BuildLevelsMenu( int w )
       string n = lm.GetNameByLevelID(id) + " (id=" + ToString(id) + ")";
       auto item = MenuItemFont::create(
          n.c_str(),
-         [&](Object *sender) {
+         [&](Ref *sender) {
          auto it = static_cast<MenuItemFont*>(sender);
          SelectedLevel( (unsigned) it->getTag() );
          }
@@ -120,7 +120,7 @@ void MPix::EditorMenu::BuildLevelsMenu( int w )
    // Add default back button
    auto back = MenuItemFont::create(
       LocalUTF8Char("Back"),
-      [&](Object *sender) {
+      [&](Ref *sender) {
          BackToWorlds();
       }
    ); menu->addChild(back);
@@ -142,29 +142,29 @@ void MPix::EditorMenu::BuildEditorsMenu()
    MenuItemFont* item = nullptr;
 
    // New
-   item = MenuItemFont::create(LocalUTF8Char("New"), [&](Object *sender) {
+   item = MenuItemFont::create(LocalUTF8Char("New"), [&](Ref *sender) {
       SelectedNewLevel();
    }); menu->addChild(item);
 
    // Last
-   item = MenuItemFont::create(LocalUTF8Char("Last"), [&](Object *sender) {
+   item = MenuItemFont::create(LocalUTF8Char("Last"), [&](Ref *sender) {
       SelectedLast();
    }); menu->addChild(item);
 
    auto ss = LocalUTF8Str("Export") + "\n" + LevelStorage::getInstance()->GetExportDir();
-   item = MenuItemFont::create(ss.c_str(), [&](Object *sender) {
+   item = MenuItemFont::create(ss.c_str(), [&](Ref *sender) {
       SelectedExportMap();
    }); menu->addChild(item); item->setScale(0.5f); item->setColor(Color3B::GREEN);
 
-   item = MenuItemFont::create(LocalUTF8Char("Edit"), [&](Object *sender) {
+   item = MenuItemFont::create(LocalUTF8Char("Edit"), [&](Ref *sender) {
       SelectedEdit();
    }); menu->addChild(item);
 
-   item = MenuItemFont::create(LocalUTF8Char("Delete"), [&](Object *sender) {
+   item = MenuItemFont::create(LocalUTF8Char("Delete"), [&](Ref *sender) {
       SelectedDelete();
    }); menu->addChild(item); item->setColor(Color3B::RED);
 
-   item = MenuItemFont::create(LocalUTF8Char("Back"), [&](Object *sender) {
+   item = MenuItemFont::create(LocalUTF8Char("Back"), [&](Ref *sender) {
       BackToMainMenu();
    }); menu->addChild(item); 
 

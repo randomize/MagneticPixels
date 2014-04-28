@@ -140,7 +140,7 @@ ostream& MPix::operator<<( ostream& os, const Direction& d )
    return os;
 }
 
-ostream& cocos2d::operator<<( ostream& os, const Vector2& b )
+ostream& cocos2d::math::operator<<( ostream& os, const Vector2& b )
 {
    size_t save_prec = os.precision();
    os << " ccp [ " << std::setprecision(4) << std::fixed << b.x << ", " << b.y << " ] " << std::scientific;

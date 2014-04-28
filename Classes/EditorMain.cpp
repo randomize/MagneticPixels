@@ -119,7 +119,7 @@ void EditorMain::onEnter()
    lvl_name = Label::createWithTTF(editor->GetLevelName().c_str(), "Arial", 36);
    lvl_name->setColor(Color3B::BLACK);
    auto sx = lvl_name->getContentSize();
-   lvl_name->setPosition(origin +Point(sx.width, sx.height));
+   lvl_name->setPosition(origin + Vector2(sx.width, sx.height));
    addChild(lvl_name, 5);
 
 }

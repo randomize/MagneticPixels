@@ -89,7 +89,7 @@ bool EditorLayer::init()
    // Draw center circle rad R
    const float R = 10.0f;
    const int N_GON = 32;
-   vector<Point> points;
+   vector<Vector2> points;
    points.resize(N_GON);
    for (int i = 0; i < N_GON; ++i)
    {
@@ -99,7 +99,7 @@ bool EditorLayer::init()
    dn->drawPolygon(points.data(), N_GON, Color4F::RED, 0, Color4F::BLACK);
 
    // Draw boundary
-   vector<Point> p = {
+   vector<Vector2> p = {
       LogicToScreen(Coordinates(-4,  6)),
       LogicToScreen(Coordinates( 4,  6)),
       LogicToScreen(Coordinates( 4, -6)),

@@ -61,7 +61,7 @@ namespace MPix {
 
       // =========== Reading methods ================================================= //
 
-      const bool IsEmpty() const;
+      bool IsEmpty() const;
 
       shared_ptr<Pixel> GetPixelByID(int id);
       shared_ptr<Pixel> GetActivePixelByID(int id);
