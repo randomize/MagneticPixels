@@ -54,7 +54,7 @@ bool MPix::LevelView::initWithId(unsigned lvl_id, int label_number)
    auto sp = cm.GetSimpleSprite("level_border");
    addChild(sp, Z_BORDER);
 
-   auto name = LabelTTF::create(lvl, cm.GetBaseFont(), FNT_LAYER_NAME);
+   auto name = Label::createWithTTF(lvl, cm.GetBaseFont(), FNT_LAYER_NAME);
    name->setColor(Color3B::BLACK);
    name->setPosition(0, -60.0f);
    addChild(name, Z_NAME);

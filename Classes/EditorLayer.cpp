@@ -425,7 +425,7 @@ void MPix::EditorLayer::PutMark( Coordinates pos, int value )
    auto it = marks.find(pos);
    if (value >= 2) { // Creation
       if (it != marks.end()) {
-         dynamic_cast<LabelTTF*>(it->second)->setString(ToString(value).c_str());
+         dynamic_cast<Label*>(it->second)->setString(ToString(value).c_str());
       } else {
          auto m = RoundMark::create(ToString(value).c_str());
          //m->setOpacity(200);

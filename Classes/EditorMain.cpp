@@ -116,7 +116,7 @@ void EditorMain::onEnter()
    menu->setAnchorPoint(Vector2(1, 0));
    menu->setScale(Director::getInstance()->getContentScaleFactor()); // FIXME
 
-   lvl_name = LabelTTF::create(editor->GetLevelName().c_str(), "Arial", 36);
+   lvl_name = Label::createWithTTF(editor->GetLevelName().c_str(), "Arial", 36);
    lvl_name->setColor(Color3B::BLACK);
    auto sx = lvl_name->getContentSize();
    lvl_name->setPosition(origin +Point(sx.width, sx.height));
@@ -230,7 +230,7 @@ void MPix::EditorMain::HideToolBox()
 
 void MPix::EditorMain::ShowHint( const string& text )
 {
-   auto hint = LabelTTF::create(text.c_str(), "Arial", 48.0f*2);
+   auto hint = Label::createWithTTF(text.c_str(), "Arial", 48.0f*2);
    hint->setScale(0.5f);
    hint->setColor(Color3B::RED);
    hint->setPositionY( Director::getInstance()->getVisibleSize().height - 54.0f );

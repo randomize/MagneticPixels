@@ -18,7 +18,7 @@ bool MPix::CuteBlocksLogo::init()
 {
    auto & cm = ContentManager::getInstance();
 
-   auto text = LabelTTF::create("Cute Blocks", cm.GetLogoFont(), LOGO_PANE_FONT_SIZE);
+   auto text = Label::createWithTTF("Cute Blocks", cm.GetLogoFont(), LOGO_PANE_FONT_SIZE);
    text->setColor(Color3B::BLACK);
    addChild(text, 1);
 

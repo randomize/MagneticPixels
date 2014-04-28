@@ -40,14 +40,14 @@ bool HSVSprite::initWithTexture( Texture2D* texture, const Rect& rect )
    return false;
 }
 
-void HSVSprite::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
+void HSVSprite::draw(Renderer *renderer, const Matrix &transform, bool transformUpdated)
 {
    _renderCommand.init(_globalZOrder);
    _renderCommand.func = CC_CALLBACK_0(HSVSprite::onDraw, this, transform, transformUpdated);
    renderer->addCommand(&_renderCommand);
 }
 
-void HSVSprite::onDraw(const kmMat4 &transform, bool transformUpdated)
+void HSVSprite::onDraw(const Matrix &transform, bool)
 {
 
    auto shader = getShaderProgram();

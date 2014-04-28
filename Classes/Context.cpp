@@ -59,7 +59,7 @@ void MPix::Context::PostEvent( GoalEvent e, int id, Coordinates pos, int priorit
 //////////////////////////////////////////////////////////////////////////
 // Assembly part
 
-Point MPix::Context::GetAssemblyCenter() const
+Vector2 MPix::Context::GetAssemblyCenter() const
 {
    assert(assembly);
    return assembly->GetCenter();

@@ -23,9 +23,9 @@ const float MENU_FONT_SIZE = 76.0f;
 
 //====---------------------------------------------======//
 
-LabelTTF* createMenuItem(const char* text, float fact = 1.0f) {
+Label* createMenuItem(const char* text, float fact = 1.0f) {
    auto & cm = ContentManager::getInstance();
-   auto label = LabelTTF::create(LocalUTF8Char(text), cm.GetBaseFont(), MENU_FONT_SIZE * fact, Size::ZERO, TextHAlignment::LEFT);
+   auto label = Label::createWithTTF(LocalUTF8Char(text), cm.GetBaseFont(), MENU_FONT_SIZE * fact, Size::ZERO, TextHAlignment::LEFT);
    assert(label);
    label->setColor(Color3B::BLACK);
    return label;
@@ -92,7 +92,7 @@ void MPix::MenuMain::onEnter()
    addChild(menu, Z_MENU);
 
    MenuItemLabel* item = nullptr;
-   LabelTTF* label = nullptr;
+   Label* label = nullptr;
 
    label = createMenuItem("Play", 1.4f);
    item = MenuItemLabel::create(label, [&](Object *sender) {
@@ -158,7 +158,7 @@ void MPix::MenuMain::onEnter()
    vers += "dev, run #" + ToString(N_RUNS);
 #endif
 
-   auto vlabel = LabelTTF::create(vers.c_str(), cm.GetBaseFont(), 24, Size::ZERO, TextHAlignment::RIGHT);
+   auto vlabel = Label::createWithTTF(vers.c_str(), cm.GetBaseFont(), 24, Size::ZERO, TextHAlignment::RIGHT);
    vlabel->setAnchorPoint(Vector2(1,0));
    auto orig = Director::getInstance()->getVisibleOrigin();
    auto sz = Director::getInstance()->getVisibleSize();

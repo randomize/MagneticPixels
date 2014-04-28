@@ -47,7 +47,7 @@ void MPix::EditorTool::Show( Coordinates where )
 
 void MPix::EditorTool::BindContents( Node * target )
 {
-   name_l = LabelTTF::create(name.c_str(), "Arial", 20.0f*2);
+   name_l = Label::createWithTTF(name.c_str(), "Arial", 20.0f*2);
    name_l->setScale(0.5f);
    name_l->setColor(Color3B(0,0,0));
    target->addChild(name_l);

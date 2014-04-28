@@ -41,8 +41,6 @@ namespace MPix {
    private:
 
       bool init();
-      static kmMat3 GetRGB2YIQ();
-      static kmMat3 GetYIQ2RGB();
 
       GLuint xformLocation;
 
@@ -52,25 +50,3 @@ namespace MPix {
 
 
 #endif // HSVSHADER_H_
-//
-//#ifdef GL_ES
-//precision lowp float;
-//#endif
-//
-//varying vec4 v_fragmentColor;
-//varying vec2 v_texCoord;
-//uniform sampler2D CC_Texture0;
-//const mat3 rgb2yiq = mat3(0.299, 0.595716, 0.211456, 0.587, -0.274453, -0.522591, 0.114, -0.321263, 0.311135);
-//const mat3 yiq2rgb = mat3(1.0, 1.0, 1.0, 0.9563, -0.2721, -1.1070, 0.6210, -0.6474, 1.7046);
-//
-//void main()	
-//{
-//   vec3 v_hsv = v_fragmentColor.xyz;
-//   vec4 textureColor = texture2D(CC_Texture0, v_texCoord);
-//   vec3 yColor = rgb2yiq * textureColor.rgb;
-//   float ang = ( 1.0 - v_hsv.x ) * 2.0 * 3.1415926;
-//   float cf = v_hsv.y * cos(ang);
-//   float sf = v_hsv.y * sin(ang);
-//   mat3 xform = mat3(v_hsv.z, 0, 0, 0, cf, sf, 0, -sf, cf);
-//   gl_FragColor  = vec4(yiq2rgb * xform * yColor, textureColor.w * v_fragmentColor.w);
-//}

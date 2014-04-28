@@ -24,7 +24,7 @@ bool MPix::SimpleInputDialog::initWithRequast( const char* req /*= "Input, pleas
    auto bg = LayerColor::create(Color4B(0,0,0,255));
    addChild(bg);
 
-   auto pLabel = LabelTTF::create(req, "Arial", 36);
+   auto pLabel = Label::createWithTTF(req, "Arial", 36);
    pLabel->setPosition(center + Vector2(0,center.y*0.5f));
    addChild(pLabel);
 

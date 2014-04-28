@@ -3,7 +3,7 @@
 
 using namespace MPix;
 
-void ColorBox::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
+void ColorBox::draw(Renderer *renderer, const Matrix &transform, bool transformUpdated)
 {
     _customCommand.init(_globalZOrder);
     _customCommand.func = CC_CALLBACK_0(ColorBox::onDraw, this, transform, transformUpdated);
@@ -32,7 +32,7 @@ void ColorBox::SetBorders( unsigned borders, Color4F col )
    borders_col = col;
 }
 
-void ColorBox::onDraw(const kmMat4 &transform, bool transformUpdated)
+void ColorBox::onDraw(const Matrix &transform, bool )
 {
 
    // Setup matrices

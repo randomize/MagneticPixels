@@ -61,7 +61,7 @@ namespace MPix {
       // -------- Gesture with one touch ------------------------------------------
 
       // Here is gesture stored (SCREEN coordinates)
-      vector<Point> sequence;
+      vector<Vector2> sequence;
 
       void AnalyseSequence();
 

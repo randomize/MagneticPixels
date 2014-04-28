@@ -60,7 +60,7 @@ void MPix::BomberPixelView::Build( shared_ptr<Pixel> model )
    bomb_eyes->setPosition(Vector2::ZERO);
 
    // Label
-   label = LabelTTF::create(ToString(pixel->GetTime()), cm.GetBaseFont(), 32.0f);
+   label = Label::createWithTTF(ToString(pixel->GetTime()), cm.GetBaseFont(), 32.0f);
    label->setColor(Color3B::WHITE);
    label->setPosition(Vector2(0,-15));
 

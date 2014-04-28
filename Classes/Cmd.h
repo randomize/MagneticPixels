@@ -164,7 +164,7 @@ namespace MPix {
             toExec.push_back(std::bind( f.second, scale, position));
          }
       }
-      static unordered_map<string,function<ErrorCode(float,Point)>> listners;
+      static unordered_map<string,function<ErrorCode(float,Vector2)>> listners;
    };
 
    struct CmdUIPutMark : public Command {

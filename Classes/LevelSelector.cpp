@@ -189,7 +189,7 @@ void MPix::LevelSelector::CreateLevelButtons()
       assert(w);
 
       // Create Label, place and hide them all
-      auto label = LabelTTF::create(w->GetName(), ContentManager::getInstance().GetBaseFontLight(), UPPER_PANE_FONT);
+      auto label = Label::createWithTTF(w->GetName(), ContentManager::getInstance().GetBaseFontLight(), UPPER_PANE_FONT);
       label->setPosition((upperLeft + upperRight)/2 + Vector2(0, -PANEL_HEIGHT/2.0));
       label->setOpacity(0);
       label->setColor(Color3B::BLACK);

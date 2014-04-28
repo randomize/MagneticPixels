@@ -36,13 +36,13 @@ HSVShader* MPix::HSVShader::create()
 
 bool MPix::HSVShader::init()
 {
-   initWithVertexShaderByteArray(ccPositionTextureColor_vert, shaderData);
+   initWithByteArrays(ccPositionTextureColor_vert, shaderData);
 
    CHECK_GL_ERROR_DEBUG();
 
-   addAttribute(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
-   addAttribute(GLProgram::ATTRIBUTE_NAME_COLOR, GLProgram::VERTEX_ATTRIB_COLOR);
-   addAttribute(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORDS);
+   bindAttribLocation(GLProgram::ATTRIBUTE_NAME_POSITION, GLProgram::VERTEX_ATTRIB_POSITION);
+   bindAttribLocation(GLProgram::ATTRIBUTE_NAME_COLOR, GLProgram::VERTEX_ATTRIB_COLOR);
+   bindAttribLocation(GLProgram::ATTRIBUTE_NAME_TEX_COORD, GLProgram::VERTEX_ATTRIB_TEX_COORDS);
 
    CHECK_GL_ERROR_DEBUG();
 
@@ -67,36 +67,49 @@ void MPix::HSVShader::Reload()
    init();
 }
 
+// Kazmath was deprecated, using own copypaste of multiplication here
+// kmMat3* kmMat3Multiply(kmMat3* pOut, const kmMat3* pM1, const kmMat3* pM2);
+// Note: pOut = M2 x M1 i.e reversed (kazmath order)
+inline void Multiply3x3Matrix(float* pOut, float* m1, float* m2) 
+{
+   pOut[0] = m1[0] * m2[0] + m1[3] * m2[1] + m1[6] * m2[2];
+   pOut[1] = m1[1] * m2[0] + m1[4] * m2[1] + m1[7] * m2[2];
+   pOut[2] = m1[2] * m2[0] + m1[5] * m2[1] + m1[8] * m2[2];
+   pOut[3] = m1[0] * m2[3] + m1[3] * m2[4] + m1[6] * m2[5];
+   pOut[4] = m1[1] * m2[3] + m1[4] * m2[4] + m1[7] * m2[5];
+   pOut[5] = m1[2] * m2[3] + m1[5] * m2[4] + m1[8] * m2[5];
+   pOut[6] = m1[0] * m2[6] + m1[3] * m2[7] + m1[6] * m2[8];
+   pOut[7] = m1[1] * m2[6] + m1[4] * m2[7] + m1[7] * m2[8];
+   pOut[8] = m1[2] * m2[6] + m1[5] * m2[7] + m1[8] * m2[8];
+}
+
 void MPix::HSVShader::GenHSVMatrix( float * xform, float hue, float saturation, float value )
 {
-   kmMat3 result = GetYIQ2RGB();
-   kmMat3 inv = GetRGB2YIQ();
-   kmMat3 rot;
+   float result[9] = { 1, 0.9563f, 0.6212f, 1, -0.2721f, -0.6474f, 1, -1.1070f, 1.7046f };
+   float inv[9] = { 0.299f, 0.587f, 0.114f, 0.595716f, -0.274453f, -0.321263f, 0.211456f, -0.522591f, 0.31113f };
 
-   kmScalar cf = saturation * cosf(hue);
-   kmScalar sf = saturation * sinf(hue);
+   float cf = saturation * cosf(hue);
+   float sf = saturation * sinf(hue);
 
-   rot.mat[0] = value; rot.mat[1] = 0;    rot.mat[2] = 0;
-   rot.mat[3] = 0;     rot.mat[4] = cf;   rot.mat[5] = -sf;
-   rot.mat[6] = 0;     rot.mat[7] = sf;   rot.mat[8] = cf;
+   float rot[9] = { value, 0, 0, 0, cf, -sf, 0, sf, cf };
 
    // For some reason(maybe Chinese reason) kmMat3Multiply multiplies in wrong order
    // Actually out = M2 x M1 while expected out = M1 x M2
    // I spend 2 hours finding why multiplication is wrong... fuck kazmath library 
-   kmMat3Multiply(&result, &rot, &result);
-   kmMat3Multiply(&result, &inv, &result);
+   Multiply3x3Matrix(result, rot, result);
+   Multiply3x3Matrix(result, inv, result);
 
-   xform[0]  = result.mat[0];
-   xform[1]  = result.mat[3];
-   xform[2]  = result.mat[6];
+   xform[0]  = result[0];
+   xform[1]  = result[3];
+   xform[2]  = result[6];
    xform[3]  = 0;
-   xform[4]  = result.mat[1];
-   xform[5]  = result.mat[4];
-   xform[6]  = result.mat[7];
+   xform[4]  = result[1];
+   xform[5]  = result[4];
+   xform[6]  = result[7];
    xform[7]  = 0;
-   xform[8]  = result.mat[2];
-   xform[9]  = result.mat[5];
-   xform[10] = result.mat[8];
+   xform[8]  = result[2];
+   xform[9]  = result[5];
+   xform[10] = result[8];
    xform[11] = 0;
    xform[12] = 0;
    xform[13] = 0;
@@ -104,21 +117,6 @@ void MPix::HSVShader::GenHSVMatrix( float * xform, float hue, float saturation, 
    xform[15] = 1;
 }
 
-kmMat3 MPix::HSVShader::GetRGB2YIQ()
-{
-   kmMat3 m;
-   float d[] = { 0.299f, 0.587f, 0.114f, 0.595716f, -0.274453f, -0.321263f, 0.211456f, -0.522591f, 0.31113f };
-   kmMat3Fill(&m, d);
-   return m;
-}
-
-kmMat3 MPix::HSVShader::GetYIQ2RGB()
-{
-   kmMat3 m;
-   float d[] = { 1, 0.9563f, 0.6212f, 1, -0.2721f, -0.6474f, 1, -1.1070f, 1.7046f };
-   kmMat3Fill(&m, d);
-   return m;
-}
 
 void MPix::HSVShader::SetHSVMatrix( float* mat4x4 )
 {

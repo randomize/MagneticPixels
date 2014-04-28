@@ -59,7 +59,7 @@ namespace MPix {
    protected:
 
       string name;
-      LabelTTF* name_l;
+      Label* name_l;
 
    };
 

@@ -45,7 +45,7 @@ namespace MPix {
       Layer * bg;
       LayerColor * tb_bg;
       float contentScale;
-      LabelTTF* lvl_name;
+      Label* lvl_name;
        
       // For async commanding
       vector<Command*> scheduled_commands;

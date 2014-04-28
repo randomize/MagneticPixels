@@ -295,12 +295,12 @@ MPix::Coordinates MPix::ScreenToLogic( Vector2 p )
 
 }
 
-Point MPix::LogicToScreen( Coordinates c )
+Vector2 MPix::LogicToScreen( Coordinates c )
 {
    return Vector2(c.x * MPIX_CELL_SIZE, c.y * MPIX_CELL_SIZE);
 }
 
-cocos2d::Point MPix::LogicToScreen( int x, int y )
+Vector2 MPix::LogicToScreen( int x, int y )
 {
    return LogicToScreen(Coordinates(x,y));
 

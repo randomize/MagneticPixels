@@ -33,7 +33,7 @@ bool MPix::CreditsState::init()
    auto s = Director::getInstance()->getWinSize();
    Vector2 center(s.width / 2, s.height / 2);
 
-   auto lb = LabelTTF::create("TODO: scrolling credits\n will be here", ContentManager::getInstance().GetLogoFont(), 48.0f);
+   auto lb = Label::createWithTTF("TODO: scrolling credits\n will be here", ContentManager::getInstance().GetLogoFont(), 48.0f);
    lb->setColor(Color3B::GRAY);
    lb->setPosition(center);
    lb->setOpacity(0);

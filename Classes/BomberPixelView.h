@@ -66,7 +66,7 @@ namespace MPix {
       HSVSprite* bomb_eyes;
       Sprite* bomb;
       HSVSprite* smash;
-      LabelTTF* label;
+      Label* label;
 
       shared_ptr<BomberPixel> pixel;
 

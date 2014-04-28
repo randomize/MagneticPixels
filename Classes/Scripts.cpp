@@ -23,8 +23,8 @@ void ShowSimpleNotification(const string& message, Vector2 pos = Vector2::ZERO) 
    notification_content->setOpacityModifyRGB(true);
    notification_content->retain();
 
-   LabelTTF* label;
-   label = LabelTTF::create(message, ContentManager::getInstance().GetBaseFont(), 32.0f);
+   Label* label;
+   label = Label::createWithTTF(message, ContentManager::getInstance().GetBaseFont(), 32.0f);
    label->setPosition(pos);
    label->setColor(Color3B::WHITE);
    notification_content->addChild(label);

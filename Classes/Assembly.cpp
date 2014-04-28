@@ -257,7 +257,7 @@ std::forward_list<std::pair<int, Coordinates>> & MPix::Assembly::GetAssemblyPosi
    return lst_coords;
 }
 
-Point MPix::Assembly::GetCenter()
+Vector2 MPix::Assembly::GetCenter()
 {
    UpdateCenter(); // For now no caching
    return center;

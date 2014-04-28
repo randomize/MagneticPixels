@@ -29,7 +29,7 @@ bool MPix::SplashState::init()
    auto s = Director::getInstance()->getWinSize();
    Vector2 center(s.width / 2, s.height / 2);
 
-   auto lb = LabelTTF::create("Loading...", ContentManager::getInstance().GetBaseFontLight(), 72.0f);
+   auto lb = Label::createWithTTF("Loading...", ContentManager::getInstance().GetBaseFontLight(), 72.0f);
    lb->setColor(Color3B::GRAY);
    lb->setPosition(center);
    lb->setOpacity(0);

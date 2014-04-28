@@ -52,7 +52,7 @@ namespace MPix {
       int root_tool_size;
       int last_used;
 
-      LabelTTF* tool_name;
+      Label* tool_name;
 
       // Touch system
       bool onTouchBegan( Touch *touch, Event *event ) override;

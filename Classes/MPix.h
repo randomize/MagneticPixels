@@ -162,7 +162,9 @@ namespace MPix {
    //== ------ For cocos classes --------------------------------------
 
 namespace cocos2d {
+   namespace math {
    ostream& operator<<( ostream& os, const Vector2& b );
+   }
 }
 
 //== ------ HSV color --------------------------------------
