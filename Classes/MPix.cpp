@@ -5,8 +5,8 @@ using namespace MPix;
 
 const float MPix::MPIX_CELL_SIZE = 80.0f;
 const float MPix::MPIX_CELL_SIZE_HALF = MPIX_CELL_SIZE/2.0f;
-const Point MPix::MPIX_CELL_SIZE_P = Point(MPIX_CELL_SIZE, MPIX_CELL_SIZE);
-const Point MPix::MPIX_CELL_SIZE_HALF_P = Point(MPIX_CELL_SIZE/2.0, MPIX_CELL_SIZE/2.0);
+const Vector2 MPix::MPIX_CELL_SIZE_P = Vector2(MPIX_CELL_SIZE, MPIX_CELL_SIZE);
+const Vector2 MPix::MPIX_CELL_SIZE_HALF_P = Vector2(MPIX_CELL_SIZE/2.0, MPIX_CELL_SIZE/2.0);
 
 
 // ------ Coordinates class implementation ----------------------------------
@@ -140,7 +140,7 @@ ostream& MPix::operator<<( ostream& os, const Direction& d )
    return os;
 }
 
-ostream& cocos2d::operator<<( ostream& os, const Point& b )
+ostream& cocos2d::operator<<( ostream& os, const Vector2& b )
 {
    size_t save_prec = os.precision();
    os << " ccp [ " << std::setprecision(4) << std::fixed << b.x << ", " << b.y << " ] " << std::scientific;
@@ -264,7 +264,7 @@ MPix::Direction MPix::RandomDirection()
 }
 
 
-MPix::Direction MPix::GetDirectionVector( Point s, Point e )
+MPix::Direction MPix::GetDirectionVector( Vector2 s, Vector2 e )
 {
    float ang = (e-s).getAngle() * 4 / M_PI + 9/2.0f;
    int p = (int)floor(ang) % 8; // 0 .. 7 
@@ -283,13 +283,13 @@ MPix::Direction MPix::GetDirectionVector( Point s, Point e )
 
 MPix::Direction MPix::GetDirectionVector( Coordinates s, Coordinates e )
 {
-   Point sp(s.x, s.y);
-   Point se(e.x, e.y);
+   Vector2 sp(s.x, s.y);
+   Vector2 se(e.x, e.y);
    return GetDirectionVector(sp, se);
 }
 
 
-MPix::Coordinates MPix::ScreenToLogic( Point p )
+MPix::Coordinates MPix::ScreenToLogic( Vector2 p )
 {
    return Coordinates(floor(p.x / MPIX_CELL_SIZE), floor(p.y/MPIX_CELL_SIZE));
 
@@ -297,7 +297,7 @@ MPix::Coordinates MPix::ScreenToLogic( Point p )
 
 Point MPix::LogicToScreen( Coordinates c )
 {
-   return Point(c.x * MPIX_CELL_SIZE, c.y * MPIX_CELL_SIZE);
+   return Vector2(c.x * MPIX_CELL_SIZE, c.y * MPIX_CELL_SIZE);
 }
 
 cocos2d::Point MPix::LogicToScreen( int x, int y )

@@ -64,7 +64,7 @@ void EditorMain::onEnter()
    Size fullSize = Director::getInstance()->getWinSize();
    Size halfSize =  fullSize / 2.0f;
    Size visibleSize = Director::getInstance()->getVisibleSize();
-   Point origin = Director::getInstance()->getVisibleOrigin();
+   Vector2 origin = Director::getInstance()->getVisibleOrigin();
 
    contentScale = visibleSize.height/fullSize.height * visibleSize.width/fullSize.width;
 
@@ -94,7 +94,7 @@ void EditorMain::onEnter()
 
    // Create menu
    auto menu = Menu::create();
-   menu->setPosition(Point::ZERO);
+   menu->setPosition(Vector2::ZERO);
    int base_tag = 101;
    const char* names[] = {
       "play.png", // 101
@@ -106,14 +106,14 @@ void EditorMain::onEnter()
    for (int i = 0; i < sizeof(names)/sizeof(names[0]); ++i) {
       auto btn = MenuItemImage::create( names[i], names[i], CC_CALLBACK_1(EditorMain::BtnHnadler, this));
       btn->setTag(base_tag + i);
-      btn->setPosition(Point(
+      btn->setPosition(Vector2(
          origin.x + visibleSize.width - btn->getContentSize().width/2 * (2*i+1) ,
          origin.y + btn->getContentSize().height/2)
          );
       menu->addChild(btn);
    }
    this->addChild(menu, 4);
-   menu->setAnchorPoint(Point(1, 0));
+   menu->setAnchorPoint(Vector2(1, 0));
    menu->setScale(Director::getInstance()->getContentScaleFactor()); // FIXME
 
    lvl_name = LabelTTF::create(editor->GetLevelName().c_str(), "Arial", 36);

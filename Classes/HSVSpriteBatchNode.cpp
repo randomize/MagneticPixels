@@ -78,7 +78,7 @@ void MPix::HSVSpriteBatchNode::buildUniforms()
 {
    auto s = getTexture()->getContentSizeInPixels();
 
-   blur_ = Point(1/s.width, 1/s.height);
+   blur_ = Vector2(1/s.width, 1/s.height);
    sub_[0] = sub_[1] = sub_[2] = sub_[3] = 0;
 
    subLocation = glGetUniformLocation( getShaderProgram()->getProgram(), "substract");
@@ -100,6 +100,6 @@ const char* MPix::HSVSpriteBatchNode::GetShaderFilename()
 void MPix::HSVSpriteBatchNode::SetBlur( float f )
 {
     auto s = getTexture()->getContentSizeInPixels();
-    blur_ = Point(1/s.width, 1/s.height);
+    blur_ = Vector2(1/s.width, 1/s.height);
     blur_ = blur_ * f;
 }

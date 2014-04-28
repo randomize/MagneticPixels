@@ -267,7 +267,7 @@ Sprite* MPix::ContentManager::GetScrollingBG(int index, bool scrolling)
    Size fullSize = Director::getInstance()->getWinSize();
    Size halfSize =  fullSize / 2.0f;
    Size visibleSize = Director::getInstance()->getVisibleSize();
-   auto center = Point(halfSize.width, halfSize.height);
+   auto center = Vector2(halfSize.width, halfSize.height);
    
    // Create
    string name("bg_" + ToString(index) );
@@ -285,8 +285,8 @@ Sprite* MPix::ContentManager::GetScrollingBG(int index, bool scrolling)
       bg1->runAction(
          RepeatForever::create(
             Sequence::create(
-               MoveTo::create(SCROLLING_SPEED, center + Point(swing, 0)),
-               MoveTo::create(SCROLLING_SPEED, center - Point(swing, 0)),
+               MoveTo::create(SCROLLING_SPEED, center + Vector2(swing, 0)),
+               MoveTo::create(SCROLLING_SPEED, center - Vector2(swing, 0)),
                nullptr
             )
          )

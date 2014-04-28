@@ -69,7 +69,7 @@ namespace MPix {
       // -------- Informations -----------------------------------
 
       inline const int GetID() const { return id; }
-      inline Point GetPosAsPoint() const  { return Point(GetPos().x, GetPos().y); }
+      inline Vector2 GetPosAsPoint() const  { return Vector2(GetPos().x, GetPos().y); }
       inline Coordinates GetPos() const { return pos; }
       //inline Coordinates GetOriginalPos() const  { return original_pos; }
       inline State GetState() const  { return st; }

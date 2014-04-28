@@ -8,7 +8,7 @@ using namespace MPix;
 
 //##########################################################################
 //  Task class
-//  Point that need to be covered with matching IColorful.
+//  Vector2 that need to be covered with matching IColorful.
 //##########################################################################
 
 GoalTask::GoalTask( Coordinates pos, PixelColor color ):

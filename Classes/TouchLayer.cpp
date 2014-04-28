@@ -57,8 +57,8 @@ namespace TouchConstants {
 
 
 MPix::TouchLayer::TouchLayer():
-   ps(Point::ZERO),
-   pe(Point::ZERO),
+   ps(Vector2::ZERO),
+   pe(Vector2::ZERO),
    n_acute_angles(0)
 {
     CmdDidEnterBG::listners["TouchLayer"] = std::bind( &TouchLayer::onBGFG, this );
@@ -172,8 +172,8 @@ void TouchLayer::onTouchMoved( Touch *touch, Event *event )
          auto sz = sequence.size();
          if ( sz >= 3 ) {
             // Taking two vectors
-            Point v1 = sequence[sz-3] - sequence[sz-2];
-            Point v2 = sequence[sz-1] - sequence[sz-2];
+            Vector2 v1 = sequence[sz-3] - sequence[sz-2];
+            Vector2 v2 = sequence[sz-1] - sequence[sz-2];
 
             // Assure that vectors have enough length
             if (v1.getLength() < TouchConstants::ACUTE_COUNTER_VECTOR_MAX_LEN
@@ -259,7 +259,7 @@ void TouchLayer::onTouchEnded( Touch *touch, Event *event )
 /////////////////////////////////////////////////////////////////////////////////
 
 
-void MPix::TouchLayer::GestureTapPoint( Point p )
+void MPix::TouchLayer::GestureTapPoint( Vector2 p )
 {
    p = Director::getInstance()->convertToGL(p);
    p = this->convertToNodeSpace(p);
@@ -392,9 +392,9 @@ void MPix::TouchLayer::AnalyseSequence()
    maxLen = sqrt(maxLen);
 
    // Additional parameters
-   auto center = Point(xmax+xmin, ymax+ymin) / 2.0f;
-   auto avgCenter = Point(avgx, avgy);
-   auto rectangle = Point(xmax-xmin, ymax-ymin);
+   auto center = Vector2(xmax+xmin, ymax+ymin) / 2.0f;
+   auto avgCenter = Vector2(avgx, avgy);
+   auto rectangle = Vector2(xmax-xmin, ymax-ymin);
 
    EM_LOG_DEBUG( " BBox is : " + rectangle.x + " x " + rectangle.y );
    EM_LOG_DEBUG( " BBox center = " + center);
@@ -428,7 +428,7 @@ void MPix::TouchLayer::AnalyseSequence()
    // p1 p2 p3 .... end_it;
    for (; p2 != s_end; ++p2, ++p1)
    {
-      Point v1 = *p2 - *p1;
+      Vector2 v1 = *p2 - *p1;
 
       float nangle = fabs(v1.getAngle());
       // float nlen = v1.getLength();

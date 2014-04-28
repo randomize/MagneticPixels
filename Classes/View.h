@@ -26,7 +26,7 @@ namespace MPix {
       virtual void setVisible(bool visibility);
 
       // Change position of view contents
-      virtual void setPosition(Point pos);
+      virtual void setPosition(Vector2 pos);
 
       // This method called most likely by target itself makes this view contents displayed on target
       // this can be done direct by childing, or through a BatchNode medium

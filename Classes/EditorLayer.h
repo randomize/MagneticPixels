@@ -103,12 +103,12 @@ namespace MPix {
       } st;
 
       Touch first_touch, second_touch;
-      Point pos;
+      Vector2 pos;
       float scale;
       float start_dist;
       bool dragging;
 
-      void OnTimeOut(Point p);
+      void OnTimeOut(Vector2 p);
 
    private: // Internal
 

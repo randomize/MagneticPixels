@@ -17,7 +17,7 @@ using namespace MPix;
 
 // Helpers
 
-void ShowSimpleNotification(const string& message, Point pos = Point::ZERO) {
+void ShowSimpleNotification(const string& message, Vector2 pos = Vector2::ZERO) {
    auto notification_content = Node::create();
    notification_content->setCascadeOpacityEnabled(true);
    notification_content->setOpacityModifyRGB(true);

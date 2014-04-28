@@ -40,7 +40,7 @@ bool MPix::SleepingZets::init()
    zzz->setEmissionRate(1.0f);
   // zzz->setTotalParticles(250);
    zzz->setPositionType(ParticleSystem::PositionType::RELATIVE);
-   zzz->setPosVar(Point::ZERO);
+   zzz->setPosVar(Vector2::ZERO);
    zzz->setAngle(60.0f);
    zzz->setAngleVar(0);
    zzz->setLife(3);

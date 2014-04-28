@@ -53,16 +53,16 @@ void MPix::BomberPixelView::Build( shared_ptr<Pixel> model )
 
    // Bomb
    bomb = cm.GetSimpleSprite("bomber_bg");
-   bomb->setPosition(Point::ZERO);
+   bomb->setPosition(Vector2::ZERO);
 
    bomb_eyes = cm.GetHSVSprite("bomber_eyes");
    bomb_eyes->SetHSV(color);
-   bomb_eyes->setPosition(Point::ZERO);
+   bomb_eyes->setPosition(Vector2::ZERO);
 
    // Label
    label = LabelTTF::create(ToString(pixel->GetTime()), cm.GetBaseFont(), 32.0f);
    label->setColor(Color3B::WHITE);
-   label->setPosition(Point(0,-15));
+   label->setPosition(Vector2(0,-15));
 
    // Dead state
    smash = cm.GetHSVSprite("magnetic_bg_smash");

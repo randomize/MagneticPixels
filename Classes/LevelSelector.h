@@ -56,9 +56,9 @@ namespace MPix {
 
       // Scrollable layer with worlds
       Layer* worlds_layer;
-      Point initial_pos, initial_touch;
+      Vector2 initial_pos, initial_touch;
       void ElasticBounceToCurrentWorld();
-      Point NormalizePozition(Point pos);
+      Vector2 NormalizePozition(Vector2 pos);
 
       // Worlds
       unordered_map<int,Node*> title_lables; // ID -> label
@@ -83,7 +83,7 @@ namespace MPix {
 
       // Saved geometry
       Size fullSize, halfSize, visibleSize;
-      Point lowerLeft, lowerRight, centerPoint, upperLeft, upperRight;
+      Vector2 lowerLeft, lowerRight, centerPoint, upperLeft, upperRight;
 
       //////////////// TOUCH HANDLING
 
@@ -108,7 +108,7 @@ namespace MPix {
       LevelView* m_cur_button;
 
       // Helper method, searches for tap match, nullptr if not found
-      LevelView* GetViewAtPoint(Point touch_pos);
+      LevelView* GetViewAtPoint(Vector2 touch_pos);
 
 #ifdef MPIX_DEVELOPERS_BUILD
 

@@ -79,7 +79,7 @@ namespace MPix {
 
    // Return direction from Start to End
    Direction GetDirectionVector(Coordinates s, Coordinates e);
-   Direction GetDirectionVector(Point s, Point e);
+   Direction GetDirectionVector(Vector2 s, Vector2 e);
 
    // Helper enum for direction classification
    enum class DirectionType {
@@ -162,7 +162,7 @@ namespace MPix {
    //== ------ For cocos classes --------------------------------------
 
 namespace cocos2d {
-   ostream& operator<<( ostream& os, const Point& b );
+   ostream& operator<<( ostream& os, const Vector2& b );
 }
 
 //== ------ HSV color --------------------------------------
@@ -188,15 +188,15 @@ namespace MPix {
    // Defines cell size in design resolution coordinates
    extern const float MPIX_CELL_SIZE;
    extern const float MPIX_CELL_SIZE_HALF;
-   extern const Point MPIX_CELL_SIZE_P;
-   extern const Point MPIX_CELL_SIZE_HALF_P;
+   extern const Vector2 MPIX_CELL_SIZE_P;
+   extern const Vector2 MPIX_CELL_SIZE_HALF_P;
 
    // Converts screen to logic
-   Coordinates ScreenToLogic(Point p);
+   Coordinates ScreenToLogic(Vector2 p);
 
    // Converts logic to screen
-   Point LogicToScreen(Coordinates c);
-   Point LogicToScreen(int x, int y);
+   Vector2 LogicToScreen(Coordinates c);
+   Vector2 LogicToScreen(int x, int y);
 
 }
 

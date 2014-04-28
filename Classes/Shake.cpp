@@ -57,7 +57,7 @@ void Shake::update(float dt)
    float randy = fgRangeRand(-m_strength_y, m_strength_y)*dt;
 
    // move the target to a shacked position
-   _target->setPosition(Point(m_initial_x, m_initial_y) + Point(randx, randy));
+   _target->setPosition(Vector2(m_initial_x, m_initial_y) + Vector2(randx, randy));
 }
 
 void Shake::startWithTarget(Node *pTarget)
@@ -72,7 +72,7 @@ void Shake::startWithTarget(Node *pTarget)
 void Shake::stop(void)
 {
    // Action is done, reset clip position
-   this->getTarget()->setPosition(Point(m_initial_x, m_initial_y));
+   this->getTarget()->setPosition(Vector2(m_initial_x, m_initial_y));
 
    CCActionInterval::stop();
 }

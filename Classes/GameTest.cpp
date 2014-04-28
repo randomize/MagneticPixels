@@ -66,11 +66,11 @@ EmbossLib::ErrorCode MPix::GameTest::FinishedGame()
 
 void MPix::GameTest::CreateButtons()
 {
-   Point origin = Director::getInstance()->getVisibleOrigin();
+   Vector2 origin = Director::getInstance()->getVisibleOrigin();
    Size visibleSize = Director::getInstance()->getVisibleSize();
    // Create menu
    auto menu = Menu::create();
-   menu->setPosition(Point::ZERO);
+   menu->setPosition(Vector2::ZERO);
    int base_tag = 101;
    const char* names[] = {
       "replay.png", // 101
@@ -82,7 +82,7 @@ void MPix::GameTest::CreateButtons()
    for (unsigned i = 0; i < sizeof(names)/sizeof(names[0]); ++i) {
       auto btn = MenuItemImage::create( names[i], names[i], CC_CALLBACK_1(GameTest::BtnHnadler, this));
       btn->setTag(base_tag + i);
-      btn->setPosition(Point(
+      btn->setPosition(Vector2(
          origin.x + visibleSize.width - btn->getContentSize().width/2 * (2*i+1) ,
          origin.y + btn->getContentSize().height/2)
          );

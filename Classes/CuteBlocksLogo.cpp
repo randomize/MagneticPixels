@@ -36,7 +36,7 @@ bool MPix::CuteBlocksLogo::init()
    pixel->Build(p);
    pixel->BindContents(pixel_holder);
    //pixel->Update(CmdUIUpdatePixelView::Reason::CREATED);
-   pixel->setPosition(Point(0, 0));
+   pixel->setPosition(Vector2(0, 0));
 
 
    auto listener = EventListenerTouchOneByOne::create();
@@ -87,7 +87,7 @@ bool MPix::CuteBlocksLogo::onTouchBegan(Touch *touch, Event *event)
 
    if ((pt - pixel_holder->getPosition()).getLength() < 50) {
       egg++;
-      Point rand_offset((rand() % 3 - 1) * 48, (rand() % 3 - 1) * 48);
+      Vector2 rand_offset((rand() % 3 - 1) * 48, (rand() % 3 - 1) * 48);
       pixel_holder->runAction(
          EaseBounceOut::create(
             MoveTo::create(0.6f, pixel_holder->getPosition() + rand_offset)

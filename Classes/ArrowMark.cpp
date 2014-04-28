@@ -11,10 +11,10 @@ ArrowMark* MPix::ArrowMark::create()
 
    auto d = DrawNode::create();
 
-   Point* verts = new Point[3];
-   verts[0] = Point(MPIX_CELL_SIZE_HALF/2.0, 0);
-   verts[1] = Point(-MPIX_CELL_SIZE_HALF/2.0, MPIX_CELL_SIZE_HALF/4.0);
-   verts[2] = Point(-MPIX_CELL_SIZE_HALF/2.0, -MPIX_CELL_SIZE_HALF/4.0);
+   Vector2* verts = new Vector2[3];
+   verts[0] = Vector2(MPIX_CELL_SIZE_HALF/2.0, 0);
+   verts[1] = Vector2(-MPIX_CELL_SIZE_HALF/2.0, MPIX_CELL_SIZE_HALF/4.0);
+   verts[2] = Vector2(-MPIX_CELL_SIZE_HALF/2.0, -MPIX_CELL_SIZE_HALF/4.0);
 
    d->drawPolygon(verts, 3, Color4F::RED, 0.0f, Color4F()); 
 

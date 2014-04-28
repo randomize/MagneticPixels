@@ -88,7 +88,7 @@ void MPix::EditorMenu::BuildWorldsMenu()
    menu->alignItemsVertically();
 
    auto s = Director::getInstance()->getWinSize();
-   menu->setPosition(Point(s.width/2, s.height/2));
+   menu->setPosition(Vector2(s.width/2, s.height/2));
    addChild(menu, 3);
    world_m = menu;
 
@@ -127,7 +127,7 @@ void MPix::EditorMenu::BuildLevelsMenu( int w )
    menu->alignItemsVertically();
 
    auto s = Director::getInstance()->getWinSize();
-   menu->setPosition(Point(s.width/2, s.height/2));
+   menu->setPosition(Vector2(s.width/2, s.height/2));
 
    addChild(menu, 4);
    level_m = menu;
@@ -171,7 +171,7 @@ void MPix::EditorMenu::BuildEditorsMenu()
    menu->alignItemsVertically();
 
    auto s = Director::getInstance()->getWinSize();
-   menu->setPosition(Point(s.width/2, s.height/2));
+   menu->setPosition(Vector2(s.width/2, s.height/2));
    addChild(menu, 2);
    edit_m = menu;
 

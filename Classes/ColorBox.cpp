@@ -45,13 +45,13 @@ void ColorBox::onDraw(const kmMat4 &transform, bool transformUpdated)
    col.a *= (this->_displayedOpacity / 255.0f);
 
    auto ap = getAnchorPoint();
-   Point p00 = ap * MPIX_CELL_SIZE * -1;
-   Point p11 = p00 + MPIX_CELL_SIZE_P;
-   Point p10 = p00; p10.x += MPIX_CELL_SIZE;
-   Point p01 = p00; p01.y += MPIX_CELL_SIZE;
+   Vector2 p00 = ap * MPIX_CELL_SIZE * -1;
+   Vector2 p11 = p00 + MPIX_CELL_SIZE_P;
+   Vector2 p10 = p00; p10.x += MPIX_CELL_SIZE;
+   Vector2 p01 = p00; p01.y += MPIX_CELL_SIZE;
 
    DrawPrimitives::drawSolidRect(p00, p11, col);
-   auto p = Point(width,width);
+   auto p = Vector2(width,width);
    if (borders) {
       if ( borders & BORDER_LEFT ) 
          DrawPrimitives::drawSolidRect(p00-p, p01+p, borders_col);

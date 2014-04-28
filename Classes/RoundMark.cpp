@@ -20,10 +20,10 @@ RoundMark* MPix::RoundMark::create( const char* text )
    const int segs = 16;
    const float rad = MPIX_CELL_SIZE_HALF * 0.2f;
 
-   Point* verts = new Point[segs];
+   Vector2* verts = new Vector2[segs];
    float drads = 2.0f * float(M_PI) / segs;
    for ( int k = 0; k < segs; ++k) {
-      verts[k] = Point(cosf(k*drads)*rad, sinf(k*drads)*rad);
+      verts[k] = Vector2(cosf(k*drads)*rad, sinf(k*drads)*rad);
    }
 
    d->drawPolygon(verts, segs, Color4F::RED, 0.0f, Color4F()); 

@@ -82,7 +82,7 @@ namespace MPix {
       // Saved on init screen metrics
       Size m_full_size, m_half_size, m_visible_size;
       float m_content_scale;
-      Point m_center, m_origin;
+      Vector2 m_center, m_origin;
 
    protected:
 

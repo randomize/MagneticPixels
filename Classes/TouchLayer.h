@@ -65,7 +65,7 @@ namespace MPix {
 
       void AnalyseSequence();
 
-      Point ps, pe;
+      Vector2 ps, pe;
       int n_acute_angles;
 
       double timestamp;
@@ -78,7 +78,7 @@ namespace MPix {
    private: // Recognized gestures
 
       // Called when tap received
-      void GestureTapPoint(Point pos);
+      void GestureTapPoint(Vector2 pos);
       void GestureSwipe(Direction dir);
       void GestureLongSwipe(Direction dir);
       void GestureShake();

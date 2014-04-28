@@ -46,7 +46,7 @@ bool GameMain::init()
    m_half_size =  m_full_size / 2.0f;
    m_visible_size = Director::getInstance()->getVisibleSize();
    m_origin = Director::getInstance()->getVisibleOrigin();
-   m_center = Point(m_half_size.width, m_half_size.height);
+   m_center = Vector2(m_half_size.width, m_half_size.height);
    m_content_scale = (m_visible_size.height/m_full_size.height * m_visible_size.width/m_full_size.width);
 
    // Create scene:
@@ -129,7 +129,7 @@ void GameMain::CreateButtons()
 {
    // Create menu
    auto menu = Menu::create();
-   menu->setPosition(Point::ZERO);
+   menu->setPosition(Vector2::ZERO);
    int base_tag = 101;
    const char* names[] = {
       "replay.png", // 101
@@ -140,14 +140,14 @@ void GameMain::CreateButtons()
    for (unsigned i = 0; i < sizeof(names)/sizeof(names[0]); ++i) {
       auto btn = MenuItemImage::create( names[i], names[i], CC_CALLBACK_1(GameMain::BtnHnadler, this));
       btn->setTag(base_tag + i);
-      btn->setPosition(Point(
+      btn->setPosition(Vector2(
          m_origin.x + m_visible_size.width - btn->getContentSize().width/2 * (2*i+1) ,
          m_origin.y + btn->getContentSize().height/2)
          );
       menu->addChild(btn);
    }
    this->addChild(menu, 3);
-   menu->setAnchorPoint(Point(1, 0));
+   menu->setAnchorPoint(Vector2(1, 0));
    menu->setScale(Director::getInstance()->getContentScaleFactor()); // FIXME
 }
 

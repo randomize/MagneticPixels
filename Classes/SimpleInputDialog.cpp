@@ -19,13 +19,13 @@ bool MPix::SimpleInputDialog::initWithRequast( const char* req /*= "Input, pleas
 {
 
    auto sx = Director::getInstance()->getWinSize();
-   Point center = Point(sx.width/2, sx.height/2);
+   Vector2 center = Vector2(sx.width/2, sx.height/2);
 
    auto bg = LayerColor::create(Color4B(0,0,0,255));
    addChild(bg);
 
    auto pLabel = LabelTTF::create(req, "Arial", 36);
-   pLabel->setPosition(center + Point(0,center.y*0.5f));
+   pLabel->setPosition(center + Vector2(0,center.y*0.5f));
    addChild(pLabel);
 
    field = TextFieldTTF::textFieldWithPlaceHolder(
@@ -33,7 +33,7 @@ bool MPix::SimpleInputDialog::initWithRequast( const char* req /*= "Input, pleas
       "Arial", // Font
       36       // Size
    );
-   field->setPosition(center + Point(0,center.y*0.25f));
+   field->setPosition(center + Vector2(0,center.y*0.25f));
    addChild(field);
 
    MenuItemFont::setFontSize(36);

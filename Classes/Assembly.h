@@ -76,7 +76,7 @@ namespace MPix {
       std::forward_list<std::pair<int, Coordinates>> & GetAssemblyPositions() const;
 
       // Get center of assembly
-      Point GetCenter();
+      Vector2 GetCenter();
 
    private: // ================= Storage =================================
 
@@ -90,7 +90,7 @@ namespace MPix {
       Historical<int> move_number;
 
       // Center
-      Point center;
+      Vector2 center;
       void UpdateCenter();
       mutable std::forward_list<shared_ptr<IColorful>> lst_colors;
       mutable std::forward_list<std::pair<int,Coordinates>> lst_coords;

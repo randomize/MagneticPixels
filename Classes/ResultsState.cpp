@@ -45,7 +45,7 @@ bool MPix::ResultsState::init()
    menu->alignItemsVertically();
 
    auto s = Director::getInstance()->getWinSize();
-   Point center(s.width / 2, s.height / 2);
+   Vector2 center(s.width / 2, s.height / 2);
 
    menu->setPosition(center);
    addChild(menu, 2);

@@ -102,7 +102,7 @@ namespace MPix {
       std::forward_list<std::pair<int, Coordinates>> & GetAssemblyPositions() const;
 
       // Get coordinates of assembly center
-      Point GetAssemblyCenter() const;
+      Vector2 GetAssemblyCenter() const;
 
       // ================= Assembly helpers ======================
 

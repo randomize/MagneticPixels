@@ -40,7 +40,7 @@ namespace MPix {
 
       const char* GetShaderFilename();
 
-      Point blur_;
+      Vector2 blur_;
       GLfloat    sub_[4];
 
       GLuint    blurLocation;

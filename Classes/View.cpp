@@ -22,7 +22,7 @@ void MPix::View::setVisible( bool visibility )
    contents->setVisible(visibility);
 }
 
-void MPix::View::setPosition( Point pos )
+void MPix::View::setPosition( Vector2 pos )
 {
    assert(contents);
    contents->setPosition(pos);

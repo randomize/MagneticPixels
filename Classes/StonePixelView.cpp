@@ -9,8 +9,8 @@ using namespace MPix;
 
 EM_NODE_CHILD_CPP(StonePixelView);
 
-const Point l_pos = {-11.62f, 6.62f};
-const Point r_pos = {11.67f, 6.62f};
+const Vector2 l_pos = {-11.62f, 6.62f};
+const Vector2 r_pos = {11.67f, 6.62f};
 
 
 MPix::StonePixelView::StonePixelView()
@@ -71,14 +71,14 @@ void MPix::StonePixelView::PixelIdleTrick()
    ResetEyes();
 
    left_eye->runAction(Sequence::create(
-      MoveTo::create(0.3f, l_pos + Point(-RandomFloat(2.0),RandomFloat(-2.0, 2.0))),
+      MoveTo::create(0.3f, l_pos + Vector2(-RandomFloat(2.0),RandomFloat(-2.0, 2.0))),
       DelayTime::create(1.6f),
       MoveTo::create(0.3f, l_pos),
       nullptr
    ));
 
    right_eye->runAction(Sequence::create(
-      MoveTo::create(0.3f, r_pos + Point(RandomFloat(2.0),RandomFloat(-2.0, 2.0))),
+      MoveTo::create(0.3f, r_pos + Vector2(RandomFloat(2.0),RandomFloat(-2.0, 2.0))),
       DelayTime::create(1.6f),
       MoveTo::create(0.3f, r_pos),
       nullptr

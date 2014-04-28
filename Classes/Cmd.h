@@ -159,7 +159,7 @@ namespace MPix {
    };
 
    struct CmdUIContentTransform : public Command {
-      CmdUIContentTransform(float scale, Point position) {
+      CmdUIContentTransform(float scale, Vector2 position) {
          for (auto f : listners) {
             toExec.push_back(std::bind( f.second, scale, position));
          }
@@ -168,12 +168,12 @@ namespace MPix {
    };
 
    struct CmdUIPutMark : public Command {
-      CmdUIPutMark (Point position) {
+      CmdUIPutMark (Vector2 position) {
          for (auto f : listners) {
             toExec.push_back(std::bind( f.second, position));
          }
       }
-      static unordered_map<string,function<ErrorCode(Point)>> listners;
+      static unordered_map<string,function<ErrorCode(Vector2)>> listners;
    };
 
    struct CmdUIGameFinished : public Command {

@@ -59,12 +59,12 @@ bool MPix::LevelSelector::init()
    halfSize =  fullSize / 2.0f;
    visibleSize = d->getVisibleSize();
 
-   centerPoint = Point(halfSize.width, halfSize.height);
+   centerPoint = Vector2(halfSize.width, halfSize.height);
 
    lowerLeft = d->getVisibleOrigin();
-   lowerRight = Point(lowerLeft.x + visibleSize.width, lowerLeft.y);
-   upperLeft  = Point(lowerLeft.x, lowerLeft.y + visibleSize.height);
-   upperRight = Point(upperLeft.x + visibleSize.width, upperLeft.y);
+   lowerRight = Vector2(lowerLeft.x + visibleSize.width, lowerLeft.y);
+   upperLeft  = Vector2(lowerLeft.x, lowerLeft.y + visibleSize.height);
+   upperRight = Vector2(upperLeft.x + visibleSize.width, upperLeft.y);
 
    return true;
 }
@@ -83,18 +83,18 @@ void MPix::LevelSelector::onEnter()
 
    // Upper pane
    auto pn = DrawNode::create();
-   Point p_u[4] = {
+   Vector2 p_u[4] = {
       upperLeft,
       upperRight,
-      upperRight + Point(0, -PANEL_HEIGHT),
-      upperLeft  + Point(0, -PANEL_HEIGHT)
+      upperRight + Vector2(0, -PANEL_HEIGHT),
+      upperLeft  + Vector2(0, -PANEL_HEIGHT)
    };
    pn->drawPolygon(p_u, 4, Color4F(1, 1, 1, 0.3f), 0, Color4F(0, 0, 0, 0));
    // Lower pane
-   Point p_l[4] = {
+   Vector2 p_l[4] = {
       lowerLeft,
-      lowerLeft + Point(0, PANEL_HEIGHT / 2.0),
-      lowerRight + Point(0, PANEL_HEIGHT / 2.0),
+      lowerLeft + Vector2(0, PANEL_HEIGHT / 2.0),
+      lowerRight + Vector2(0, PANEL_HEIGHT / 2.0),
       lowerRight
    };
    pn->drawPolygon(p_l, 4, Color4F(1, 1, 1, 0.3f), 0, Color4F(0, 0, 0, 0));
@@ -190,14 +190,14 @@ void MPix::LevelSelector::CreateLevelButtons()
 
       // Create Label, place and hide them all
       auto label = LabelTTF::create(w->GetName(), ContentManager::getInstance().GetBaseFontLight(), UPPER_PANE_FONT);
-      label->setPosition((upperLeft + upperRight)/2 + Point(0, -PANEL_HEIGHT/2.0));
+      label->setPosition((upperLeft + upperRight)/2 + Vector2(0, -PANEL_HEIGHT/2.0));
       label->setOpacity(0);
       label->setColor(Color3B::BLACK);
       title_lables.emplace(id, label);
       addChild(label, Z_UPPER_PANE_FONT);
 
-      Point cur_center = Point(base_offset, 0) + centerPoint;
-      //auto cur_center = Point(base_offset, -UPPER_PANE_HEIGHT / 2) + center;
+      Vector2 cur_center = Vector2(base_offset, 0) + centerPoint;
+      //auto cur_center = Vector2(base_offset, -UPPER_PANE_HEIGHT / 2) + center;
 
       vector<LevelView*> world_buttons;
       world_buttons.reserve(15);
@@ -210,8 +210,8 @@ void MPix::LevelSelector::CreateLevelButtons()
          int row = j / LEVEL_BUTTON_COLS_COUNT;
          int col = j % LEVEL_BUTTON_COLS_COUNT;
 
-         Point pos{ col * level_pane_spacing_x, row * -level_pane_spacing_y };
-         Point shift{ -level_pane_w / 2, level_pane_h / 2 };
+         Vector2 pos{ col * level_pane_spacing_x, row * -level_pane_spacing_y };
+         Vector2 shift{ -level_pane_w / 2, level_pane_h / 2 };
 
          level_button->setPosition(cur_center + pos + shift); 
          level_button->setAnchorPoint({0.5f, 0.5f});
@@ -353,7 +353,7 @@ void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
    {
       // Update position
       auto pos = convertTouchToNodeSpace(touch) - initial_touch;
-      auto new_position = initial_pos + Point(pos.x, 0);
+      auto new_position = initial_pos + Vector2(pos.x, 0);
       worlds_layer->setPosition(NormalizePozition(new_position));
 
       if (idling_counter == 0) 
@@ -436,7 +436,7 @@ void MPix::LevelSelector::PrewWorld()
    ElasticBounceToCurrentWorld();
 }
 
-LevelView* MPix::LevelSelector::GetViewAtPoint(Point touch_pos)
+LevelView* MPix::LevelSelector::GetViewAtPoint(Vector2 touch_pos)
 {
    int j = 0;
    for (auto v : indexed_views[current_index]) {
@@ -460,7 +460,7 @@ void MPix::LevelSelector::ElasticBounceToCurrentWorld()
    worlds_layer->runAction(
       Sequence::create(
          EaseBounceOut::create(
-            MoveTo::create(0.5f, Point(p,0))
+            MoveTo::create(0.5f, Vector2(p,0))
          ),
          //CallFunc::create(
             //[this](){
@@ -475,7 +475,7 @@ void MPix::LevelSelector::ElasticBounceToCurrentWorld()
    
 }
 
-cocos2d::Point MPix::LevelSelector::NormalizePozition(Point pos)
+cocos2d::Point MPix::LevelSelector::NormalizePozition(Vector2 pos)
 {
    if (pos.x > indexed_positions[0]) {
       pos.x = indexed_positions[0];

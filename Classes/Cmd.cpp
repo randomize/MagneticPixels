@@ -9,7 +9,7 @@ using namespace MPix;
 unordered_map<string,function<ErrorCode(int,CmdUIUpdatePixelView::Reason)>> MPix::CmdUIUpdatePixelView::listners;
 unordered_map<string,function<ErrorCode(int,MPix::Coordinates,CmdUIUpdateGoalView::Reason)>> MPix::CmdUIUpdateGoalView::listners;
 
-unordered_map<string,function<ErrorCode(Point)>> MPix::CmdUIPutMark::listners;
+unordered_map<string,function<ErrorCode(Vector2)>> MPix::CmdUIPutMark::listners;
 unordered_map<string,function<ErrorCode(void)>> MPix::CmdUICreateViews::listners;
 unordered_map<string,function<ErrorCode(void)>> MPix::CmdUIAddAssembly::listners;
 unordered_map<string,function<ErrorCode(CmdUIRemoveAsembly::DestroyType)>> MPix::CmdUIRemoveAsembly::listners;

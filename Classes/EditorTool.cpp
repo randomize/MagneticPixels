@@ -163,7 +163,7 @@ void MPix::EditorFolderTool::BindContents( Node * target )
          auto view = PixelView::create(px);
          view->Build(px);
          view->BindContents(icon);
-         view->setPosition(Point(0,0));
+         view->setPosition(Vector2(0,0));
          icon_view = view;
       }
 
@@ -171,7 +171,7 @@ void MPix::EditorFolderTool::BindContents( Node * target )
    else // No logo
    { 
       auto b = ColorBox::create();
-      b->setAnchorPoint(Point(0.5f,0.5f));
+      b->setAnchorPoint(Vector2(0.5f,0.5f));
       b->SetColor(Color4F(0.8f,0.8f,0.8f,0.8f));
       b->SetBorders(15,Color4F(0.0f,0.0f,0.0f,0.8f));
       b->SetBorderWidth(1.0f);

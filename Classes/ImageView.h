@@ -27,7 +27,7 @@ namespace MPix {
       ImageView ();
 
       void setVisible( bool visibility ) override;
-      void setPosition( Point pos ) override;
+      void setPosition( Vector2 pos ) override;
 
    private:
 

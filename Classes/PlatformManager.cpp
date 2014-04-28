@@ -7,7 +7,7 @@
 #include <jni.h>
 #include <android_native_app_glue.h>
 
-// Pointer to android add, for JNI usage
+// Vector2er to android add, for JNI usage
 extern struct android_app* a_app;
 
 // Env for JNI calls

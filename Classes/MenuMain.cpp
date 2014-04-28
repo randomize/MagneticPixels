@@ -59,10 +59,10 @@ void MPix::MenuMain::onEnter()
    auto halfSize =  fullSize / 2.0f;
    auto visibleSize = d->getVisibleSize();
    auto visibleOrigin = d->getVisibleOrigin();
-   auto center = Point(halfSize.width, halfSize.height);
+   auto center = Vector2(halfSize.width, halfSize.height);
 
-   auto upperLeft  = Point(visibleOrigin.x, visibleOrigin.y + visibleSize.height);
-   auto upperRight = Point(upperLeft.x + visibleSize.width, upperLeft.y);
+   auto upperLeft  = Vector2(visibleOrigin.x, visibleOrigin.y + visibleSize.height);
+   auto upperRight = Vector2(upperLeft.x + visibleSize.width, upperLeft.y);
 
 
    // 2. Background
@@ -72,23 +72,23 @@ void MPix::MenuMain::onEnter()
 
    // BG
    auto pn = DrawNode::create();
-   Point p[4] = {
+   Vector2 p[4] = {
       upperLeft,
       upperRight,
-      upperRight + Point(0, -PANEL_HEIGHT),
-      upperLeft  + Point(0, -PANEL_HEIGHT)
+      upperRight + Vector2(0, -PANEL_HEIGHT),
+      upperLeft  + Vector2(0, -PANEL_HEIGHT)
    };
    pn->drawPolygon(p, 4, Color4F(1, 1, 1, 0.3f), 0, Color4F(0, 0, 0, 0));
    addChild(pn, Z_PANELS);
 
    // Logo
    auto title_label = CuteBlocksLogo::create();
-   title_label->setPosition((upperLeft + upperRight) / 2 + Point(0, -PANEL_HEIGHT / 2.0));
+   title_label->setPosition((upperLeft + upperRight) / 2 + Vector2(0, -PANEL_HEIGHT / 2.0));
    addChild(title_label, Z_UPPER_PANE_FONT);
 
    // 4. Main menu
    auto menu = Menu::create();
-   menu->setPosition(Point::ZERO);
+   menu->setPosition(Vector2::ZERO);
    addChild(menu, Z_MENU);
 
    MenuItemLabel* item = nullptr;
@@ -138,14 +138,14 @@ void MPix::MenuMain::onEnter()
 
 
    // Align items
-   auto init_pos = visibleOrigin + Point(visibleSize.width / 5, visibleSize.height - PANEL_HEIGHT - 50);
+   auto init_pos = visibleOrigin + Vector2(visibleSize.width / 5, visibleSize.height - PANEL_HEIGHT - 50);
    bool one = true;
    for (auto c : menu->getChildren()) {
-      c->setAnchorPoint(Point(0, 1));
+      c->setAnchorPoint(Vector2(0, 1));
       c->setPosition(init_pos);
-      init_pos += Point(0, -90);
+      init_pos += Vector2(0, -90);
       if (one) {
-         init_pos += Point(0, -40);
+         init_pos += Vector2(0, -40);
          one = false;
       }
    }
@@ -159,10 +159,10 @@ void MPix::MenuMain::onEnter()
 #endif
 
    auto vlabel = LabelTTF::create(vers.c_str(), cm.GetBaseFont(), 24, Size::ZERO, TextHAlignment::RIGHT);
-   vlabel->setAnchorPoint(Point(1,0));
+   vlabel->setAnchorPoint(Vector2(1,0));
    auto orig = Director::getInstance()->getVisibleOrigin();
    auto sz = Director::getInstance()->getVisibleSize();
-   vlabel->setPosition(Point(orig.x + sz.width, orig.y));
+   vlabel->setPosition(Vector2(orig.x + sz.width, orig.y));
    addChild(vlabel, 2);
 
 

@@ -267,7 +267,7 @@ void MPix::Assembly::UpdateCenter()
 {
 
    if (contents.GetValue().empty()) { 
-      center = Point::ZERO;
+      center = Vector2::ZERO;
       return;
    }
 
@@ -279,7 +279,7 @@ void MPix::Assembly::UpdateCenter()
       l++;
    }
 
-   center = Point(xes/l, yes/l);
+   center = Vector2(xes/l, yes/l);
 }
 
 bool MPix::Assembly::IsEmpty()

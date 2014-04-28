@@ -492,7 +492,7 @@ void MPix::EditorLayer::TouchDisable()
    touch_events = nullptr;
 }
 
-void MPix::EditorLayer::OnTimeOut(Point p)
+void MPix::EditorLayer::OnTimeOut(Vector2 p)
 {
    GestureLongTapPoint(ScreenToLogic(p));
    st = TouchState::IGNORING;

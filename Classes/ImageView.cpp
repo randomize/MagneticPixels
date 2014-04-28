@@ -13,7 +13,7 @@ void MPix::ImageView::setVisible( bool visibility )
    throw std::logic_error("The method or operation is not implemented.");
 }
 
-void MPix::ImageView::setPosition( Point pos )
+void MPix::ImageView::setPosition( Vector2 pos )
 {
    throw std::logic_error("The method or operation is not implemented.");
 }

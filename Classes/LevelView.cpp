@@ -105,10 +105,10 @@ bool MPix::LevelView::initWithId(unsigned lvl_id, int label_number)
       if (max.x < p.x) max.x = p.x;
       if (max.y < p.y) max.y = p.y;
    }
-   Point screen_min = MPix::LogicToScreen(min);
-   Point screen_max = MPix::LogicToScreen(max);
-   Point center = -(screen_max + screen_min) / 2 - MPIX_CELL_SIZE_HALF_P;
-   Point dims = (screen_max - screen_min + MPIX_CELL_SIZE_P);
+   Vector2 screen_min = MPix::LogicToScreen(min);
+   Vector2 screen_max = MPix::LogicToScreen(max);
+   Vector2 center = -(screen_max + screen_min) / 2 - MPIX_CELL_SIZE_HALF_P;
+   Vector2 dims = (screen_max - screen_min + MPIX_CELL_SIZE_P);
    float w = fabs(dims.x);
    float h = fabs(dims.y);
    float fitter = w > h ? w : h;
