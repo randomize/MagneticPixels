@@ -85,19 +85,26 @@ inline void Multiply3x3Matrix(float* pOut, float* m1, float* m2)
 
 void MPix::HSVShader::GenHSVMatrix( float * xform, float hue, float saturation, float value )
 {
-   float result[9] = { 1, 0.9563f, 0.6212f, 1, -0.2721f, -0.6474f, 1, -1.1070f, 1.7046f };
-   float inv[9] = { 0.299f, 0.587f, 0.114f, 0.595716f, -0.274453f, -0.321263f, 0.211456f, -0.522591f, 0.31113f };
+   float fwd[9] = { 1, 0.9563f, 0.6212f,
+                       1, -0.2721f, -0.6474f,
+                       1, -1.1070f, 1.7046f };
+
+   float inv[9] = { 0.299f, 0.587f, 0.114f,
+                    0.595716f, -0.274453f, -0.321263f, 
+                    0.211456f, -0.522591f, 0.31113f };
 
    float cf = saturation * cosf(hue);
    float sf = saturation * sinf(hue);
 
    float rot[9] = { value, 0, 0, 0, cf, -sf, 0, sf, cf };
 
+   float result[9];
+
    // For some reason(maybe Chinese reason) kmMat3Multiply multiplies in wrong order
    // Actually out = M2 x M1 while expected out = M1 x M2
    // I spend 2 hours finding why multiplication is wrong... fuck kazmath library 
-   Multiply3x3Matrix(result, rot, result);
-   Multiply3x3Matrix(result, inv, result);
+   Multiply3x3Matrix(xform, rot, fwd);
+   Multiply3x3Matrix(result, inv, xform);
 
    xform[0]  = result[0];
    xform[1]  = result[3];
@@ -115,6 +122,7 @@ void MPix::HSVShader::GenHSVMatrix( float * xform, float hue, float saturation, 
    xform[13] = 0;
    xform[14] = 0;
    xform[15] = 1;
+
 }
 
 
