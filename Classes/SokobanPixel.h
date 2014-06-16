@@ -10,8 +10,8 @@
 #ifndef SOKOBANPIXEL_H_
 #define SOKOBANPIXEL_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 #include "MPix.h"
 
 #include "SokobanBase.h"
@@ -30,7 +30,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(SokobanPixel);
+      ECNODE_CHILD(SokobanPixel);
 
    public:
 

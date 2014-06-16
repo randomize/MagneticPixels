@@ -10,7 +10,7 @@
 #ifndef PIXELCONTEXT_H_
 #define PIXELCONTEXT_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Events.h"
 

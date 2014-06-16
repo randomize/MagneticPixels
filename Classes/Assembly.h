@@ -10,7 +10,7 @@
 #ifndef PIXELASSEMBLY_H_
 #define PIXELASSEMBLY_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Historical.h"
 

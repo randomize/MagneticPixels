@@ -10,7 +10,7 @@
 #ifndef ICOLORFUL_H_
 #define ICOLORFUL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Pixel.h"
 #include "Historical.h"

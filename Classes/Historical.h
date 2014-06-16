@@ -10,7 +10,7 @@
 #ifndef HISTORICAL_H_
 #define HISTORICAL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "HistoryManager.h"
 
 namespace MPix {

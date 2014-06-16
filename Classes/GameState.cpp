@@ -17,7 +17,7 @@ ErrorCode GameState::Execute( Command* cmd ) const
 {
    assert(cmd);
    ErrorCode ret = cmd->Execute();
-   //EM_LOG_DEBUG("Game state " + GetName() + " executed command" );
+   //ECLOG_DEBUG("Game state " + GetName() + " executed command" );
    delete cmd;
    return ret;
 }

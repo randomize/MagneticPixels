@@ -10,7 +10,7 @@
 #ifndef GAMEMAIN_H_
 #define GAMEMAIN_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "GameState.h"
 
@@ -26,7 +26,7 @@ namespace MPix {
    {
    public:
 
-      EM_GAME_STATE(GameMain);
+      ECGAME_STATE(GameMain);
       GameMain();
       ~GameMain();
       bool init() override;

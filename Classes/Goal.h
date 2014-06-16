@@ -10,7 +10,7 @@
 #ifndef PIXELSHAPE_H_
 #define PIXELSHAPE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Historical.h"
 

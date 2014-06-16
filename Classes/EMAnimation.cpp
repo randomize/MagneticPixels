@@ -1,4 +1,4 @@
-#include "EMAnimation.h"
+#include "ECAnimation.h"
 
 #include "GameStateManager.h"
 
@@ -7,9 +7,9 @@ using namespace MPix;
 //====---------------------------------------------======//
 
 
-MPix::EMAnimation* MPix::EMAnimation::create( const string& arm_name )
+MPix::ECAnimation* MPix::ECAnimation::create( const string& arm_name )
 {
-   auto fab = new EMAnimation;
+   auto fab = new ECAnimation;
    if (fab->initWithArmatureName(arm_name)) {
       fab->autorelease();
       return fab;
@@ -18,18 +18,18 @@ MPix::EMAnimation* MPix::EMAnimation::create( const string& arm_name )
    return nullptr;
 }
 
-bool MPix::EMAnimation::initWithArmatureName( const string& arm_name )
+bool MPix::ECAnimation::initWithArmatureName( const string& arm_name )
 {
    if (Node::init()) {
 
       armature = Armature::create(arm_name);
       if (armature == nullptr) {
-         EM_LOG_ERROR("Cannot create " + arm_name + " armature ");
+         ECLOG_ERROR("Cannot create " + arm_name + " armature ");
          return false;
       }
       armature->setBlendFunc(BlendFunc::ALPHA_NON_PREMULTIPLIED);
       armature->getAnimation()->setSpeedScale(0.75f); // FIXME: actually something wrong with dragonbones export, animations are a bit faster
-      armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_3(EMAnimation::animationNext, this));
+      armature->getAnimation()->setMovementEventCallFunc(CC_CALLBACK_3(ECAnimation::animationNext, this));
       addChild(armature);
 
       this->setCascadeOpacityEnabled(true);
@@ -40,21 +40,21 @@ bool MPix::EMAnimation::initWithArmatureName( const string& arm_name )
    return false;
 }
 
-void MPix::EMAnimation::Play( const string& name )
+void MPix::ECAnimation::Play( const string& name )
 {
    ani_queue.push_back(make_pair(false, name));
    if (!isplaying)
       ProcessOne();
 }
 
-void MPix::EMAnimation::PlayLocked( const string& name )
+void MPix::ECAnimation::PlayLocked( const string& name )
 {
    ani_queue.push_back(make_pair(true, name));
    if (!isplaying)
       ProcessOne();
 }
 
-void MPix::EMAnimation::PlayNow( const string& name )
+void MPix::ECAnimation::PlayNow( const string& name )
 {
    if (islocking) {
       islocking = false;
@@ -68,7 +68,7 @@ void MPix::EMAnimation::PlayNow( const string& name )
 }
 
 
-void MPix::EMAnimation::animationNext( Armature *armature, MovementEventType movementType, const std::string& movementID )
+void MPix::ECAnimation::animationNext( Armature *armature, MovementEventType movementType, const std::string& movementID )
 {
     if (movementType == COMPLETE)
     {
@@ -84,7 +84,7 @@ void MPix::EMAnimation::animationNext( Armature *armature, MovementEventType mov
     }
 }
 
-void MPix::EMAnimation::ProcessOne()
+void MPix::ECAnimation::ProcessOne()
 {
    auto pr = ani_queue.front();
    ani_queue.pop_front();

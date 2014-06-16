@@ -10,7 +10,7 @@
 #ifndef IMOVEBLE_H_
 #define IMOVEBLE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Pixel.h"
 #include "AnyBehavior.h"
 

@@ -9,7 +9,7 @@
 #include "LevelManager.h"
 #include "ContentManager.h"
 #include "ViewManager.h"
-#include "EMBaseMasterLoop.h"
+#include "ECBaseMasterLoop.h"
 
 using namespace MPix;
 using namespace std::placeholders;
@@ -263,8 +263,8 @@ ErrorCode GameMain::onCmdGameFinished()
 EndlessCatLib::ErrorCode MPix::GameMain::onCmdShowNotification(Node* content)
 {
    // Stamp and put on queue
-   EM_LOG_INFO("Pushing notification");
-   notifications.push_back({ content, EMBaseMasterLoop::GetTime() });
+   ECLOG_INFO("Pushing notification");
+   notifications.push_back({ content, ECBaseMasterLoop::GetTime() });
    return ErrorCode::RET_OK;
 }
 

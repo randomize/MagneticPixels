@@ -10,7 +10,7 @@
 #ifndef EDITORMENU_H_
 #define EDITORMENU_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "GameState.h"
 
 namespace MPix {
@@ -24,7 +24,7 @@ namespace MPix {
    {
    public:
 
-      EM_GAME_STATE(EditorMenu);
+      ECGAME_STATE(EditorMenu);
       EditorMenu();
       ~EditorMenu();
       bool init() override;

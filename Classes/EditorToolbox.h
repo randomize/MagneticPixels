@@ -10,7 +10,7 @@
 #ifndef EDITORTOOLBOX_H_
 #define EDITORTOOLBOX_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

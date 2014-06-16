@@ -10,7 +10,7 @@
 #ifndef IPROTECTOR_H_
 #define IPROTECTOR_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Pixel.h"
 #include "AnyBehavior.h"
 

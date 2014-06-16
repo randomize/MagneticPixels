@@ -9,12 +9,12 @@ using namespace MPix;
 
 ScriptManager::ScriptManager()
 {
-   EM_LOG_INFO("Script manager init");
+   ECLOG_INFO("Script manager init");
 
    m_scripts = CppScripts::GetScripts();
    //m_scripts = LuaScripts::GetScripts(); // TODO: swap this when lua ready
 
-   EM_LOG_INFO("Loaded " + m_scripts.size() + " scripts");
+   ECLOG_INFO("Loaded " + m_scripts.size() + " scripts");
 }
 
 MPix::ScriptManager::~ScriptManager()
@@ -32,7 +32,7 @@ void MPix::ScriptManager::LoadScript(unsigned id)
       m_current = make_shared<Script>();
    }
 
-   EM_LOG_INFO("Loaded script : " + m_current->GetName());
+   ECLOG_INFO("Loaded script : " + m_current->GetName());
 }
 
 void MPix::ScriptManager::OnFirstMove(const Context& context)

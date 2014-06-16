@@ -66,7 +66,7 @@ bool GoalView::Update( CmdUIUpdateGoalView::Reason reason, Coordinates pos )
 
          //Check if exists and warn
          if (t->getActionByTag(ViewsConstants::ActionTags::GOAL_HIGHLIGHT_PULSE) != nullptr) {
-            EM_LOG_WARNING("Goal HIGHLIGHT called twice");
+            ECLOG_WARNING("Goal HIGHLIGHT called twice");
             break;
          }
 
@@ -91,7 +91,7 @@ bool GoalView::Update( CmdUIUpdateGoalView::Reason reason, Coordinates pos )
 
          //Check if not exists and warn
          if (t->getActionByTag(ViewsConstants::ActionTags::GOAL_HIGHLIGHT_PULSE) == nullptr) {
-            EM_LOG_WARNING("Goal UNHIGHLIGHT called twice");
+            ECLOG_WARNING("Goal UNHIGHLIGHT called twice");
             break;
          }
 

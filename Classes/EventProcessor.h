@@ -10,7 +10,7 @@
 #ifndef PIXELEVENTPROCESSOR_H_
 #define PIXELEVENTPROCESSOR_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 #include "Events.h"

@@ -10,8 +10,8 @@
 #ifndef SOKOBANPIXELVIEW_H_
 #define SOKOBANPIXELVIEW_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 #include "MPix.h"
 
 #include "PixelView.h"
@@ -27,7 +27,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(SokobanPixelView);
+      ECNODE_CHILD(SokobanPixelView);
       SokobanPixelView();
 
       void Build( shared_ptr<Pixel> model ) override;

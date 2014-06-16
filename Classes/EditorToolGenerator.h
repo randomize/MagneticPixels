@@ -10,7 +10,7 @@
 #ifndef EDITORTOOLGENERATOR_H_
 #define EDITORTOOLGENERATOR_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

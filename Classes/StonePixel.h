@@ -10,8 +10,8 @@
 #ifndef STONEPIXEL_H_
 #define STONEPIXEL_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 
 #include "SokobanBase.h"
 #include "IKilling.h"
@@ -32,7 +32,7 @@ namespace MPix {
       StonePixel();
       ~StonePixel();
 
-      EM_NODE_CHILD(StonePixel);
+      ECNODE_CHILD(StonePixel);
 
       PixelType GetType() const override { return PixelType::STONE_PIX; }
 

@@ -10,7 +10,7 @@
 #ifndef CREDITSSTATE_H_
 #define CREDITSSTATE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "GameState.h"
 
 namespace MPix {
@@ -24,7 +24,7 @@ namespace MPix {
    {
    public:
 
-      EM_GAME_STATE(CreditsState);
+      ECGAME_STATE(CreditsState);
       CreditsState();
       ~CreditsState();
 

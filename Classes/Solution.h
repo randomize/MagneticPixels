@@ -10,7 +10,7 @@
 #ifndef SOLUTION_H_
 #define SOLUTION_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

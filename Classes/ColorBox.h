@@ -11,7 +11,7 @@
 #ifndef COLORBOX_H_
 #define COLORBOX_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

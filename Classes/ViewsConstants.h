@@ -10,7 +10,7 @@
 #ifndef VIEWSCONSTANTS_H_
 #define VIEWSCONSTANTS_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

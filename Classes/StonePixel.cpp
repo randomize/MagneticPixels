@@ -4,7 +4,7 @@
 using namespace MPix;
 
 //====---------------------------------------------======//
-EM_NODE_CHILD_CPP(StonePixel)
+ECNODE_CHILD_CPP(StonePixel)
 
 MPix::StonePixel::StonePixel():
    SokobanBase()

@@ -10,7 +10,7 @@
 #ifndef PITFALLVIEW_H_
 #define PITFALLVIEW_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -25,7 +25,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(PitfallView);
+      ECNODE_CHILD(PitfallView);
 
       PitfallView();
       ~PitfallView();

@@ -10,7 +10,7 @@
 #ifndef GAMEPLAYMANAGER_H_
 #define GAMEPLAYMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 #include "Context.h"

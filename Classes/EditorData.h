@@ -11,7 +11,7 @@
 #ifndef EDITORDATA_H_
 #define EDITORDATA_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

@@ -10,7 +10,7 @@
 #ifndef EDITOR_LAYER_H__
 #define EDITOR_LAYER_H__
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

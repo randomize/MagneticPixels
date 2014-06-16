@@ -10,7 +10,7 @@
 #ifndef STATISTICSMANAGER_H_
 #define STATISTICSMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

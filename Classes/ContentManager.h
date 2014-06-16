@@ -10,14 +10,14 @@
 #ifndef CONTENTMANAGER_H_
 #define CONTENTMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 
    // forwards
-   class EMShader;
+   class ECShader;
    class HSVSprite;
-   class EMAnimation;
+   class ECAnimation;
 
    // ContentManager
    // It is actually a resource manager ;)
@@ -55,7 +55,7 @@ namespace MPix {
 
       // =========== Animation management ==========================================
 
-      EMAnimation* GetAnimation(const string& name);
+      ECAnimation* GetAnimation(const string& name);
 
       // =========== Font management =====================================
 
@@ -82,7 +82,7 @@ namespace MPix {
       void ReloadShaders();
 
       // List of shaders
-      unordered_map<string, EMShader*> shaders;
+      unordered_map<string, ECShader*> shaders;
 
       // List of resources
       unordered_map<string, string> resources;

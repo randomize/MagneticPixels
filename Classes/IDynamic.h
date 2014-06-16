@@ -10,7 +10,7 @@
 #ifndef IDYNAMIC_H_
 #define IDYNAMIC_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Pixel.h"
 
 namespace MPix {

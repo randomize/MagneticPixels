@@ -10,7 +10,7 @@
 #ifndef IMOVEBLOCKER_H_
 #define IMOVEBLOCKER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Pixel.h"
 #include "AnyBehavior.h"

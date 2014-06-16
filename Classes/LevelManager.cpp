@@ -12,12 +12,12 @@ using namespace MPix;
 LevelManager::LevelManager()
 {
    state = State::EMPTY;
-   EM_LOG_INFO("[ LevelManager initialized ]");
+   ECLOG_INFO("[ LevelManager initialized ]");
 }
 
 EndlessCatLib::ErrorCode MPix::LevelManager::ResetData()
 {
-   EM_LOG_INFO("LevelManager cleaning... ");
+   ECLOG_INFO("LevelManager cleaning... ");
    levels.clear();
    worlds.clear();
    worlds_map.clear();
@@ -35,7 +35,7 @@ ErrorCode LevelManager::LoadData()
       ResetData();
    }
 
-   EM_LOG_INFO("LevelManager loading ... ");
+   ECLOG_INFO("LevelManager loading ... ");
 
    auto ret = LevelStorage::getInstance()->GetLevels(worlds, levels); 
 
@@ -43,12 +43,12 @@ ErrorCode LevelManager::LoadData()
    auto ls = levels.size();
 
    if (ret != ErrorCode::RET_OK || ws == 0 || ls == 0 ) {
-      EM_LOG_ERROR("LevelManager failed levels load, resetting");
+      ECLOG_ERROR("LevelManager failed levels load, resetting");
       ResetData();
       return ErrorCode::RET_FAIL;
    }
 
-   EM_LOG_INFO("LevelManager loaded " + worlds.size() + " worlds with " + levels.size() + " levels");
+   ECLOG_INFO("LevelManager loaded " + worlds.size() + " worlds with " + levels.size() + " levels");
 
    // Setting up searchmap
    worlds_map.reserve(worlds.size());
@@ -98,11 +98,11 @@ shared_ptr<Level> LevelManager::GetPlayableLevelByID(unsigned  int levelID )
    auto lvl = GetLevelByID(levelID);
 
    if (lvl == nullptr) { 
-      EM_LOG_ERROR("> Not found Level " + levelID);
+      ECLOG_ERROR("> Not found Level " + levelID);
       return nullptr;
    }
 
-   EM_LOG_DEBUG("> Requested level " + levelID);
+   ECLOG_DEBUG("> Requested level " + levelID);
    last_lvl = lvl;
    return DupeLastAndMakePlayable();
 }
@@ -211,10 +211,10 @@ shared_ptr<World> MPix::LevelManager::GetWorldByID( int wID )
 {
    auto p = worlds_map.find(wID);
    if (p == end(worlds_map)) {
-      EM_LOG_ERROR("> Requested world " + wID + " not exists");
+      ECLOG_ERROR("> Requested world " + wID + " not exists");
       return nullptr;
    }
-   EM_LOG_DEBUG("> Requested world " + wID);
+   ECLOG_DEBUG("> Requested world " + wID);
    return p->second;
 }
 
@@ -300,11 +300,11 @@ void MPix::LevelManager::StoreLevel( shared_ptr<Level> level )
 
    auto it = worlds_map.find(worldID); // Check worlds
    if (it == worlds_map.end()) { // Bad
-      EM_LOG_ERROR("World ID="+worldID+" not found, level not stored");
+      ECLOG_ERROR("World ID="+worldID+" not found, level not stored");
       return;
    }
 
-   EM_LOG_DEBUG("Saving level id=" + levelID);
+   ECLOG_DEBUG("Saving level id=" + levelID);
 
    // Delete if exists
    DeleteLevelByID(levelID);
@@ -329,7 +329,7 @@ void MPix::LevelManager::DeleteLevelByID( unsigned int levelID )
       it->second->EraseLevel(levelID);
    }
 
-   EM_LOG_DEBUG("Erasing level id=" + levelID);
+   ECLOG_DEBUG("Erasing level id=" + levelID);
    levels.erase(p);
 
    LevelStorage::getInstance()->DeleteLevel(levelID);

@@ -10,7 +10,7 @@
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

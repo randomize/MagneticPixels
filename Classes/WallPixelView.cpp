@@ -6,7 +6,7 @@
 
 using namespace MPix;
 
-EM_NODE_CHILD_CPP(WallPixelView);
+ECNODE_CHILD_CPP(WallPixelView);
 
 void MPix::WallPixelView::Build( shared_ptr<Pixel> model )
 {

@@ -2,7 +2,7 @@
 
 #include "BomberPixel.h"
 
-#include "EMAnimation.h"
+#include "ECAnimation.h"
 #include "Shake.h"
 #include "ContentManager.h"
 #include "GameStateManager.h"
@@ -11,7 +11,7 @@
 
 using namespace MPix;
 
-EM_NODE_CHILD_CPP(BomberPixelView);
+ECNODE_CHILD_CPP(BomberPixelView);
 
 
 MPix::BomberPixelView::BomberPixelView():

@@ -10,7 +10,7 @@
 #ifndef IMAGNETICPIXEL_H_
 #define IMAGNETICPIXEL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Pixel.h"
 

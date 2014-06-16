@@ -10,7 +10,7 @@
 #ifndef MAGNETICPIXELVIEW_H_
 #define MAGNETICPIXELVIEW_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -18,7 +18,7 @@ namespace MPix {
    // Forward dependencies
    class MagneticPixel;
    class SleepingZets;
-   class EMAnimation;
+   class ECAnimation;
    class HSVSprite;
 
    // MagneticPixelView
@@ -27,7 +27,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(MagneticPixelView);
+      ECNODE_CHILD(MagneticPixelView);
       MagneticPixelView();
       ~MagneticPixelView();
 
@@ -58,7 +58,7 @@ namespace MPix {
      // contents
       SleepingZets* zzz;
       Node* body;
-      EMAnimation* mimics;
+      ECAnimation* mimics;
       HSVSprite* bg;
       HSVSprite* smash;
 

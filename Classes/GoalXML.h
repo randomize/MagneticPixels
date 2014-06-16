@@ -10,7 +10,7 @@
 #ifndef GOALXML_H_
 #define GOALXML_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

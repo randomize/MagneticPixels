@@ -22,7 +22,7 @@
 
 
 // Include master header
-#include "EMBase.h"
+#include "ECBase.h"
 
 
 
@@ -238,6 +238,6 @@ const string& LocalUTF8Str(const string& key);
 
 
 // Core universal things like Localization, PlatformDependent;
-using namespace EMCore;
+using namespace ECCore;
 
 #endif // MPIX_H_

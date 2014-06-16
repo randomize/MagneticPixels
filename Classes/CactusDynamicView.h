@@ -10,7 +10,7 @@
 #ifndef CACTUSDYNAMICVIEW_H_
 #define CACTUSDYNAMICVIEW_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -24,7 +24,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(CactusDynamicView);
+      ECNODE_CHILD(CactusDynamicView);
       CactusDynamicView();
 
       void Build( shared_ptr<Pixel> model ) override;

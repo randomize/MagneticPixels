@@ -10,7 +10,7 @@
 #ifndef IWALLPIXEL_H_
 #define IWALLPIXEL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Pixel.h"
 #include "IMoveBlocker.h"
 #include "IProtector.h"

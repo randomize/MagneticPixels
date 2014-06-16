@@ -10,7 +10,7 @@
 #ifndef FIELDXML_H_
 #define FIELDXML_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

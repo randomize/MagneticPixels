@@ -10,7 +10,7 @@
 #ifndef VIEWMANAGER_H_
 #define VIEWMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Cmd.h"
 
 namespace MPix {

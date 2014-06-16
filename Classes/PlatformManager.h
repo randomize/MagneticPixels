@@ -10,9 +10,9 @@
 #ifndef PLATFORMMANAGER_H_
 #define PLATFORMMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
-namespace EMCore {
+namespace ECCore {
 
 
    class PlatformManager

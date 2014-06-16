@@ -10,7 +10,7 @@
 #ifndef SOKOBANBASE_H_
 #define SOKOBANBASE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "IDynamic.h"
 #include "IAlive.h"
 #include "IMovable.h"

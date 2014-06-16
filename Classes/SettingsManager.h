@@ -10,7 +10,7 @@
 #ifndef SETTINGSMANAGER_H_
 #define SETTINGSMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

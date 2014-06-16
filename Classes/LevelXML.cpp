@@ -36,12 +36,12 @@ shared_ptr<Level> MPix::LevelXML::Generate( tinyxml2::XMLElement* src )
    // Loading pixel field
    auto fld = src->FirstChildElement("fld");
    if ( fld == nullptr ) {
-      EM_LOG_ERROR("No field `fld` tag, level " + fab->GetID() + " load failed ");
+      ECLOG_ERROR("No field `fld` tag, level " + fab->GetID() + " load failed ");
       return nullptr;
    }
    auto f = FieldXML::Generate(fld);
    if (f == nullptr) {
-      EM_LOG_ERROR("Field loading failed, level " + fab->GetID() + " load failed ");
+      ECLOG_ERROR("Field loading failed, level " + fab->GetID() + " load failed ");
       return nullptr;
    }
    fab->field = f;
@@ -49,17 +49,17 @@ shared_ptr<Level> MPix::LevelXML::Generate( tinyxml2::XMLElement* src )
    // Loading goals
    auto gl = fld->NextSiblingElement("gl");
    if ( fld == nullptr ) {
-      EM_LOG_ERROR("No goal `gl` tag, level " + fab->GetID() + " load failed ");
+      ECLOG_ERROR("No goal `gl` tag, level " + fab->GetID() + " load failed ");
       return nullptr;
    }
    auto goals = GoalXML::GenerateGoals(gl);
    if (!goals) {
-      EM_LOG_ERROR("Goals loading failed, level " + fab->GetID() + " load failed ");
+      ECLOG_ERROR("Goals loading failed, level " + fab->GetID() + " load failed ");
       return nullptr;
    }
    fab->goals = goals;
 
-   EM_LOG_DEBUG("Level `"  + fab->GetName() + "` id="+ fab->GetID() + " loaded ");
+   ECLOG_DEBUG("Level `"  + fab->GetName() + "` id="+ fab->GetID() + " loaded ");
 
    return fab;
 

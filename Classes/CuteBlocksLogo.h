@@ -10,7 +10,7 @@
 #ifndef CUTEBLOCKSLOGO_H_
 #define CUTEBLOCKSLOGO_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

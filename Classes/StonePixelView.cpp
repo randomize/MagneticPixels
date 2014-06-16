@@ -7,7 +7,7 @@ using namespace MPix;
 
 //====---------------------------------------------======//
 
-EM_NODE_CHILD_CPP(StonePixelView);
+ECNODE_CHILD_CPP(StonePixelView);
 
 const Vector2 l_pos = {-11.62f, 6.62f};
 const Vector2 r_pos = {11.67f, 6.62f};

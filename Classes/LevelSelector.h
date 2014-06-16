@@ -10,7 +10,7 @@
 #ifndef LEVELSELECTOR_H_
 #define LEVELSELECTOR_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "GameState.h"
 
@@ -26,7 +26,7 @@ namespace MPix {
    {
    public: //  === State interface =====================
 
-      EM_GAME_STATE(LevelSelector);
+      ECGAME_STATE(LevelSelector);
 
       void onEnter() override;
       void onExit() override;

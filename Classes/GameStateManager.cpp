@@ -26,7 +26,7 @@ using namespace MPix;
 GameStateManager::GameStateManager() :  
    currentState(nullptr) // State undefined
 {
-   EM_LOG_INFO("[ GameStateManager initialized ]");
+   ECLOG_INFO("[ GameStateManager initialized ]");
 }
 
 

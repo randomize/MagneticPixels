@@ -10,11 +10,11 @@
 #ifndef PITFALL_H_
 #define PITFALL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 #include "IKilling.h"
 
-#include "EMNode.h"
+#include "ECNode.h"
 
 namespace MPix {
 
@@ -28,7 +28,7 @@ namespace MPix {
    public:
 
       // Register this pixel type to pixel factory
-      EM_NODE_CHILD(Pitfall);
+      ECNODE_CHILD(Pitfall);
 
       Pitfall();
       ~Pitfall();

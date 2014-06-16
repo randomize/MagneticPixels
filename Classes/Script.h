@@ -10,7 +10,7 @@
 #ifndef SCRIPT_H_
 #define SCRIPT_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

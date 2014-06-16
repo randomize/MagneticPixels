@@ -10,7 +10,7 @@
 #ifndef ASSEMBLEDMAGNETICBASE_H_
 #define ASSEMBLEDMAGNETICBASE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 #include "IMagnetic.h"
 #include "IAssembled.h"

@@ -10,7 +10,7 @@
 #ifndef LEVELXML_H_
 #define LEVELXML_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

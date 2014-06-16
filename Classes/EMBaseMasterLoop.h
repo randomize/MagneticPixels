@@ -1,4 +1,4 @@
-//===-- EMBaseMasterLoop.h -------------------------------*- C++ -*-===//
+//===-- ECBaseMasterLoop.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/12/04
 //  Author:      Mihailenco E. at TheEndlessCat Games, 2013
@@ -7,20 +7,20 @@
 //===---------------------------------------------------------===//
 
 #pragma once
-#ifndef EMBASEMASTERLOOP_H_
-#define EMBASEMASTERLOOP_H_
+#ifndef ECBASEMASTERLOOP_H_
+#define ECBASEMASTERLOOP_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 
-   // EMBaseMasterLoop
+   // ECBaseMasterLoop
 
-   class EMBaseMasterLoop : public Node
+   class ECBaseMasterLoop : public Node
    {
    public:
 
-      EMBaseMasterLoop();
+      ECBaseMasterLoop();
 
       // Method instantiates all singletones in required order
       void InitGame();
@@ -49,4 +49,4 @@ namespace MPix {
 }
 
 
-#endif // EMBASEMASTERLOOP_H_
+#endif // ECBASEMASTERLOOP_H_

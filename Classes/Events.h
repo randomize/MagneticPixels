@@ -10,7 +10,7 @@
 #ifndef PIXELEVENTS_H_
 #define PIXELEVENTS_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

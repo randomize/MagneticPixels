@@ -10,7 +10,7 @@
 #ifndef PIXELXML_H_
 #define PIXELXML_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

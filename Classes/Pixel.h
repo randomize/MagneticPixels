@@ -10,9 +10,9 @@
 #ifndef PIXEL_H_
 #define PIXEL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
-#include "EMNode.h"
+#include "ECNode.h"
 #include "Historical.h"
 
 namespace MPix {
@@ -21,12 +21,12 @@ namespace MPix {
    class Context;
 
    // Pixel base class
-   class Pixel : public EMNode
+   class Pixel : public ECNode
    {
    public:
 
       // Registering Pixel as base node, and create pixel factory
-      EM_NODE_BASE(Pixel);
+      ECNODE_BASE(Pixel);
 
    public:
 

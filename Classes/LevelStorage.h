@@ -10,7 +10,7 @@
 #ifndef XMLLOADER_H_
 #define XMLLOADER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

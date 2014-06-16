@@ -7,19 +7,19 @@
 //===---------------------------------------------------------===//
 
 #pragma once
-#ifndef EM_ANIMATION_H_
-#define EM_ANIMATION_H_
+#ifndef ECANIMATION_H_
+#define ECANIMATION_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 
    // Animation
-   class EMAnimation : public Node
+   class ECAnimation : public Node
    {
    public:
 
-      static EMAnimation* create( const string& arm_name );
+      static ECAnimation* create( const string& arm_name );
 
       // Plays or schedules to queue and play after current
       void Play( const string& name );
@@ -50,4 +50,4 @@ namespace MPix {
 }
 
 
-#endif // EM_ANIMATION_H_
+#endif // ECANIMATION_H_

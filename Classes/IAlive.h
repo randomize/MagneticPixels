@@ -10,7 +10,7 @@
 #ifndef IALIVE_H_
 #define IALIVE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Historical.h"
 #include "Pixel.h"
 #include "AnyBehavior.h"

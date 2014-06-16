@@ -30,7 +30,7 @@ GameplayManager::GameplayManager()
          CmdGameplayGrowAsm::listners["GameplayManager"] = std::bind(&GameplayManager::GrowAssembly,     this);
        CmdGameplayFirstMove::listners["GameplayManager"] = std::bind(&GameplayManager::FirstMove,     this);
 
-   EM_LOG_INFO("[ GameplayManager initialized ]");
+   ECLOG_INFO("[ GameplayManager initialized ]");
 
    st = State::IDLE;
 
@@ -87,7 +87,7 @@ ErrorCode GameplayManager::SwitchState( State to )
       (st==State::PLAYING && to==State::IDLE)      // Reset
       );
 
-   EM_LOG_INFO("<<<< GPM: change " + StateString(st) + " => " + StateString(to) + ">>>>" );
+   ECLOG_INFO("<<<< GPM: change " + StateString(st) + " => " + StateString(to) + ">>>>" );
    st = to;
    
    return ErrorCode::RET_OK;
@@ -116,7 +116,7 @@ ErrorCode GameplayManager::ProcessOneCommand()
    cmd->Execute();
    delete cmd;
 
-   //EM_LOG_DEBUG(" GameplayManager : Executed CMD=[not implemented], return " + static_cast<int>(ret)); 
+   //ECLOG_DEBUG(" GameplayManager : Executed CMD=[not implemented], return " + static_cast<int>(ret)); 
 
    return ErrorCode::RET_OK;
 }
@@ -141,7 +141,7 @@ ErrorCode GameplayManager::LoadLevel( shared_ptr<Level> level )
 {
 
    if (st != State::IDLE) {
-      EM_LOG_WARNING("GameplayManager is not IDLE, level cant be loaded, need reset");
+      ECLOG_WARNING("GameplayManager is not IDLE, level cant be loaded, need reset");
       GameplayManager::Reset();
    }
 
@@ -150,7 +150,7 @@ ErrorCode GameplayManager::LoadLevel( shared_ptr<Level> level )
    assert( ! level->GetField()->IsEmpty() );
    assert(level->GetState() == Level::State::IS_PLAYABLE);
 
-   EM_LOG_INFO("LOADING LEVEL #" + level->GetID());
+   ECLOG_INFO("LOADING LEVEL #" + level->GetID());
 
    this->level = level;
 
@@ -163,7 +163,7 @@ ErrorCode GameplayManager::LoadLevel( shared_ptr<Level> level )
 
 ErrorCode GameplayManager::Play()
 {
-   EM_LOG_INFO("PLAY");
+   ECLOG_INFO("PLAY");
 
    assert(level);
    SwitchState(State::PLAYING);
@@ -214,7 +214,7 @@ ErrorCode GameplayManager::FirstMove()
 
 ErrorCode GameplayManager::Reset()
 {
-   EM_LOG_INFO("RESET");
+   ECLOG_INFO("RESET");
 
    // Break reference to level
    level.reset();
@@ -240,7 +240,7 @@ ErrorCode GameplayManager::Reset()
 
 ErrorCode GameplayManager::ClickAtPoint( Coordinates position )
 {
-   EM_LOG_DEBUG("ClickAtPoint");
+   ECLOG_DEBUG("ClickAtPoint");
 
    assert(st == State::PLAYING);
 
@@ -295,7 +295,7 @@ ErrorCode MPix::GameplayManager::StartAssembling( shared_ptr<IAssembled> pixel )
    assert(context.assembly->IsEmpty());
    assert(pixel);
 
-   EM_LOG_INFO("Starting assembly with " + pixel->GetTypeName() + " (id=" + pixel->GetID() + ") at " + pixel->GetPos() );
+   ECLOG_INFO("Starting assembly with " + pixel->GetTypeName() + " (id=" + pixel->GetID() + ") at " + pixel->GetPos() );
 
    // Save move number when started
    context.assembly->SetMoveNumber(context.moveNumber);
@@ -319,7 +319,7 @@ ErrorCode GameplayManager::MoveAssembly(Direction d)
 {
    assert(st == GameplayManager::State::PLAYING );
 
-   EM_LOG_INFO("GameplayManager->MoveAssembly()");
+   ECLOG_INFO("GameplayManager->MoveAssembly()");
 
    // Break on script disallow moving
    if (ScriptManager::getInstance().OnPlayerMove(context, d) == false) {
@@ -338,7 +338,7 @@ ErrorCode GameplayManager::MoveAssembly(Direction d)
    {
 
       // Moving
-      EM_LOG_INFO("Moving Assembly to " + d);
+      ECLOG_INFO("Moving Assembly to " + d);
 
       // Saving what was
       context.PushContextSnapshots();
@@ -371,7 +371,7 @@ ErrorCode MPix::GameplayManager::AfterMoveAssembly( Direction d ) {
 
    assert(st == State::PLAYING);
 
-   EM_LOG_INFO("GameplayManager->AfterMoveAssembly()");
+   ECLOG_INFO("GameplayManager->AfterMoveAssembly()");
 
    // Check for deaths in world, caused by player moved 
    // assembly(stone kills cactus, stone fallso pit, sokoban spikes on cactus)
@@ -405,7 +405,7 @@ ErrorCode GameplayManager::GrowAssembly()
 {
    assert(st == State::PLAYING);
 
-   EM_LOG_INFO("GameplayManager->GrowAssembly()");
+   ECLOG_INFO("GameplayManager->GrowAssembly()");
 
    // Searching for dead pixels killed by cactus or pits
    auto ret = context.assembly->CheckForLost(context); 
@@ -420,7 +420,7 @@ ErrorCode GameplayManager::GrowAssembly()
 
       if ( ret == ErrorCode::RET_YES ) {
 
-         EM_LOG_DEBUG("Assembly grows");
+         ECLOG_DEBUG("Assembly grows");
 
          // Play sound
          GameStateManager::getInstance().CurrentState()->Execute(new CmdPlaySound("stick"));
@@ -429,7 +429,7 @@ ErrorCode GameplayManager::GrowAssembly()
          PostPriorityCommand(new CmdGameplayGrowAsm());
 
       } else {
-         EM_LOG_DEBUG("Assembly last grow");
+         ECLOG_DEBUG("Assembly last grow");
          ScriptManager::getInstance().OnLastGrow(context);
       }
 
@@ -496,7 +496,7 @@ ErrorCode GameplayManager::CancelAssembly()
 ErrorCode GameplayManager::EndAssembling()
 {
    assert(st == State::PLAYING);
-   EM_LOG_INFO("Requested EndAssembly");
+   ECLOG_INFO("Requested EndAssembly");
 
    if (context.goals->ExistsSolution() == false)  {
       return ErrorCode::RET_FAIL;
@@ -509,7 +509,7 @@ ErrorCode GameplayManager::EndAssembling()
    context.goals->AcceptSolution(context);
    context.assembly->AcceptedSolution(context);
 
-   EM_LOG_INFO("Accepted solution");
+   ECLOG_INFO("Accepted solution");
 
    // Win check
    if ( context.goals->HasUnsatisfiedGoals() == false )

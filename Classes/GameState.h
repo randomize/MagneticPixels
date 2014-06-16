@@ -10,7 +10,7 @@
 #ifndef GAMESTATE_H_
 #define GAMESTATE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 
@@ -68,7 +68,7 @@ namespace MPix {
          };
    */
 
-   #define EM_GAME_STATE(Name)                                     \
+   #define ECGAME_STATE(Name)                                     \
       const char* GetName() const override { return #Name; } \
       CREATE_FUNC(Name)                                         \
    // GAME_STATE

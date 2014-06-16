@@ -15,7 +15,7 @@
 #include "Level.h"
 #include "LevelGenerator.h"
 #include "EditorData.h"
-#include "EMBaseMasterLoop.h"
+#include "ECBaseMasterLoop.h"
 
 using namespace MPix;
 
@@ -241,7 +241,7 @@ void EditorLayer::onTouchCancelled( Touch *touch, Event *event )
 
 void EditorLayer::onTouchEnded( Touch *touch, Event *event )
 {
-   //EM_LOG_WARNING("Ended");
+   //ECLOG_WARNING("Ended");
    //auto pScrEnd = touch->getLocationInView();
    //auto pScrStart = touch->getStartLocationInView();
 
@@ -274,7 +274,7 @@ void EditorLayer::onTouchEnded( Touch *touch, Event *event )
 
 void MPix::EditorLayer::GestureTapPoint( Coordinates p )
 {
-   EM_LOG_DEBUG(" P: " + p);
+   ECLOG_DEBUG(" P: " + p);
    if (p != cursor) {
       MoveCursor(p);
       return;
@@ -469,7 +469,7 @@ const string& MPix::EditorLayer::GetLevelName()
 
 void MPix::EditorLayer::TouchEnable()
 {
-   EM_LOG_DEBUG("Editor touch layer touches on");
+   ECLOG_DEBUG("Editor touch layer touches on");
 
    assert(touch_events == nullptr); // Ensures Enable/Disable matching
 

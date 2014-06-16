@@ -11,7 +11,7 @@
 #define BOMBERPIXELVIEW_H_
 
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -19,7 +19,7 @@ namespace MPix {
    // Forward dependencies
    class BomberPixel;
    class SleepingZets;
-   class EMAnimation;
+   class ECAnimation;
    class HSVSprite;
 
    // MagneticPixelView
@@ -28,7 +28,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(BomberPixelView);
+      ECNODE_CHILD(BomberPixelView);
       BomberPixelView();
       ~BomberPixelView();
 
@@ -61,7 +61,7 @@ namespace MPix {
 
      // contents
       Node* body;
-      EMAnimation* mimics;
+      ECAnimation* mimics;
       HSVSprite* bg;
       HSVSprite* bomb_eyes;
       Sprite* bomb;

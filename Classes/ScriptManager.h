@@ -11,7 +11,7 @@
 #ifndef SCRIPTMANAGER_H_
 #define SCRIPTMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

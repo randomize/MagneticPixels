@@ -136,7 +136,7 @@ void MPix::EditorToolbox::TouchDisable()
 
 void MPix::EditorToolbox::TouchEnable()
 {
-   EM_LOG_DEBUG("Editor toolbox layer touches on");
+   ECLOG_DEBUG("Editor toolbox layer touches on");
 
    assert(touch_events == nullptr); // Ensures Enable/Disable matching
 

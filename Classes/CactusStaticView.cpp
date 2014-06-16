@@ -5,7 +5,7 @@
 
 using namespace MPix;
 
-EM_NODE_CHILD_CPP(CactusStaticView);
+ECNODE_CHILD_CPP(CactusStaticView);
 
 void MPix::CactusStaticView::Build( shared_ptr<Pixel> model )
 {

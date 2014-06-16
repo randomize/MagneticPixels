@@ -10,7 +10,7 @@
 #ifndef HSVSPRITE_H_
 #define HSVSPRITE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "HSVProtocol.h"
 

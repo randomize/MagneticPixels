@@ -10,7 +10,7 @@
 #ifndef HSVPROTOCOL_H_
 #define HSVPROTOCOL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "HSVShader.h"
 #include "MPix.h"
 

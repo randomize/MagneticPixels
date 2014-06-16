@@ -24,14 +24,14 @@ SoundManager::SoundManager()
    // TODO: load predefined packs
 
 
-   EM_LOG_INFO("[ SoundManager initialized ]");
+   ECLOG_INFO("[ SoundManager initialized ]");
 
 }
 
 EndlessCatLib::ErrorCode MPix::SoundManager::PlayInBackground( const string& name )
 {
    // TODO: implement
-   EM_LOG_INFO("SoundManager is playing gentle music now");
+   ECLOG_INFO("SoundManager is playing gentle music now");
    //SimpleAudioEngine::getInstance()->playBackgroundMusic(name.c_str(),true);
    return ErrorCode::RET_OK;
 }
@@ -41,7 +41,7 @@ EndlessCatLib::ErrorCode MPix::SoundManager::PlaySoundSync( const string& name )
    // TODO: implement different formats:
    // http://www.cocos2d-x.org/projects/cocos2d-x/wiki/Audio_formats_supported_by_CocosDenshion_on_different_platforms
    // WAV on windows
-   EM_LOG_INFO("Playing sound file: " + name);
+   ECLOG_INFO("Playing sound file: " + name);
    SimpleAudioEngine::getInstance()->playEffect((name + ".wav").c_str());
    return ErrorCode::RET_OK;
 }

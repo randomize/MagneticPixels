@@ -10,7 +10,7 @@
 #ifndef IASSEMBLED_H_
 #define IASSEMBLED_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Historical.h"
 
 #include "IColorful.h"

@@ -10,9 +10,9 @@
 #ifndef LOCALEMANAGER_H_
 #define LOCALEMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
-namespace EMCore {
+namespace ECCore {
 
    // Forward dependencies
    class Dictionary;

@@ -1,12 +1,12 @@
-//===-- EMNode.h -------------------------------*- C++ -*-===//
+//===-- ECNode.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
 //  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: C++ auto factory implementation 
 //  Usage:
-//   Base class should have EM_NODE_BASE(ClassName) in declaration
-//   Derived classes should have EM_NODE_CHILD(ClassName) in declaration
-//   Derived classes should have EM_NODE_CHILD_CPP(ClassName) in definition 
+//   Base class should have ECNODE_BASE(ClassName) in declaration
+//   Derived classes should have ECNODE_CHILD(ClassName) in declaration
+//   Derived classes should have ECNODE_CHILD_CPP(ClassName) in definition 
 //   Now can use:
 //      GetTypeName() for "classname" string
 //      BaseName::Factory().NewNodeByName ByID etc
@@ -14,43 +14,43 @@
 //===---------------------------------------------------------===//
 
 #pragma once
-#ifndef EMNODE_H_
-#define EMNODE_H_
+#ifndef ECNODE_H_
+#define ECNODE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace EndlessCatLib {
 
    // Base class for anything that is factored 
-   class EMNode
+   class ECNode
    {
    public:
-      virtual EMNode* Clone()            = 0; 
+      virtual ECNode* Clone()            = 0; 
       virtual string GetTypeName() const = 0; 
       virtual int GetTypeID()      const = 0;
-      virtual ~EMNode() {}
+      virtual ~ECNode() {}
    };
 
    // Factories store generators, not objects
-   class EMNodeGenerator {
+   class ECNodeGenerator {
    public:
-      virtual EMNode* Gen() = 0; 
+      virtual ECNode* Gen() = 0; 
    };
 
 //Add this macro to each base class having factory
-#define EM_NODE_BASE(NodeType)                             \
+#define ECNODE_BASE(NodeType)                             \
 public:                                                    \
    static NodeFactory* Factory() {                         \
       static NodeFactory factory(#NodeType);               \
       return &factory;                                     \
    }                                                       \
-// EM_NODE_BASE
+// ECNODE_BASE
 
 // This macro registers factorized child with type NodeType but named NodeTypeString 
-#define EM_NODE_CHILD_CUSTOM_NAME(NodeType, NodeTypeString)                \
+#define ECNODE_CHILD_CUSTOM_NAME(NodeType, NodeTypeString)                \
 public:                                                                    \
                                                                            \
-   EMNode* Clone() override { return new NodeType(*this); }                \
+   ECNode* Clone() override { return new NodeType(*this); }                \
                                                                            \
    /* Get this instance ID*/                                                 \
    int GetTypeID() const override { return NodeType##_type_gen.id ; }      \
@@ -64,34 +64,34 @@ public:                                                                    \
                                                                            \
 private:                                                                   \
                                                                            \
-   struct NodeType##Gen : public EMNodeGenerator {                         \
+   struct NodeType##Gen : public ECNodeGenerator {                         \
       NodeType##Gen() {                                                    \
          id = Factory()->RegistrateGen( this, #NodeTypeString );            \
       }                                                                    \
-      EMNode* Gen() { return new NodeType(); }                             \
+      ECNode* Gen() { return new NodeType(); }                             \
       int id;                                                              \
    };                                                                      \
                                                                            \
    static NodeType##Gen NodeType##_type_gen;                               \
                                                                            \
 public:                                                                    \
-// EM_NODE_CHILD_CUSTOM_NAME
+// ECNODE_CHILD_CUSTOM_NAME
 
-#define EM_NODE_CHILD(NodeType)                 \
-   EM_NODE_CHILD_CUSTOM_NAME(NodeType,NodeType) \
-// EM_NODE_CHILD_NODE
+#define ECNODE_CHILD(NodeType)                 \
+   ECNODE_CHILD_CUSTOM_NAME(NodeType,NodeType) \
+// ECNODE_CHILD_NODE
 
-#define EM_NODE_CHILD_CPP(NodeType)                         \
+#define ECNODE_CHILD_CPP(NodeType)                         \
    NodeType::NodeType##Gen NodeType::NodeType##_type_gen ;  \
-// EM_NODE_CHILD_CPP
+// ECNODE_CHILD_CPP
 
 class NodeFactory
 {
 public:
    NodeFactory(const char* name);
 
-   EMNode* NewNodeByName(const string& name);
-   EMNode* NewNodeByID(int typeID);
+   ECNode* NewNodeByName(const string& name);
+   ECNode* NewNodeByID(int typeID);
 
    int GetTypeID(const string& name);
 
@@ -99,12 +99,12 @@ public:
 
 public:
    // Called automatically, do not call this = private
-   int RegistrateGen( EMNodeGenerator* node, const string& name);
+   int RegistrateGen( ECNodeGenerator* node, const string& name);
 protected:
    int counter;
 private:
    unordered_map <string, int>             nameToID;
-   unordered_map <int, EMNodeGenerator* >  idToNode;
+   unordered_map <int, ECNodeGenerator* >  idToNode;
 };
 
 

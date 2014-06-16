@@ -55,7 +55,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
       data = CCFileUtils::getInstance()->getDataFromFile(writeLevelMap);
 
       if (data.isNull()) {
-         EM_LOG_ERROR("FATAL : Writable " + levelMap + " exists at\n" + writeLevelMap + "\nbut is empty or inaccessible" );
+         ECLOG_ERROR("FATAL : Writable " + levelMap + " exists at\n" + writeLevelMap + "\nbut is empty or inaccessible" );
          return ErrorCode::RET_FAIL;
       }
    } 
@@ -68,7 +68,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
       data = CCFileUtils::getInstance()->getDataFromFile(resLevelsFile);
 
       if (data.isNull()) {
-         EM_LOG_ERROR("FATAL : Can't load " + levelMap);
+         ECLOG_ERROR("FATAL : Can't load " + levelMap);
          return ErrorCode::RET_FAIL;
       }
    }
@@ -76,8 +76,8 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
    doc.Parse((char*)data.getBytes(), data.getSize()); // TODO: remove reallocation
 
    if (doc.Error()) {
-      EM_LOG_ERROR("FATAL : Can't parse "+levelMap);
-      EM_LOG_ERROR("TIXML reports : \n " + doc.GetErrorStr1() + " \n"  + doc.GetErrorStr2() );
+      ECLOG_ERROR("FATAL : Can't parse "+levelMap);
+      ECLOG_ERROR("TIXML reports : \n " + doc.GetErrorStr1() + " \n"  + doc.GetErrorStr2() );
       return ErrorCode::RET_FAIL;
    }
 
@@ -92,7 +92,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
    auto root = doc.FirstChildElement("mpix");
    if ( !root )
    {
-      EM_LOG_ERROR("Can't find root element with name `mpix` in file " + levelMap);
+      ECLOG_ERROR("Can't find root element with name `mpix` in file " + levelMap);
       return ErrorCode::RET_FAIL;
    }
 
@@ -103,7 +103,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
    auto wsection = root->FirstChildElement("worlds"); //Check
    if ( !wsection )
    {
-      EM_LOG_ERROR("Can't find element with name `worlds` in file " + levelMap);
+      ECLOG_ERROR("Can't find element with name `worlds` in file " + levelMap);
       return ErrorCode::RET_FAIL;
    }
 
@@ -113,7 +113,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
 
       auto name = world->Attribute("name");
       if (name == nullptr ) {
-         EM_LOG_WARNING("World without `name` attribute, skipping");
+         ECLOG_WARNING("World without `name` attribute, skipping");
          world = world->NextSiblingElement("world");
          continue;
       }
@@ -126,7 +126,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
    } 
 
    if (world_counter == 0 ) {
-      EM_LOG_WARNING("No worlds in file, only editor(=0) world will be available " + levelMap);
+      ECLOG_WARNING("No worlds in file, only editor(=0) world will be available " + levelMap);
    }
 
    unordered_map<int, shared_ptr<World>> worlds_map;
@@ -138,7 +138,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
    auto lsection = root->FirstChildElement("levels");
    if ( !lsection )
    {
-      EM_LOG_ERROR("Can't find element with name `levels` in file " + levelMap);
+      ECLOG_ERROR("Can't find element with name `levels` in file " + levelMap);
       return ErrorCode::RET_FAIL;
    }
 
@@ -151,7 +151,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
 
       // Not loaded?
       if (l == nullptr) {
-         EM_LOG_WARNING("Found invalid level, skipping");
+         ECLOG_WARNING("Found invalid level, skipping");
          err_counter++;
          lvl = lvl->NextSiblingElement("lvl");
          continue;
@@ -160,7 +160,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
       // has no world?
       auto wit = worlds_map.find(l->GetWorld());
       if (wit == worlds_map.end()) {
-         EM_LOG_WARNING("Found worldless level, skipping");
+         ECLOG_WARNING("Found worldless level, skipping");
          err_counter++;
          lvl = lvl->NextSiblingElement("lvl");
          continue;
@@ -170,7 +170,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
       auto id = l->GetID();
       auto lid = levels.find(id);
       if (lid != levels.end()) {
-         EM_LOG_WARNING("Found dublicate id level, skipping");
+         ECLOG_WARNING("Found dublicate id level, skipping");
          err_counter++;
          lvl = lvl->NextSiblingElement("lvl");
          continue;
@@ -184,9 +184,9 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
    }
 
 
-   EM_LOG_INFO("LevelStorage : Loaded " + world_counter + " worlds, "+lvl_counter + " levels ");
+   ECLOG_INFO("LevelStorage : Loaded " + world_counter + " worlds, "+lvl_counter + " levels ");
    if (err_counter) {
-      EM_LOG_WARNING("LevelStorage : Got " + err_counter + " errors in levels ");
+      ECLOG_WARNING("LevelStorage : Got " + err_counter + " errors in levels ");
    }
 
    return ErrorCode::RET_OK;
@@ -207,7 +207,7 @@ void MPix::LevelStorage::SaveLevel( shared_ptr<Level> level )
    // Open file for read
    auto wfile = fopen(wname.c_str(), "rb");
    if ( wfile == nullptr ) {
-      EM_LOG_ERROR(" Saving level failed, " + levelMap + " not found, or can't be read");
+      ECLOG_ERROR(" Saving level failed, " + levelMap + " not found, or can't be read");
       return;
    }
 
@@ -216,7 +216,7 @@ void MPix::LevelStorage::SaveLevel( shared_ptr<Level> level )
    unsigned long size = ftell(wfile);
    fseek(wfile,0,SEEK_SET);
    if (size == 0) {
-      EM_LOG_ERROR(" Saving level failed, " + levelMap + " size is zero, saving needs a boilerplate file");
+      ECLOG_ERROR(" Saving level failed, " + levelMap + " size is zero, saving needs a boilerplate file");
       fclose(wfile);
       return;
    }
@@ -225,7 +225,7 @@ void MPix::LevelStorage::SaveLevel( shared_ptr<Level> level )
    pLevelData = new char[size];
    auto read = fread(pLevelData, sizeof(char), size, wfile);
    if (size != read) {
-      EM_LOG_ERROR(" Saving level failed, " + levelMap + " read failed, saving needs a boilerplate file");
+      ECLOG_ERROR(" Saving level failed, " + levelMap + " read failed, saving needs a boilerplate file");
       delete[] pLevelData;
       fclose(wfile);
       return;
@@ -240,7 +240,7 @@ void MPix::LevelStorage::SaveLevel( shared_ptr<Level> level )
    auto ldata = dst.CStr();
    auto dstsz = dst.CStrSize();
    if (ldata == nullptr || dstsz <= 1) {
-      EM_LOG_ERROR(" Saving level failed, " + levelMap + " xml printer returned Zero string");
+      ECLOG_ERROR(" Saving level failed, " + levelMap + " xml printer returned Zero string");
       delete[] pLevelData;
       return;
 
@@ -250,7 +250,7 @@ void MPix::LevelStorage::SaveLevel( shared_ptr<Level> level )
    // Searching where to inject
    auto pos = strstr(pLevelData, "</levels>");
    if (pos == nullptr) {
-      EM_LOG_ERROR(" Saving level failed, " + levelMap + " no tag </levels> found, saving needs a boilerplate");
+      ECLOG_ERROR(" Saving level failed, " + levelMap + " no tag </levels> found, saving needs a boilerplate");
       delete[] pLevelData;
       return;
    }
@@ -279,23 +279,23 @@ void MPix::LevelStorage::SaveLevel( shared_ptr<Level> level )
 
    // Check
    if (doc.Error()) {
-      EM_LOG_ERROR("FATAL : Can't parse "+levelMap);
-      EM_LOG_ERROR("TIXML reports : \n " + doc.GetErrorStr1() + " \n"  + doc.GetErrorStr2() );
+      ECLOG_ERROR("FATAL : Can't parse "+levelMap);
+      ECLOG_ERROR("TIXML reports : \n " + doc.GetErrorStr1() + " \n"  + doc.GetErrorStr2() );
       return;
    }
 
    // Writing back
    auto ret = doc.SaveFile(wname.c_str());
    if ( ret != tinyxml2::XML_NO_ERROR ) {
-      EM_LOG_ERROR(" Saving level failed, " + levelMap + " can't be written");
+      ECLOG_ERROR(" Saving level failed, " + levelMap + " can't be written");
       return;
    }
 
 
-   EM_LOG_INFO(" Saved level " + level->GetName() + "(id=" + level->GetID() + ") to " + levelMap);
+   ECLOG_INFO(" Saved level " + level->GetName() + "(id=" + level->GetID() + ") to " + levelMap);
 
 #else
-   EM_LOG_WARNING("Level deletion is avaliable only for dev. build")
+   ECLOG_WARNING("Level deletion is avaliable only for dev. build")
 #endif
 
 }
@@ -313,7 +313,7 @@ void MPix::LevelStorage::DeleteLevel( unsigned levelID )
    auto root = doc.FirstChildElement("mpix");
    if ( !root )
    {
-      EM_LOG_ERROR("Delete level failed : can't find root element with name `mpix` in file " + levelMap);
+      ECLOG_ERROR("Delete level failed : can't find root element with name `mpix` in file " + levelMap);
       return;
    }
 
@@ -321,7 +321,7 @@ void MPix::LevelStorage::DeleteLevel( unsigned levelID )
    auto lsection = root->FirstChildElement("levels"); 
    if ( !lsection )
    {
-      EM_LOG_ERROR("Can't find element with name `levels` in file " + levelMap);
+      ECLOG_ERROR("Can't find element with name `levels` in file " + levelMap);
       return;
    }
 
@@ -333,7 +333,7 @@ void MPix::LevelStorage::DeleteLevel( unsigned levelID )
       // Read ID
       unsigned int id = 0;
       if ((lvl->QueryUnsignedAttribute("id", &id) != XML_NO_ERROR)){
-         EM_LOG_WARNING("Some level has no `id` attribute in " + levelMap + ", level deletion routine skips it");
+         ECLOG_WARNING("Some level has no `id` attribute in " + levelMap + ", level deletion routine skips it");
          lvl = lvl->NextSiblingElement("lvl");
          continue;
       }
@@ -351,12 +351,12 @@ void MPix::LevelStorage::DeleteLevel( unsigned levelID )
 
    if (deleted) {
       doc.SaveFile(wname.c_str());
-      EM_LOG_INFO(" Level id=" + levelID + " deleted from " + levelMap);
+      ECLOG_INFO(" Level id=" + levelID + " deleted from " + levelMap);
    }
 
 
 #else
-   EM_LOG_WARNING("Level deletion is avaliable only for dev. build")
+   ECLOG_WARNING("Level deletion is avaliable only for dev. build")
 #endif
 
 }
@@ -371,13 +371,13 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::ExportMap()
    tinyxml2::XMLDocument doc;
    doc.LoadFile(wname.c_str());
    if (doc.Error()) {
-      EM_LOG_ERROR("FATAL: Current levelmap is unparseble");
+      ECLOG_ERROR("FATAL: Current levelmap is unparseble");
       PlatformManager::getInstance().ShowMessage("LevelStorage", "Level map is broken!");
       return ErrorCode::RET_FAIL;
    }
    doc.SaveFile(tname.c_str());
    if (doc.Error()) {
-      EM_LOG_ERROR("FATAL: Can't save levelmap to"+tname);
+      ECLOG_ERROR("FATAL: Can't save levelmap to"+tname);
       string msg = "Can't save to\n " + tname + "\nPossibly write error";
       PlatformManager::getInstance().ShowMessage("LevelStorage", msg.c_str());
       return ErrorCode::RET_FAIL;

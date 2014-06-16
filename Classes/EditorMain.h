@@ -10,7 +10,7 @@
 #ifndef EDITORMAIN_H_
 #define EDITORMAIN_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "GameState.h"
 
@@ -27,7 +27,7 @@ namespace MPix {
    {
    public:
 
-      EM_GAME_STATE(EditorMain);
+      ECGAME_STATE(EditorMain);
       EditorMain();
       ~EditorMain();
       bool init() override;

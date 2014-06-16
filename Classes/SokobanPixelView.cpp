@@ -11,7 +11,7 @@ using namespace MPix;
 
 //====---------------------------------------------======//
 
-EM_NODE_CHILD_CPP(SokobanPixelView);
+ECNODE_CHILD_CPP(SokobanPixelView);
 
 void MPix::SokobanPixelView::Build( shared_ptr<Pixel> model )
 {

@@ -1,25 +1,25 @@
 /* 
-   Main header for all my cocos games
+   Main header for all cocos games
    by Mihailenco E, TheEndlessCat Games, 2013-2014
 */
 
 #pragma once
-#ifndef EM_BASE_H
-#define EM_BASE_H
+#ifndef ECBASE_H
+#define ECBASE_H
 
 //===-------------- Globals section -------------------------------------------===//
 
 // Putting usings in headers is generally bad idea,
 // I turn this off when project is finished
-#define EM_USINGS_ON
+#define ECUSINGS_ON
 
 // My own debuggint specification
-#define EM_DEBUG
+#define ECDEBUG
 
 
 /* Namespaces:
   EndlessCatLib -- user components 
-  EMCore -- internal components
+  ECCore -- internal components
  */
 
 //===----------- Standard libs section ----------------------------------------===//
@@ -44,7 +44,7 @@
 #include <cassert>
 #include <typeinfo>
 
-#ifdef EM_USINGS_ON
+#ifdef ECUSINGS_ON
 
    using std::vector;
    using std::list;
@@ -68,7 +68,7 @@
    using std::dynamic_pointer_cast;
    using std::forward_list;
 
-#endif // EM_USINGS_ON
+#endif // ECUSINGS_ON
 
 
 //===----------- Cocos section ----------------------------------------===//
@@ -111,7 +111,7 @@
 #endif
 
 
-#ifdef EM_USINGS_ON
+#ifdef ECUSINGS_ON
    using namespace cocos2d;
    //using namespace CocosDenshion;
    using namespace cocos2d::extension;
@@ -198,40 +198,40 @@ namespace EndlessCatLib {
 
 } // namespace EndlessCatLib 
 
-#ifdef EM_USINGS_ON
+#ifdef ECUSINGS_ON
 using namespace EndlessCatLib;
-#endif // EM_USINGS_ON
+#endif // ECUSINGS_ON
 
 
 //===----------- Logging system ----------------------------------------===//
 
 // Fast version (can be globally shut down)
-//#define EM_LOG_OFF // Uncomment do off completely
+//#define ECLOG_OFF // Uncomment do off completely
 
 // Choose filter for logging (ON = uncommented)
-#define EM_LOGGING_ERRORS
-#define EM_LOGGING_WARNINGS
-#define EM_LOGGING_INFO
-#define EM_LOGGING_DEBUG
+#define ECLOGGING_ERRORS
+#define ECLOGGING_WARNINGS
+#define ECLOGGING_INFO
+#define ECLOGGING_DEBUG
 
 // Slow version with dynamic verb. control
-//#define EM_LOG_DYNAMIC
+//#define ECLOG_DYNAMIC
 
 // Usage:
-// EM_LOG_ERROR("Got real error");
-// EM_LOG_INFO(42);
-// EM_LOG_WARNING("X="+101.6+" d="+string);
-// EM_LOG_DEBUG("A holds: " + instanceOfA ); // A has operator<< defined
-// EM_LOG( "This" + " is " + 'c' + 0 + "ol!" );
+// ECLOG_ERROR("Got real error");
+// ECLOG_INFO(42);
+// ECLOG_WARNING("X="+101.6+" d="+string);
+// ECLOG_DEBUG("A holds: " + instanceOfA ); // A has operator<< defined
+// ECLOG( "This" + " is " + 'c' + 0 + "ol!" );
 
-namespace EMCore {
+namespace ECCore {
 
    // This fast and dirty way of implementing + concatenation
-   class EMChainConcatenator{
+   class ECChainConcatenator{
       std::ostringstream out;
    public:
       template <class T>
-      inline EMChainConcatenator& operator+(const T &rhs){
+      inline ECChainConcatenator& operator+(const T &rhs){
          out << rhs;
          return *this;
       }
@@ -240,7 +240,7 @@ namespace EMCore {
       }
    };
 
-   #ifdef EM_LOG_DYNAMIC
+   #ifdef ECLOG_DYNAMIC
 
    // Supporting class for dynamic logging
    class LogLevelHolder{
@@ -256,39 +256,39 @@ namespace EMCore {
       return log;
    }
 
-   #endif // EM_LOG_DYNAMIC
+   #endif // ECLOG_DYNAMIC
 
 }
 
-#ifdef EM_LOG_DYNAMIC
-   #define EM_LOG_SETLEVEL(x) do { EMCore::LogLevel().SetLogLevel(x); } while(false)
-   #define EM_LOG_SET_OFF     EM_LOG_SETLEVEL(0)
-   #define EM_LOG_SET_ERRORS  EM_LOG_SETLEVEL(1)
-   #define EM_LOG_SET_WARNING EM_LOG_SETLEVEL(2)
-   #define EM_LOG_SET_INFO    EM_LOG_SETLEVEL(3)
-   #define EM_LOG_SET_DEBUG   EM_LOG_SETLEVEL(4)
+#ifdef ECLOG_DYNAMIC
+   #define ECLOG_SETLEVEL(x) do { ECCore::LogLevel().SetLogLevel(x); } while(false)
+   #define ECLOG_SET_OFF     EC_LOG_SETLEVEL(0)
+   #define ECLOG_SET_ERRORS  EC_LOG_SETLEVEL(1)
+   #define ECLOG_SET_WARNING EC_LOG_SETLEVEL(2)
+   #define ECLOG_SET_INFO    EC_LOG_SETLEVEL(3)
+   #define ECLOG_SET_DEBUG   EC_LOG_SETLEVEL(4)
 #else
-   #define EM_LOG_SET_OFF
-   #define EM_LOG_SET_ERRORS
-   #define EM_LOG_SET_WARNINGS
-   #define EM_LOG_SET_INFO
-   #define EM_LOG_SET_DEBUG
+   #define ECLOG_SET_OFF
+   #define ECLOG_SET_ERRORS
+   #define ECLOG_SET_WARNINGS
+   #define ECLOG_SET_INFO
+   #define ECLOG_SET_DEBUG
    #define PL_LOG_SET_LEVEL(x)
 #endif
 
 // Logging is muted entirely by default
-#define EM_LOG_ERROR(s)  
-#define EM_LOG_WARNING(s)
-#define EM_LOG_INFO(s)  
-#define EM_LOG_DEBUG(s)
-#define EM_LOG(s) 
+#define ECLOG_ERROR(s)  
+#define ECLOG_WARNING(s)
+#define ECLOG_INFO(s)  
+#define ECLOG_DEBUG(s)
+#define ECLOG(s) 
 
 
-#ifndef EM_LOG_OFF
+#ifndef ECLOG_OFF
 
    #ifdef WIN32
 
-   namespace EMCore {
+   namespace ECCore {
    inline void SetConsoleDefault () { // Reset color
       SetConsoleTextAttribute(
          GetStdHandle(STD_OUTPUT_HANDLE), 
@@ -319,76 +319,76 @@ namespace EMCore {
 
       #define __NAME_OF_FILE__ (strrchr(__FILE__, '\\') ? strrchr(__FILE__, '\\') + 1 : __FILE__)
 
-      #define EM_CONCATENATOR_HELPER(s) __NAME_OF_FILE__,  __LINE__,  (EMCore::EMChainConcatenator() + s).str().c_str()
+      #define ECCONCATENATOR_HELPER(s) __NAME_OF_FILE__,  __LINE__,  (ECCore::ECChainConcatenator() + s).str().c_str()
 
-      #undef EM_LOG
-      #define EM_LOG(s) do { CCLOG("%s:%d %s", EM_CONCATENATOR_HELPER(s) ); } while(false)
+      #undef ECLOG
+      #define ECLOG(s) do { CCLOG("%s:%d %s", EC_CONCATENATOR_HELPER(s) ); } while(false)
 
-      #ifdef EM_LOG_DYNAMIC
+      #ifdef ECLOG_DYNAMIC
 
-         #define EM_LOG_ERROR(s)                           \
+         #define ECLOG_ERROR(s)                           \
          do {                                              \
-            if ( EMCore::LogLevel().GetLogLevel() >= 1 ) {     \
-               CCLOG("%s:%d [EE] %s", EM_CONCATENATOR_HELPER(s) ); \
+            if ( ECCore::LogLevel().GetLogLevel() >= 1 ) {     \
+               CCLOG("%s:%d [EE] %s", ECCONCATENATOR_HELPER(s) ); \
             }                                              \
          } while(false)
 
-         #define EM_LOG_WARNING(s)                         \
+         #define ECLOG_WARNING(s)                         \
          do {                                              \
-            if ( EMCore::LogLevel().GetLogLevel() >= 2 ) {     \
-               CCLOG("%s:%d [WW] %s", EM_CONCATENATOR_HELPER(s) ); \
+            if ( ECCore::LogLevel().GetLogLevel() >= 2 ) {     \
+               CCLOG("%s:%d [WW] %s", ECCONCATENATOR_HELPER(s) ); \
             }                                              \
          } while(false)
 
-         #define EM_LOG_INFO(s)                            \
+         #define ECLOG_INFO(s)                            \
          do {                                              \
-            if ( EMCore::LogLevel().GetLogLevel() >= 3 ) {     \
-               CCLOG("%s:%d [II] %s", EM_CONCATENATOR_HELPER(s) ); \
+            if ( ECCore::LogLevel().GetLogLevel() >= 3 ) {     \
+               CCLOG("%s:%d [II] %s", ECCONCATENATOR_HELPER(s) ); \
             }                                              \
          } while(false)
 
-         #define EM_LOG_DEBUG(s)                           \
+         #define ECLOG_DEBUG(s)                           \
          do {                                              \
-            if ( EMCore::LogLevel().GetLogLevel() >= 4 ) {     \
-               CCLOG("%s:%d [DD] %s", EM_CONCATENATOR_HELPER(s) ); \
+            if ( ECCore::LogLevel().GetLogLevel() >= 4 ) {     \
+               CCLOG("%s:%d [DD] %s", ECCONCATENATOR_HELPER(s) ); \
             }                                              \
          } while(false)
 
       #else // Else static
 
-         #ifdef EM_LOGGING_ERRORS
-            #undef EM_LOG_ERROR
-            #define EM_LOG_ERROR(s) \
+         #ifdef ECLOGGING_ERRORS
+            #undef ECLOG_ERROR
+            #define ECLOG_ERROR(s) \
                do { \
-                  EMCore::SetConsoleRed();\
-                  CCLOG("%s:%d: [EE] %s", EM_CONCATENATOR_HELPER(s));\
-                  EMCore::SetConsoleDefault();\
+                  ECCore::SetConsoleRed();\
+                  CCLOG("%s:%d: [EE] %s", ECCONCATENATOR_HELPER(s));\
+                  ECCore::SetConsoleDefault();\
                } while(false)
          #endif
 
-         #ifdef EM_LOGGING_WARNINGS
-            #undef EM_LOG_WARNING
-            #define EM_LOG_WARNING(s) \
+         #ifdef ECLOGGING_WARNINGS
+            #undef ECLOG_WARNING
+            #define ECLOG_WARNING(s) \
                do { \
-                  EMCore::SetConsoleYellow();\
-                  CCLOG("%s:%d: [WW] %s", EM_CONCATENATOR_HELPER(s)); \
-                  EMCore::SetConsoleDefault();\
+                  ECCore::SetConsoleYellow();\
+                  CCLOG("%s:%d: [WW] %s", ECCONCATENATOR_HELPER(s)); \
+                  ECCore::SetConsoleDefault();\
                } while(false)
          #endif
 
-         #ifdef EM_LOGGING_INFO
-            #undef EM_LOG_INFO
-            #define EM_LOG_INFO(s) \
+         #ifdef ECLOGGING_INFO
+            #undef ECLOG_INFO
+            #define ECLOG_INFO(s) \
                do { \
-                  EMCore::SetConsoleGreen();\
-                  CCLOG("%s:%d: [II] %s", EM_CONCATENATOR_HELPER(s)); \
-                  EMCore::SetConsoleDefault();\
+                  ECCore::SetConsoleGreen();\
+                  CCLOG("%s:%d: [II] %s", ECCONCATENATOR_HELPER(s)); \
+                  ECCore::SetConsoleDefault();\
                } while(false)
          #endif
 
-         #ifdef EM_LOGGING_DEBUG
-            #undef EM_LOG_DEBUG
-            #define EM_LOG_DEBUG(s) do { CCLOG("%s:%d: [DD] %s", EM_CONCATENATOR_HELPER(s)); } while(false)
+         #ifdef ECLOGGING_DEBUG
+            #undef ECLOG_DEBUG
+            #define ECLOG_DEBUG(s) do { CCLOG("%s:%d: [DD] %s", EC_CONCATENATOR_HELPER(s)); } while(false)
          #endif
 
       #endif
@@ -396,61 +396,61 @@ namespace EMCore {
    #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 
       // By default android SDK is compiled with GCC -- use PrettyFunction
-      #define EM_CONCATENATOR_HELPER(s) __FILE__,  __LINE__, __PRETTY_FUNCTION__, (EMCore::EMChainConcatenator() + s).str().c_str()
+      #define ECCONCATENATOR_HELPER(s) __FILE__,  __LINE__, __PRETTY_FUNCTION__, (ECCore::ECChainConcatenator() + s).str().c_str()
 
-      #undef EM_LOG
-      #define EM_LOG(s) do { CCLOG("%s:%d:%s %s", EM_CONCATENATOR_HELPER(s) ); } while(false)
+      #undef ECLOG
+      #define ECLOG(s) do { CCLOG("%s:%d:%s %s", EC_CONCATENATOR_HELPER(s) ); } while(false)
 
-      #ifdef EM_LOG_DYNAMIC
+      #ifdef ECLOG_DYNAMIC
 
-         #define EM_LOG_ERROR(s)                                   \
+         #define ECLOG_ERROR(s)                                   \
          do {                                                      \
-            if ( EMCore::LogLevel().GetLogLevel() >= 1 ) {             \
-               CCLOG("\033[1;31m%s:%d:%s [EE] %s\033[0m", EM_CONCATENATOR_HELPER(s) ); \
+            if ( ECCore::LogLevel().GetLogLevel() >= 1 ) {             \
+               CCLOG("\033[1;31m%s:%d:%s [EE] %s\033[0m", ECCONCATENATOR_HELPER(s) ); \
             }                                                      \
          } while(false)
 
-         #define EM_LOG_WARNING(s)                                 \
+         #define ECLOG_WARNING(s)                                 \
          do {                                                      \
-            if ( EMCore::LogLevel().GetLogLevel() >= 2 ) {             \
-               CCLOG("\033[1;33m%s:%d:%s [WW] %s\033[0m", EM_CONCATENATOR_HELPER(s) ); \
+            if ( ECCore::LogLevel().GetLogLevel() >= 2 ) {             \
+               CCLOG("\033[1;33m%s:%d:%s [WW] %s\033[0m", ECCONCATENATOR_HELPER(s) ); \
             }                                                      \
          } while(false)
 
-         #define EM_LOG_INFO(s)                                    \
+         #define ECLOG_INFO(s)                                    \
          do {                                                      \
-            if ( EMCore::LogLevel().GetLogLevel() >= 3 ) {             \
-               CCLOG("\033[1;32m%s:%d:%s [II] %s\033[0m", EM_CONCATENATOR_HELPER(s) ); \
+            if ( ECCore::LogLevel().GetLogLevel() >= 3 ) {             \
+               CCLOG("\033[1;32m%s:%d:%s [II] %s\033[0m", ECCONCATENATOR_HELPER(s) ); \
             }                                                      \
          } while(false)
 
-         #define EM_LOG_DEBUG(s)                                   \
+         #define ECLOG_DEBUG(s)                                   \
          do {                                                      \
-            if ( EMCore::LogLevel().GetLogLevel() >= 4 ) {             \
-               CCLOG("\033[1;35m%s:%d:%s [DD] %s\033[0m", EM_CONCATENATOR_HELPER(s) ); \
+            if ( ECCore::LogLevel().GetLogLevel() >= 4 ) {             \
+               CCLOG("\033[1;35m%s:%d:%s [DD] %s\033[0m", ECCONCATENATOR_HELPER(s) ); \
             }                                                      \
          } while(false)
 
       #else // Else static
 
-         #ifdef EM_LOGGING_ERRORS
-            #undef EM_LOG_ERROR
-            #define EM_LOG_ERROR(s) do { CCLOG("%s:%d:%s [EE] %s", EM_CONCATENATOR_HELPER(s)); } while(false)
+         #ifdef ECLOGGING_ERRORS
+            #undef ECLOG_ERROR
+            #define ECLOG_ERROR(s) do { CCLOG("%s:%d:%s [EE] %s", EC_CONCATENATOR_HELPER(s)); } while(false)
          #endif
 
-         #ifdef EM_LOGGING_WARNINGS
-            #undef EM_LOG_WARNING
-            #define EM_LOG_WARNING(s) do { CCLOG("%s:%d:%s [WW] %s",  EM_CONCATENATOR_HELPER(s)); } while(false)
+         #ifdef ECLOGGING_WARNINGS
+            #undef ECLOG_WARNING
+            #define ECLOG_WARNING(s) do { CCLOG("%s:%d:%s [WW] %s",  EC_CONCATENATOR_HELPER(s)); } while(false)
          #endif
 
-         #ifdef EM_LOGGING_INFO
-            #undef EM_LOG_INFO
-            #define EM_LOG_INFO(s) do { CCLOG("%s:%d:%s [II] %s",  EM_CONCATENATOR_HELPER(s)); } while(false)
+         #ifdef ECLOGGING_INFO
+            #undef ECLOG_INFO
+            #define ECLOG_INFO(s) do { CCLOG("%s:%d:%s [II] %s",  EC_CONCATENATOR_HELPER(s)); } while(false)
          #endif
 
-         #ifdef EM_LOGGING_DEBUG
-            #undef EM_LOG_DEBUG
-            #define EM_LOG_DEBUG(s) do { CCLOG("%s:%d:%s [DD] %s",  EM_CONCATENATOR_HELPER(s)); } while(false)
+         #ifdef ECLOGGING_DEBUG
+            #undef ECLOG_DEBUG
+            #define ECLOG_DEBUG(s) do { CCLOG("%s:%d:%s [DD] %s",  EC_CONCATENATOR_HELPER(s)); } while(false)
          #endif
 
       #endif
@@ -460,68 +460,68 @@ namespace EMCore {
       #define __NAME_OF_FILE__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
 
       // Use escape sequences in nix consoles, also GCC can insert full Function names
-      #define EM_CONCATENATOR_HELPER(s) __NAME_OF_FILE__ << ":" << __LINE__ << ": " << __PRETTY_FUNCTION__ << ": " << (EMCore::EMChainConcatenator() + s).str() << "\033[0m" << endl;
+      #define ECCONCATENATOR_HELPER(s) __NAME_OF_FILE__ << ":" << __LINE__ << ": " << __PRETTY_FUNCTION__ << ": " << (ECCore::ECChainConcatenator() + s).str() << "\033[0m" << endl;
 
-      #undef EM_LOG
-      #define EM_LOG(s) do { cout << EM_CONCATENATOR_HELPER(s) } while(false)
+      #undef ECLOG
+      #define ECLOG(s) do { cout << EC_CONCATENATOR_HELPER(s) } while(false)
 
       #ifdef DYNAMIC_VERBOSITY
 
-         #define EM_LOG_ERROR(s)                           \
+         #define ECLOG_ERROR(s)                           \
          do {                                              \
-            if ( EMCore::LogLevel().GetLogLevel() >= 1 ) {     \
-                cout << "\033[1;31m" << EM_CONCATENATOR_HELPER(s)  \
+            if ( ECCore::LogLevel().GetLogLevel() >= 1 ) {     \
+                cout << "\033[1;31m" << ECCONCATENATOR_HELPER(s)  \
             }                                              \
          } while(false)
 
-         #define EM_LOG_WARNING(s)                         \
+         #define ECLOG_WARNING(s)                         \
          do {                                              \
-            if ( EMCore::LogLevel().GetLogLevel() >= 2 ) {     \
-                cout << "\033[1;33m" << EM_CONCATENATOR_HELPER(s) \
+            if ( ECCore::LogLevel().GetLogLevel() >= 2 ) {     \
+                cout << "\033[1;33m" << ECCONCATENATOR_HELPER(s) \
             }                                              \
          } while(false)
 
-         #define EM_LOG_INFO(s)                            \
+         #define ECLOG_INFO(s)                            \
          do {                                              \
-            if ( EMCore::LogLevel().GetLogLevel() >= 3 ) {     \
-                cout << "\033[1;32m" << EM_CONCATENATOR_HELPER(s) \
+            if ( ECCore::LogLevel().GetLogLevel() >= 3 ) {     \
+                cout << "\033[1;32m" << ECCONCATENATOR_HELPER(s) \
             }                                              \
          } while(false)
 
-         #define EM_LOG_DEBUG(s)                           \
+         #define ECLOG_DEBUG(s)                           \
          do {                                              \
-            if ( EMCore::LogLevel().GetLogLevel() >= 4 ) {     \
-                cout << "\033[1;35m" << EM_CONCATENATOR_HELPER(s) \
+            if ( ECCore::LogLevel().GetLogLevel() >= 4 ) {     \
+                cout << "\033[1;35m" << ECCONCATENATOR_HELPER(s) \
             }                                              \
          } while(false)
 
       #else
 
-         #ifdef EM_LOGGING_ERRORS
-            #undef EM_LOG_ERROR
-            #define EM_LOG_ERROR(s) do { cout << "\033[1;31m" << EM_CONCATENATOR_HELPER(s) } while(false)
+         #ifdef ECLOGGING_ERRORS
+            #undef ECLOG_ERROR
+            #define ECLOG_ERROR(s) do { cout << "\033[1;31m" << EC_CONCATENATOR_HELPER(s) } while(false)
          #endif
 
-         #ifdef EM_LOGGING_WARNINGS
-            #undef EM_LOG_WARNING
-            #define EM_LOG_WARNING(s) do { cout << "\033[1;33m" << EM_CONCATENATOR_HELPER(s) } while(false)
+         #ifdef ECLOGGING_WARNINGS
+            #undef ECLOG_WARNING
+            #define ECLOG_WARNING(s) do { cout << "\033[1;33m" << EC_CONCATENATOR_HELPER(s) } while(false)
          #endif
 
-         #ifdef EM_LOGGING_INFO
-            #undef EM_LOG_INFO
-            #define EM_LOG_INFO(s) do { cout << "\033[1;32m" << EM_CONCATENATOR_HELPER(s) } while(false)
+         #ifdef ECLOGGING_INFO
+            #undef ECLOG_INFO
+            #define ECLOG_INFO(s) do { cout << "\033[1;32m" << EC_CONCATENATOR_HELPER(s) } while(false)
          #endif
 
-         #ifdef EM_LOGGING_DEBUG
-            #undef EM_LOG_DEBUG
-            #define EM_LOG_DEBUG(s) do { cout << "\033[1;35m" << EM_CONCATENATOR_HELPER(s) } while(false)
+         #ifdef ECLOGGING_DEBUG
+            #undef ECLOG_DEBUG
+            #define ECLOG_DEBUG(s) do { cout << "\033[1;35m" << EC_CONCATENATOR_HELPER(s) } while(false)
          #endif
 
       #endif
 
    #endif
 
-#endif // !EM_LOG_OFF
+#endif // !ECLOG_OFF
 
 
 
@@ -578,4 +578,4 @@ template<class enum_type> struct EnumRanger {
 };
    
 
-#endif // EM_BASE_H
+#endif // ECBASE_H

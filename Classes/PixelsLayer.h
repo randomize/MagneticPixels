@@ -10,7 +10,7 @@
 #ifndef PIXELSLAYER_H_
 #define PIXELSLAYER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Context.h"
 

@@ -52,7 +52,7 @@ void MPix::PixelsLayer::Reset()
 
 EndlessCatLib::ErrorCode MPix::PixelsLayer::CreateAllViews()
 {
-   EM_LOG_DEBUG("Creating all views in PixelsLayer");
+   ECLOG_DEBUG("Creating all views in PixelsLayer");
    assert(activeContext->goals);
    assert(activeContext->field);
 

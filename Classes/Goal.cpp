@@ -51,7 +51,7 @@ void MPix::GoalTask::Update( const Context& context, int goalID )
 
    if ( cp && cp->GetColor() == color )  // Covered with my color IColorful pixel
    { 
-      EM_LOG_DEBUG(" Matched color goal :" + color + " at " + pos + " with " + cp->GetID());
+      ECLOG_DEBUG(" Matched color goal :" + color + " at " + pos + " with " + cp->GetID());
 
       if (st == State::UNACCEPTABLE) // Whoora! become acceptable
       {
@@ -363,14 +363,14 @@ void Goals::InsertGoal( shared_ptr<Goal> goal )
 
 ErrorCode Goals::UpdateSolution( const Context& context )
 {
-   EM_LOG_DEBUG("Updating solution");
+   ECLOG_DEBUG("Updating solution");
    has_full_solution = false;
    has_solution = false;
 
    // Check that assembly is fully smiling
    if ( context.IsAssemblyEmpty() || context.IsAssemblySmiling() == false ) {
 
-      EM_LOG_DEBUG("Assembly is not smiling, no solution");
+      ECLOG_DEBUG("Assembly is not smiling, no solution");
 
       // No solution
       for (auto g: goals) {

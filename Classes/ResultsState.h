@@ -10,7 +10,7 @@
 #ifndef RESULTSSTATE_H_
 #define RESULTSSTATE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "GameState.h"
 
 namespace MPix {
@@ -24,7 +24,7 @@ namespace MPix {
    {
    public: //  === State interface =====================
 
-      EM_GAME_STATE(ResultsState);
+      ECGAME_STATE(ResultsState);
       ResultsState();
       ~ResultsState();
 

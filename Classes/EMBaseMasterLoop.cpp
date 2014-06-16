@@ -1,4 +1,4 @@
-#include "EMBaseMasterLoop.h"
+#include "ECBaseMasterLoop.h"
 #include "HistoryManager.h"
 #include "SoundManager.h"
 #include "GameplayManager.h"
@@ -8,23 +8,23 @@
 
 using namespace MPix;
 
-double MPix::EMBaseMasterLoop::time_runs = 0.0;
+double MPix::ECBaseMasterLoop::time_runs = 0.0;
 //====---------------------------------------------======//
 
-MPix::EMBaseMasterLoop::EMBaseMasterLoop()
+MPix::ECBaseMasterLoop::ECBaseMasterLoop()
 {
-   EM_LOG_INFO("==== Magnetic pixels master loop constructed =====");
+   ECLOG_INFO("==== Magnetic pixels master loop constructed =====");
 }
 
-void MPix::EMBaseMasterLoop::InitGame()
+void MPix::ECBaseMasterLoop::InitGame()
 {
-   EM_LOG_INFO("==== Magnetic pixels master loop init =====");
+   ECLOG_INFO("==== Magnetic pixels master loop init =====");
    HistoryManager::getInstance();
 }
 
-void MPix::EMBaseMasterLoop::RunGame()
+void MPix::ECBaseMasterLoop::RunGame()
 {
-   EM_LOG_INFO("==== Magnetic pixels master loop run =====");
+   ECLOG_INFO("==== Magnetic pixels master loop run =====");
 
    // Setup update
    Director::getInstance()->getScheduler()->scheduleUpdate(this, 0, false);
@@ -48,7 +48,7 @@ void MPix::EMBaseMasterLoop::RunGame()
    auto ret = LevelManager::getInstance().LoadData();
 
    if (ret != ErrorCode::RET_OK ) {
-      EM_LOG_ERROR("Levels not loaded, game will exit now");
+      ECLOG_ERROR("Levels not loaded, game will exit now");
       return;
    }
 
@@ -56,9 +56,9 @@ void MPix::EMBaseMasterLoop::RunGame()
 }
 
 
-void MPix::EMBaseMasterLoop::MasterTick(float t)
+void MPix::ECBaseMasterLoop::MasterTick(float t)
 {
-   //EM_LOG_INFO("==== Magnetic pixels master tick =====");
+   //ECLOG_INFO("==== Magnetic pixels master tick =====");
    time_runs += t;
 
    GameStateManager::getInstance().Tick(t);
@@ -66,17 +66,17 @@ void MPix::EMBaseMasterLoop::MasterTick(float t)
    SoundManager::getInstance().UpdateSoundSystem(t);
 }
 
-void MPix::EMBaseMasterLoop::update( float t )
+void MPix::ECBaseMasterLoop::update( float t )
 {
    MasterTick(t);
 }
 
-void MPix::EMBaseMasterLoop::PrintTime()
+void MPix::ECBaseMasterLoop::PrintTime()
 {
-   EM_LOG_ERROR("Time is: " + time_runs);
+   ECLOG_ERROR("Time is: " + time_runs);
 }
 
-double MPix::EMBaseMasterLoop::GetTime()
+double MPix::ECBaseMasterLoop::GetTime()
 {
    return time_runs;
 }

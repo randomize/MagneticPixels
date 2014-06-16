@@ -10,7 +10,7 @@
 #ifndef CACTUS_STATIC_VIEW_H_
 #define CACTUS_STATIC_VIEW_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -23,7 +23,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(CactusStaticView);
+      ECNODE_CHILD(CactusStaticView);
       CactusStaticView();
 
       void Build( shared_ptr<Pixel> model ) override;

@@ -10,7 +10,7 @@
 #ifndef HISTORYSTORAGE_H_
 #define HISTORYSTORAGE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

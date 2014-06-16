@@ -10,8 +10,8 @@
 #ifndef MAGNETICDIAGONALPIXEL_H_
 #define MAGNETICDIAGONALPIXEL_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 #include "MPix.h"
 
 #include "AssembledMagneticBase.h"
@@ -25,7 +25,7 @@ namespace MPix {
    public:
 
       // Register this pixel type to pixel factory
-      EM_NODE_CHILD(MagneticDiagonalPixel);
+      ECNODE_CHILD(MagneticDiagonalPixel);
       PixelType GetType() const override { return PixelType::ASSEMBLY_PIX; }
 
    public:

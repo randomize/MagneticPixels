@@ -10,7 +10,7 @@
 #ifndef LEVELVIEW_H_
 #define LEVELVIEW_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

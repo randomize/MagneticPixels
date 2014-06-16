@@ -8,13 +8,13 @@ using namespace MPix;
 
 //====---------------------- Alive -----------------------======//
 
-EM_NODE_CHILD_CPP(AliveImmortal);
+ECNODE_CHILD_CPP(AliveImmortal);
 bool MPix::AliveImmortal::canLive( shared_ptr<IAlive> subject, const Context& context )
 {
    return true;
 }
 
-EM_NODE_CHILD_CPP(AliveSimple);
+ECNODE_CHILD_CPP(AliveSimple);
 
 bool MPix::AliveSimple::GotAnyKillerAt( int subject, const Context& context, Coordinates pos )
 {
@@ -40,7 +40,7 @@ bool MPix::AliveSimple::canLive( shared_ptr<IAlive> subject, const Context& cont
    return GotAnyKillerAt(subject->GetID(), context, subject->GetPos()) == false;
 }
 
-EM_NODE_CHILD_CPP(AliveStandard);
+ECNODE_CHILD_CPP(AliveStandard);
 bool MPix::AliveStandard::canLive( shared_ptr<IAlive> subject, const Context& context )
 {
    // Check my pos
@@ -56,7 +56,7 @@ bool MPix::AliveStandard::canLive( shared_ptr<IAlive> subject, const Context& co
    return ret;
 }
 
-EM_NODE_CHILD_CPP(AliveExtended);
+ECNODE_CHILD_CPP(AliveExtended);
 bool MPix::AliveExtended::canLive( shared_ptr<IAlive> subject, const Context& context )
 {
    // Check major and my pos
@@ -74,7 +74,7 @@ bool MPix::AliveExtended::canLive( shared_ptr<IAlive> subject, const Context& co
 
 //====---------------------- Killers -----------------------======//
 
-EM_NODE_CHILD_CPP(KillingBase);
+ECNODE_CHILD_CPP(KillingBase);
 void MPix::KillingBase::PerformKill( const IKilling& subject, const Context& context, IAlive& victim )
 {
    // Kill
@@ -102,9 +102,9 @@ bool MPix::KillingBase::tryKillThat( shared_ptr<IKilling> subject, const Context
    return true;
 }
 
-EM_NODE_CHILD_CPP(KillingKind);
+ECNODE_CHILD_CPP(KillingKind);
 
-EM_NODE_CHILD_CPP(KillingAtPoint);
+ECNODE_CHILD_CPP(KillingAtPoint);
 bool MPix::KillingAtPoint::tryKillThat( shared_ptr<IKilling> subject, const Context& context, int target )
 {
    // Take victim
@@ -131,7 +131,7 @@ bool MPix::KillingAtPoint::tryKillThat( shared_ptr<IKilling> subject, const Cont
    return true;
 }
 
-EM_NODE_CHILD_CPP(KillingPitfall);
+ECNODE_CHILD_CPP(KillingPitfall);
 bool MPix::KillingPitfall::tryKillThat( shared_ptr<IKilling> subject, const Context& context, int target )
 {
    // Take victim
@@ -160,7 +160,7 @@ bool MPix::KillingPitfall::tryKillThat( shared_ptr<IKilling> subject, const Cont
 }
 
 
-EM_NODE_CHILD_CPP(KillingSpikes);
+ECNODE_CHILD_CPP(KillingSpikes);
 
 // Helper for fast list check
 bool MPix::KillingSpikes::CheckProtectionAt(  const Context& context, Coordinates pos,shared_ptr<IAlive> victim, shared_ptr<IKilling> killer )
@@ -221,13 +221,13 @@ bool MPix::KillingSpikes::tryKillThat( shared_ptr<IKilling> subject, const Conte
 
 //====-------------------- Steppers -------------------------======//
 
-EM_NODE_CHILD_CPP(StepperAlways);
+ECNODE_CHILD_CPP(StepperAlways);
 bool MPix::StepperAlways::canMoveThis(shared_ptr<IMovableStepper> subject,  const Context& context, Direction dir )
 {
    return false;
 }
 
-EM_NODE_CHILD_CPP(StepperStandard);
+ECNODE_CHILD_CPP(StepperStandard);
 bool StepperStandard::IsSomeoneBlockingMeAt(shared_ptr<IMovableStepper> subject, const Context& context, Coordinates pos, Direction dir)
 {
    forward_list<shared_ptr<IMoveBlocker>> blockers;
@@ -262,13 +262,13 @@ bool MPix::StepperStandard::canMoveThis(shared_ptr<IMovableStepper> subject,  co
    // do not optimize, because need feedback from all blockers, not only first
    for (auto d : EnumRanger<Direction>(DirectionType::ALL) ) {
       can_move = can_move && !IsSomeoneBlockingMeAt(subject, context, new_p+d, dir);
-      //EM_LOG_ERROR("checked"+d);
+      //ECLOG_ERROR("checked"+d);
    }
 
    return can_move;
 }
 
-EM_NODE_CHILD_CPP(StepperHard);
+ECNODE_CHILD_CPP(StepperHard);
 bool MPix::StepperHard::IsSomeoneBlockingMeAt( shared_ptr<IMovableStepper> subject, const Context& context, Coordinates pos, Direction dir )
 {
    forward_list<shared_ptr<IMoveBlocker>> blockers;
@@ -295,7 +295,7 @@ bool MPix::StepperHard::IsSomeoneBlockingMeAt( shared_ptr<IMovableStepper> subje
 }
 
 
-EM_NODE_CHILD_CPP(StepperMagnetic);
+ECNODE_CHILD_CPP(StepperMagnetic);
 bool MPix::StepperMagnetic::IsSomeoneBlockingMeAt( shared_ptr<IMovableStepper> subject, const Context& context, Coordinates pos, Direction dir )
 {
    forward_list<shared_ptr<IMoveBlocker>> blockers;
@@ -321,7 +321,7 @@ bool MPix::StepperMagnetic::IsSomeoneBlockingMeAt( shared_ptr<IMovableStepper> s
 }
 
 
-EM_NODE_CHILD_CPP(StepperGhost);
+ECNODE_CHILD_CPP(StepperGhost);
 bool MPix::StepperGhost::canMoveThis( shared_ptr<IMovableStepper> subject, const Context& context, Direction dir )
 {
    return true;
@@ -329,7 +329,7 @@ bool MPix::StepperGhost::canMoveThis( shared_ptr<IMovableStepper> subject, const
 
 //====-------------------- Move blocker -------------------------======//
 
-EM_NODE_CHILD_CPP(MoveBlockerSimple);
+ECNODE_CHILD_CPP(MoveBlockerSimple);
 bool MPix::MoveBlockerSimple::blocksMoves( shared_ptr<IMoveBlocker> subject, const Context& context, Coordinates from, Direction to, shared_ptr<Pixel> pix )
 {
    auto pixel_new_pos = from + to;
@@ -353,7 +353,7 @@ bool MPix::MoveBlockerSimple::blocksMoves( shared_ptr<IMoveBlocker> subject, con
    return false;
 }
 
-EM_NODE_CHILD_CPP(MoveBlockerMyType);
+ECNODE_CHILD_CPP(MoveBlockerMyType);
 bool MPix::MoveBlockerMyType::blocksMoves( shared_ptr<IMoveBlocker> subject, const Context& context, Coordinates from, Direction to, shared_ptr<Pixel> pix )
 {
    if (!pix) return false; // No affect on unspecified type
@@ -369,13 +369,13 @@ bool MPix::MoveBlockerMyType::blocksMoves( shared_ptr<IMoveBlocker> subject, con
 
 //====-------------------- Growwer  -------------------------======//
 
-EM_NODE_CHILD_CPP(DisabledGrow);
+ECNODE_CHILD_CPP(DisabledGrow);
 bool MPix::DisabledGrow::growThis( shared_ptr<IAssembled> subject, const Context& context )
 {
    return false;
 }
 
-EM_NODE_CHILD_CPP(MagneticGrowStandard);
+ECNODE_CHILD_CPP(MagneticGrowStandard);
 shared_ptr<IAssembled> MPix::MagneticGrowStandard::PerformMagneticGrow( shared_ptr<IAssembled> subject, const Context& context, Coordinates pos )
 {
    // Get all assembled, then seed not in assembly, and then try cast magnetic
@@ -413,7 +413,7 @@ bool MPix::MagneticGrowStandard::growThis( shared_ptr<IAssembled> subject, const
 }
 
 
-EM_NODE_CHILD_CPP(MagneticGrowExtended);
+ECNODE_CHILD_CPP(MagneticGrowExtended);
 bool MPix::MagneticGrowExtended::growThis( shared_ptr<IAssembled> subject, const Context& context )
 {
    bool grow_happened = false;
@@ -427,7 +427,7 @@ bool MPix::MagneticGrowExtended::growThis( shared_ptr<IAssembled> subject, const
    return grow_happened;
 }
 
-EM_NODE_CHILD_CPP(CactusWallProtector);
+ECNODE_CHILD_CPP(CactusWallProtector);
 bool MPix::CactusWallProtector::isProtecting( shared_ptr<IProtector> subject, const Context& context, shared_ptr<IAlive> victim, shared_ptr<IKilling> killer )
 {
    //auto w = dynamic_pointer_cast<IWallPixel>

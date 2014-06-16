@@ -10,7 +10,7 @@
 #ifndef WALLVIEW_H_
 #define WALLVIEW_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -26,7 +26,7 @@ namespace MPix {
 
    public:
 
-      EM_NODE_CHILD(WallPixelView);
+      ECNODE_CHILD(WallPixelView);
 
       void Build( shared_ptr<Pixel> model ) override;
 

@@ -1,6 +1,6 @@
 #include "BehaviorManager.h"
 #include "AnyBehavior.h"
-#include "EMNode.h"
+#include "ECNode.h"
 
 using namespace MPix;
 
@@ -15,7 +15,7 @@ shared_ptr<AnyBehavior> MPix::BehaviorManager::GetPixelBehavior( const string& n
 
 MPix::BehaviorManager::BehaviorManager()
 {
-   EM_LOG_INFO("===== Pixel Behavior init ========");
+   ECLOG_INFO("===== Pixel Behavior init ========");
    shared.reserve(16);
 }
 
@@ -23,7 +23,7 @@ shared_ptr<AnyBehavior> MPix::BehaviorManager::GetSharedBehaviour( const string&
 {
    auto it = shared.find(name);
    if (it == shared.end()) { // If not exist
-      EM_LOG_INFO("Created behavior "+name);
+      ECLOG_INFO("Created behavior "+name);
       auto b = GetPixelBehavior(name);
       shared.emplace(name, b);
       return b; // New one

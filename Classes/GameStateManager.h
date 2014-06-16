@@ -10,7 +10,7 @@
 #ifndef UIMANAGER_H_
 #define UIMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "GameState.h"
 
 namespace MPix {
