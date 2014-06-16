@@ -28,7 +28,7 @@ SoundManager::SoundManager()
 
 }
 
-EmbossLib::ErrorCode MPix::SoundManager::PlayInBackground( const string& name )
+EndlessCatLib::ErrorCode MPix::SoundManager::PlayInBackground( const string& name )
 {
    // TODO: implement
    EM_LOG_INFO("SoundManager is playing gentle music now");
@@ -36,7 +36,7 @@ EmbossLib::ErrorCode MPix::SoundManager::PlayInBackground( const string& name )
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::SoundManager::PlaySoundSync( const string& name )
+EndlessCatLib::ErrorCode MPix::SoundManager::PlaySoundSync( const string& name )
 {
    // TODO: implement different formats:
    // http://www.cocos2d-x.org/projects/cocos2d-x/wiki/Audio_formats_supported_by_CocosDenshion_on_different_platforms
@@ -46,7 +46,7 @@ EmbossLib::ErrorCode MPix::SoundManager::PlaySoundSync( const string& name )
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::SoundManager::UpdateSoundSystem( float deltha )
+EndlessCatLib::ErrorCode MPix::SoundManager::UpdateSoundSystem( float deltha )
 {
    // TODO: get time and perform playback
    return ErrorCode::RET_OK;

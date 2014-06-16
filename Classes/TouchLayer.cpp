@@ -323,7 +323,7 @@ ErrorCode TouchLayer::onBGFG() {
 }
 
 
-EmbossLib::ErrorCode MPix::TouchLayer::TouchEnable()
+EndlessCatLib::ErrorCode MPix::TouchLayer::TouchEnable()
 {
    EM_LOG_DEBUG("Touch layer touches on");
    auto listener = EventListenerTouchOneByOne::create();
@@ -341,7 +341,7 @@ EmbossLib::ErrorCode MPix::TouchLayer::TouchEnable()
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::TouchLayer::TouchDisable()
+EndlessCatLib::ErrorCode MPix::TouchLayer::TouchDisable()
 {
    EM_LOG_DEBUG("Touch layer touches off");
 

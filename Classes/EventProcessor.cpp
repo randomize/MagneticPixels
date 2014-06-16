@@ -279,7 +279,7 @@ void EventProcessor::ClearEvents()
    events.clear();
 }
 
-EmbossLib::ErrorCode EventProcessor::ProcessEvents()
+EndlessCatLib::ErrorCode EventProcessor::ProcessEvents()
 {
    EM_LOG_INFO(" ==== Processing events === ");
 
@@ -296,7 +296,7 @@ EmbossLib::ErrorCode EventProcessor::ProcessEvents()
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode EventProcessor::PreprocessEvents()
+EndlessCatLib::ErrorCode EventProcessor::PreprocessEvents()
 {
 
    // Kill duplicates

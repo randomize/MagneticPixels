@@ -47,7 +47,7 @@ shared_ptr<GoalView> MPix::ViewManager::GetGoalViewByID( int id )
    return vit->second;
 }
 
-EmbossLib::ErrorCode MPix::ViewManager::UpdatePixelView( int id, CmdUIUpdatePixelView::Reason reason )
+EndlessCatLib::ErrorCode MPix::ViewManager::UpdatePixelView( int id, CmdUIUpdatePixelView::Reason reason )
 {
    if ( GetPixelViewByID(id)->Update(reason) == false ) {
       EM_LOG_WARNING("Pixel View #" + id + " not handled update reason #" + static_cast<int>(reason)) ;
@@ -55,7 +55,7 @@ EmbossLib::ErrorCode MPix::ViewManager::UpdatePixelView( int id, CmdUIUpdatePixe
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::ViewManager::UpdateGoalView( int id, Coordinates task, CmdUIUpdateGoalView::Reason reason )
+EndlessCatLib::ErrorCode MPix::ViewManager::UpdateGoalView( int id, Coordinates task, CmdUIUpdateGoalView::Reason reason )
 {
    if (GetGoalViewByID(id)->Update(reason, task) == false ) {
       EM_LOG_WARNING("Goal View #" + id + " Task# " + task + " not handled update reason #" + static_cast<int>(reason)) ;

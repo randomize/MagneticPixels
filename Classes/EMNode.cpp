@@ -1,6 +1,6 @@
 #include "EMNode.h"
 
-using namespace EmbossLib;
+using namespace EndlessCatLib;
 
 NodeFactory::NodeFactory(const char* name):
    name(name),
@@ -12,7 +12,7 @@ NodeFactory::NodeFactory(const char* name):
 int NodeFactory::RegistrateGen( EMNodeGenerator* node, const string& s )
 {
     int newID = ++counter; // form 1
-    nameToID[EmbossLib::StringToLowcase(s)] = newID;
+    nameToID[EndlessCatLib::StringToLowcase(s)] = newID;
     EM_LOG_INFO("Registered " + s + " as " + newID + " at " + name + " factory" );
     idToNode[newID] = node;
     
@@ -24,7 +24,7 @@ int NodeFactory::RegistrateGen( EMNodeGenerator* node, const string& s )
 EMNode* NodeFactory::NewNodeByName(const string& name )
 {
     
-    auto idIter = nameToID.find(EmbossLib::StringToLowcase(name));
+    auto idIter = nameToID.find(EndlessCatLib::StringToLowcase(name));
     if ( idIter != nameToID.end() )
     {
         return NewNodeByID( idIter->second );

@@ -260,7 +260,7 @@ ErrorCode GameMain::onCmdGameFinished()
 }
 
 
-EmbossLib::ErrorCode MPix::GameMain::onCmdShowNotification(Node* content)
+EndlessCatLib::ErrorCode MPix::GameMain::onCmdShowNotification(Node* content)
 {
    // Stamp and put on queue
    EM_LOG_INFO("Pushing notification");

@@ -1,7 +1,7 @@
 //===-- IDynamic.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/22
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Dynamics can move on scene
 //
 //===---------------------------------------------------------===//

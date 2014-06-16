@@ -1,7 +1,7 @@
 //===-- IWallPixel.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/22
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Wall pixels must implement this interface
 //
 //===---------------------------------------------------------===//

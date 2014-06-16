@@ -581,19 +581,19 @@ ErrorCode MPix::GameplayManager::SendUIPleaseUndoOrRestart()
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::GameplayManager::SendUIFullSolution()
+EndlessCatLib::ErrorCode MPix::GameplayManager::SendUIFullSolution()
 {
    // TODO: sound
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::GameplayManager::SendUIPartSolution()
+EndlessCatLib::ErrorCode MPix::GameplayManager::SendUIPartSolution()
 {
    // TODO: sound
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::GameplayManager::SendUIAcceptSolution()
+EndlessCatLib::ErrorCode MPix::GameplayManager::SendUIAcceptSolution()
 {
    // TODO: play happy sound, and effect
    return ErrorCode::RET_OK;

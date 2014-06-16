@@ -1,7 +1,7 @@
 //===-- SleepingZets.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/01
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Sleeping xets used by many pixels
 //
 //===---------------------------------------------------------===//

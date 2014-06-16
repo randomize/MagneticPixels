@@ -26,7 +26,7 @@ MPix::LevelStorage::~LevelStorage()
 {
 }
 
-EmbossLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> &worlds, unordered_map<unsigned int, shared_ptr<Level>> &levels )
+EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> &worlds, unordered_map<unsigned int, shared_ptr<Level>> &levels )
 {
 
   // ssize_t size = 0;
@@ -361,7 +361,7 @@ void MPix::LevelStorage::DeleteLevel( unsigned levelID )
 
 }
 
-EmbossLib::ErrorCode MPix::LevelStorage::ExportMap()
+EndlessCatLib::ErrorCode MPix::LevelStorage::ExportMap()
 {
 
    auto wpath = FileUtils::getInstance()->getWritablePath();

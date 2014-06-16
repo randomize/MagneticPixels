@@ -1,7 +1,7 @@
 //===-- HSVProtocol.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/30
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Class for anything that can have HSV shift
 //
 //===---------------------------------------------------------===//

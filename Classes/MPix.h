@@ -1,7 +1,7 @@
 //===-- MPix.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Generic types and constants for game Magnetic Pixels
 //
 //===---------------------------------------------------------===//

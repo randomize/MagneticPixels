@@ -1,7 +1,7 @@
 //===-- EditorLayer.h ------------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/01
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: EditorLayer works with touches, displays grid
 //
 //===---------------------------------------------------------===//

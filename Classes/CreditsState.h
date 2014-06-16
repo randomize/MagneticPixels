@@ -1,7 +1,7 @@
 //===-- CreditsState.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2014/01/29
-//  Author:      Mihailenco E. at Emboss Games, 2014
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2014
 //  Description: Credits state
 //
 //===---------------------------------------------------------===//

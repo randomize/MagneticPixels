@@ -15,7 +15,7 @@ LevelManager::LevelManager()
    EM_LOG_INFO("[ LevelManager initialized ]");
 }
 
-EmbossLib::ErrorCode MPix::LevelManager::ResetData()
+EndlessCatLib::ErrorCode MPix::LevelManager::ResetData()
 {
    EM_LOG_INFO("LevelManager cleaning... ");
    levels.clear();

@@ -50,7 +50,7 @@ void MPix::PixelsLayer::Reset()
 
 ////////// Views ////////////////////////////////////////////////////////////////
 
-EmbossLib::ErrorCode MPix::PixelsLayer::CreateAllViews()
+EndlessCatLib::ErrorCode MPix::PixelsLayer::CreateAllViews()
 {
    EM_LOG_DEBUG("Creating all views in PixelsLayer");
    assert(activeContext->goals);
@@ -79,7 +79,7 @@ void MPix::PixelsLayer::Clear()
 
 }
 
-EmbossLib::ErrorCode MPix::PixelsLayer::CreateViewForPixel( shared_ptr<Pixel> p )
+EndlessCatLib::ErrorCode MPix::PixelsLayer::CreateViewForPixel( shared_ptr<Pixel> p )
 {
    auto view = PixelView::create(p);
    assert(view);
@@ -89,7 +89,7 @@ EmbossLib::ErrorCode MPix::PixelsLayer::CreateViewForPixel( shared_ptr<Pixel> p 
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::PixelsLayer::CreateViewForGoal(shared_ptr<Goal> g)
+EndlessCatLib::ErrorCode MPix::PixelsLayer::CreateViewForGoal(shared_ptr<Goal> g)
 {
    auto gv = make_shared<GoalView>();
    gv->Build(g);

@@ -1,6 +1,6 @@
 /* 
    Main header for all my cocos games
-   by Mihailenco E, Emboss Games, 2013-2014
+   by Mihailenco E, TheEndlessCat Games, 2013-2014
 */
 
 #pragma once
@@ -18,7 +18,7 @@
 
 
 /* Namespaces:
-  EmbossLib -- user components 
+  EndlessCatLib -- user components 
   EMCore -- internal components
  */
 
@@ -120,7 +120,7 @@
 
 //===----------- Helper functions ----------------------------------------===//
 
-namespace EmbossLib {
+namespace EndlessCatLib {
 
    enum class ErrorCode {
       RET_OK,
@@ -196,10 +196,10 @@ namespace EmbossLib {
       return float(rand()) / RAND_MAX * (max - min) + min;
    };
 
-} // namespace EmbossLib 
+} // namespace EndlessCatLib 
 
 #ifdef EM_USINGS_ON
-using namespace EmbossLib;
+using namespace EndlessCatLib;
 #endif // EM_USINGS_ON
 
 

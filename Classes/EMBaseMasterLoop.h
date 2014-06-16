@@ -1,7 +1,7 @@
 //===-- EMBaseMasterLoop.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/12/04
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: This is only one singleton that holds all parts of game
 //
 //===---------------------------------------------------------===//

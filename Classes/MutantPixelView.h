@@ -1,7 +1,7 @@
 //===-- MutantPixelView.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2014/02/19
-//  Author:      Mihailenco E. at Emboss Games, 2014
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2014
 //  Description: Mutant pixel view, like simple, but with color dots
 //
 //===---------------------------------------------------------===//

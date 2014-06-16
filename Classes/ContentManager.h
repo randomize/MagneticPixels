@@ -1,7 +1,7 @@
 //===-- ContentManager.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/10
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Content manager holds textures, sprites etc
 //
 //===---------------------------------------------------------===//

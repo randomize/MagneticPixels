@@ -1,7 +1,7 @@
 //===-- EMNode.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: C++ auto factory implementation 
 //  Usage:
 //   Base class should have EM_NODE_BASE(ClassName) in declaration
@@ -19,7 +19,7 @@
 
 #include "EMBase.h"
 
-namespace EmbossLib {
+namespace EndlessCatLib {
 
    // Base class for anything that is factored 
    class EMNode
@@ -58,7 +58,7 @@ public:                                                                    \
    static int GetClassTypeID() { return NodeType##_type_gen.id ; }      \
                                                                            \
    string GetTypeName() const override {                                   \
-      static string name = EmbossLib::StringToLowcase( #NodeTypeString );  \
+      static string name = EndlessCatLib::StringToLowcase( #NodeTypeString );  \
       return name;                                                         \
    }                                                                       \
                                                                            \
@@ -108,6 +108,6 @@ private:
 };
 
 
-} // namespace EmbossLib
+} // namespace EndlessCatLib
 
 #endif //NODE_FACTORY_H

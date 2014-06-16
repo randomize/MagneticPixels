@@ -1,7 +1,7 @@
 //===-- BomberPixel.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2014/02/19
-//  Author:      Mihailenco E. at Emboss Games, 2014
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2014
 //  Description: Bomb explodes after some time
 //
 //===---------------------------------------------------------===//

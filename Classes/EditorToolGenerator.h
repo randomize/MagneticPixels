@@ -1,7 +1,7 @@
 //===-- EditorToolGenerator.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/18
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Generates default map of tools 
 //
 //===---------------------------------------------------------===//

@@ -1,7 +1,7 @@
 //===-- ViewManager.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/09
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: View manager stores all views in scene
 //
 //===---------------------------------------------------------===//

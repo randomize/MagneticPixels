@@ -1,7 +1,7 @@
 //===-- HSVShader.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/29
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Shader for colorful variety
 //
 //===---------------------------------------------------------===//

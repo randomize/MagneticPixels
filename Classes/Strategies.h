@@ -1,7 +1,7 @@
 //===-- Strategies.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/24
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Here are defined all pixel strategies, in one file for now
 //
 //===---------------------------------------------------------===//

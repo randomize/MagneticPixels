@@ -1,7 +1,7 @@
 //===-- Goal.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/03
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Goal is map of colors on the floor
 //
 //===---------------------------------------------------------===//
