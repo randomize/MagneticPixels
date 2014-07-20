@@ -97,7 +97,7 @@ void MPix::MenuMain::onEnter()
    label = createMenuItem("Play", 1.4f);
    item = MenuItemLabel::create(label, [&](Ref *sender) {
       ToSelector();
-   }); 
+   });
    menu->addChild(item);
 
 #ifdef MPIX_DEVELOPERS_BUILD

@@ -1,7 +1,7 @@
 #include "CuteBlocksLogo.h"
 #include "ContentManager.h"
 
-// For logo... 
+// For logo...
 #include "MagneticPixel.h"
 #include "MagneticPixelView.h"
 

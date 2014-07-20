@@ -71,7 +71,7 @@ void MPix::MutantPixelView::Build( shared_ptr<Pixel> model )
    // Init color
    UpdateColors();
 
-   // Initial 
+   // Initial
    smash->setOpacity(0);
    mimics->PlayNow("asleep");
 }
@@ -128,7 +128,7 @@ void MPix::MutantPixelView::PixelCreated()
          RotateTo::create(0.3f, 0),
          nullptr
       ),
-      CallFunc::create([=]() { 
+      CallFunc::create([=]() {
          mimics->setVisible(true);
          mimics->PlayNow("create");
          mimics->Play("sleeping");
@@ -181,11 +181,11 @@ void MPix::MutantPixelView::PixelDied()
             dots->runAction(FadeOut::create(0.5f));
             GameStateManager::getInstance().CurrentState()->Execute(new CmdPlaySound("pop_" + ToString(rand()%3+1)));
          }),
-         nullptr 
+         nullptr
          );
       mimics->runAction(sq);
       break;
-   } 
+   }
    case IAlive::State::KILLED_BY_STONE :
    {
       auto sq = Sequence::create(
@@ -196,14 +196,14 @@ void MPix::MutantPixelView::PixelDied()
             smash->runAction(FadeOut::create(0.5f));
             GameStateManager::getInstance().CurrentState()->Execute(new CmdPlaySound("pop_" + ToString(rand()%3+1)));
          }),
-         nullptr 
+         nullptr
          );
       mimics->runAction(sq);
       break;
    }
    case IAlive::State::KILLED_BY_PITTRAP:
    {
-      auto m_act = Spawn::create( 
+      auto m_act = Spawn::create(
          FadeOut::create(0.5f),
          ScaleTo::create(0.5f, 0.01f),
          RotateTo::create(0.5f, 180.0f),
@@ -244,7 +244,7 @@ void MPix::MutantPixelView::PixelResurrect()
          RotateTo::create(0.2f, 0),
          nullptr
       ),
-      CallFunc::create([=]() { 
+      CallFunc::create([=]() {
          mimics->setVisible(true);
          mimics->PlayNow("create");
          if ( pixel->IsSmiling() ) {

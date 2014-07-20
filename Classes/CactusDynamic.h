@@ -2,7 +2,7 @@
 //
 //  Created:     2013/09/09
 //  Author:      Mihailenco E. at TheEndlessCat Games, 2013
-//  Description: 
+//  Description:
 //
 //===---------------------------------------------------------===//
 
@@ -25,7 +25,7 @@ namespace MPix {
    class Context;
 
    // MagneticPixel
-   class CactusDynamic : 
+   class CactusDynamic :
       public IDynamic,         // Updates every move
       public IKilling,         // Can kill
       public IMovableStepper,  // Moves step by step

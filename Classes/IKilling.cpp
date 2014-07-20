@@ -18,7 +18,7 @@ MPix::IKilling::~IKilling()
 bool MPix::IKilling::tryKillThat( const Context& context, int target )
 {
    assert(killing);
-   auto me = dynamic_pointer_cast<IKilling> ( context.GetByID(this->GetID())); 
+   auto me = dynamic_pointer_cast<IKilling> ( context.GetByID(this->GetID()));
    assert(me); // will be strange having null here...
    return killing->tryKillThat(me, context, target);
 }

@@ -2,7 +2,7 @@
 //
 //  Created:     2013/10/01
 //  Author:      Mihailenco E. at TheEndlessCat Games, 2013
-//  Description: 
+//  Description:
 //
 //===---------------------------------------------------------===//
 

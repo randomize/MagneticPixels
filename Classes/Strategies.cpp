@@ -117,7 +117,7 @@ bool MPix::KillingAtPoint::tryKillThat( shared_ptr<IKilling> subject, const Cont
    }
 
    // kill only on my pos
-   if ( victim->GetPos() != subject->GetPos()) { 
+   if ( victim->GetPos() != subject->GetPos()) {
       return false;
    }
 
@@ -144,7 +144,7 @@ bool MPix::KillingPitfall::tryKillThat( shared_ptr<IKilling> subject, const Cont
    }
 
    // kill only on my pos
-   if ( victim->GetPos() != subject->GetPos()) { 
+   if ( victim->GetPos() != subject->GetPos()) {
       return false;
    }
 
@@ -208,7 +208,7 @@ bool MPix::KillingSpikes::tryKillThat( shared_ptr<IKilling> subject, const Conte
          return false;
 
       // Check if victim has protection
-      if ( CheckProtectionAt(context, mpos, victim, subject) || 
+      if ( CheckProtectionAt(context, mpos, victim, subject) ||
             CheckProtectionAt(context, vpos, victim, subject) )
             return false;
 
@@ -237,7 +237,7 @@ bool StepperStandard::IsSomeoneBlockingMeAt(shared_ptr<IMovableStepper> subject,
    for (auto b : blockers ) {
 
       // Skip self
-      if (b->GetID() == subject->GetID()) 
+      if (b->GetID() == subject->GetID())
          continue;
 
       if (b->blocksMoves(context, subject->GetPos(), dir, context.GetByID(subject->GetID()))) {
@@ -258,7 +258,7 @@ bool MPix::StepperStandard::canMoveThis(shared_ptr<IMovableStepper> subject,  co
    // check new pos itself
    can_move = can_move && !IsSomeoneBlockingMeAt(subject, context, new_p, dir);
 
-   // check all possible aliases 8 types, 
+   // check all possible aliases 8 types,
    // do not optimize, because need feedback from all blockers, not only first
    for (auto d : EnumRanger<Direction>(DirectionType::ALL) ) {
       can_move = can_move && !IsSomeoneBlockingMeAt(subject, context, new_p+d, dir);
@@ -282,7 +282,7 @@ bool MPix::StepperHard::IsSomeoneBlockingMeAt( shared_ptr<IMovableStepper> subje
          continue;
 
       // Skip self
-      if (b->GetID() == subject->GetID()) 
+      if (b->GetID() == subject->GetID())
          continue;
 
       if (b->blocksMoves(context, subject->GetPos(), dir, context.GetByID(subject->GetID()))) {
@@ -309,7 +309,7 @@ bool MPix::StepperMagnetic::IsSomeoneBlockingMeAt( shared_ptr<IMovableStepper> s
          continue;
 
       // Skip self
-      if (b->GetID() == subject->GetID()) 
+      if (b->GetID() == subject->GetID())
          continue;
 
       if (b->blocksMoves(context, subject->GetPos(), dir, context.GetByID(subject->GetID()))) {
@@ -358,11 +358,11 @@ bool MPix::MoveBlockerMyType::blocksMoves( shared_ptr<IMoveBlocker> subject, con
 {
    if (!pix) return false; // No affect on unspecified type
 
-   if ( subject->GetType() != pix->GetType() ) { 
+   if ( subject->GetType() != pix->GetType() ) {
       // Misc types - no affect
       return false;
    }
-   
+
    return MoveBlockerSimple::blocksMoves(subject, context, from, to, pix);
 }
 
@@ -402,7 +402,7 @@ shared_ptr<IAssembled> MPix::MagneticGrowStandard::PerformMagneticGrow( shared_p
 bool MPix::MagneticGrowStandard::growThis( shared_ptr<IAssembled> subject, const Context& context )
 {
    bool grow_happened = false;
-   for (auto d : EnumRanger<Direction>(DirectionType::MAJOR) ) { 
+   for (auto d : EnumRanger<Direction>(DirectionType::MAJOR) ) {
       auto target = PerformMagneticGrow(subject, context, subject->GetPos() + d);
       if (target) {
          context.AddToAssembly(target);
@@ -417,7 +417,7 @@ ECNODE_CHILD_CPP(MagneticGrowExtended);
 bool MPix::MagneticGrowExtended::growThis( shared_ptr<IAssembled> subject, const Context& context )
 {
    bool grow_happened = false;
-   for (auto d : EnumRanger<Direction>(DirectionType::ALL) ) { 
+   for (auto d : EnumRanger<Direction>(DirectionType::ALL) ) {
       auto target = PerformMagneticGrow(subject, context, subject->GetPos() + d);
       if (target) {
          context.AddToAssembly(target);

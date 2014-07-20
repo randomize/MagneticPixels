@@ -224,20 +224,20 @@ bool MPix::PixelXML::StoreMutantToXML(shared_ptr<Pixel> src, tinyxml2::XMLPrinte
 
 void QueryCommon(Pixel& px, tinyxml2::XMLElement* src) {
 
-   int x; 
-   
+   int x;
+
    if (src->QueryIntAttribute("x", &x) != XML_NO_ERROR) {
       ECLOG_ERROR("Coordinateless pixel detected ");
    }
 
-   int y; 
-   
+   int y;
+
    if (src->QueryIntAttribute("y", &y) != XML_NO_ERROR) {
       ECLOG_ERROR("Coordinateless pixel detected ");
    }
 
-   int t; 
-   
+   int t;
+
    if (src->QueryIntAttribute("g", &t) == XML_NO_ERROR) {
       px.SetTag(t);
    }

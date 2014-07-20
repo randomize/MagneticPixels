@@ -37,7 +37,7 @@ ErrorCode LevelManager::LoadData()
 
    ECLOG_INFO("LevelManager loading ... ");
 
-   auto ret = LevelStorage::getInstance()->GetLevels(worlds, levels); 
+   auto ret = LevelStorage::getInstance()->GetLevels(worlds, levels);
 
    auto ws = worlds.size();
    auto ls = levels.size();
@@ -58,11 +58,11 @@ ErrorCode LevelManager::LoadData()
       int id = w->GetID();
 
 #ifndef MPIX_DEVELOPERS_BUILD
-      if (id == 0) 
+      if (id == 0)
          continue; // Skip editors world in release
 #endif
       worlds_map.emplace(id, w);
-      worlds_ids.push_back(id); 
+      worlds_ids.push_back(id);
    }
 
    // Filling in data about levels using settings
@@ -79,7 +79,7 @@ ErrorCode LevelManager::LoadData()
    auto first_lvl = it->second;
    assert(first_lvl);
    first_lvl->SetState(Level::State::IS_OPEN);
-   
+
    // TODO: Load user data of solved levels atars etc from st;
    //auto & st = SettingsManager::getInstance();
 
@@ -97,7 +97,7 @@ shared_ptr<Level> LevelManager::GetPlayableLevelByID(unsigned  int levelID )
 {
    auto lvl = GetLevelByID(levelID);
 
-   if (lvl == nullptr) { 
+   if (lvl == nullptr) {
       ECLOG_ERROR("> Not found Level " + levelID);
       return nullptr;
    }
@@ -265,7 +265,7 @@ unsigned MPix::LevelManager::GetNextLevelByWorldID(int wID, unsigned levelID)
 
    auto & levels = w->GetLevels();
    assert(levels.empty() == false);
-   
+
    auto it = find(levels.begin(), levels.end(), levelID);
    assert(it != levels.end());
    ++it;
@@ -325,7 +325,7 @@ void MPix::LevelManager::DeleteLevelByID( unsigned int levelID )
    }
 
    auto it = worlds_map.find(p->second->GetWorld()); // Check worlds
-   if (it != worlds_map.end()) { 
+   if (it != worlds_map.end()) {
       it->second->EraseLevel(levelID);
    }
 

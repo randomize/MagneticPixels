@@ -38,7 +38,7 @@ namespace MPix {
    private:
 
 
-      // 
+      //
       void MasterTick(float t);
 
       // Timer

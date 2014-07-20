@@ -24,8 +24,8 @@ namespace MPix {
 
    // SokobanPixel
 
-   class SokobanPixel : 
-      public SokobanBase, 
+   class SokobanPixel :
+      public SokobanBase,
       public IColorful
    {
    public:
@@ -37,7 +37,7 @@ namespace MPix {
       SokobanPixel(PixelColor color = PixelColor::RED);
       ~SokobanPixel();
 
-      // Pixel base 
+      // Pixel base
       PixelType GetType() const override { return PixelType::SOKOBAN_PIX; }
 
       // History methods

@@ -2,7 +2,7 @@
 //
 //  Created:     2013/09/18
 //  Author:      Mihailenco E. at TheEndlessCat Games, 2013
-//  Description: Generates default map of tools 
+//  Description: Generates default map of tools
 //
 //===---------------------------------------------------------===//
 

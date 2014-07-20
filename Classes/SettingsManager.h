@@ -75,8 +75,8 @@ namespace MPix {
       unordered_map<Key, SettingValue, KeyHash> m_key_vals;
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
+
+   public:
 
       static SettingsManager& getInstance() {
          static SettingsManager theSingleInstance;

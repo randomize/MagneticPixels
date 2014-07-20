@@ -2,7 +2,7 @@
 //
 //  Created:     2013/09/24
 //  Author:      Mihailenco E. at TheEndlessCat Games, 2013
-//  Description: 
+//  Description:
 //
 //===---------------------------------------------------------===//
 
@@ -26,7 +26,7 @@ namespace MPix {
    template<class T> class HistoryStorage : public BaseStorage {
    public:
 
-      void PopValue(unsigned n, T& v) { 
+      void PopValue(unsigned n, T& v) {
          if (n == 1) {
             // Pop one
             v = values.back();
@@ -37,11 +37,11 @@ namespace MPix {
             values.resize(values.size() - (n-1));
             v = values.back();
             values.pop_back();
-         } else { // n==0 
+         } else { // n==0
             // Pop all
             v = values.front();
             values.clear();
-         } 
+         }
       }
 
       void PushValue(const T& v) {
@@ -56,7 +56,7 @@ namespace MPix {
 
       // map of data
       vector<T> values; // TODO : replace with distributed compact diffs
-   
+
    };
 
 }

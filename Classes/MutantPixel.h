@@ -23,7 +23,7 @@ namespace MPix {
 
    // MutantPixel
 
-   class MutantPixel : 
+   class MutantPixel :
       public  AssembledMagneticBase,
       public  IDynamic
    {

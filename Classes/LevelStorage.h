@@ -26,8 +26,8 @@ namespace MPix {
 
       void SetMap(const string & levelMap);
 
-      ErrorCode GetLevels( 
-         list<shared_ptr<World>> &worlds, 
+      ErrorCode GetLevels(
+         list<shared_ptr<World>> &worlds,
          unordered_map<unsigned int, shared_ptr<Level>> &levels
       );
 
@@ -44,16 +44,16 @@ namespace MPix {
       string exportDir;
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
-   
+
+   public:
+
       static LevelStorage* getInstance() {
          static LevelStorage theSingleInstance;
          return &theSingleInstance;
       }
-   
+
    private:
-   
+
       LevelStorage();
       LevelStorage(LevelStorage& root){}
       LevelStorage& operator=(LevelStorage&){return *this;}

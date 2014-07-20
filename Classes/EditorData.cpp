@@ -33,7 +33,7 @@ void MPix::EditorData::InsertPixelAt( Coordinates pos, shared_ptr<Pixel> p )
 int MPix::EditorData::NumberOfPixelsAt( Coordinates pos )
 {
    auto it = field.find(pos);
-   if (it != field.end()) { 
+   if (it != field.end()) {
       return it->second.size();
    }
    else{
@@ -44,7 +44,7 @@ int MPix::EditorData::NumberOfPixelsAt( Coordinates pos )
 bool MPix::EditorData::RemoveTopPixelAt( Coordinates pos )
 {
    auto it = field.find(pos);
-   if (it != field.end()) { 
+   if (it != field.end()) {
       it->second.pop_back();
       if (it->second.empty()) // LAst
          field.erase(it);
@@ -58,7 +58,7 @@ bool MPix::EditorData::RemoveTopPixelAt( Coordinates pos )
 bool MPix::EditorData::RemoveAllPixelsAt( Coordinates pos )
 {
    auto it = field.find(pos);
-   if (it != field.end()) { 
+   if (it != field.end()) {
       field.erase(pos);
       return true;
    }
@@ -122,7 +122,7 @@ void MPix::EditorData::InsertWallAt( Coordinates pos, shared_ptr<Pixel> p )
 bool MPix::EditorData::RemoveWallAt( Coordinates pos )
 {
    auto it = walls.find(pos);
-   if (it != walls.end()) { 
+   if (it != walls.end()) {
       walls.erase(pos);
       return true;
    }

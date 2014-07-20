@@ -85,7 +85,7 @@ namespace MPix {
 
    };
 
-   // Kind killer never kills 
+   // Kind killer never kills
    class KillingKind : public KillingBehavior {
    public:
 
@@ -112,7 +112,7 @@ namespace MPix {
 
    };
 
-   // Spike kills 
+   // Spike kills
    class KillingSpikes : public KillingBase {
    public:
 

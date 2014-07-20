@@ -4,7 +4,7 @@ using namespace MPix;
 
 //====---------------------------------------------======//
 
-const char* shaderData = 
+const char* shaderData =
 "\n\
 #ifdef GL_ES\n\
 precision lowp float;\n\
@@ -70,7 +70,7 @@ void MPix::HSVShader::Reload()
 // Kazmath was deprecated, using own copypaste of multiplication here
 // kmMat3* kmMat3Multiply(kmMat3* pOut, const kmMat3* pM1, const kmMat3* pM2);
 // Note: pOut = M2 x M1 i.e reversed (kazmath order)
-inline void Multiply3x3Matrix(float* pOut, float* m1, float* m2) 
+inline void Multiply3x3Matrix(float* pOut, float* m1, float* m2)
 {
    pOut[0] = m1[0] * m2[0] + m1[3] * m2[1] + m1[6] * m2[2];
    pOut[1] = m1[1] * m2[0] + m1[4] * m2[1] + m1[7] * m2[2];
@@ -95,7 +95,7 @@ void MPix::HSVShader::GenHSVMatrix( float * xform, float hue, float saturation, 
 
    // For some reason(maybe Chinese reason) kmMat3Multiply multiplies in wrong order
    // Actually out = M2 x M1 while expected out = M1 x M2
-   // I spend 2 hours finding why multiplication is wrong... fuck kazmath library 
+   // I spend 2 hours finding why multiplication is wrong... fuck kazmath library
    Multiply3x3Matrix(result, rot, result);
    Multiply3x3Matrix(result, inv, result);
 

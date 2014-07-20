@@ -16,7 +16,7 @@ MPix::IAlive::IAlive()
 bool MPix::IAlive::canLive( const Context& context )
 {
    assert(alive); // AliveBehavior not set
-   auto me = dynamic_pointer_cast<IAlive> ( context.GetByID(this->GetID())); 
+   auto me = dynamic_pointer_cast<IAlive> ( context.GetByID(this->GetID()));
    assert(me); // will be strange having null here...
    return alive->canLive(me, context);
 }

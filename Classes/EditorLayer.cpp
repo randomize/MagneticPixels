@@ -189,7 +189,7 @@ void EditorLayer::onTouchMoved( Touch *touch, Event *event )
    {
    case TouchState::WAITING_TOUCH:
       break;
-   case TouchState::ONE_TOUCH: 
+   case TouchState::ONE_TOUCH:
    {
       if (!dragging) {
          if ( (touch->getStartLocationInView() - touch->getLocationInView()).getLength() > TAP_THRESHOLD ) {
@@ -203,7 +203,7 @@ void EditorLayer::onTouchMoved( Touch *touch, Event *event )
       this->setPosition(pos + dir);
       break;
    }
-   case TouchState::ZOOMING: 
+   case TouchState::ZOOMING:
    {
       float new_scale = scale;
 
@@ -338,7 +338,7 @@ void MPix::EditorLayer::InsertGoalView( PixelColor color )
 {
    // For simplicity:
    //  not using common goal view for now, but instead
-   //  create goal view with single task and put to screen 
+   //  create goal view with single task and put to screen
    //  for each task. Visually it is the same.
    auto g = make_shared<Goal>();
    g->AddTask(cursor, color);

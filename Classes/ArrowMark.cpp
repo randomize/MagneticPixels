@@ -16,7 +16,7 @@ ArrowMark* MPix::ArrowMark::create()
    verts[1] = Vector2(-MPIX_CELL_SIZE_HALF/2.0, MPIX_CELL_SIZE_HALF/4.0);
    verts[2] = Vector2(-MPIX_CELL_SIZE_HALF/2.0, -MPIX_CELL_SIZE_HALF/4.0);
 
-   d->drawPolygon(verts, 3, Color4F::RED, 0.0f, Color4F()); 
+   d->drawPolygon(verts, 3, Color4F::RED, 0.0f, Color4F());
 
    fab->addChild(d);
    return fab;

@@ -31,21 +31,21 @@ namespace MPix {
       EditorData* SaveToEditorData(shared_ptr<Level> source);
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
-   
+
+   public:
+
       static LevelGenerator* getInstance() {
          static LevelGenerator theSingleInstance;
          return &theSingleInstance;
       }
-   
+
    private:
-   
+
       LevelGenerator();
       LevelGenerator(LevelGenerator& root){}
       LevelGenerator& operator=(LevelGenerator&){return *this;}
-   
-   
+
+
    };
 
 }

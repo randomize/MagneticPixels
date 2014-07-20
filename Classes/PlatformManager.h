@@ -53,20 +53,20 @@ namespace ECCore {
 #endif
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
-   
+
+   public:
+
       static PlatformManager& getInstance() {
          static PlatformManager theSingleInstance;
          return theSingleInstance;
       }
-   
+
    private:
-   
+
       PlatformManager();
       PlatformManager(PlatformManager& root){}
       PlatformManager& operator=(PlatformManager&){return *this;}
-   
+
 
    };
 

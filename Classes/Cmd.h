@@ -38,7 +38,7 @@ namespace MPix {
 
    // Request update of a pixel view with giveng ID
    struct CmdUIUpdatePixelView : public Command {
-      enum class Reason{ 
+      enum class Reason{
          MOVING,   // mover pixel - when view must be moved
          CREATED,  // any pixel - created
          CHANGED,  // any pixel - changed
@@ -68,7 +68,7 @@ namespace MPix {
 
    // Request update of a goal view with given ID
    struct CmdUIUpdateGoalView : public Command {
-      enum class Reason{ 
+      enum class Reason{
          CREATED,        // goal view created
          CHANGED,        // goal view changed
          ACCEPTED,       // goal task hides with ani

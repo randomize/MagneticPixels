@@ -206,14 +206,14 @@ void MPix::LevelSelector::CreateLevelButtons()
       for (auto lvl_id : lm.GetLevelsByWorldID(id)) {
          // Create view
          auto level_button = LevelView::create(lvl_id, j);
-         
+
          int row = j / LEVEL_BUTTON_COLS_COUNT;
          int col = j % LEVEL_BUTTON_COLS_COUNT;
 
          Vector2 pos{ col * level_pane_spacing_x, row * -level_pane_spacing_y };
          Vector2 shift{ -level_pane_w / 2, level_pane_h / 2 };
 
-         level_button->setPosition(cur_center + pos + shift); 
+         level_button->setPosition(cur_center + pos + shift);
          level_button->setAnchorPoint({0.5f, 0.5f});
 
          level_button->setScale(0.02f);
@@ -247,7 +247,7 @@ bool MPix::LevelSelector::onTouchBegan(Touch *touch, Event *event)
    case State::WAIT:
    {
       initial_touch = convertTouchToNodeSpace(touch);
-      if (worlds_layer->getNumberOfRunningActions() == 0) { // Disable buttons while animating 
+      if (worlds_layer->getNumberOfRunningActions() == 0) { // Disable buttons while animating
          auto button = GetViewAtPoint(worlds_layer->convertTouchToNodeSpace(touch));
          if (button) { // Touched button
 
@@ -338,7 +338,7 @@ void MPix::LevelSelector::onTouchEnded(Touch *touch, Event *event)
          ElasticBounceToCurrentWorld();
          return;
       }
-   } 
+   }
    else if (state == State::IGNORING)
    {
       state = State::WAIT;
@@ -356,7 +356,7 @@ void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
       auto new_position = initial_pos + Vector2(pos.x, 0);
       worlds_layer->setPosition(NormalizePosition(new_position));
 
-      if (idling_counter == 0) 
+      if (idling_counter == 0)
       {
          float threshold = visibleSize.width * FLIP_PAGE_TRESHOLD_PERCENT;
          // Update gesture
@@ -472,7 +472,7 @@ void MPix::LevelSelector::ElasticBounceToCurrentWorld()
    );
    //state = State::ANIMATING;
    }
-   
+
 }
 
 Vector2 MPix::LevelSelector::NormalizePosition(Vector2 pos)

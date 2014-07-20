@@ -31,7 +31,7 @@ namespace MPix {
 
    public: // ==============  Interface for GameplayManager
 
-      // Created always with a start point 
+      // Created always with a start point
       Assembly();
 
       ErrorCode CheckMove(const Context& context, Direction d);
@@ -42,7 +42,7 @@ namespace MPix {
       //   ErrorCode::RET_YES - if occurred
       //   ErrorCode::RET_NO  - if can't grow
       ErrorCode Grow(const Context& context);
-      
+
       // Called before removing assembly no notify that solution accepted
       ErrorCode AcceptedSolution( const Context& context );
 

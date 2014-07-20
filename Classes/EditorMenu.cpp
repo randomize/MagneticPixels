@@ -166,7 +166,7 @@ void MPix::EditorMenu::BuildEditorsMenu()
 
    item = MenuItemFont::create(LocalUTF8Char("Back"), [&](Ref *sender) {
       BackToMainMenu();
-   }); menu->addChild(item); 
+   }); menu->addChild(item);
 
    menu->alignItemsVertically();
 
@@ -202,7 +202,7 @@ void MPix::EditorMenu::BackToMainMenu()
 //////////////////////////////////////////////////////////////////////////
 // Action
 
-// Editor menu 
+// Editor menu
 
 void MPix::EditorMenu::SelectedNewLevel()
 {
@@ -218,7 +218,7 @@ void MPix::EditorMenu::SelectedLast()
    auto lvl = lm.GetPlayableLastLevel();
    if (!lvl)
       lvl = lm.GetEmpty();
-    
+
    lm.SetEditorsLevel(lvl);
 
    GameStateManager::getInstance().SwitchToEditor();
@@ -276,7 +276,7 @@ void MPix::EditorMenu::SelectedLevel( unsigned int id )
       assert(lvl);
       lm.SetEditorsLevel(lvl);
       GameStateManager::getInstance().SwitchToEditor();
-   } 
+   }
    else if (mode == Mode::DELETE)
    {
       if (confirmed == id) {
@@ -286,7 +286,7 @@ void MPix::EditorMenu::SelectedLevel( unsigned int id )
          it->setEnabled(false);
          confirmed = 0;
       }
-      else 
+      else
       {
          if (confirmed) {
             auto it = dynamic_cast<MenuItemFont*>(level_m->getChildByTag((int)confirmed));
@@ -300,7 +300,7 @@ void MPix::EditorMenu::SelectedLevel( unsigned int id )
          it->setScale(1.1f);
          it->setColor(Color3B::RED);
       }
-   } 
+   }
    else
    {
       ECLOG_ERROR("Wrong state");

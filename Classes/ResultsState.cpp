@@ -25,7 +25,7 @@ bool MPix::ResultsState::init()
    {
       return false;
    }
-   
+
    auto bg = LayerColor::create(Color4B::MAGENTA);
    addChild(bg, 0);
 
@@ -58,7 +58,7 @@ bool MPix::ResultsState::init()
    n->setOpacity(200);
    n->setPosition(center);
    // TODO: Add blur
-   addChild(n, 1); 
+   addChild(n, 1);
    cnt.RemoveNode("screen_for_blur");
 
    return true;

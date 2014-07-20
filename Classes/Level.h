@@ -59,12 +59,12 @@ namespace MPix {
       // Stars
       int GetStars() const { return starz; }
 
-   private: 
+   private:
 
       //////////////////////////////////////////////////////////////////////////
       // Data set outside
-      
-      // State defines level 
+
+      // State defines level
       State st;
 
       unsigned int world;

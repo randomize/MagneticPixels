@@ -36,9 +36,9 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
    // Release version:
    //    reads /res/levelMap file to pLevelData
    // Debug version:
-   //    if /writable/levelMap exists 
+   //    if /writable/levelMap exists
    //       loads it to pLevelData
-   //    if /writable/levelMap not exists 
+   //    if /writable/levelMap not exists
    //       reads /res/levelMap to pLevelData
    //       copies to /writable/levelMap for next time
 
@@ -58,11 +58,11 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
          ECLOG_ERROR("FATAL : Writable " + levelMap + " exists at\n" + writeLevelMap + "\nbut is empty or inaccessible" );
          return ErrorCode::RET_FAIL;
       }
-   } 
+   }
    else  // carefully, code continues outside of #endif intentionally, logic described above
 #endif
    {
-      // Load file levelMap from /res 
+      // Load file levelMap from /res
       string resLevelsFile = CCFileUtils::getInstance()->fullPathForFilename(levelMap);
 
       data = CCFileUtils::getInstance()->getDataFromFile(resLevelsFile);
@@ -123,7 +123,7 @@ EndlessCatLib::ErrorCode MPix::LevelStorage::GetLevels( list<shared_ptr<World>> 
       worlds.push_back(make_shared<World>(id, name));
 
       world = world->NextSiblingElement("world");
-   } 
+   }
 
    if (world_counter == 0 ) {
       ECLOG_WARNING("No worlds in file, only editor(=0) world will be available " + levelMap);
@@ -318,7 +318,7 @@ void MPix::LevelStorage::DeleteLevel( unsigned levelID )
    }
 
    // Parse worlds section
-   auto lsection = root->FirstChildElement("levels"); 
+   auto lsection = root->FirstChildElement("levels");
    if ( !lsection )
    {
       ECLOG_ERROR("Can't find element with name `levels` in file " + levelMap);
@@ -327,7 +327,7 @@ void MPix::LevelStorage::DeleteLevel( unsigned levelID )
 
    // Searching for level to delete by id
    bool deleted = false;
-   auto lvl = lsection->FirstChildElement("lvl"); 
+   auto lvl = lsection->FirstChildElement("lvl");
    while (lvl)
    {
       // Read ID

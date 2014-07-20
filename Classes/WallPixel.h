@@ -65,7 +65,7 @@ namespace MPix {
       bool IsBlocking(Direction dir);
 
       // Helper for defining shape
-      void SetBlockAt(Direction dir); 
+      void SetBlockAt(Direction dir);
 
       // Helper for shape
       void SetShapeInt(int sh);

@@ -15,7 +15,7 @@ int NodeFactory::RegistrateGen( ECNodeGenerator* node, const string& s )
     nameToID[EndlessCatLib::StringToLowcase(s)] = newID;
     ECLOG_INFO("Registered " + s + " as " + newID + " at " + name + " factory" );
     idToNode[newID] = node;
-    
+
     //nameDictionary[newID] = node.getTypeName();
     return newID;
 }
@@ -23,7 +23,7 @@ int NodeFactory::RegistrateGen( ECNodeGenerator* node, const string& s )
 
 ECNode* NodeFactory::NewNodeByName(const string& name )
 {
-    
+
     auto idIter = nameToID.find(EndlessCatLib::StringToLowcase(name));
     if ( idIter != nameToID.end() )
     {
@@ -32,7 +32,7 @@ ECNode* NodeFactory::NewNodeByName(const string& name )
         ECLOG_ERROR( "No '"+ name + "' in " + name + " factory!" );
         return nullptr;
     }
-    
+
 }
 
 ECNode* NodeFactory::NewNodeByID( int typeID )

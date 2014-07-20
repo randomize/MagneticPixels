@@ -98,7 +98,7 @@ void MPix::ECAnimation::ProcessOne()
       }
       islocking = pr.first;
    }
- 
+
    armature->getAnimation()->play(pr.second.c_str());
    isplaying = true;
 

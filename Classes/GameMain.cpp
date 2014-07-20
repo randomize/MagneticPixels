@@ -57,7 +57,7 @@ bool GameMain::init()
    //   touch = 2
    // UI: = 2
    // Notifications = 3
-   
+
 
    bg = Layer::create();
    bg->addChild(ContentManager::getInstance().GetScrollingBG(rand() % 5 + 1), 1);
@@ -79,7 +79,7 @@ bool GameMain::init()
 
    // Notificator =================================
 
-   // Background 
+   // Background
    notification_bg = LayerColor::create(Color4B(0, 0, 0, 89));
    notification_bg->setVisible(false);
 
@@ -95,7 +95,7 @@ bool GameMain::init()
    notification_toucher = listener;
    listener->setSwallowTouches(false);
    listener->onTouchBegan = [this](Touch*, Event*)
-   { 
+   {
       if (notification_content) {
          onNotificationClick();
          return false;

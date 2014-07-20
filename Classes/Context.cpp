@@ -68,7 +68,7 @@ Vector2 MPix::Context::GetAssemblyCenter() const
 ErrorCode Context::AddToAssembly( shared_ptr<Pixel> pix ) const
 {
    auto ia_pix = std::dynamic_pointer_cast<IAssembled>(pix);
-   assert(ia_pix); 
+   assert(ia_pix);
    return assembly->AddPixel(*this, ia_pix);
 }
 

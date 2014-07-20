@@ -20,7 +20,7 @@ namespace MPix {
 
    public: ////// States switching ///////////////////////////////////////////////////////////////////
 
-      // Entry point 
+      // Entry point
       void SwitchToStart(void);
 
       // "Exit point" - termination of game
@@ -76,7 +76,7 @@ namespace MPix {
 
       //////////////////////////////////////////////////////////////////////////
 
-   private: 
+   private:
 
       GameStateManager();
       GameStateManager(GameStateManager& root){}

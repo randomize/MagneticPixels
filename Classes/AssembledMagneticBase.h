@@ -34,7 +34,7 @@ namespace MPix {
 
       AssembledMagneticBase(PixelColor color);
 
-      // Pixel base 
+      // Pixel base
       PixelType GetType() const override { return PixelType::ASSEMBLY_PIX; }
 
       // History methods

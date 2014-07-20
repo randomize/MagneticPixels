@@ -26,7 +26,7 @@ RoundMark* MPix::RoundMark::create( const char* text )
       verts[k] = Vector2(cosf(k*drads)*rad, sinf(k*drads)*rad);
    }
 
-   d->drawPolygon(verts, segs, Color4F::RED, 0.0f, Color4F()); 
+   d->drawPolygon(verts, segs, Color4F::RED, 0.0f, Color4F());
    delete[] verts;
 
    fab->addChild(d);

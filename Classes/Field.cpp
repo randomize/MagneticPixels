@@ -145,7 +145,7 @@ EndlessCatLib::ErrorCode MPix::Field::WorldCheckForLost( const Context& context 
 
    // Only alive one
    ranked_k_list.remove_if(
-      [=](const int& v){ 
+      [=](const int& v){
          bool not_alive = world_alive.find(v) == world_alive.end();
          bool not_active = active.find(v) == active.end();
          return not_active || not_alive;
@@ -324,7 +324,7 @@ list<shared_ptr<Pixel>> Field::GetAllPixelsAt( Coordinates pos )
    auto pair = map.find(pos);
    if (pair == map.end()) return result;
 
-   auto lst = pair->second; 
+   auto lst = pair->second;
 
    assert(lst.empty() == false);
 
@@ -347,13 +347,13 @@ list<shared_ptr<Pixel>> Field::GetAllActivePixelsAt( Coordinates pos )
    auto pair = map.find(pos);
    if (pair == map.end()) return result;
 
-   auto lst = pair->second; 
+   auto lst = pair->second;
 
    assert(lst.empty() == false);
 
    for (auto pi : lst ) {
       auto px = GetPixelByID(pi);
-      if (px->GetState() == Pixel::State::ACTIVE) 
+      if (px->GetState() == Pixel::State::ACTIVE)
          result.push_back(px);
    }
 
@@ -514,7 +514,7 @@ void MPix::Field::PlacePosInMap( int id, Coordinates pos )
       lst->second.push_front(id);
       lst->second.sort(
          [&](const int & a, const int & b)
-         { 
+         {
             return GetPixelByID(a) < GetPixelByID(b);
          }
       );

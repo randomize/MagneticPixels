@@ -90,7 +90,7 @@ void MPix::EditorFolderTool::SubCur()
 
 void MPix::EditorFolderTool::Insert( int id )
 {
-   if ( map_inv.find(id) != map_inv.end()) 
+   if ( map_inv.find(id) != map_inv.end())
       return;
    assert(map.find(cur) == map.end());
    map.emplace(cur, id);
@@ -123,7 +123,7 @@ ToolMap* MPix::EditorFolderTool::Childs()
 bool MPix::EditorFolderTool::onSelected( EditorLayer* target )
 {
    // Does nothing, false means - don't close
-   return false; 
+   return false;
 }
 
 void MPix::EditorFolderTool::Hide()
@@ -169,7 +169,7 @@ void MPix::EditorFolderTool::BindContents( Node * target )
 
    }
    else // No logo
-   { 
+   {
       auto b = ColorBox::create();
       b->setAnchorPoint(Vector2(0.5f,0.5f));
       b->SetColor(Color4F(0.8f,0.8f,0.8f,0.8f));
@@ -211,7 +211,7 @@ void MPix::EditorToolPixel::BindContents( Node * target )
    assert(view);
    view->Build(px);
    view->BindContents(target, 1);
-   view->Update(CmdUIUpdatePixelView::Reason::CREATED); 
+   view->Update(CmdUIUpdatePixelView::Reason::CREATED);
 }
 
 bool MPix::EditorToolPixel::onSelected( EditorLayer* target )
@@ -231,7 +231,7 @@ void MPix::EditorToolPixel::Show( Coordinates where )
    EditorTool::Show(where);
    view->setPosition(LogicToScreen(where) + MPIX_CELL_SIZE_HALF_P);
    view->setVisible(true);
-   view->Update(CmdUIUpdatePixelView::Reason::CREATED); 
+   view->Update(CmdUIUpdatePixelView::Reason::CREATED);
 }
 
 //////////////////////////////////////////////////////////////////////////

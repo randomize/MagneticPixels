@@ -27,7 +27,7 @@ shared_ptr<AnyBehavior> MPix::BehaviorManager::GetSharedBehaviour( const string&
       auto b = GetPixelBehavior(name);
       shared.emplace(name, b);
       return b; // New one
-   } 
+   }
    return it->second; // Existing one
 }
 

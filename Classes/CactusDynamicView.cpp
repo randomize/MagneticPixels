@@ -122,7 +122,7 @@ void MPix::CactusDynamicView::PixelResurrect()
    contents->setOpacity(255);
    contents->setColor(Color3B::WHITE);
    bg->setRotation(0);
-   auto m_act = Spawn::create( 
+   auto m_act = Spawn::create(
       FadeIn::create(0.5f),
       ScaleTo::create(0.5f, 1.0f),
       nullptr

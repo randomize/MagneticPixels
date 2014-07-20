@@ -38,16 +38,16 @@ namespace TouchConstants {
    // Circle ===============================================================
 
    // Min radius of circle
-   const float CIRCLE_RAD = 150.0f; 
+   const float CIRCLE_RAD = 150.0f;
 
    // Threshold of fitness (percent of radius)
-   const float CIRCLE_THRESH = 25.0f; 
+   const float CIRCLE_THRESH = 25.0f;
 
    // Threshold for fitness of angles
    const float ANGLE_THRESH = PI_FLOAT / 4;// 45 degree
 
    // Percent of fitted points required to be circle
-   const float CIRCLENESS_CRITERIA = 65.0f; 
+   const float CIRCLENESS_CRITERIA = 65.0f;
 
 
    // Slipping touches
@@ -81,12 +81,12 @@ bool TouchLayer::init()
    auto cl = Color4F(0.5f, 0.5f, 0.5f, 0.5f);
    const int size = 90;
    for (int i=0; i < size*2+1; ++i){
-      dn->drawSegment( 
+      dn->drawSegment(
          LogicToScreen(Coordinates(-size, i-size)),
          LogicToScreen(Coordinates(size, i-size)),
          0.5f,
          cl);
-      dn->drawSegment( 
+      dn->drawSegment(
          LogicToScreen(Coordinates(i-size, -size)),
          LogicToScreen(Coordinates(i-size, size)),
          0.5f,
@@ -355,7 +355,7 @@ EndlessCatLib::ErrorCode MPix::TouchLayer::TouchDisable()
 
 void MPix::TouchLayer::AnalyseSequence()
 {
-   // Good to have nonempty sequence 
+   // Good to have nonempty sequence
    if (sequence.empty())
       return;
 
@@ -408,7 +408,7 @@ void MPix::TouchLayer::AnalyseSequence()
    }
 
    // Filter out too small gestures to be gesture but too large to be tap
-   if ( rectangle.x < TouchConstants::GESTURE_BOUNDARY_MIN 
+   if ( rectangle.x < TouchConstants::GESTURE_BOUNDARY_MIN
      && rectangle.y < TouchConstants::GESTURE_BOUNDARY_MIN ) {
       return;
    }
@@ -448,7 +448,7 @@ void MPix::TouchLayer::AnalyseSequence()
       float div = TouchConstants::CIRCLE_THRESH / 100.0f * avgRadius;
       for ( auto p : sequence ) {
          float rad = (p-avgCenter).getLength();
-         if ( fabs(rad-avgRadius) < div ) 
+         if ( fabs(rad-avgRadius) < div )
             fitness++;
       }
       float fitnessPercent = fitness/float(n) * 100.0f;
@@ -461,7 +461,7 @@ void MPix::TouchLayer::AnalyseSequence()
 
    // Falling back to Linear gesture
 
-   // Calculate angle 
+   // Calculate angle
    auto &p_end = sequence.back();
    auto pdeltha = p_end - p_start;
    float leadAng = pdeltha.getAngle();
@@ -485,7 +485,7 @@ void MPix::TouchLayer::AnalyseSequence()
 
    // Getting direction from angle
    float ang = leadAng * 4 / M_PI + 9/2.0f;
-   int p = (int)floor(ang) % 8; // 0 .. 7 
+   int p = (int)floor(ang) % 8; // 0 .. 7
 
    Direction di = Direction::DIR_UNKNOWN;
    switch (p)

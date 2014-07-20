@@ -26,11 +26,11 @@ namespace MPix {
    public:
 
       virtual bool blocksMoves (
-         shared_ptr<IMoveBlocker> subject,  
+         shared_ptr<IMoveBlocker> subject,
          const Context& context,
          Coordinates from,
          Direction to,
-         shared_ptr<Pixel> pix 
+         shared_ptr<Pixel> pix
       ) = 0;
 
    };

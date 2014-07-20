@@ -91,7 +91,7 @@ namespace MPix {
       ~EditorFolderTool();
 
    protected:
-      
+
       unordered_map<Coordinates, int> map;
       unordered_map<int, Coordinates> map_inv;
       Coordinates cur;

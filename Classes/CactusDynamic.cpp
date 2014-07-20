@@ -8,10 +8,10 @@ using namespace MPix;
 // Allocating memory for ECNODE_CHILD, see header
 ECNODE_CHILD_CPP(CactusDynamic);
 
-MPix::CactusDynamic::CactusDynamic( 
+MPix::CactusDynamic::CactusDynamic(
    NeedleType t /*= NeedleType::STEPPER*/,
    Direction way /*= Direction::DIR_RIGHT*/,
-   bool sleeping /*= false*/ 
+   bool sleeping /*= false*/
 ):
    Pixel(0),
    type(t),
@@ -139,8 +139,8 @@ void MPix::CactusDynamic::UpdateMyWay( const Context& context )
       //srand
       d = RandomDirection();
       break;
-   case NeedleType::PREDATOR: 
-      { // Seeks for pixels 
+   case NeedleType::PREDATOR:
+      { // Seeks for pixels
          auto s = GetPosAsPoint();
          auto e = context.GetAssemblyCenter();
          d = GetDirectionVector(s, e);

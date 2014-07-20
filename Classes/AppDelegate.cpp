@@ -73,21 +73,21 @@ bool AppDelegate::applicationDidFinishLaunching() {
    list<std::pair<int, string>> resolutions;
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-   resolutions = { 
+   resolutions = {
       { 40,  "iOS/40" },
       { 80,  "iOS/80" },
       { 85,  "iOS/85" },
       { 171, "iOS/171" }
    };
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-   resolutions = { 
+   resolutions = {
       { 40,  "Android/40" },
       { 60,  "Android/60" },
       { 135, "Android/135" },
       { 180, "Android/180" }
    };
 #else // On other platforms just use all
-   resolutions = { 
+   resolutions = {
       { 40,  "Android/40" },
       { 60,  "Android/60" },
       { 80,  "iOS/80" },

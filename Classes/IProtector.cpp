@@ -21,7 +21,7 @@ void MPix::IProtector::SetProtectorBehavior( const string& name )
 bool MPix::IProtector::isProtecting( const Context& context, shared_ptr<IAlive> victim, shared_ptr<IKilling> killer )
 {
    assert(protector);
-   auto me = dynamic_pointer_cast<IProtector> ( context.GetByID(this->GetID())); 
+   auto me = dynamic_pointer_cast<IProtector> ( context.GetByID(this->GetID()));
    assert(me); // will be strange having null here...
    return protector->isProtecting(me, context, victim, killer);
 }

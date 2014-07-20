@@ -10,7 +10,7 @@
 using namespace MPix;
 
 // Stupid cocos listeners don't work with non-Object instances
-// I don't want to have ContentManager deriving Object class, so 
+// I don't want to have ContentManager deriving Object class, so
 // this little helper handles the situation
 class ListenerDelegate : public Ref {
 public:
@@ -268,7 +268,7 @@ Sprite* MPix::ContentManager::GetScrollingBG(int index, bool scrolling)
    Size halfSize =  fullSize / 2.0f;
    Size visibleSize = Director::getInstance()->getVisibleSize();
    auto center = Vector2(halfSize.width, halfSize.height);
-   
+
    // Create
    string name("bg_" + ToString(index) );
    auto bg1 = GetSimpleSprite(name.c_str());
