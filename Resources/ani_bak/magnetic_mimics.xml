@@ -1,0 +1,589 @@
+<skeleton name="magnetic_mimics" frameRate="30" version="2.2">
+ <armatures>
+  <armature name="magnetic_0">
+   <b name="Ly_ball" x="-12.31" y="-8.4" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="-0.11" z="0">
+    <d name="l_yball" pX="8.56" pY="12"/>
+   </b>
+   <b name="Ry_ball" x="12.58" y="-8.4" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="0" z="1">
+    <d name="ry_ball" pX="8.53" pY="12"/>
+   </b>
+   <b name="Ly_iris" x="-12.22" y="-8.44" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="2">
+    <d name="ly_iris" pX="3.11" pY="3.76"/>
+   </b>
+   <b name="Ry_iris" x="12.67" y="-8.44" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="3">
+    <d name="ry_iris" pX="3.11" pY="3.76"/>
+   </b>
+   <b name="mouth" x="-0.29" y="15.73" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4">
+    <d name="mouth" pX="3.38" pY="3.11"/>
+    <d name="m_1" pX="5.29" pY="3.13"/>
+    <d name="m_2" pX="7.18" pY="3.2"/>
+    <d name="m_3" pX="9.09" pY="3.42"/>
+    <d name="m_4" pX="11" pY="3.82"/>
+    <d name="m_5" pX="12.91" pY="4.2"/>
+    <d name="m_6" pX="14.78" pY="4.62"/>
+    <d name="mouth_smile" pX="16.69" pY="5"/>
+   </b>
+  </armature>
+ </armatures>
+ <animations>
+  <animation name="magnetic_0">
+   <mov name="wake" dr="5" to="6" drTW="5" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="-0.11" z="0" dI="0" dr="4"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="0" z="1" dI="0" dr="4"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-12.22" y="-8.44" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="2" dI="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+     <f x="-12.44" y="-8.67" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.5" cY="0.5" pX="0" pY="-0.04" z="2" dI="0" dr="2"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="12.67" y="-8.44" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="3" dI="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+     <f x="12.67" y="-8.78" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.5" cY="0.5" pX="0" pY="0" z="3" dI="0" dr="2"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.29" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="4"/>
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="asleep" dr="5" to="6" drTW="9" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="4"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="-0.11" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="4"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="0" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-12.44" y="-8.67" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.5" cY="0.5" pX="0" pY="-0.04" z="2" dI="0" dr="3"/>
+     <f x="-12.22" y="-8.44" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="2" dI="0" dr="1">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="12.67" y="-8.78" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.5" cY="0.5" pX="0" pY="0" z="3" dI="0" dr="3"/>
+     <f x="12.67" y="-8.44" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="3" dI="0" dr="1">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="4"/>
+     <f x="-0.29" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="sleeping" dr="5" to="6" drTW="60" lp="1" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="-0.11" z="0" dI="0" dr="2"/>
+     <f x="-12.31" y="-9.73" cocos2d_x="-12" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="-0.11" z="0" dI="0" dr="2"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="-0.11" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="0" z="1" dI="0" dr="2"/>
+     <f x="12.58" y="-9.73" cocos2d_x="13" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="0" z="1" dI="0" dr="2"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="0" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-12.22" y="-8.44" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="2" dI="0" dr="4">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+     <f x="-12.22" y="-8.44" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="2" dI="0" dr="1">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="12.67" y="-8.44" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="3" dI="0" dr="4">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+     <f x="12.67" y="-8.44" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="3" dI="0" dr="1">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.29" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="2"/>
+     <f x="-0.29" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="0.72" cY="0.72" pX="0" pY="0" z="4" dI="0" dr="2"/>
+     <f x="-0.29" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="smile" dr="8" to="6" drTW="8" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="7"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="7"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="7"/>
+     <f x="-12.67" y="-7.33" cocos2d_x="-12" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="7"/>
+     <f x="12.22" y="-7.33" cocos2d_x="13" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.89" y="15.67" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+     <f x="-0.69" y="16.16" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="1" dr="1"/>
+     <f x="-0.53" y="16.58" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="2" dr="1"/>
+     <f x="-0.38" y="16.8" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="3" dr="1"/>
+     <f x="-0.22" y="16.84" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="4" dr="1"/>
+     <f x="-0.07" y="16.89" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="5" dr="1"/>
+     <f x="0.09" y="16.96" cocos2d_x="1" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="6" dr="1"/>
+     <f x="0.24" y="17" cocos2d_x="1" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="7" dr="1"/>
+    </b>
+   </mov>
+   <mov name="happy" dr="5" to="6" drTW="45" lp="1" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="4"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="4"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-12.67" y="-7.33" cocos2d_x="-12" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-12.67" y="-6.44" cocos2d_x="-12" cocos2d_y="-6" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-12.67" y="-7.33" cocos2d_x="-12" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="12.22" y="-7.33" cocos2d_x="13" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="12.22" y="-6.44" cocos2d_x="13" cocos2d_y="-6" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="12.22" y="-7.33" cocos2d_x="13" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="0.24" y="17" cocos2d_x="1" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="7" dr="2"/>
+     <f x="0.24" y="16.33" cocos2d_x="1" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="7" dr="2"/>
+     <f x="0.24" y="17" cocos2d_x="1" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="7" dr="1"/>
+    </b>
+   </mov>
+   <mov name="unsmile" dr="8" to="6" drTW="8" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="7"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="7"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-12.67" y="-7.33" cocos2d_x="-12" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="7"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="12.22" y="-7.33" cocos2d_x="13" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="7"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="0.24" y="17" cocos2d_x="1" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="7" dr="1"/>
+     <f x="0.09" y="16.96" cocos2d_x="1" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="6" dr="1"/>
+     <f x="-0.07" y="16.89" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="5" dr="1"/>
+     <f x="-0.22" y="16.84" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="4" dr="1"/>
+     <f x="-0.38" y="16.8" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="3" dr="1"/>
+     <f x="-0.53" y="16.58" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="2" dr="1"/>
+     <f x="-0.69" y="16.16" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="1" dr="1"/>
+     <f x="-0.89" y="15.67" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="die" dr="5" to="6" drTW="6" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="3"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+     <f dr="1" dI="-1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="3"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+     <f dr="1" dI="-1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-12.89" y="-8.44" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-12.56" y="-8.44" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="2" cY="2" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f dr="1" dI="-1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="12" y="-8.44" cocos2d_x="12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="12.44" y="-8.33" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="2" cY="2" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f dr="1" dI="-1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="3"/>
+     <f x="-0.18" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="2.73" cY="1.01" pX="0" pY="0" z="4" dI="0" dr="1"/>
+     <f dr="1" dI="-1"/>
+    </b>
+   </mov>
+   <mov name="create" dr="4" to="6" drTW="9" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f dr="1" dI="-1"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.03" cY="0.04" pX="0" pY="-0.49" z="0" dI="0" dr="1"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="-0.11" z="0" dI="0" dr="2"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f dr="1" dI="-1"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.03" cY="0.04" pX="0" pY="0" z="1" dI="0" dr="1"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="0" z="1" dI="0" dr="2"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f dr="1" dI="-1"/>
+     <f x="-12.22" y="-8.44" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="2" dI="0" dr="1">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+     <f x="-12.22" y="-8.44" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="2" dI="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f dr="1" dI="-1"/>
+     <f x="12.67" y="-8.44" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="3" dI="0" dr="1">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+     <f x="12.67" y="-8.44" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="3" dI="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f dr="1" dI="-1"/>
+     <f x="-0.29" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="0.03" cY="0.04" pX="0" pY="0" z="4" dI="0" dr="2"/>
+     <f x="-0.29" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="shocked" dr="10" to="6" drTW="10" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="9"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="9"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-14" y="-12.11" cocos2d_x="-13" cocos2d_y="-12" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-11.78" y="-13.78" cocos2d_x="-11" cocos2d_y="-13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-9.78" y="-12.44" cocos2d_x="-9" cocos2d_y="-12" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-8.78" y="-9.89" cocos2d_x="-8" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-8.33" y="-6.33" cocos2d_x="-8" cocos2d_y="-6" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-10.22" y="-3.56" cocos2d_x="-10" cocos2d_y="-3" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-13.33" y="-3.33" cocos2d_x="-13" cocos2d_y="-3" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-15.44" y="-5.89" cocos2d_x="-15" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="10" y="-6.33" cocos2d_x="10" cocos2d_y="-6" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="11.78" y="-3.67" cocos2d_x="12" cocos2d_y="-3" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="14.22" y="-3.56" cocos2d_x="15" cocos2d_y="-3" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="15.44" y="-5.89" cocos2d_x="16" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="16.44" y="-9.33" cocos2d_x="17" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="15.44" y="-12.44" cocos2d_x="16" cocos2d_y="-12" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="13.33" y="-14" cocos2d_x="14" cocos2d_y="-13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="11" y="-12.56" cocos2d_x="11" cocos2d_y="-12" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="4"/>
+     <f x="-0.84" y="14.84" cocos2d_x="0" cocos2d_y="15" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="5"/>
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="idle_0" dr="9" to="6" drTW="54" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="8"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="8"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-12.22" y="-13.89" cocos2d_x="-12" cocos2d_y="-13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="4"/>
+     <f x="-12.22" y="-13.89" cocos2d_x="-12" cocos2d_y="-13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="12.67" y="-13.89" cocos2d_x="13" cocos2d_y="-13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="4"/>
+     <f x="12.67" y="-13.89" cocos2d_x="13" cocos2d_y="-13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="2"/>
+     <f x="-0.84" y="14.84" cocos2d_x="0" cocos2d_y="15" kX="0" kY="0" cX="0.78" cY="0.78" pX="-0.04" pY="0" z="4" dI="0" dr="6"/>
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="idle_1" dr="11" to="6" drTW="60" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="10"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="10"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-8.67" y="-9" cocos2d_x="-8" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="5"/>
+     <f x="-9.56" y="-5.44" cocos2d_x="-9" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="3"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="16.22" y="-9" cocos2d_x="17" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="5"/>
+     <f x="15.33" y="-5.44" cocos2d_x="16" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="3"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="2"/>
+     <f x="-0.84" y="16.18" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="0.78" cY="0.78" pX="-0.04" pY="0" z="4" dI="0" dr="5"/>
+     <f x="-1.73" y="16.18" cocos2d_x="-1" cocos2d_y="17" kX="0" kY="0" cX="0.78" cY="0.78" pX="-0.02" pY="0" z="4" dI="0" dr="3"/>
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="idle_2" dr="38" to="6" drTW="99" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="37"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="37"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="3"/>
+     <f x="-15.56" y="-5.33" cocos2d_x="-15" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="5"/>
+     <f x="-15.56" y="-5.33" cocos2d_x="-15" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="3"/>
+     <f x="-8.89" y="-9.33" cocos2d_x="-8" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-8.89" y="-9.33" cocos2d_x="-8" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="4"/>
+     <f x="-8.89" y="-7.11" cocos2d_x="-8" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="9"/>
+     <f x="-8.89" y="-9.33" cocos2d_x="-8" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="6"/>
+     <f x="-14.22" y="-8.89" cocos2d_x="-14" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="5"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="3"/>
+     <f x="9.33" y="-5.78" cocos2d_x="10" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="5"/>
+     <f x="9.33" y="-5.78" cocos2d_x="10" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="3"/>
+     <f x="8.89" y="-8.89" cocos2d_x="9" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="8.89" y="-8.89" cocos2d_x="9" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="4"/>
+     <f x="8.89" y="-6.67" cocos2d_x="9" cocos2d_y="-6" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="9"/>
+     <f x="8.89" y="-8.89" cocos2d_x="9" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="6"/>
+     <f x="9.78" y="-8.89" cocos2d_x="10" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="5"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="11"/>
+     <f x="-0.89" y="15.67" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+     <f x="-0.69" y="16.16" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="1" dr="1"/>
+     <f x="-0.53" y="16.58" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="2" dr="1"/>
+     <f x="-0.38" y="16.8" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="3" dr="1"/>
+     <f x="-0.22" y="16.84" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="4" dr="1"/>
+     <f x="-0.07" y="16.89" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="5" dr="1"/>
+     <f x="0.09" y="16.96" cocos2d_x="1" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="6" dr="2"/>
+     <f x="0.09" y="16.07" cocos2d_x="1" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="6" dr="2"/>
+     <f x="0.09" y="13.4" cocos2d_x="1" cocos2d_y="14" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="6" dr="2"/>
+     <f x="0.09" y="15.18" cocos2d_x="1" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="6" dr="2"/>
+     <f x="0.09" y="12.51" cocos2d_x="1" cocos2d_y="13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="0" z="4" dI="6" dr="1"/>
+     <f x="-0.07" y="14.67" cocos2d_x="0" cocos2d_y="15" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="5" dr="1"/>
+     <f x="-0.22" y="15.96" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="4" dr="2"/>
+     <f x="-0.38" y="16.8" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="3" dr="1"/>
+     <f x="-0.53" y="16.58" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="2" dr="1"/>
+     <f x="-0.69" y="16.16" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="1" dr="1"/>
+     <f x="-0.89" y="15.67" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="5"/>
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="idle_3" dr="9" to="6" drTW="45" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="8"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="8"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-15.56" y="-5.78" cocos2d_x="-15" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="5"/>
+     <f x="-15.56" y="-5.78" cocos2d_x="-15" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="9.33" y="-5.78" cocos2d_x="10" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="5"/>
+     <f x="9.33" y="-5.78" cocos2d_x="10" cocos2d_y="-5" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="8"/>
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="idle_4" dr="8" to="6" drTW="30" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="2"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.95" pX="0" pY="-0.02" z="0" dI="0" dr="5"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="2"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.95" pX="0" pY="-0.02" z="1" dI="0" dr="5"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="0.49" pX="0" pY="-0.04" z="2" dI="0" dr="4"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="0.49" pX="0" pY="-0.04" z="2" dI="0" dr="1"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="0.49" pX="0" pY="-0.04" z="3" dI="0" dr="4"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="0.49" pX="0" pY="-0.04" z="3" dI="0" dr="1"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="2"/>
+     <f x="-0.84" y="14.84" cocos2d_x="0" cocos2d_y="15" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="5"/>
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="idle_5" dr="11" to="6" drTW="11" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="5"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="-0.11" z="0" dI="0" dr="5"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="5"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="0.21" pX="0" pY="0" z="1" dI="0" dr="5"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-12.44" y="-8.67" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.5" cY="0.5" pX="0" pY="-0.04" z="2" dI="0" dr="3"/>
+     <f x="-12.22" y="-8.44" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="2" dI="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+     <f x="-12.44" y="-8.67" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="0.5" cY="0.5" pX="0" pY="-0.04" z="2" dI="0" dr="3"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="12.67" y="-8.78" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.5" cY="0.5" pX="0" pY="0" z="3" dI="0" dr="3"/>
+     <f x="12.67" y="-8.44" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.04" cY="0.03" pX="0" pY="0" z="3" dI="0" dr="2">
+      <colorTransform a="0" r="0" g="0" b="0" aM="0" rM="100" gM="100" bM="100"/>
+     </f>
+     <f x="12.67" y="-8.78" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="0.5" cY="0.5" pX="0" pY="0" z="3" dI="0" dr="3"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="5"/>
+     <f x="-0.29" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="5"/>
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="idle_6" dr="15" to="6" drTW="60" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="14"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="14"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="2"/>
+     <f x="-15.11" y="-6.67" cocos2d_x="-15" cocos2d_y="-6" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="3"/>
+     <f x="-15.11" y="-6.67" cocos2d_x="-15" cocos2d_y="-6" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-9.33" y="-10.22" cocos2d_x="-9" cocos2d_y="-10" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="3"/>
+     <f x="-9.33" y="-10.22" cocos2d_x="-9" cocos2d_y="-10" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-8.89" y="-8" cocos2d_x="-8" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-11.56" y="-4" cocos2d_x="-11" cocos2d_y="-3" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="3"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="2"/>
+     <f x="9.78" y="-6.67" cocos2d_x="10" cocos2d_y="-6" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="3"/>
+     <f x="9.78" y="-6.67" cocos2d_x="10" cocos2d_y="-6" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="15.56" y="-10.22" cocos2d_x="16" cocos2d_y="-10" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="3"/>
+     <f x="15.56" y="-10.22" cocos2d_x="16" cocos2d_y="-10" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="16" y="-8" cocos2d_x="16" cocos2d_y="-7" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="13.33" y="-4" cocos2d_x="14" cocos2d_y="-3" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="3"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="6"/>
+     <f x="-0.84" y="15.29" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="0.77" cY="0.77" pX="-0.02" pY="0" z="4" dI="0" dr="4"/>
+     <f x="-0.84" y="16.62" cocos2d_x="0" cocos2d_y="17" kX="0" kY="0" cX="0.72" cY="0.72" pX="0" pY="0" z="4" dI="0" dr="4"/>
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+   <mov name="idle_7" dr="12" to="6" drTW="30" lp="0" twE="NaN">
+    <b name="Ly_ball" sc="1" dl="0">
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="11"/>
+     <f x="-12.31" y="-8.4" cocos2d_x="-12" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="0" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_ball" sc="1" dl="0">
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="11"/>
+     <f x="12.58" y="-8.4" cocos2d_x="13" cocos2d_y="-8" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="1" dI="0" dr="1"/>
+    </b>
+    <b name="Ly_iris" sc="1" dl="0">
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-14.22" y="-12.89" cocos2d_x="-14" cocos2d_y="-12" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-12" y="-13.33" cocos2d_x="-11" cocos2d_y="-13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-9.33" y="-11.56" cocos2d_x="-9" cocos2d_y="-11" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="4"/>
+     <f x="-9.33" y="-11.56" cocos2d_x="-9" cocos2d_y="-11" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-12" y="-13.33" cocos2d_x="-11" cocos2d_y="-13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-14.22" y="-12.89" cocos2d_x="-14" cocos2d_y="-12" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-15.11" y="-12" cocos2d_x="-15" cocos2d_y="-11" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+     <f x="-15.11" y="-9.33" cocos2d_x="-15" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="2" dI="0" dr="1"/>
+    </b>
+    <b name="Ry_iris" sc="1" dl="0">
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="10.67" y="-12.89" cocos2d_x="11" cocos2d_y="-12" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="12.89" y="-13.33" cocos2d_x="13" cocos2d_y="-13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="15.56" y="-11.56" cocos2d_x="16" cocos2d_y="-11" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="4"/>
+     <f x="15.56" y="-11.56" cocos2d_x="16" cocos2d_y="-11" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="12.89" y="-13.33" cocos2d_x="13" cocos2d_y="-13" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="10.67" y="-12.89" cocos2d_x="11" cocos2d_y="-12" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="9.78" y="-12" cocos2d_x="10" cocos2d_y="-11" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+     <f x="9.78" y="-9.33" cocos2d_x="10" cocos2d_y="-9" kX="0" kY="0" cX="1" cY="1" pX="0" pY="-0.02" z="3" dI="0" dr="1"/>
+    </b>
+    <b name="mouth" sc="1" dl="0">
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="11"/>
+     <f x="-0.84" y="15.73" cocos2d_x="0" cocos2d_y="16" kX="0" kY="0" cX="1" cY="1" pX="-0.02" pY="0" z="4" dI="0" dr="1"/>
+    </b>
+   </mov>
+  </animation>
+ </animations>
+ <TextureAtlas name="magnetic_mimics" width="64" height="128">
+  <SubTexture name="mouth_smile" width="34" height="11" cocos2d_pX="17" cocos2d_pY="5" x="0" y="0"/>
+  <SubTexture name="m_6" width="30" height="10" cocos2d_pX="15" cocos2d_pY="5" x="0" y="69"/>
+  <SubTexture name="m_5" width="27" height="9" cocos2d_pX="13" cocos2d_pY="5" x="32" y="55"/>
+  <SubTexture name="m_4" width="23" height="8" cocos2d_pX="11" cocos2d_pY="4" x="36" y="29"/>
+  <SubTexture name="m_3" width="19" height="8" cocos2d_pX="10" cocos2d_pY="4" x="35" y="42"/>
+  <SubTexture name="m_2" width="15" height="7" cocos2d_pX="8" cocos2d_pY="4" x="0" y="45"/>
+  <SubTexture name="m_1" width="11" height="7" cocos2d_pX="6" cocos2d_pY="4" x="23" y="16"/>
+  <SubTexture name="mouth" width="8" height="7" cocos2d_pX="4" cocos2d_pY="4" x="23" y="28"/>
+  <SubTexture name="ry_iris" width="7" height="8" cocos2d_pX="4" cocos2d_pY="4" x="23" y="40"/>
+  <SubTexture name="ly_iris" width="7" height="8" cocos2d_pX="4" cocos2d_pY="4" x="20" y="53"/>
+  <SubTexture name="ry_ball" width="18" height="24" cocos2d_pX="9" cocos2d_pY="12" x="0" y="16"/>
+  <SubTexture name="l_yball" width="18" height="24" cocos2d_pX="9" cocos2d_pY="12" x="39" y="0"/>
+ </TextureAtlas>
+</skeleton>
