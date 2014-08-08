@@ -7,6 +7,8 @@ cd "$(dirname "$0")"
 
 ls ./cocos2d > /dev/null
 
+DBG=""
+
 if [ $# -ne 0 ]; then
 
    if [ $1 = "clean" ]; then
@@ -16,6 +18,14 @@ if [ $# -ne 0 ]; then
       echo "====================================================="
       rm ./cocos2d/linux-build -rf
       rm ./proj.linux/build -rf
+   fi;
+
+   if [ $1 = "debug" ]; then
+      DBG=" -DDEBUG_MODE=ON "
+   fi;
+
+   if [ $1 = "release" ]; then
+      DBG=" -DDEBUG_MODE=OFF "
    fi;
 
    #if [ $1 = "loggy" ]; then
@@ -58,7 +68,7 @@ cd ./proj.linux
 # rm -rf bin
 mkdir -p build
 cd build
-cmake  ../..
+cmake ${DBG}  ../..
 make -j$ncpu
 
 cd ../..
@@ -68,6 +78,10 @@ echo "====================================================="
 echo "====================LAUNCHING========================"
 echo "====================================================="
 
-# ./proj.linux/buid/bin/MyGame
+ls -lh ./proj.linux/build/bin/MyGame
+pushd ./
+cd ./proj.linux/build/bin/
+./MyGame
 # sh -c ./proj.linux/buid/bin/MyGame
+popd
 

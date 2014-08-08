@@ -60,6 +60,7 @@ namespace MPix {
       // =========== Font management =====================================
 
       string GetBaseFont(); 
+      string GetEditorFont(); 
       string GetBaseFontLight();
       string GetLogoFont();
 

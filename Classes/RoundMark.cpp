@@ -1,4 +1,5 @@
 #include "RoundMark.h"
+#include "ContentManager.h"
 
 using namespace MPix;
 
@@ -9,7 +10,7 @@ RoundMark* MPix::RoundMark::create( const char* text )
    auto fab = new RoundMark();
    fab->autorelease();
    const int RES = 4;
-   auto digit = Label::createWithTTF(text, "Arial", 24.0f * RES,
+   auto digit = Label::createWithTTF(text, ContentManager::getInstance().GetEditorFont(), 24.0f * RES,
                               Size::ZERO, TextHAlignment::CENTER, TextVAlignment::CENTER);
    digit->setScale(1.0f/RES);
    //fab->digit->setColor(Color3B(255,255,0));

@@ -23,7 +23,7 @@ bool EditorToolbox::init()
       t->Hide();
    }
 
-   tool_name = Label::createWithTTF("No tool", "Arial", 32.0f*2);
+   tool_name = Label::createWithTTF("No tool", ContentManager::getInstance().GetEditorFont(), 32.0f*2);
    //tool_name->getTexture()->setAliasTexParameters();
    tool_name->setScale(0.5f);
    tool_name->setColor(Color3B(0,0,0));

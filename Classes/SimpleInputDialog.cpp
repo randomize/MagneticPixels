@@ -1,4 +1,5 @@
 #include "SimpleInputDialog.h"
+#include "ContentManager.h"
 
 using namespace MPix;
 
@@ -24,13 +25,13 @@ bool MPix::SimpleInputDialog::initWithRequast( const char* req /*= "Input, pleas
    auto bg = LayerColor::create(Color4B(0,0,0,255));
    addChild(bg);
 
-   auto pLabel = Label::createWithTTF(req, "Arial", 36);
+   auto pLabel = Label::createWithTTF(req, ContentManager::getInstance().GetEditorFont(), 36);
    pLabel->setPosition(center + Vector2(0,center.y*0.5f));
    addChild(pLabel);
 
    field = TextFieldTTF::textFieldWithPlaceHolder(
       def,    // Text
-      "Arial", // Font
+      ContentManager::getInstance().GetEditorFont(), // Font
       36       // Size
    );
    field->setPosition(center + Vector2(0,center.y*0.25f));
