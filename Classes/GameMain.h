@@ -42,7 +42,7 @@ namespace MPix {
       PixelsLayer* pixels;
       TouchLayer* touch;
       Layer* bg;
-       
+
       // Content holds pixels and touch layers, making easy to scroll/zoom
       Node* content;
 

@@ -57,7 +57,7 @@ namespace MPix {
          auto hh = (p->second);
          hh->Clear();
       }
-      
+
       // Register, returns id
       template<class T> int Register(const T& value) {
          //ECLOG_DEBUG(" Registered hist " + typeid(T).name());
@@ -81,16 +81,16 @@ namespace MPix {
       void ExpandIDs();
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
-   
+
+   public:
+
       static HistoryManager& getInstance() {
          static HistoryManager theSingleInstance;
          return theSingleInstance;
       }
-   
+
    private:
-   
+
       HistoryManager();
       ~HistoryManager();
       HistoryManager(HistoryManager& root){}
@@ -98,7 +98,7 @@ namespace MPix {
       // 100 places for object id's
       static const int PLACES = 100;
 
-      // 
+      //
 
    };
 

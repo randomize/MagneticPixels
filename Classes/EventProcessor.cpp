@@ -8,7 +8,7 @@ using namespace MPix;
 
 //====-----EventPacket----------------------------------------======//
 
-EventPacket::EventPacket( int pri ) : 
+EventPacket::EventPacket( int pri ) :
    priority(pri),
    isActive(true)
 {
@@ -25,7 +25,7 @@ bool EventPacket::operator<( const EventPacket& rhs ) const
 
 void MPix::EventPacket::ProcessEvent()
 {
-   if (isActive) 
+   if (isActive)
       this->Dispatch();
 }
 
@@ -52,20 +52,20 @@ MPix::PixelRules MPix::PixelEventPacket::rules = [] () {
 
 }();
 
-PixelEventPacket::PixelEventPacket( PixelEvent e, int id, int pri ) : 
-   EventPacket(pri), 
-   event(e), 
+PixelEventPacket::PixelEventPacket( PixelEvent e, int id, int pri ) :
+   EventPacket(pri),
+   event(e),
    pixelID(id)
 {
 }
 
-size_t PixelEventPacket::hash() const 
+size_t PixelEventPacket::hash() const
 {
    auto res = ( static_cast<unsigned>(pixelID) << 16 ) | ( static_cast<unsigned>(event) & 0x0000FFFF );
    return res ^ 0x1A70BFF4; // Some magic
 }
 
-bool PixelEventPacket::operator==( const EventPacket& rhs_base ) const 
+bool PixelEventPacket::operator==( const EventPacket& rhs_base ) const
 {
    auto rhs = dynamic_cast<const PixelEventPacket*>(&rhs_base);
    if (rhs == nullptr)
@@ -177,7 +177,7 @@ void MPix::PixelEventPacket::RuleCheck( EventList & tokill )
       for (auto k : rule->second ) {
          for (auto e: tokill) {
             auto dp = dynamic_pointer_cast<PixelEventPacket> (e);
-            if (dp != nullptr && dp->event == k && dp->pixelID == pixelID) 
+            if (dp != nullptr && dp->event == k && dp->pixelID == pixelID)
                dp->Deactivate();
          }
       }
@@ -187,15 +187,15 @@ void MPix::PixelEventPacket::RuleCheck( EventList & tokill )
 
 //====-----GoalEventPacket----------------------------------------======//
 
-GoalEventPacket::GoalEventPacket( GoalEvent e, int id, Coordinates task, int pri ) : 
-   EventPacket(pri), 
-   event(e), 
-   goalID(id), 
+GoalEventPacket::GoalEventPacket( GoalEvent e, int id, Coordinates task, int pri ) :
+   EventPacket(pri),
+   event(e),
+   goalID(id),
    task(task)
 {
 }
 
-size_t GoalEventPacket::hash() const 
+size_t GoalEventPacket::hash() const
 {
    unsigned res = 0x12345678;
    res ^= ( static_cast<unsigned>(goalID) << 16 ) | ( static_cast<unsigned>(event) & 0x0000FFFF );
@@ -205,7 +205,7 @@ size_t GoalEventPacket::hash() const
    return res;
 }
 
-bool GoalEventPacket::operator==( const EventPacket& rhs_base ) const 
+bool GoalEventPacket::operator==( const EventPacket& rhs_base ) const
 {
    auto rhs = dynamic_cast<const GoalEventPacket*>(&rhs_base);
    if (rhs == nullptr)

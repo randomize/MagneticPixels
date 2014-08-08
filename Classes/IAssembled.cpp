@@ -93,14 +93,14 @@ void MPix::IAssembled::UpdateSmile( const Context& context )
 {
    if ( context.ExistsMatchingGoal(GetPos(), GetColor())) {
       SetSmile(context, true);
-   } else 
+   } else
       SetSmile(context, false);
 }
 
 bool MPix::IAssembled::growThis( const Context& context )
 {
    assert(grower);
-   auto me = dynamic_pointer_cast<IAssembled> ( context.GetByID(this->GetID())); 
+   auto me = dynamic_pointer_cast<IAssembled> ( context.GetByID(this->GetID()));
    assert(me); // will be strange having null here...
    return grower->growThis(me, context);
 }
@@ -134,7 +134,7 @@ bool MPix::IAssembled::CheckCanFall( const Context& context )
          context.PostEvent(PixelEvent::CAN_FALL, GetID());
       }
    }
-   else 
+   else
    {
       if (canFall) {
          canFall = false;

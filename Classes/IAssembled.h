@@ -33,14 +33,14 @@ namespace MPix {
 
    // IAssembled
 
-   class IAssembled : 
+   class IAssembled :
       public IColorful,        // Must have color to be assemble able
       public IAlive,           // TODO: Maybe can have strong pixel with kill resistance ?
       public IMovableStepper   // Moves by steps
    {
    public:
 
-      IAssembled(PixelColor color = PixelColor::RED); 
+      IAssembled(PixelColor color = PixelColor::RED);
 
       // Must call when pixel is tapped to start assembly, allows or blocks
       virtual bool canStartAssembly(const Context& context) = 0;
@@ -76,7 +76,7 @@ namespace MPix {
       Historical<bool> in_assembly;
 
       void UpdateSmile( const Context& context );
-      
+
       Historical<bool> canFall;
 
       bool hintCanFall;

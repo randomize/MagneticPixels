@@ -20,7 +20,7 @@ using namespace MPix;
 
 GameplayManager::GameplayManager()
 {
-   // Register commands 
+   // Register commands
 
            CmdGameplayClick::listners["GameplayManager"] = std::bind(&GameplayManager::ClickAtPoint,     this, std::placeholders::_1);
             CmdGameplayMove::listners["GameplayManager"] = std::bind(&GameplayManager::MoveAssembly,     this, std::placeholders::_1);
@@ -74,7 +74,7 @@ ErrorCode GameplayManager::SwitchState( State to )
 {
 
    // Better check state graph
-   assert( 
+   assert(
       (st==State::IDLE && to==State::READY) ||
       (st==State::READY && to==State::PLAYING) ||
 
@@ -89,7 +89,7 @@ ErrorCode GameplayManager::SwitchState( State to )
 
    ECLOG_INFO("<<<< GPM: change " + StateString(st) + " => " + StateString(to) + ">>>>" );
    st = to;
-   
+
    return ErrorCode::RET_OK;
 
 }
@@ -103,7 +103,7 @@ ErrorCode GameplayManager::ProcessOneCommand()
    // Return RET_FAIL if no more commands ans RET_OK when have more ti process
 
    // Break on wrong state
-   if (st != State::PLAYING) 
+   if (st != State::PLAYING)
       return ErrorCode::RET_FAIL;
 
    // Break on empty
@@ -116,7 +116,7 @@ ErrorCode GameplayManager::ProcessOneCommand()
    cmd->Execute();
    delete cmd;
 
-   //ECLOG_DEBUG(" GameplayManager : Executed CMD=[not implemented], return " + static_cast<int>(ret)); 
+   //ECLOG_DEBUG(" GameplayManager : Executed CMD=[not implemented], return " + static_cast<int>(ret));
 
    return ErrorCode::RET_OK;
 }
@@ -135,7 +135,7 @@ ErrorCode GameplayManager::PostPriorityCommand( Command* cmd )
 
 
 //////////////////////////////////////////////////////////////////////////
-// Controls 
+// Controls
 
 ErrorCode GameplayManager::LoadLevel( shared_ptr<Level> level )
 {
@@ -236,7 +236,7 @@ ErrorCode GameplayManager::Reset()
 }
 
 //////////////////////////////////////////////////////////////////////////
-// Internal 
+// Internal
 
 ErrorCode GameplayManager::ClickAtPoint( Coordinates position )
 {
@@ -334,7 +334,7 @@ ErrorCode GameplayManager::MoveAssembly(Direction d)
    // Check if can move
    auto ret = context.assembly->CheckMove(context, d);
 
-   if (ret == ErrorCode::RET_YES) 
+   if (ret == ErrorCode::RET_YES)
    {
 
       // Moving
@@ -353,7 +353,7 @@ ErrorCode GameplayManager::MoveAssembly(Direction d)
       // Schedule more logic after move
       PostPriorityCommand(new CmdGameplayAfterMove(d));
 
-   } 
+   }
    else
    {
       // Performing worlds reaction for block
@@ -373,7 +373,7 @@ ErrorCode MPix::GameplayManager::AfterMoveAssembly( Direction d ) {
 
    ECLOG_INFO("GameplayManager->AfterMoveAssembly()");
 
-   // Check for deaths in world, caused by player moved 
+   // Check for deaths in world, caused by player moved
    // assembly(stone kills cactus, stone fallso pit, sokoban spikes on cactus)
    context.field->WorldCheckForLost(context);
 
@@ -385,7 +385,7 @@ ErrorCode MPix::GameplayManager::AfterMoveAssembly( Direction d ) {
       CheckForSolution();
       UpdateUI();
       return ErrorCode::RET_FAIL;
-   } 
+   }
 
    // Moved assembly is stable now
 
@@ -408,7 +408,7 @@ ErrorCode GameplayManager::GrowAssembly()
    ECLOG_INFO("GameplayManager->GrowAssembly()");
 
    // Searching for dead pixels killed by cactus or pits
-   auto ret = context.assembly->CheckForLost(context); 
+   auto ret = context.assembly->CheckForLost(context);
 
    // TODO: test if death of some can cause more deaths! pitfallbug teset
 
@@ -433,7 +433,7 @@ ErrorCode GameplayManager::GrowAssembly()
          ScriptManager::getInstance().OnLastGrow(context);
       }
 
-   } 
+   }
 
    CheckForSolution();
 
@@ -446,7 +446,7 @@ ErrorCode GameplayManager::UndoMove()
 {
    if (st != State::PLAYING) return ErrorCode::RET_FAIL;
 
-   if (context.moveNumber == 0) { 
+   if (context.moveNumber == 0) {
       // TODO: Send UI : this is first move!! (Better gray out/remove undo)
       return ErrorCode::RET_FAIL;
    }
@@ -467,7 +467,7 @@ ErrorCode GameplayManager::CancelAssembly()
 {
    if (st != State::PLAYING) return ErrorCode::RET_FAIL;
 
-   if (context.moveNumber == 0) { 
+   if (context.moveNumber == 0) {
       // TODO: Send UI : this is first move!!
       return ErrorCode::RET_FAIL;
    }
@@ -517,7 +517,7 @@ ErrorCode GameplayManager::EndAssembling()
       SwitchState(State::FINISHED);
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIGameFinished());
       return ErrorCode::RET_OK;
-   } 
+   }
 
 
    return ErrorCode::RET_OK;

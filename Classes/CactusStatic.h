@@ -2,7 +2,7 @@
 //
 //  Created:     2013/09/09
 //  Author:      Mihailenco E. at TheEndlessCat Games, 2013
-//  Description: 
+//  Description:
 //
 //===---------------------------------------------------------===//
 
@@ -23,7 +23,7 @@ namespace MPix {
    class Context;
 
    // MagneticPixel
-   class CactusStatic : 
+   class CactusStatic :
       public IKilling,         // Can kill
       public IAlive,           // Can be killed(by pitfalls for example)
       public IMoveBlocker      // Blocks cactus

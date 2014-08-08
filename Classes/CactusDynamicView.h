@@ -2,7 +2,7 @@
 //
 //  Created:     2013/10/02
 //  Author:      Mihailenco E. at TheEndlessCat Games, 2013
-//  Description: 
+//  Description:
 //
 //===---------------------------------------------------------===//
 
@@ -30,7 +30,7 @@ namespace MPix {
       void Build( shared_ptr<Pixel> model ) override;
 
       void PixelMoved() override;
-      
+
       void PixelChanged() override;
 
 

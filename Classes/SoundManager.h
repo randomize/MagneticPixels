@@ -38,12 +38,12 @@ namespace MPix {
       ErrorCode UpdateSoundSystem(float deltha);
 
    protected:
-   	
+
    private:
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
 
-   public: 
+   public:
 
       static SoundManager& getInstance() {
          static SoundManager theSingleInstance;

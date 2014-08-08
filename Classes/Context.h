@@ -68,7 +68,7 @@ namespace MPix {
       // Restores context
       void PopContextSnapshots(size_t number_of = 1);
 
-   public: 
+   public:
 
       // ================= Field helpers ======================
 
@@ -95,7 +95,7 @@ namespace MPix {
       // Checks if all pixels of assembly stay on their colors goals
       bool IsAssemblySmiling() const;
 
-      // Check is assembly is empty 
+      // Check is assembly is empty
       bool IsAssemblyEmpty() const;
 
       // Get list of coordinates of all pixels

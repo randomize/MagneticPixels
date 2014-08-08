@@ -18,11 +18,11 @@ namespace MPix {
    class Field;
 
    // FieldXML
-   class CC_DLL FieldXML 
+   class CC_DLL FieldXML
    {
    public:
 
-      // Field 
+      // Field
       static shared_ptr<Field> Generate( tinyxml2::XMLElement* src );
       static bool Store(shared_ptr<Field> src, tinyxml2::XMLPrinter * dst);
 

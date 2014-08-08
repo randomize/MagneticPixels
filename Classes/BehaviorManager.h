@@ -33,20 +33,20 @@ namespace MPix {
       unordered_map<string,shared_ptr<AnyBehavior>> shared;
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
-   
+
+   public:
+
       static BehaviorManager& getInstance() {
          static BehaviorManager theSingleInstance;
          return theSingleInstance;
       }
-   
+
    private:
-   
+
       BehaviorManager();
       BehaviorManager(BehaviorManager& root){}
       BehaviorManager& operator=(BehaviorManager&){return *this;}
-   
+
 
    };
 

@@ -26,7 +26,7 @@ void MPix::GoalTask::Reset( const Context& context, int goalID )
    assert( st != State::ACCEPTED && "Cannot reset satisfied task");
 
    // If was highlighted, send event
-   if ( st == State::ACCEPTABLE ) 
+   if ( st == State::ACCEPTABLE )
    {
       context.PostEvent(GoalEvent::UNHIGHLIGHT, goalID, pos);
    }
@@ -50,7 +50,7 @@ void MPix::GoalTask::Update( const Context& context, int goalID )
    auto cp = context.GetColorfulAt(pos);
 
    if ( cp && cp->GetColor() == color )  // Covered with my color IColorful pixel
-   { 
+   {
       ECLOG_DEBUG(" Matched color goal :" + color + " at " + pos + " with " + cp->GetID());
 
       if (st == State::UNACCEPTABLE) // Whoora! become acceptable
@@ -58,9 +58,9 @@ void MPix::GoalTask::Update( const Context& context, int goalID )
          context.PostEvent(GoalEvent::HIGHTLIGHT, goalID, pos);
       }
       st = State::ACCEPTABLE;
-   } 
+   }
    else // if not covered by pixel or covered with wrong one
-   { 
+   {
       if (st == State::ACCEPTABLE) // Noooo. it was acceptable
       {
          context.PostEvent(GoalEvent::UNHIGHLIGHT, goalID, pos);
@@ -74,7 +74,7 @@ void MPix::GoalTask::Update( const Context& context, int goalID )
 //////////////////////////////////////////////////////////////////////////
 // Getters and informers
 
-bool GoalTask::MatchesColor( PixelColor c ) const 
+bool GoalTask::MatchesColor( PixelColor c ) const
 {
    return color == c;
 }
@@ -170,7 +170,7 @@ const GoalTask* Goal::TaskAt( Coordinates pos ) const
    return nullptr;
 }
 
-bool Goal::FindMatch( Coordinates p, PixelColor c ) const 
+bool Goal::FindMatch( Coordinates p, PixelColor c ) const
 {
    assert(st != State::ACCEPTED && "Shouldn't call this if goal marked as satisfied");
    assert(!tasks.empty() && "Ensure that tasks exists");
@@ -291,10 +291,10 @@ void Goal::SetID( int id )
 }
 
 //////////////////////////////////////////////////////////////////////////
-// Informers 
+// Informers
 
 
-bool Goal::ContainsPoint( Coordinates pos ) const 
+bool Goal::ContainsPoint( Coordinates pos ) const
 {
    return TaskAt(pos) != nullptr;
 }
@@ -382,10 +382,10 @@ ErrorCode Goals::UpdateSolution( const Context& context )
 
    has_full_solution = true; // Assume
    for (auto g : goals)
-   { 
+   {
       // Only unsatisfied playing now
       if ( g->WasAccepted() )  continue;
-      
+
       g->UpdateSolution(context);
 
       if (g->GetState() != Goal::State::CAN_BE_SATISFIED_FULLY) {
@@ -450,7 +450,7 @@ int MPix::Goals::GoalsCount() const
 void MPix::Goals::ResetSolution( const Context& context )
 {
    for (auto g : goals)
-   { 
+   {
       // Only unsatisfied playing now
       if ( g->WasAccepted() )  continue;
       // Reset

@@ -27,7 +27,7 @@ vector<shared_ptr<EditorTool>> MPix::EditorToolGenerator::GenerateDefaultSet()
    v.emplace_back(root);
 
    //////////////////////////////////////////////////////////////////////////
-   // Core category 
+   // Core category
 
    auto mag = new EditorFolderTool("Magnetic Pixel", "magneticpixel");
    PUT_TO(root, mag);
@@ -60,7 +60,7 @@ vector<shared_ptr<EditorTool>> MPix::EditorToolGenerator::GenerateDefaultSet()
    }
 
    //////////////////////////////////////////////////////////////////////////
-   // Needle category 
+   // Needle category
 
    // Static
    fab = new EditorToolPixel("Static", make_shared<CactusStatic>());
@@ -79,7 +79,7 @@ vector<shared_ptr<EditorTool>> MPix::EditorToolGenerator::GenerateDefaultSet()
    }
 
    //////////////////////////////////////////////////////////////////////////
-   // Wall category 
+   // Wall category
 
    for (int i = 1; i < 16; ++i) {
       auto pw = make_shared<WallPixel>(i);

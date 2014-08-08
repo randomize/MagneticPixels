@@ -40,7 +40,7 @@ namespace ECCore {
          }
 
          auto root = doc.FirstChildElement("language");
-         if (root == nullptr) { 
+         if (root == nullptr) {
             ECLOG_ERROR("No `language` element"); return false;
          }
 

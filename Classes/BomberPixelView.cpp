@@ -84,7 +84,7 @@ void MPix::BomberPixelView::Build( shared_ptr<Pixel> model )
    // Setup contents
    contents->addChild( body, 1);
 
-   // Initial 
+   // Initial
    smash->setOpacity(0);
    mimics->PlayNow("asleep");
 }
@@ -159,7 +159,7 @@ void MPix::BomberPixelView::PixelReset()
 {
 
    auto sq = Sequence::create(
-      Shake::create(0.5,10), 
+      Shake::create(0.5,10),
       MoveTo::create(0.1f, LogicToScreen(model->GetPos()) + MPIX_CELL_SIZE_HALF_P),
       CallFunc::create([this](){
          body->setOpacity(255);
@@ -181,7 +181,7 @@ void MPix::BomberPixelView::PixelReset()
 void MPix::BomberPixelView::PixelDied()
 {
    auto ast = pixel->GetLiveState();
-   if (ast == IAlive::State::KILLED_BY_NEEDLE) 
+   if (ast == IAlive::State::KILLED_BY_NEEDLE)
    {
       mimics->PlayNow("die");
       auto sq = Sequence::create(
@@ -193,11 +193,11 @@ void MPix::BomberPixelView::PixelDied()
             smash->runAction(FadeOut::create(0.5f));
             GameStateManager::getInstance().CurrentState()->Execute(new CmdPlaySound("pop_" + ToString(rand()%3+1)));
          }),
-         nullptr 
+         nullptr
          );
       mimics->runAction(sq);
-   } 
-   else if (ast == IAlive::State::KILLED_BY_STONE ) 
+   }
+   else if (ast == IAlive::State::KILLED_BY_STONE )
    {
       auto sq = Sequence::create(
          Hide::create(),
@@ -207,27 +207,27 @@ void MPix::BomberPixelView::PixelDied()
             smash->runAction(FadeOut::create(0.5f));
             GameStateManager::getInstance().CurrentState()->Execute(new CmdPlaySound("pop_" + ToString(rand()%3+1)));
          }),
-         nullptr 
+         nullptr
          );
       mimics->runAction(sq);
    }
-   else if (ast == IAlive::State::KILLED_BY_PITTRAP ) 
+   else if (ast == IAlive::State::KILLED_BY_PITTRAP )
    {
-      auto m_act = Spawn::create( 
+      auto m_act = Spawn::create(
          FadeOut::create(0.5f),
          ScaleTo::create(0.5f, 0.01f),
          RotateTo::create(0.5f, 180.0f),
          nullptr
        );
       body->runAction(m_act);
-   } 
+   }
    else if (ast == IAlive::State::KILLED_BY_EXPLOSION)
    {
       //TODO: particle effect
       body->runAction(FadeOut::create(0.5f));
       GameStateManager::getInstance().CurrentState()->Execute(new CmdPlaySound("boom_" + ToString(rand() % 3 + 1)));
    }
-   else 
+   else
    {
       PixelView::PixelDied();
    }
@@ -256,7 +256,7 @@ void MPix::BomberPixelView::PixelResurrect()
 
    auto sq = Sequence::create(
       ScaleTo::create(0.3f, 1.0f),
-      CallFunc::create([=]() { 
+      CallFunc::create([=]() {
 
       if (pixel->IsInAssembly() == true) {
          mimics->setVisible(true);

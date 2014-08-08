@@ -34,10 +34,10 @@ namespace MPix {
       virtual void Accept( const Context& context );
 
       // Override specific history
-      void InitSnapshots( const Context& context ) override; 
-      void PushSnapshot( const Context& context ) override; 
-      void ClearSnapshots( const Context& context ) override; 
-      void PopSnapshots( const Context& context, int n ) override; 
+      void InitSnapshots( const Context& context ) override;
+      void PushSnapshot( const Context& context ) override;
+      void ClearSnapshots( const Context& context ) override;
+      void PopSnapshots( const Context& context, int n ) override;
 
    private:
 

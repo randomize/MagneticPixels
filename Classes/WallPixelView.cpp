@@ -19,7 +19,7 @@ void MPix::WallPixelView::Build( shared_ptr<Pixel> model )
    for (auto a : borset)
    {
       auto pp = ContentManager::getInstance().GetSimpleSprite("wall_element");
-      switch (a) 
+      switch (a)
       {
       case Direction::DIR_UP:
          break;

@@ -39,7 +39,7 @@ namespace MPix {
       GoalTask(Coordinates pos, PixelColor color);
 
       //////////////////////////////////////////////////////////////////////////
-      // History support 
+      // History support
 
       ErrorCode InitSnapshots( const Context& context );
       ErrorCode PopSnapshots(const Context& context, int goalID, int count = 1);
@@ -131,7 +131,7 @@ namespace MPix {
 
       size_t TaskCount() { return tasks.size(); }
 
-   private:  
+   private:
 
       //////////////////////////////////////////////////////////////////////////
       // Helpers
@@ -201,8 +201,8 @@ namespace MPix {
       bool ExistsSolution() const;
       bool ExistsFullSolution() const;
 
-   private: 
-      
+   private:
+
       //////////////////////////////////////////////////////////////////////////
       // Helpers
 

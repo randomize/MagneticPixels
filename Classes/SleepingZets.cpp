@@ -34,7 +34,7 @@ bool MPix::SleepingZets::init()
 
    zzz = ParticleSmoke::create();
    auto texture = Director::getInstance()->getTextureCache()->addImage("zee.png");
-      
+
    zzz->setTexture( texture );
    zzz->setEmitterMode( ParticleSystem::Mode::GRAVITY );
    zzz->setEmissionRate(1.0f);

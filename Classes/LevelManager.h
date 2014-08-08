@@ -153,8 +153,8 @@ namespace MPix {
       vector<int> worlds_ids;
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
+
+   public:
 
       static LevelManager& getInstance() {
          static LevelManager theSingleInstance;

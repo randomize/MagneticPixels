@@ -106,15 +106,15 @@ namespace ECCore {
 
    string PlatformManager::GetSDCardPath()
    {
-      jclass env_class = env->FindClass("android/os/Environment"); 
+      jclass env_class = env->FindClass("android/os/Environment");
       jmethodID getextstor_id = env->GetStaticMethodID(
          env_class,"getExternalStorageDirectory", "()Ljava/io/File;"
-         ); 
+         );
       jobject file_obj = env->CallStaticObjectMethod(env_class, getextstor_id);
-      jclass file_class = env->FindClass("java/io/File"); 
+      jclass file_class = env->FindClass("java/io/File");
       jmethodID filetostr_id = env->GetMethodID(file_class, "getAbsolutePath", "()Ljava/lang/String;");
       jstring dirstr_obj = (jstring)env->CallObjectMethod(file_obj, filetostr_id);
-      const char *nativeString = env->GetStringUTFChars(dirstr_obj, 0); 
+      const char *nativeString = env->GetStringUTFChars(dirstr_obj, 0);
       string s(nativeString);
       env->ReleaseStringUTFChars(dirstr_obj, nativeString);
       return s;
@@ -125,10 +125,10 @@ namespace ECCore {
       JNIEnv *env;
       a_app->activity->vm->AttachCurrentThread(&env, 0);
 
-      jclass build_class = env->FindClass("android/os/Build"); 
-      jfieldID brand_id = env->GetStaticFieldID(build_class, "MODEL", "Ljava/lang/String;"); 
-      jstring brand_obj = (jstring)env->GetStaticObjectField(build_class, brand_id); 
-      const char *nativeString = env->GetStringUTFChars(brand_obj, 0); 
+      jclass build_class = env->FindClass("android/os/Build");
+      jfieldID brand_id = env->GetStaticFieldID(build_class, "MODEL", "Ljava/lang/String;");
+      jstring brand_obj = (jstring)env->GetStaticObjectField(build_class, brand_id);
+      const char *nativeString = env->GetStringUTFChars(brand_obj, 0);
       string s(nativeString);
       env->ReleaseStringUTFChars(brand_obj, nativeString);
       return s;

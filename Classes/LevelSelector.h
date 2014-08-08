@@ -35,7 +35,7 @@ namespace MPix {
 
       bool init() override;
 
-   private: 
+   private:
 
       // Handlers
 

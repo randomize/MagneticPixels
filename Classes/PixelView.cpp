@@ -107,7 +107,7 @@ void MPix::PixelView::PixelMoved()
 void MPix::PixelView::PixelReset()
 {
    auto sq = Sequence::create(
-      Shake::create(0.5,10), 
+      Shake::create(0.5,10),
       MoveTo::create(0.1f, LogicToScreen(model->GetPos()) + MPIX_CELL_SIZE_HALF_P),
       nullptr
       );
@@ -116,7 +116,7 @@ void MPix::PixelView::PixelReset()
 
 void MPix::PixelView::PixelDied()
 {
-   auto m_act = Spawn::create( 
+   auto m_act = Spawn::create(
       FadeOut::create(0.5f),
       ScaleTo::create(0.5f, 0.001f),
       nullptr
@@ -132,7 +132,7 @@ void MPix::PixelView::PixelAccepted()
 
 void MPix::PixelView::PixelResurrect()
 {
-   auto m_act = Spawn::create( 
+   auto m_act = Spawn::create(
       FadeIn::create(0.1f),
       ScaleTo::create(0.1f, 1.0f),
       nullptr

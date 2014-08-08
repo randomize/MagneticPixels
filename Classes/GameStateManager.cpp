@@ -23,7 +23,7 @@
 using namespace MPix;
 
 
-GameStateManager::GameStateManager() :  
+GameStateManager::GameStateManager() :
    currentState(nullptr) // State undefined
 {
    ECLOG_INFO("[ GameStateManager initialized ]");
@@ -72,7 +72,7 @@ void MPix::GameStateManager::SwitchToTestGame( void )
 
 void GameStateManager::SwitchToSelector( void )
 {
-   assert(currentState); 
+   assert(currentState);
 
    // Animating transition
    auto newState = LevelSelector::create();

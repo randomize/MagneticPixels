@@ -50,21 +50,21 @@ namespace MPix {
       unordered_map<unsigned, shared_ptr<Script>> m_scripts;
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
-   
+
+   public:
+
       static ScriptManager& getInstance() {
          static ScriptManager theSingleInstance;
          return theSingleInstance;
       }
-   
+
    private:
-   
+
       ScriptManager();
       ~ScriptManager();
       ScriptManager(ScriptManager& root){}
       ScriptManager& operator=(ScriptManager&){return *this;}
-   
+
 
    };
 

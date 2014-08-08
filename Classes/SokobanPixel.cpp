@@ -61,7 +61,7 @@ void MPix::SokobanPixel::UpdateSmile( const Context& context )
 {
    if ( context.ExistsMatchingGoal(GetPos(), GetColor())) {
       SetSmile(context, true);
-   } else 
+   } else
       SetSmile(context, false);
 }
 

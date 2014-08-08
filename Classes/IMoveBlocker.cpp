@@ -10,7 +10,7 @@ using namespace MPix;
 bool MPix::IMoveBlocker::blocksMoves( const Context& context, Coordinates from, Direction to, shared_ptr<Pixel> pix /*= nullptr*/ )
 {
    assert(blocker);
-   auto me = dynamic_pointer_cast<IMoveBlocker> ( context.GetByID(this->GetID())); 
+   auto me = dynamic_pointer_cast<IMoveBlocker> ( context.GetByID(this->GetID()));
    assert(me); // will be strange having null here...
    return blocker->blocksMoves(me, context, from, to, pix);
 }

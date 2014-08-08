@@ -55,7 +55,7 @@ void ColorBox::onDraw(const Matrix &transform, bool )
    DrawPrimitives::drawSolidRect(p00, p11, col);
    auto p = Vector2(width,width);
    if (borders) {
-      if ( borders & BORDER_LEFT ) 
+      if ( borders & BORDER_LEFT )
          DrawPrimitives::drawSolidRect(p00-p, p01+p, borders_col);
       if ( borders & BORDER_RIGHT )
           DrawPrimitives::drawSolidRect(p10-p, p11+p, borders_col);

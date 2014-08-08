@@ -2,11 +2,11 @@
 //
 //  Created:     2013/09/02
 //  Author:      Mihailenco E. at TheEndlessCat Games, 2013
-//  Description: C++ auto factory implementation 
+//  Description: C++ auto factory implementation
 //  Usage:
 //   Base class should have ECNODE_BASE(ClassName) in declaration
 //   Derived classes should have ECNODE_CHILD(ClassName) in declaration
-//   Derived classes should have ECNODE_CHILD_CPP(ClassName) in definition 
+//   Derived classes should have ECNODE_CHILD_CPP(ClassName) in definition
 //   Now can use:
 //      GetTypeName() for "classname" string
 //      BaseName::Factory().NewNodeByName ByID etc
@@ -21,12 +21,12 @@
 
 namespace EndlessCatLib {
 
-   // Base class for anything that is factored 
+   // Base class for anything that is factored
    class ECNode
    {
    public:
-      virtual ECNode* Clone()            = 0; 
-      virtual string GetTypeName() const = 0; 
+      virtual ECNode* Clone()            = 0;
+      virtual string GetTypeName() const = 0;
       virtual int GetTypeID()      const = 0;
       virtual ~ECNode() {}
    };
@@ -34,7 +34,7 @@ namespace EndlessCatLib {
    // Factories store generators, not objects
    class ECNodeGenerator {
    public:
-      virtual ECNode* Gen() = 0; 
+      virtual ECNode* Gen() = 0;
    };
 
 //Add this macro to each base class having factory
@@ -46,7 +46,7 @@ public:                                                    \
    }                                                       \
 // ECNODE_BASE
 
-// This macro registers factorized child with type NodeType but named NodeTypeString 
+// This macro registers factorized child with type NodeType but named NodeTypeString
 #define ECNODE_CHILD_CUSTOM_NAME(NodeType, NodeTypeString)                \
 public:                                                                    \
                                                                            \

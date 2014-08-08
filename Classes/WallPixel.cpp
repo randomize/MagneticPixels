@@ -51,7 +51,7 @@ bool MPix::WallPixel::blocksMoves( const Context& context, Coordinates from, Dir
    }
 
    // Calculate targeting point
-   auto pixel_new_pos = from + to; 
+   auto pixel_new_pos = from + to;
 
    // If pixel is moving to me then reverse dir and same check
    if (pixel_new_pos == GetPos()) {
@@ -71,34 +71,34 @@ bool MPix::WallPixel::blocksMoves( const Context& context, Coordinates from, Dir
       {
       case Direction::DIR_UPRIGHT:
          if (pixel_new_pos == GetPos()+Direction::DIR_UP) {
-            if (IsBlocking(Direction::DIR_UP) || IsBlocking(Direction::DIR_LEFT)) return true; 
-         } else 
+            if (IsBlocking(Direction::DIR_UP) || IsBlocking(Direction::DIR_LEFT)) return true;
+         } else
          if (pixel_new_pos == GetPos()+Direction::DIR_RIGHT){
-            if (IsBlocking(Direction::DIR_DOWN) || IsBlocking(Direction::DIR_RIGHT)) return true; 
+            if (IsBlocking(Direction::DIR_DOWN) || IsBlocking(Direction::DIR_RIGHT)) return true;
          }
          break;
       case Direction::DIR_UPLEFT:
          if (pixel_new_pos == GetPos()+Direction::DIR_UP) {
-            if (IsBlocking(Direction::DIR_UP) || IsBlocking(Direction::DIR_RIGHT)) return true; 
-         } else 
+            if (IsBlocking(Direction::DIR_UP) || IsBlocking(Direction::DIR_RIGHT)) return true;
+         } else
          if (pixel_new_pos == GetPos()+Direction::DIR_LEFT){
-            if (IsBlocking(Direction::DIR_DOWN) || IsBlocking(Direction::DIR_LEFT)) return true; 
+            if (IsBlocking(Direction::DIR_DOWN) || IsBlocking(Direction::DIR_LEFT)) return true;
          }
          break;
       case Direction::DIR_DOWNRIGHT:
          if (pixel_new_pos == GetPos()+Direction::DIR_DOWN) {
-            if (IsBlocking(Direction::DIR_DOWN) || IsBlocking(Direction::DIR_LEFT)) return true; 
-         } else 
+            if (IsBlocking(Direction::DIR_DOWN) || IsBlocking(Direction::DIR_LEFT)) return true;
+         } else
          if (pixel_new_pos == GetPos()+Direction::DIR_RIGHT){
-            if (IsBlocking(Direction::DIR_UP) || IsBlocking(Direction::DIR_RIGHT)) return true; 
+            if (IsBlocking(Direction::DIR_UP) || IsBlocking(Direction::DIR_RIGHT)) return true;
          }
          break;
       case Direction::DIR_DOWNLEFT:
          if (pixel_new_pos == GetPos()+Direction::DIR_DOWN) {
-            if (IsBlocking(Direction::DIR_DOWN) || IsBlocking(Direction::DIR_RIGHT)) return true; 
-         } else 
+            if (IsBlocking(Direction::DIR_DOWN) || IsBlocking(Direction::DIR_RIGHT)) return true;
+         } else
          if (pixel_new_pos == GetPos()+Direction::DIR_LEFT){
-            if (IsBlocking(Direction::DIR_UP) || IsBlocking(Direction::DIR_LEFT)) return true; 
+            if (IsBlocking(Direction::DIR_UP) || IsBlocking(Direction::DIR_LEFT)) return true;
          }
          break;
       default:

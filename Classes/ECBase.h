@@ -1,4 +1,4 @@
-/* 
+/*
    Main header for all cocos games
    by Mihailenco E, TheEndlessCat Games, 2013-2014
 */
@@ -18,7 +18,7 @@
 
 
 /* Namespaces:
-  EndlessCatLib -- user components 
+  EndlessCatLib -- user components
   ECCore -- internal components
  */
 
@@ -132,10 +132,10 @@ namespace EndlessCatLib {
 
    inline string StringToLowcase(string str)
    {
-       std::transform(str.begin(), 
+       std::transform(str.begin(),
                       str.end(),
                       str.begin(),
-                     [](char ch ){ return tolower(ch); } 
+                     [](char ch ){ return tolower(ch); }
        );
        return str;
    }
@@ -196,7 +196,7 @@ namespace EndlessCatLib {
       return float(rand()) / RAND_MAX * (max - min) + min;
    };
 
-} // namespace EndlessCatLib 
+} // namespace EndlessCatLib
 
 #ifdef ECUSINGS_ON
 using namespace EndlessCatLib;
@@ -277,11 +277,11 @@ namespace ECCore {
 #endif
 
 // Logging is muted entirely by default
-#define ECLOG_ERROR(s)  
+#define ECLOG_ERROR(s)
 #define ECLOG_WARNING(s)
-#define ECLOG_INFO(s)  
+#define ECLOG_INFO(s)
 #define ECLOG_DEBUG(s)
-#define ECLOG(s) 
+#define ECLOG(s)
 
 
 #ifndef ECLOG_OFF
@@ -291,28 +291,28 @@ namespace ECCore {
    namespace ECCore {
    inline void SetConsoleDefault () { // Reset color
       SetConsoleTextAttribute(
-         GetStdHandle(STD_OUTPUT_HANDLE), 
+         GetStdHandle(STD_OUTPUT_HANDLE),
          /*FOREGROUND_INTENSITY | */FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE
       );
    }
 
    inline void SetConsoleRed () { // ERROR
       SetConsoleTextAttribute(
-         GetStdHandle(STD_OUTPUT_HANDLE), 
-         FOREGROUND_INTENSITY | FOREGROUND_RED 
+         GetStdHandle(STD_OUTPUT_HANDLE),
+         FOREGROUND_INTENSITY | FOREGROUND_RED
       );
    }
 
    inline void SetConsoleGreen () { // INFO
       SetConsoleTextAttribute(
-         GetStdHandle(STD_OUTPUT_HANDLE), 
-         FOREGROUND_INTENSITY | FOREGROUND_GREEN 
+         GetStdHandle(STD_OUTPUT_HANDLE),
+         FOREGROUND_INTENSITY | FOREGROUND_GREEN
       );
    }
    inline void SetConsoleYellow () { // WARNING
       SetConsoleTextAttribute(
-         GetStdHandle(STD_OUTPUT_HANDLE), 
-         FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_RED 
+         GetStdHandle(STD_OUTPUT_HANDLE),
+         FOREGROUND_INTENSITY | FOREGROUND_GREEN | FOREGROUND_RED
       );
    }
    }
@@ -533,7 +533,7 @@ class enum_iterator {
 private:
    enum_type value;
    typedef typename std::underlying_type<enum_type>::type under;
-public:   
+public:
    typedef std::size_t size_type;
    typedef std::ptrdiff_t difference_type;
    typedef enum_type value_type;
@@ -562,7 +562,7 @@ public:
    friend enum_iterator operator+(const enum_iterator& it, size_type o) {return enum_iterator((enum_type)(under(it)+o));}
    friend enum_iterator operator+(size_type o, const enum_iterator& it) {return enum_iterator((enum_type)(under(it)+o));}
    friend bool operator==(const enum_iterator& lhs, const enum_iterator& rhs) {return lhs.value==rhs.value;}
-   friend bool operator!=(const enum_iterator& lhs, const enum_iterator& rhs) {return lhs.value!=rhs.value;} 
+   friend bool operator!=(const enum_iterator& lhs, const enum_iterator& rhs) {return lhs.value!=rhs.value;}
    friend bool operator<(const enum_iterator& lhs, const enum_iterator& rhs) {return lhs.value<rhs.value;}
    friend bool operator>(const enum_iterator& lhs, const enum_iterator& rhs) {return lhs.value>rhs.value;}
    friend bool operator<=(const enum_iterator& lhs, const enum_iterator& rhs) {return lhs.value<=rhs.value;}
@@ -576,6 +576,6 @@ template<class enum_type> struct EnumRanger {
    enum_iterator<enum_type> begin() { return enum_iterator<enum_type>(enum_type::First); }
    enum_iterator<enum_type> end() { return enum_iterator<enum_type>(enum_type::Last); }
 };
-   
+
 
 #endif // ECBASE_H

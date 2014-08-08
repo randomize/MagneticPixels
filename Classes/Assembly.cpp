@@ -84,13 +84,13 @@ ErrorCode Assembly::CheckForLost( const Context& context )
 {
    auto & contents = this->contents.GetValue();
 
-   if (contents.empty()) 
+   if (contents.empty())
       return ErrorCode::RET_NO;
 
    bool lost = false;
 
    // phase 1 - remove dead pixels from assembly
-   contents.remove_if( 
+   contents.remove_if(
       [&](shared_ptr<IAssembled> px) {
          if (!px->canLive(context)) {
             px->RemoveFromAssembly(context);
@@ -124,12 +124,12 @@ ErrorCode Assembly::CheckForLost( const Context& context )
 
       while (stack.empty() == false)
       {
-         auto px = stack.front(); 
+         auto px = stack.front();
          stack.pop_front();
          auto pos = px->GetPos();
 
          // Check 4 directions
-         for (auto d : EnumRanger<Direction>(DirectionType::MAJOR)) 
+         for (auto d : EnumRanger<Direction>(DirectionType::MAJOR))
          {
             for ( auto p : toProcess )
             {
@@ -145,25 +145,25 @@ ErrorCode Assembly::CheckForLost( const Context& context )
       }
    }
 
-   // Test for debug 
+   // Test for debug
    /*ECLOG_ERROR(" Clsss split: got " + classes.size() );
    for ( auto & a : classes ) {
       ECLOG_ERROR(" - Class = " + a.size() );
    }*/
 
    // 2.2 - Check each class, form dead pixel set in toProcess set
-   for ( auto & c : classes ) 
+   for ( auto & c : classes )
    {
       bool fall_all = true;
-      for (auto & pix : c) 
+      for (auto & pix : c)
       {
-         if (pix->CheckCanFall(context) == false ) 
+         if (pix->CheckCanFall(context) == false )
          {
             fall_all = false;
          }
       }
 
-      if (fall_all) 
+      if (fall_all)
       {
          toProcess.insert(c.begin(), c.end());
       }
@@ -174,7 +174,7 @@ ErrorCode Assembly::CheckForLost( const Context& context )
    if ( toProcess.empty() == false ) {
       lost = true;
 
-      contents.remove_if( 
+      contents.remove_if(
          [&](shared_ptr<IAssembled> px) {
             if (toProcess.find(px) != end(toProcess)) {
                px->Kill(context, IAlive::State::KILLED_BY_PITTRAP);
@@ -266,7 +266,7 @@ Vector2 MPix::Assembly::GetCenter()
 void MPix::Assembly::UpdateCenter()
 {
 
-   if (contents.GetValue().empty()) { 
+   if (contents.GetValue().empty()) {
       center = Vector2::ZERO;
       return;
    }
@@ -289,7 +289,7 @@ bool MPix::Assembly::IsEmpty()
 
 bool MPix::Assembly::AreAllSmiling()
 {
-   if (IsEmpty()) 
+   if (IsEmpty())
       return false;
 
    for (auto p : contents.GetValue()) {

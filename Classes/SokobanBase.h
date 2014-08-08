@@ -21,7 +21,7 @@ namespace MPix {
    // SokobanBase
    class SokobanBase :
       public IDynamic,         // Dynamics used to implement logic
-      public IAlive,           // Can be killed 
+      public IAlive,           // Can be killed
       public IMovableStepper,  // Moves step by step
       public IMoveBlocker      // Blocking used to implement logic
    {

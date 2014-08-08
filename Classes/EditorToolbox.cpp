@@ -63,7 +63,7 @@ void MPix::EditorToolbox::PrepareTools()
             n->Insert(p.front());
             p.pop_front();
          }
-      } 
+      }
 
    }
    LoadTool( root_tool, 0);
@@ -73,7 +73,7 @@ void MPix::EditorToolbox::GotClick(Coordinates p)
 {
    auto map = current_tool->Childs();
    assert(map); // current tool must have childs
-   
+
    // search for any tool at pos
    auto it = map->find(p);
 

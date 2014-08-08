@@ -61,12 +61,13 @@ namespace MPix {
 
       string GetBaseFont(); 
       string GetEditorFont(); 
+      string GetBaseFont();
       string GetBaseFontLight();
       string GetLogoFont();
 
       // =========== GFX helpers ==========================================
-      // If some state wants to pass some (data)node to another they use 
-      // these methods, ContentManager acts as middle-man 
+      // If some state wants to pass some (data)node to another they use
+      // these methods, ContentManager acts as middle-man
 
       void AddNode(Node* new_node, const string& node_name);
       void RemoveNode(const string& node_name);
@@ -74,7 +75,7 @@ namespace MPix {
 
    private:
 
-      // Initialization 
+      // Initialization
       void CreateAnimations();
       void CreateShaders();
       void CreateSprites();
@@ -95,16 +96,16 @@ namespace MPix {
       unordered_map<string, Node*> nodes;
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
-   
+
+   public:
+
       static ContentManager& getInstance() {
          static ContentManager theSingleInstance;
          return theSingleInstance;
       }
-   
+
    private:
-   
+
       ContentManager();
       ~ContentManager();
       ContentManager(ContentManager& root){}

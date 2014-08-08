@@ -2,7 +2,7 @@
 //
 //  Created:     2013/09/01
 //  Author:      Mihailenco E. at TheEndlessCat Games, 2013
-//  Description: Base class for any state in game 
+//  Description: Base class for any state in game
 //
 //===---------------------------------------------------------===//
 
@@ -37,7 +37,7 @@ namespace MPix {
       // Tick executed on update, default one just processes commands
       virtual ErrorCode Tick(float deltha);
 
-      // Busyness is used to make game wait until certain animation finishes 
+      // Busyness is used to make game wait until certain animation finishes
       bool IsBusy();
 
       // When called, state should become busy

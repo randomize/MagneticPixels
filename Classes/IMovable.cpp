@@ -41,7 +41,7 @@ bool MPix::IMovable::canMoveThis( const Context& context, Coordinates pos )
 bool MPix::IMovableStepper::canMoveThis( const Context& context, Direction dir )
 {
    assert(stepper);
-   auto me = dynamic_pointer_cast<IMovableStepper> ( context.GetByID(this->GetID())); 
+   auto me = dynamic_pointer_cast<IMovableStepper> ( context.GetByID(this->GetID()));
    assert(me); // will be strange having null here...
    return stepper->canMoveThis(me, context, dir);
 }

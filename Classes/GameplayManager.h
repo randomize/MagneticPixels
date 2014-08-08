@@ -113,7 +113,7 @@ namespace MPix {
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
 
-   public: 
+   public:
 
       static GameplayManager& getInstance() {
          static GameplayManager theSingleInstance;

@@ -31,8 +31,8 @@ namespace MPix {
    public:
 
       // State of pixel, changes
-      enum class State { 
-         ACTIVE,      // Interacts 
+      enum class State {
+         ACTIVE,      // Interacts
          HIDDEN,      // Placed under other pixel, inactive but can be activated
          INACTIVE,    // Dead or played out
          Last,
@@ -40,7 +40,7 @@ namespace MPix {
       };
 
       // Type of pixels, constant, are more general than classes itself
-      enum class PixelType { 
+      enum class PixelType {
          WALL_PIX,     // Walls : SimpleWall, ValveWall
          PITFALL_PIX,  // Pitfall
          CACTUS_PIX,   // Cactus es : CactusDynamic, CactusStatic
@@ -102,7 +102,7 @@ namespace MPix {
       Historical<Coordinates> pos;
 
       // Original position in field, cannot be changed
-      //Coordinates original_pos; 
+      //Coordinates original_pos;
 
       // Current state
       Historical<State> st;

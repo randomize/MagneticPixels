@@ -39,7 +39,7 @@ namespace MPix {
    struct Coordinates;
 
    // Direction type
-   enum class Direction { 
+   enum class Direction {
 
       // ATTENTION: Should never reorder this! order used in EnumRanger below
 
@@ -102,7 +102,7 @@ namespace std
 }
 
 template<> struct EnumRanger<MPix::Direction> {
-   EnumRanger(MPix::DirectionType t = MPix::DirectionType::ALL) { 
+   EnumRanger(MPix::DirectionType t = MPix::DirectionType::ALL) {
       type = t;
       // Using simple order-dependent implementation, be careful here
       // FIXME: Replace with more error-prone method
@@ -170,7 +170,7 @@ namespace cocos2d {
 //== ------ HSV color --------------------------------------
 struct HSVColor {
 
-   HSVColor(float hue = 0.0f,float saturation = 1.0f,float value = 1.0f ) : 
+   HSVColor(float hue = 0.0f,float saturation = 1.0f,float value = 1.0f ) :
       hue(hue), saturation(saturation), value(value) {}
 
    float hue;
@@ -205,7 +205,7 @@ namespace MPix {
 namespace MPix {
 
    //////////////////////////////////////////////////////////////////////////
-   // Pixel color 
+   // Pixel color
 
    enum class PixelColor {
       WHITE = 0,

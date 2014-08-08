@@ -31,7 +31,7 @@ namespace MPix {
    {
    public:
 
-      bool init() override;  
+      bool init() override;
       CREATE_FUNC(PixelsLayer);
 
    public:

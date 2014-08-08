@@ -11,7 +11,7 @@ using namespace tinyxml2;
 bool MPix::FieldXML::Store( shared_ptr<Field> src, tinyxml2::XMLPrinter * dst )
 {
    dst->OpenElement("fld");
-   
+
    for (auto px : src->GetPixelData()) {
 
       if (PixelXML::Store( px, dst ) == false) {

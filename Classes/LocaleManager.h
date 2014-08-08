@@ -42,21 +42,21 @@ namespace ECCore {
       const char* GetCurrentLanguage();
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
-   
+
+   public:
+
       static LocaleManager& getInstance() {
          static LocaleManager theSingleInstance;
          return theSingleInstance;
       }
-   
+
    private:
-   
+
       LocaleManager();
       ~LocaleManager();
       LocaleManager(LocaleManager& root){}
       LocaleManager& operator=(LocaleManager&){return *this;}
-   
+
 
    };
 

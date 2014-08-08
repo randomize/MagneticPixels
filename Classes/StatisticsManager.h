@@ -35,16 +35,16 @@ namespace MPix {
    private:
 
    ////// Singleton ///////////////////////////////////////////////////////////////////
-   
-   public: 
-   
+
+   public:
+
       static StatisticsManager& getInstance() {
          static StatisticsManager theSingleInstance;
          return theSingleInstance;
       }
-   
+
    private:
-   
+
       StatisticsManager();
       ~StatisticsManager();
       StatisticsManager(StatisticsManager& root){}

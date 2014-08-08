@@ -38,7 +38,7 @@ namespace MPix {
 
    protected:
 
-      // Parent 
+      // Parent
       Node* target;
 
       // Contents

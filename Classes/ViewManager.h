@@ -57,7 +57,7 @@ namespace MPix {
 
       ////// Singleton ///////////////////////////////////////////////////////////////////
 
-   public: 
+   public:
 
       static ViewManager& getInstance() {
          static ViewManager theSingleInstance;

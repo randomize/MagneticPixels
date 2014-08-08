@@ -11,7 +11,7 @@ const Vector2 MPix::MPIX_CELL_SIZE_HALF_P = Vector2(MPIX_CELL_SIZE/2.0, MPIX_CEL
 
 // ------ Coordinates class implementation ----------------------------------
 
-Coordinates::Coordinates( int x /*= 0*/, int y /*= 0*/ ) : 
+Coordinates::Coordinates( int x /*= 0*/, int y /*= 0*/ ) :
    x(x),
    y(y)
 {
@@ -37,7 +37,7 @@ void MPix::Coordinates::MoveTo( Direction dir )
    auto nop = [](int& a) -> void {;};
 
    std::function<void(int& a)> xes[8] = {
-      nop, inc, nop, dec, inc, dec, inc, dec  
+      nop, inc, nop, dec, inc, dec, inc, dec
    };
 
    std::function<void(int& a)> yes[8] = {
@@ -267,7 +267,7 @@ MPix::Direction MPix::RandomDirection()
 MPix::Direction MPix::GetDirectionVector( Vector2 s, Vector2 e )
 {
    float ang = (e-s).getAngle() * 4 / M_PI + 9/2.0f;
-   int p = (int)floor(ang) % 8; // 0 .. 7 
+   int p = (int)floor(ang) % 8; // 0 .. 7
    static const Direction d8[8] = {
       Direction::DIR_LEFT, // = 0
       Direction::DIR_DOWNLEFT,
