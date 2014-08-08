@@ -25,7 +25,7 @@
 using namespace MPix;
 
 LevelGenerator::LevelGenerator() {
-   EM_LOG_INFO("[ LevelGenerator initialized ]");
+   ECLOG_INFO("[ LevelGenerator initialized ]");
 }
 
 WallPixel* GetRandomWall() {

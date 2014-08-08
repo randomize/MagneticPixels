@@ -1,7 +1,7 @@
 //===-- IMoveBlocker.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/23
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Blocker blocks =)
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef IMOVEBLOCKER_H_
 #define IMOVEBLOCKER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Pixel.h"
 #include "AnyBehavior.h"

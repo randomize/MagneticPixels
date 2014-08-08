@@ -1,7 +1,7 @@
 //===-- AnyBehavior.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/24
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Class for generalizing behaviors
 //
 //===---------------------------------------------------------===//
@@ -10,8 +10,8 @@
 #ifndef ANYBEHAVIOR_H_
 #define ANYBEHAVIOR_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 
 namespace MPix {
 
@@ -20,11 +20,11 @@ namespace MPix {
 
    // AnyBehavior
 
-   class AnyBehavior : public EMNode
+   class AnyBehavior : public ECNode
    {
    public:
 
-      EM_NODE_BASE(AnyBehavior);
+      ECNODE_BASE(AnyBehavior);
 
       // By default all behaviors are shared, they are stateless
       // If there will be one with states, it should override and return false;

@@ -2,7 +2,7 @@
 //===-- ScriptManager.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2014/02/01
-//  Author:      Mihailenco E. at Emboss Games, 2014
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2014
 //  Description: Manages scripts
 //
 //===---------------------------------------------------------===//
@@ -11,7 +11,7 @@
 #ifndef SCRIPTMANAGER_H_
 #define SCRIPTMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

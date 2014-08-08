@@ -1,7 +1,7 @@
 //===-- SettingsManager.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Store user profile, achievements and other settings
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef SETTINGSMANAGER_H_
 #define SETTINGSMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

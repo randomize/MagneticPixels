@@ -103,7 +103,7 @@ MPix::IAlive::State MPix::IAlive::GetStateByKiller( const IKilling& k ) const
    case Pixel::PixelType::STONE_PIX:
       return State::KILLED_BY_STONE;
    default:
-      EM_LOG_WARNING("Unknow dead cause");
+      ECLOG_WARNING("Unknow dead cause");
       return State::KILLED_BY_HUNGRY_WOLF;
    }
 }

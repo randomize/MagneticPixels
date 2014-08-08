@@ -1,7 +1,7 @@
 //===-- LocaleManager.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/19
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Localization support
 //
 //===---------------------------------------------------------===//
@@ -10,9 +10,9 @@
 #ifndef LOCALEMANAGER_H_
 #define LOCALEMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
-namespace EMCore {
+namespace ECCore {
 
    // Forward dependencies
    class Dictionary;

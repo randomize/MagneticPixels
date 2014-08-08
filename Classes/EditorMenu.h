@@ -1,7 +1,7 @@
 //===-- EditorMenu.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/15
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Menu alows to cerate, delete and edit levels
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef EDITORMENU_H_
 #define EDITORMENU_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "GameState.h"
 
 namespace MPix {
@@ -24,7 +24,7 @@ namespace MPix {
    {
    public:
 
-      EM_GAME_STATE(EditorMenu);
+      ECGAME_STATE(EditorMenu);
       EditorMenu();
       ~EditorMenu();
       bool init() override;

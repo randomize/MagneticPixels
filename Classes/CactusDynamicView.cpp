@@ -6,7 +6,7 @@
 
 using namespace MPix;
 
-EM_NODE_CHILD_CPP(CactusDynamicView);
+ECNODE_CHILD_CPP(CactusDynamicView);
 
 void MPix::CactusDynamicView::Build( shared_ptr<Pixel> model )
 {

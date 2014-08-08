@@ -1,7 +1,7 @@
 //===-- IMagneticPixel.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/22
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Magnetic pixels must implement this
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef IMAGNETICPIXEL_H_
 #define IMAGNETICPIXEL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Pixel.h"
 

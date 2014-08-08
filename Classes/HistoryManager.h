@@ -1,7 +1,7 @@
 //===-- HistoryManager.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/24
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: History manager is universal storage for history
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef HISTORYMANAGER_H_
 #define HISTORYMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "HistoryStorage.h"
 
 
@@ -60,7 +60,7 @@ namespace MPix {
       
       // Register, returns id
       template<class T> int Register(const T& value) {
-         //EM_LOG_DEBUG(" Registered hist " + typeid(T).name());
+         //ECLOG_DEBUG(" Registered hist " + typeid(T).name());
          int id = GetFreeID();
          auto storage = new HistoryStorage<T>();
          map_main.emplace(id, storage);

@@ -1,7 +1,7 @@
 //===-- LevelSelector.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/04
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Level selector state displays grid of levels/wordls
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef LEVELSELECTOR_H_
 #define LEVELSELECTOR_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "GameState.h"
 
@@ -26,7 +26,7 @@ namespace MPix {
    {
    public: //  === State interface =====================
 
-      EM_GAME_STATE(LevelSelector);
+      ECGAME_STATE(LevelSelector);
 
       void onEnter() override;
       void onExit() override;

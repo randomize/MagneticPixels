@@ -17,7 +17,7 @@ ErrorCode GameState::Execute( Command* cmd ) const
 {
    assert(cmd);
    ErrorCode ret = cmd->Execute();
-   //EM_LOG_DEBUG("Game state " + GetName() + " executed command" );
+   //ECLOG_DEBUG("Game state " + GetName() + " executed command" );
    delete cmd;
    return ret;
 }
@@ -44,13 +44,13 @@ void MPix::GameState::ResetLocks()
 
 }
 
-EmbossLib::ErrorCode MPix::GameState::ExecuteAsync( Command* cmd )
+EndlessCatLib::ErrorCode MPix::GameState::ExecuteAsync( Command* cmd )
 {
    scheduled_commands.push_back(cmd);
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::GameState::Tick( float deltha )
+EndlessCatLib::ErrorCode MPix::GameState::Tick( float deltha )
 {
    // Check if async commands available
    if (!scheduled_commands.empty()) {

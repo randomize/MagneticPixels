@@ -1,7 +1,7 @@
 //===-- IAlive.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/23
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Implemented by pixels that can be killed
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef IALIVE_H_
 #define IALIVE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Historical.h"
 #include "Pixel.h"
 #include "AnyBehavior.h"

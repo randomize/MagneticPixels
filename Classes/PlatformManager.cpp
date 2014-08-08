@@ -26,7 +26,7 @@ JavaVM *jvm = nullptr;
 
 #endif
 
-namespace EMCore {
+namespace ECCore {
 
    //////////////////////////////////////////////////////////////////////////
    // PlatformManager's multi platform methods
@@ -46,15 +46,15 @@ namespace EMCore {
 
          }
       }
-      EM_LOG_INFO("=== Android platform manager ready ====");
+      ECLOG_INFO("=== Android platform manager ready ====");
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-      EM_LOG_INFO("=== Windows platform manager ready ====");
+      ECLOG_INFO("=== Windows platform manager ready ====");
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-      EM_LOG_INFO("=== IOS platform manager ready ====");
+      ECLOG_INFO("=== IOS platform manager ready ====");
 #elif (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-      EM_LOG_INFO("=== Linux platform manager ready ====");
+      ECLOG_INFO("=== Linux platform manager ready ====");
 #else
-      EM_LOG_ERROR("=== No platform manager for this platform ===");
+      ECLOG_ERROR("=== No platform manager for this platform ===");
       assert(false);
 #endif
    }

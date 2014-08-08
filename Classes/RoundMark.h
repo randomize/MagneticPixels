@@ -1,7 +1,7 @@
 //===-- RoundMark.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/26
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Simple UI element, digit label in circle
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef ROUNDMARK_H_
 #define ROUNDMARK_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

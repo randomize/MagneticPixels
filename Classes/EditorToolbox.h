@@ -1,7 +1,7 @@
 //===-- EditorToolbox.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/18
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Toolbox holds tools
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef EDITORTOOLBOX_H_
 #define EDITORTOOLBOX_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

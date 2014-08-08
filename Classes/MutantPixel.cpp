@@ -5,8 +5,8 @@ using namespace MPix;
 
 //====---------------------------------------------======//
 
-// Allocating memory for EM_NODE_CHILD, see header
-EM_NODE_CHILD_CPP(MutantPixel);
+// Allocating memory for ECNODE_CHILD, see header
+ECNODE_CHILD_CPP(MutantPixel);
 
 MPix::MutantPixel::MutantPixel( PixelColor colorA, PixelColor colorB ):
    MutantPixel(vector<PixelColor>{colorA, colorB})

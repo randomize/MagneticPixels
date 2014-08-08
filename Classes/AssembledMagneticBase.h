@@ -1,7 +1,7 @@
 //===-- AssembledMagneticBase.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/03
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: This mixture is base for assembled magnetic pixels
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef ASSEMBLEDMAGNETICBASE_H_
 #define ASSEMBLEDMAGNETICBASE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 #include "IMagnetic.h"
 #include "IAssembled.h"

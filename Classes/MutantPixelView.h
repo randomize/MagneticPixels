@@ -1,7 +1,7 @@
 //===-- MutantPixelView.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2014/02/19
-//  Author:      Mihailenco E. at Emboss Games, 2014
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2014
 //  Description: Mutant pixel view, like simple, but with color dots
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef MUTANTPIXELVIEW_H_
 #define MUTANTPIXELVIEW_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -18,7 +18,7 @@ namespace MPix {
    // Forward dependencies
    class MutantPixel;
    class SleepingZets;
-   class EMAnimation;
+   class ECAnimation;
    class HSVSprite;
 
 
@@ -28,7 +28,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(MutantPixelView);
+      ECNODE_CHILD(MutantPixelView);
       MutantPixelView();
       ~MutantPixelView();
 
@@ -62,7 +62,7 @@ namespace MPix {
      // contents
       SleepingZets* zzz;
       Node* body;
-      EMAnimation* mimics;
+      ECAnimation* mimics;
       HSVSprite* bg;
       HSVSprite* smash;
       HSVSprite* dots;

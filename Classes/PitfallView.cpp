@@ -7,7 +7,7 @@ using namespace MPix;
 
 //====---------------------------------------------======//
 
-EM_NODE_CHILD_CPP(PitfallView);
+ECNODE_CHILD_CPP(PitfallView);
 
 MPix::PitfallView::PitfallView()
 {

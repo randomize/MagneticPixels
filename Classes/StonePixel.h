@@ -1,7 +1,7 @@
 //===-- StonePixel.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/16
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Stone can kill cactuses, fall to pits
 //
 //===---------------------------------------------------------===//
@@ -10,8 +10,8 @@
 #ifndef STONEPIXEL_H_
 #define STONEPIXEL_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 
 #include "SokobanBase.h"
 #include "IKilling.h"
@@ -32,7 +32,7 @@ namespace MPix {
       StonePixel();
       ~StonePixel();
 
-      EM_NODE_CHILD(StonePixel);
+      ECNODE_CHILD(StonePixel);
 
       PixelType GetType() const override { return PixelType::STONE_PIX; }
 

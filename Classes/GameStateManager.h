@@ -1,7 +1,7 @@
 //===-- GameStateManager.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/01
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: This singleton manages game states and switches
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef UIMANAGER_H_
 #define UIMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "GameState.h"
 
 namespace MPix {

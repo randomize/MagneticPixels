@@ -1,7 +1,7 @@
 //===-- LevelStorage.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/03
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: XML loader can load data from levels.xml file
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef XMLLOADER_H_
 #define XMLLOADER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

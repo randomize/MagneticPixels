@@ -1,6 +1,6 @@
 #include "LocaleManager.h"
 
-namespace EMCore {
+namespace ECCore {
 
    const vector<string> LocaleManager::implemented_langs = {
       "lang/russian.xml",
@@ -30,29 +30,29 @@ namespace EMCore {
 
       bool initWithData(const string& path) {
 
-         EM_LOG_DEBUG("Reading dictionary " + path);
+         ECLOG_DEBUG("Reading dictionary " + path);
 
          tinyxml2::XMLDocument doc;
          doc.LoadFile(path.c_str());
 
          if (doc.Error()) {
-            EM_LOG_ERROR("Cant parse file, Txml says: \n " + doc.GetErrorStr1() + "\n" + doc.GetErrorStr2()); return false;
+            ECLOG_ERROR("Cant parse file, Txml says: \n " + doc.GetErrorStr1() + "\n" + doc.GetErrorStr2()); return false;
          }
 
          auto root = doc.FirstChildElement("language");
          if (root == nullptr) { 
-            EM_LOG_ERROR("No `language` element"); return false;
+            ECLOG_ERROR("No `language` element"); return false;
          }
 
          auto n = root->Attribute("name");
          if (n == nullptr) {
-            EM_LOG_ERROR("No `name` attribute"); return false;
+            ECLOG_ERROR("No `name` attribute"); return false;
          }
          name = n;
 
          auto on = root->Attribute("original_name");
          if (on == nullptr) {
-            EM_LOG_ERROR("No `original_name` attribute"); return false;
+            ECLOG_ERROR("No `original_name` attribute"); return false;
          }
          original_name = on;
 
@@ -65,14 +65,14 @@ namespace EMCore {
          {
             auto key = s->Attribute("k");
             if (key == nullptr) {
-               EM_LOG_WARNING("No `k` attribute in string, skipping");
+               ECLOG_WARNING("No `k` attribute in string, skipping");
                s = s->NextSiblingElement("s");
                continue;
             }
 
             auto value = s->GetText();
             if (value == nullptr) {
-               EM_LOG_WARNING("No value for '" + key + "', skipping");
+               ECLOG_WARNING("No value for '" + key + "', skipping");
                s = s->NextSiblingElement("s");
                continue;
             }
@@ -92,7 +92,7 @@ namespace EMCore {
          if (it != end(data)) {
             return it->second;
          }
-         EM_LOG_WARNING("Locale: `"  + s + "` has no translation in " + name );
+         ECLOG_WARNING("Locale: `"  + s + "` has no translation in " + name );
          return s;
       }
       virtual const char* Lookup(const char* s) {
@@ -100,7 +100,7 @@ namespace EMCore {
          if (it != end(data)) {
             return it->second.c_str();
          }
-         EM_LOG_WARNING("Locale: `"  + s + "` has no translation in " + name );
+         ECLOG_WARNING("Locale: `"  + s + "` has no translation in " + name );
          return s;
       }
       unsigned GetSize() { return data.size(); }
@@ -116,41 +116,41 @@ namespace EMCore {
 
    LocaleManager::LocaleManager()
    {
-      EM_LOG_INFO( " ===== Locale manager created ====== " );
+      ECLOG_INFO( " ===== Locale manager created ====== " );
       current = nullptr;
 
       // Loading XML's
       for (auto& f : implemented_langs ) {
          auto fab = Dictionary::create(f);
          if (!fab) {
-            EM_LOG_ERROR("Failed load lang XML :" + f + "skipping");
+            ECLOG_ERROR("Failed load lang XML :" + f + "skipping");
             continue;
          }
          languages.emplace(fab->GetName(), fab);
-         EM_LOG_INFO("Loaded: " + f + " with " + fab->GetSize() + " strings" );
+         ECLOG_INFO("Loaded: " + f + " with " + fab->GetSize() + " strings" );
       }
 
       // TODO: Take settings in account
 
       auto it = languages.find(GetCurrentLanguage());
       if (it == languages.end()) {
-         EM_LOG_INFO("Selecting English language as default");
+         ECLOG_INFO("Selecting English language as default");
          auto it = languages.find(GetCurrentLanguage());
          if (it == languages.end()) {
-            EM_LOG_WARNING("English xml not loaded, WTF?");
+            ECLOG_WARNING("English xml not loaded, WTF?");
             current = new Dictionary();
          }
          else {
             current = it->second;
          }
       } else {
-         EM_LOG_INFO("Selecting " + it->first + " language");
+         ECLOG_INFO("Selecting " + it->first + " language");
          current = it->second;
       }
 
       locale = current->GetName();
 
-      EM_LOG_INFO( " ===== Locale loaded =============== " );
+      ECLOG_INFO( " ===== Locale loaded =============== " );
    }
 
    LocaleManager::~LocaleManager()
@@ -177,7 +177,7 @@ namespace EMCore {
    {
       auto it = languages.find(locale);
       if (it == languages.end()) {
-         EM_LOG_ERROR("Locale: " + locale + " not loaded ");
+         ECLOG_ERROR("Locale: " + locale + " not loaded ");
          return;
       }
       current = it->second;

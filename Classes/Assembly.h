@@ -1,7 +1,7 @@
 //===-- Assembly.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/04
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Assembly represents group of pixels moving together
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef PIXELASSEMBLY_H_
 #define PIXELASSEMBLY_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Historical.h"
 

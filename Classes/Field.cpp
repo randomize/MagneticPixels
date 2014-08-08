@@ -67,7 +67,7 @@ Field::~Field()
 /////////////////////////////////////////////////////////////////////////////////////
 // General methods
 
-EmbossLib::ErrorCode MPix::Field::SendCreateEvents( const Context& context )
+EndlessCatLib::ErrorCode MPix::Field::SendCreateEvents( const Context& context )
 {
    for (auto px : id_map ) {
       if (px->GetState() == Pixel::State::ACTIVE) {
@@ -133,7 +133,7 @@ ErrorCode MPix::Field::WorldMove( const Context& context )
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::Field::WorldCheckForLost( const Context& context )
+EndlessCatLib::ErrorCode MPix::Field::WorldCheckForLost( const Context& context )
 {
    // Prepare list
    auto & world_alive = kind_map[PixelKind::ALIVE];
@@ -248,7 +248,7 @@ ErrorCode Field::InsertPixel( Pixel* p, Coordinates pos)
    return InsertPixel(shared_ptr<Pixel>(p));
 }
 
-EmbossLib::ErrorCode MPix::Field::InsertPixel( Pixel* p, int x, int y )
+EndlessCatLib::ErrorCode MPix::Field::InsertPixel( Pixel* p, int x, int y )
 {
    return InsertPixel(p, Coordinates(x,y));
 }

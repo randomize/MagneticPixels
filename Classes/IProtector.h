@@ -1,7 +1,7 @@
 //===-- IProtector.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/15
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Protectors protect from misc danger
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef IPROTECTOR_H_
 #define IPROTECTOR_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Pixel.h"
 #include "AnyBehavior.h"
 

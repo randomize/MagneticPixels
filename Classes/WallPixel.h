@@ -1,7 +1,7 @@
 //===-- WallPixel.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Wall pixels restrict movements
 //
 //===---------------------------------------------------------===//
@@ -10,14 +10,14 @@
 #ifndef WALLPIXEL_H_
 #define WALLPIXEL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 #include "Pixel.h"
 #include "IWallPixel.h"
 
 // For auto factory support
-#include "EMNode.h"
+#include "ECNode.h"
 
 namespace MPix {
 
@@ -32,7 +32,7 @@ namespace MPix {
    public:
 
       // Register this pixel type to pixel factory
-      EM_NODE_CHILD(WallPixel);
+      ECNODE_CHILD(WallPixel);
 
    public:
 

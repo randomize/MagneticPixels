@@ -258,7 +258,7 @@ void MPix::EditorMenu::SelectedWorld( int id )
       removeChild(world_m);
       BuildLevelsMenu(id);
    } else {
-      EM_LOG_ERROR("Wrong state");
+      ECLOG_ERROR("Wrong state");
    }
 }
 
@@ -303,7 +303,7 @@ void MPix::EditorMenu::SelectedLevel( unsigned int id )
    } 
    else
    {
-      EM_LOG_ERROR("Wrong state");
+      ECLOG_ERROR("Wrong state");
    }
 
 }

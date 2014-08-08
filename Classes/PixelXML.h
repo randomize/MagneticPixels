@@ -1,7 +1,7 @@
 //===-- PixelXML.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/17
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Saves and loads XML data from/to pixels
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef PIXELXML_H_
 #define PIXELXML_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

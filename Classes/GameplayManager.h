@@ -1,7 +1,7 @@
 //===-- GameplayManager.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: This class implements game rules and logic
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef GAMEPLAYMANAGER_H_
 #define GAMEPLAYMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 #include "Context.h"

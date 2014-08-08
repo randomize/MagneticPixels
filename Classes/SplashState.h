@@ -1,7 +1,7 @@
 //===-- SplashState.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2014/01/29
-//  Author:      Mihailenco E. at Emboss Games, 2014
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2014
 //  Description: 
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef SPLASHSTATE_H_
 #define SPLASHSTATE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "GameState.h"
 
 namespace MPix {
@@ -23,7 +23,7 @@ namespace MPix {
    {
    public:
 
-      EM_GAME_STATE(SplashState);
+      ECGAME_STATE(SplashState);
       SplashState();
       ~SplashState();
 

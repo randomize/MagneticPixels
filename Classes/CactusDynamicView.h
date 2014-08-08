@@ -1,7 +1,7 @@
 //===-- CactusDynamicView.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: 
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef CACTUSDYNAMICVIEW_H_
 #define CACTUSDYNAMICVIEW_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -24,7 +24,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(CactusDynamicView);
+      ECNODE_CHILD(CactusDynamicView);
       CactusDynamicView();
 
       void Build( shared_ptr<Pixel> model ) override;

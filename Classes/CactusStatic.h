@@ -1,7 +1,7 @@
 //===-- NeedlePixel.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/09
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: 
 //
 //===---------------------------------------------------------===//
@@ -10,8 +10,8 @@
 #ifndef STATIC_CACTUS_H_
 #define STATIC_CACTUS_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 
 #include "IKilling.h"
 #include "IAlive.h"
@@ -31,7 +31,7 @@ namespace MPix {
    public:
 
       // Register this pixel type to pixel factory
-      EM_NODE_CHILD(CactusStatic);
+      ECNODE_CHILD(CactusStatic);
 
    public:
 

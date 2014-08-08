@@ -1,7 +1,7 @@
 //===-- PitfallView.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: View for pitfall pixel
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef PITFALLVIEW_H_
 #define PITFALLVIEW_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -25,7 +25,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(PitfallView);
+      ECNODE_CHILD(PitfallView);
 
       PitfallView();
       ~PitfallView();

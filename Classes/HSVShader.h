@@ -1,7 +1,7 @@
 //===-- HSVShader.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/29
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Shader for colorful variety
 //
 //===---------------------------------------------------------===//
@@ -10,14 +10,14 @@
 #ifndef HSVSHADER_H_
 #define HSVSHADER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 
 
    // Any shader program in game should have this interface
    // TODO: if more shaders -- place this to standalone file
-   class EMShader : public GLProgram {
+   class ECShader : public GLProgram {
    public:
 
       // Called on android when enters foreground, reinitializes shader
@@ -26,7 +26,7 @@ namespace MPix {
    };
 
    // HSVShader program
-   class HSVShader : public EMShader
+   class HSVShader : public ECShader
    {
    public:
 

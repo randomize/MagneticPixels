@@ -1,7 +1,7 @@
 //===-- SoundManager.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Sound manager facades SimpleAudioEngine
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef SOUNDMANAGER_H_
 #define SOUNDMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

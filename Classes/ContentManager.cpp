@@ -5,7 +5,7 @@
 
 #include "HSVShader.h"
 #include "HSVSprite.h"
-#include "EMAnimation.h"
+#include "ECAnimation.h"
 
 using namespace MPix;
 
@@ -25,7 +25,7 @@ public:
 
 MPix::ContentManager::ContentManager()
 {
-   EM_LOG_INFO("Content manager created");
+   ECLOG_INFO("Content manager created");
 
    listener.callback = std::bind(&ContentManager::ReloadShaders, this);
 
@@ -115,10 +115,10 @@ void MPix::ContentManager::CreateSprites()
       auto texture = t_cache->addImage(s.second);
       if (texture) {
          auto sz = texture->getContentSizeInPixels();
-         EM_LOG_DEBUG("Cached: " + s.second + " [ " + sz.width + ", " + sz.height + "]");
+         ECLOG_DEBUG("Cached: " + s.second + " [ " + sz.width + ", " + sz.height + "]");
       }
       else {
-         EM_LOG_WARNING("Not found texture: " + s.second);
+         ECLOG_WARNING("Not found texture: " + s.second);
       }
    }
 
@@ -152,7 +152,7 @@ void MPix::ContentManager::ReloadShaders()
 Sprite* MPix::ContentManager::GetSimpleSprite(const string& name)
 {
 
-   EM_LOG_DEBUG("Loading simple sprite resource: " + name);
+   ECLOG_DEBUG("Loading simple sprite resource: " + name);
 
    Sprite* fab = nullptr;
 
@@ -160,7 +160,7 @@ Sprite* MPix::ContentManager::GetSimpleSprite(const string& name)
    if (it == resources.end())
    {
        fab = Sprite::create("dummy.png");
-       EM_LOG_WARNING("Not found resource " + name);
+       ECLOG_WARNING("Not found resource " + name);
    }
    else
    {
@@ -174,7 +174,7 @@ Sprite* MPix::ContentManager::GetSimpleSprite(const string& name)
 
 HSVSprite* MPix::ContentManager::GetHSVSprite(const string& name)
 {
-   EM_LOG_DEBUG("Loading HSV sprite resource: " + name);
+   ECLOG_DEBUG("Loading HSV sprite resource: " + name);
 
    HSVSprite* fab = nullptr;
 
@@ -182,7 +182,7 @@ HSVSprite* MPix::ContentManager::GetHSVSprite(const string& name)
    if (it == resources.end())
    {
       fab = HSVSprite::create("dummy.png");
-      EM_LOG_WARNING("Not found resource " + name);
+      ECLOG_WARNING("Not found resource " + name);
       assert(fab);
    }
    else
@@ -190,7 +190,7 @@ HSVSprite* MPix::ContentManager::GetHSVSprite(const string& name)
       fab = HSVSprite::create(it->second);
       if (fab == nullptr) {
          fab = HSVSprite::create("dummy.png");
-         EM_LOG_WARNING("Not found resource " + name);
+         ECLOG_WARNING("Not found resource " + name);
          assert(fab);
       }
    }
@@ -198,21 +198,21 @@ HSVSprite* MPix::ContentManager::GetHSVSprite(const string& name)
    return fab;
 }
 
-EMAnimation* MPix::ContentManager::GetAnimation(const string& name)
+ECAnimation* MPix::ContentManager::GetAnimation(const string& name)
 {
-   EM_LOG_DEBUG("Loading animation: " + name);
+   ECLOG_DEBUG("Loading animation: " + name);
 
-   EMAnimation* fab = nullptr;
+   ECAnimation* fab = nullptr;
 
    auto it = animations.find(name);
    if (it == animations.end())
    {
-       EM_LOG_WARNING("Not found animation " + name);
+       ECLOG_WARNING("Not found animation " + name);
        assert(false);
    }
    else
    {
-      fab = EMAnimation::create(it->second);
+      fab = ECAnimation::create(it->second);
    }
 
    assert(fab);

@@ -1,7 +1,7 @@
 //===-- World.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Worlds are groups in which levels are stored
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef WORLD_H_
 #define WORLD_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

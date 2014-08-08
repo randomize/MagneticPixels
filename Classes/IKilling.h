@@ -1,7 +1,7 @@
 //===-- IKilling.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/22
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Killing interface, used by pixels who can kill
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef IKILLING_H_
 #define IKILLING_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Pixel.h"
 #include "AnyBehavior.h"
 

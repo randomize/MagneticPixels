@@ -1,7 +1,7 @@
 //===-- CactusDynamic.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/09
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: 
 //
 //===---------------------------------------------------------===//
@@ -10,8 +10,8 @@
 #ifndef NEEDLEPIXEL_H_
 #define NEEDLEPIXEL_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 
 #include "IDynamic.h"
 #include "IKilling.h"
@@ -35,7 +35,7 @@ namespace MPix {
    public:
 
       // Register this pixel type to pixel factory
-      EM_NODE_CHILD(CactusDynamic);
+      ECNODE_CHILD(CactusDynamic);
 
    public:
 

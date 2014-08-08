@@ -1,7 +1,7 @@
 //===-- EventProcessor.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/03
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Events processor realizes events storing and processing
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef PIXELEVENTPROCESSOR_H_
 #define PIXELEVENTPROCESSOR_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 #include "Events.h"

@@ -1,7 +1,7 @@
 //===-- HSVSprite.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/26
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Sprite with HSV parameters
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef HSVSPRITE_H_
 #define HSVSPRITE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "HSVProtocol.h"
 

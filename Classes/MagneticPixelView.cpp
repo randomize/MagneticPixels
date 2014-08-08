@@ -1,7 +1,7 @@
 #include "MagneticPixelView.h"
 #include "MagneticPixel.h"
 
-#include "EMAnimation.h"
+#include "ECAnimation.h"
 #include "Shake.h"
 #include "ContentManager.h"
 #include "GameStateManager.h"
@@ -10,7 +10,7 @@
 
 using namespace MPix;
 
-EM_NODE_CHILD_CPP(MagneticPixelView);
+ECNODE_CHILD_CPP(MagneticPixelView);
 
 
 MPix::MagneticPixelView::MagneticPixelView():

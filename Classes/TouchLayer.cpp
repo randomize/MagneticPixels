@@ -2,7 +2,7 @@
 #include "GameStateManager.h"
 #include "GameplayManager.h"
 #include "Cmd.h"
-#include "EMBaseMasterLoop.h"
+#include "ECBaseMasterLoop.h"
 
 using namespace MPix;
 
@@ -106,7 +106,7 @@ bool TouchLayer::onTouchBegan( Touch *touch, Event *event )
 {
 
    auto posOnScreen = touch->getLocationInView();
-   //EM_LOG_DEBUG("== BEGAN == " + posOnScreen);
+   //ECLOG_DEBUG("== BEGAN == " + posOnScreen);
 
    switch (st)
    {
@@ -120,7 +120,7 @@ bool TouchLayer::onTouchBegan( Touch *touch, Event *event )
 
       sequence.push_back(posOnScreen);
 
-      timestamp = EMBaseMasterLoop::GetTime();
+      timestamp = ECBaseMasterLoop::GetTime();
 
       idling_counter = 0;
 
@@ -185,15 +185,15 @@ void TouchLayer::onTouchMoved( Touch *touch, Event *event )
             float angle = v1.getAngle(v2);
             if (fabs(angle) <= TouchConstants::ACUTE_ANGLE_MAX) {
                n_acute_angles++;
-               //EM_LOG_DEBUG("== MOVE == " + n_acute_angles + " sm " + sz);
+               //ECLOG_DEBUG("== MOVE == " + n_acute_angles + " sm " + sz);
             }
 
-            if (EMBaseMasterLoop::GetTime() - timestamp < TouchConstants::MAX_GESTURE_TIMEOUT * 2) {
+            if (ECBaseMasterLoop::GetTime() - timestamp < TouchConstants::MAX_GESTURE_TIMEOUT * 2) {
                if (n_acute_angles >= TouchConstants::MIN_ACUTE_TO_BE_SHAKE && sz >= TouchConstants::MIN_SHAKE_ACCEPT_SAMPLES) {
                   GestureShake();
                   st = IGNORING;
                }
-               //EM_LOG_DEBUG("========= " + posOnScreen);
+               //ECLOG_DEBUG("========= " + posOnScreen);
             }
 
          }
@@ -225,7 +225,7 @@ void TouchLayer::onTouchEnded( Touch *touch, Event *event )
 {
 
    auto posOnScreen = touch->getLocationInView();
-   //EM_LOG_DEBUG("== END == " + posOnScreen);
+   //ECLOG_DEBUG("== END == " + posOnScreen);
 
    switch (st)
    {
@@ -234,7 +234,7 @@ void TouchLayer::onTouchEnded( Touch *touch, Event *event )
       break;
    case MPix::TouchLayer::ONE_TOUCH_RECORDING:
       assert(touch->getID() == 0); // must be that one
-      if (EMBaseMasterLoop::GetTime() - timestamp < TouchConstants::MAX_GESTURE_TIMEOUT) {
+      if (ECBaseMasterLoop::GetTime() - timestamp < TouchConstants::MAX_GESTURE_TIMEOUT) {
          sequence.push_back(posOnScreen);
          pe = this->convertTouchToNodeSpace(touch);
          AnalyseSequence();
@@ -264,37 +264,37 @@ void MPix::TouchLayer::GestureTapPoint( Vector2 p )
    p = Director::getInstance()->convertToGL(p);
    p = this->convertToNodeSpace(p);
    Coordinates pos = ScreenToLogic(p);
-   EM_LOG_DEBUG("Got a tap at: " + pos);
+   ECLOG_DEBUG("Got a tap at: " + pos);
 
    GameplayManager::getInstance().PostCommand(new CmdGameplayClick(pos));
 }
 
 void MPix::TouchLayer::GestureSwipe( Direction dir )
 {
-   EM_LOG_DEBUG("Got a swype to " + dir);
+   ECLOG_DEBUG("Got a swype to " + dir);
    GameplayManager::getInstance().PostCommand(new CmdGameplayMove(dir));
 }
 
 void MPix::TouchLayer::GestureLongSwipe( Direction dir )
 {
-   EM_LOG_DEBUG("Got a long swype to " + dir);
+   ECLOG_DEBUG("Got a long swype to " + dir);
 }
 
 void MPix::TouchLayer::GestureShake()
 {
-   EM_LOG_DEBUG("Got a shake");
+   ECLOG_DEBUG("Got a shake");
    GameplayManager::getInstance().PostCommand(new CmdGameplayRestartAssembly);
 }
 
 void MPix::TouchLayer::GestureRotateCW()
 {
-   EM_LOG_DEBUG("Got a CW circle");
+   ECLOG_DEBUG("Got a CW circle");
    GameplayManager::getInstance().PostCommand(new CmdGameplayRedoMove);
 }
 
 void MPix::TouchLayer::GestureRotateCCW()
 {
-   EM_LOG_DEBUG("Got a CCW circle");
+   ECLOG_DEBUG("Got a CCW circle");
    GameplayManager::getInstance().PostCommand(new CmdGameplayUndoMove);
 }
 
@@ -323,9 +323,9 @@ ErrorCode TouchLayer::onBGFG() {
 }
 
 
-EmbossLib::ErrorCode MPix::TouchLayer::TouchEnable()
+EndlessCatLib::ErrorCode MPix::TouchLayer::TouchEnable()
 {
-   EM_LOG_DEBUG("Touch layer touches on");
+   ECLOG_DEBUG("Touch layer touches on");
    auto listener = EventListenerTouchOneByOne::create();
    listener->setSwallowTouches(true);
    listener->onTouchBegan     = CC_CALLBACK_2(TouchLayer::onTouchBegan, this);
@@ -341,9 +341,9 @@ EmbossLib::ErrorCode MPix::TouchLayer::TouchEnable()
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::TouchLayer::TouchDisable()
+EndlessCatLib::ErrorCode MPix::TouchLayer::TouchDisable()
 {
-   EM_LOG_DEBUG("Touch layer touches off");
+   ECLOG_DEBUG("Touch layer touches off");
 
    _eventDispatcher->removeEventListener(toucher);
 
@@ -396,9 +396,9 @@ void MPix::TouchLayer::AnalyseSequence()
    auto avgCenter = Vector2(avgx, avgy);
    auto rectangle = Vector2(xmax-xmin, ymax-ymin);
 
-   EM_LOG_DEBUG( " BBox is : " + rectangle.x + " x " + rectangle.y );
-   EM_LOG_DEBUG( " BBox center = " + center);
-   EM_LOG_DEBUG( " BBox avg center = " + avgCenter);
+   ECLOG_DEBUG( " BBox is : " + rectangle.x + " x " + rectangle.y );
+   ECLOG_DEBUG( " BBox center = " + center);
+   ECLOG_DEBUG( " BBox avg center = " + avgCenter);
 
    // ok maybe it is still TAP
    if ( maxLen < TouchConstants::TAP_RADIUS_MAX  ) {
@@ -439,8 +439,8 @@ void MPix::TouchLayer::AnalyseSequence()
    }
    avgRadius /= n;
    avgAngle /= allAngles.size();
-   EM_LOG_DEBUG( " A radus = " + avgRadius);
-   EM_LOG_DEBUG( " Angle avg " + avgAngle );
+   ECLOG_DEBUG( " A radus = " + avgRadius);
+   ECLOG_DEBUG( " Angle avg " + avgAngle );
 
    // Trying to recognize circle
    if ( avgRadius >= TouchConstants::CIRCLE_RAD ) {
@@ -452,7 +452,7 @@ void MPix::TouchLayer::AnalyseSequence()
             fitness++;
       }
       float fitnessPercent = fitness/float(n) * 100.0f;
-      EM_LOG_DEBUG( " Fitness circle " + fitnessPercent );
+      ECLOG_DEBUG( " Fitness circle " + fitnessPercent );
       if ( fitnessPercent >= TouchConstants::CIRCLENESS_CRITERIA ) {
          //GestureRotateCCW(); // FIXME : circle is to unstable
          return;
@@ -465,20 +465,20 @@ void MPix::TouchLayer::AnalyseSequence()
    auto &p_end = sequence.back();
    auto pdeltha = p_end - p_start;
    float leadAng = pdeltha.getAngle();
-   EM_LOG_DEBUG( " Lead ang " + leadAng );
+   ECLOG_DEBUG( " Lead ang " + leadAng );
 
 
    // Calculate deviation of angle
    int angle_fitness = 0;
    for ( auto a : allAngles )
    {
-      //EM_LOG_DEBUG(a);
+      //ECLOG_DEBUG(a);
       if ( fabs(a-fabs(leadAng)) < TouchConstants::ANGLE_THRESH ) {
          angle_fitness++;
       }
    }
    float angle_fitnessPercent = float(angle_fitness) / allAngles.size() * 100.0f;
-   EM_LOG_DEBUG( " Fitness line " + angle_fitnessPercent );
+   ECLOG_DEBUG( " Fitness line " + angle_fitnessPercent );
    if ( angle_fitnessPercent <= 40.0 ) {
       return;
    }
@@ -519,7 +519,7 @@ void MPix::TouchLayer::AnalyseSequence()
       break;
    }
 
-   //EM_LOG_DEBUG("Gesture len: "+ maxLen);
+   //ECLOG_DEBUG("Gesture len: "+ maxLen);
    /*if (maxLen > 300) {
       GestureLongSwipe(di);
    } else {

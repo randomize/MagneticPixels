@@ -1,7 +1,7 @@
 //===-- SokobanBase.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/15
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Sokoban pixel can't be magnetized, but can be pushed by assembly
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef SOKOBANBASE_H_
 #define SOKOBANBASE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "IDynamic.h"
 #include "IAlive.h"
 #include "IMovable.h"

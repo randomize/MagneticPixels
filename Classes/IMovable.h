@@ -1,7 +1,7 @@
 //===-- IMovable.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/24
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Anything that moves
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef IMOVEBLE_H_
 #define IMOVEBLE_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Pixel.h"
 #include "AnyBehavior.h"
 

@@ -23,7 +23,7 @@ ErrorCode Assembly::AddPixel( const Context& context, shared_ptr<IAssembled> pix
    // Set internal state
    pixel->AddToAssembly(context);
 
-   EM_LOG_DEBUG(" Pixel "+ pixel->GetID() + " added to assembly");
+   ECLOG_DEBUG(" Pixel "+ pixel->GetID() + " added to assembly");
 
    return ErrorCode::RET_OK;
 }
@@ -146,9 +146,9 @@ ErrorCode Assembly::CheckForLost( const Context& context )
    }
 
    // Test for debug 
-   /*EM_LOG_ERROR(" Clsss split: got " + classes.size() );
+   /*ECLOG_ERROR(" Clsss split: got " + classes.size() );
    for ( auto & a : classes ) {
-      EM_LOG_ERROR(" - Class = " + a.size() );
+      ECLOG_ERROR(" - Class = " + a.size() );
    }*/
 
    // 2.2 - Check each class, form dead pixel set in toProcess set

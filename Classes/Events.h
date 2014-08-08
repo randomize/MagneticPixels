@@ -1,7 +1,7 @@
 //===-- PixelEvents.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/03
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Events for pixels, if someone wants to send event, include this file
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef PIXELEVENTS_H_
 #define PIXELEVENTS_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

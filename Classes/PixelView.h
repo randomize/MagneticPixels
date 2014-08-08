@@ -1,7 +1,7 @@
 //===-- PixelView.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/03
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Pixel view represents a pixel on screen
 //
 //===---------------------------------------------------------===//
@@ -10,8 +10,8 @@
 #ifndef PIXELVIEW_H_
 #define PIXELVIEW_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 #include "Cmd.h"
 #include "View.h"
 
@@ -22,13 +22,13 @@ namespace MPix {
 
 
    // PixelView
-   class PixelView : public EMNode, public View
+   class PixelView : public ECNode, public View
    {
    public:
 
       PixelView();
       virtual ~PixelView();
-      EM_NODE_BASE(PixelView);
+      ECNODE_BASE(PixelView);
       static shared_ptr<PixelView> create(shared_ptr<Pixel> px);
 
    public:

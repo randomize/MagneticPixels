@@ -1,7 +1,7 @@
 //===-- StonePixelView.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/16
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Stone pixel view
 //
 //===---------------------------------------------------------===//
@@ -10,8 +10,8 @@
 #ifndef STONEPIXELVIEW_H_
 #define STONEPIXELVIEW_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -27,7 +27,7 @@ namespace MPix {
       StonePixelView();
       ~StonePixelView();
 
-      EM_NODE_CHILD(StonePixelView);
+      ECNODE_CHILD(StonePixelView);
 
       void Build( shared_ptr<Pixel> model ) override;
 

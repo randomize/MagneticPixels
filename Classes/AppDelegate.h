@@ -1,7 +1,7 @@
 //===-- AppDelegate.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Main cocos2dx application class
 //
 //===---------------------------------------------------------===//
@@ -10,8 +10,8 @@
 #ifndef APPDELEGATE_H_
 #define APPDELEGATE_H_
 
-#include "EMBase.h"
-#include "EMBaseMasterLoop.h"
+#include "ECBase.h"
+#include "ECBaseMasterLoop.h"
 
 class  AppDelegate : private cocos2d::Application
 {
@@ -21,7 +21,7 @@ public:
    bool applicationDidFinishLaunching() override;
    void applicationDidEnterBackground() override;
    void applicationWillEnterForeground() override;
-   MPix::EMBaseMasterLoop *master;
+   MPix::ECBaseMasterLoop *master;
 };
 
 #endif // APPDELEGATE_H_

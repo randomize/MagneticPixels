@@ -1,7 +1,7 @@
 //===-- Level.h -----------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Level stores map, info, score etc, it is only container
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef LEVEL_H_
 #define LEVEL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

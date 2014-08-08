@@ -1,7 +1,7 @@
 //===-- WallPixelView.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/06
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Wall pixel view
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef WALLVIEW_H_
 #define WALLVIEW_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "PixelView.h"
 
 namespace MPix {
@@ -26,7 +26,7 @@ namespace MPix {
 
    public:
 
-      EM_NODE_CHILD(WallPixelView);
+      ECNODE_CHILD(WallPixelView);
 
       void Build( shared_ptr<Pixel> model ) override;
 

@@ -45,13 +45,13 @@ shared_ptr<Goal> MPix::GoalXML::GenerateGoal( tinyxml2::XMLElement* src )
 
          int x = 0;
          if ( gtask->QueryIntAttribute("x", &x) != XML_NO_ERROR ) {
-            EM_LOG_WARNING("Goal task has no x, skipping ");
+            ECLOG_WARNING("Goal task has no x, skipping ");
             break; // skip
          }
 
          int y = 0;
          if ( gtask->QueryIntAttribute("y", &y) != XML_NO_ERROR ) {
-            EM_LOG_WARNING("Goal task has no y, skipping ");
+            ECLOG_WARNING("Goal task has no y, skipping ");
             break; // skip
          }
 
@@ -59,7 +59,7 @@ shared_ptr<Goal> MPix::GoalXML::GenerateGoal( tinyxml2::XMLElement* src )
 
          int i = 0;
          if ( gtask->QueryIntAttribute("c", &i) != XML_NO_ERROR ) {
-            EM_LOG_WARNING("Goal task has no color, skipping ");
+            ECLOG_WARNING("Goal task has no color, skipping ");
             break; // skip
          }
 
@@ -73,7 +73,7 @@ shared_ptr<Goal> MPix::GoalXML::GenerateGoal( tinyxml2::XMLElement* src )
    }
 
    if (tc == 0) {
-      EM_LOG_WARNING("No `p` tag in goal, load goal failed");
+      ECLOG_WARNING("No `p` tag in goal, load goal failed");
       return nullptr;
    }
 
@@ -92,7 +92,7 @@ shared_ptr<Goals> MPix::GoalXML::GenerateGoals( tinyxml2::XMLElement* src )
 
       auto  goal = GenerateGoal(g);
       if (goal == nullptr ) {
-         EM_LOG_WARNING("Goal load failed, skipping");
+         ECLOG_WARNING("Goal load failed, skipping");
          g = g->NextSiblingElement();
          continue;
       }
@@ -104,10 +104,10 @@ shared_ptr<Goals> MPix::GoalXML::GenerateGoals( tinyxml2::XMLElement* src )
    }
 
    if (gl_cnt == 0) {
-      EM_LOG_ERROR("No goals loaded");
+      ECLOG_ERROR("No goals loaded");
       return nullptr;
    }
 
-   EM_LOG_DEBUG("Loaded " + gl_cnt + " goals ");
+   ECLOG_DEBUG("Loaded " + gl_cnt + " goals ");
    return fab;
 }

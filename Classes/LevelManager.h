@@ -1,7 +1,7 @@
 //===-- LevelManager.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Level manager holds all levels and worlds of the game
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef LEVELMANAGER_H_
 #define LEVELMANAGER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

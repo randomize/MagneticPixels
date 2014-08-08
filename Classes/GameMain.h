@@ -1,7 +1,7 @@
 //===-- GameMain.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Main game state is active when playing
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef GAMEMAIN_H_
 #define GAMEMAIN_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "GameState.h"
 
@@ -26,7 +26,7 @@ namespace MPix {
    {
    public:
 
-      EM_GAME_STATE(GameMain);
+      ECGAME_STATE(GameMain);
       GameMain();
       ~GameMain();
       bool init() override;

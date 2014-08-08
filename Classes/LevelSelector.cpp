@@ -379,7 +379,7 @@ void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
    {
       auto pos = worlds_layer->convertTouchToNodeSpace(touch) - m_cur_button->getPosition();
       if (pos.getLengthSq() > BUTTON_TOUCH_RADIUS*BUTTON_TOUCH_RADIUS) {
-         EM_LOG_DEBUG("Touch left the button");
+         ECLOG_DEBUG("Touch left the button");
          //state = State::IGNORING;
          m_cur_button->stopAllActions();
          m_cur_button->runAction(ScaleTo::create(0.15f, 1));
@@ -406,7 +406,7 @@ void MPix::LevelSelector::onTouchMoved(Touch *touch, Event *event)
 
 void MPix::LevelSelector::NextWorld()
 {
-   EM_LOG_DEBUG("Next world");
+   ECLOG_DEBUG("Next world");
 
    if (current_index < world_count-1) {
       title_lables[indexed_ids[current_index]]->stopAllActions();
@@ -422,7 +422,7 @@ void MPix::LevelSelector::NextWorld()
 
 void MPix::LevelSelector::PrewWorld()
 {
-   EM_LOG_DEBUG("Prew world");
+   ECLOG_DEBUG("Prew world");
 
    if (current_index > 0) {
       title_lables[indexed_ids[current_index]]->stopAllActions();
@@ -441,7 +441,7 @@ LevelView* MPix::LevelSelector::GetViewAtPoint(Vector2 touch_pos)
    int j = 0;
    for (auto v : indexed_views[current_index]) {
       if ((touch_pos - v->getPosition()).getLengthSq() < BUTTON_TOUCH_RADIUS*BUTTON_TOUCH_RADIUS) {
-         EM_LOG_DEBUG("Matched buttton with id " + j);
+         ECLOG_DEBUG("Matched buttton with id " + j);
          return v;
       }
       j++;

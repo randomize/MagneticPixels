@@ -4,7 +4,7 @@ using namespace MPix;
 
 //====---------------------------------------------======//
 
-EM_NODE_CHILD_CPP(BadMagneticPixel);
+ECNODE_CHILD_CPP(BadMagneticPixel);
 
 MPix::BadMagneticPixel::BadMagneticPixel( PixelColor color /*= PixelColor::RED*/ ) :
    AssembledMagneticBase(color)

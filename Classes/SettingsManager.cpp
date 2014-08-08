@@ -12,31 +12,31 @@ m_key_vals({
    { Key::SOUND_ON, { false, 0, "snd" } }
 })
 {
-   EM_LOG_INFO("[ SettingsManager initialized ]");
+   ECLOG_INFO("[ SettingsManager initialized ]");
 }
 
 void MPix::SettingsManager::LoadSettings()
 {
-   EM_LOG_INFO("Loading data...");
+   ECLOG_INFO("Loading data...");
 
    // Init db cocosy
    db = UserDefault::getInstance();
    assert(db);
 
-   EM_LOG_INFO("XML File: " + db->getXMLFilePath());
+   ECLOG_INFO("XML File: " + db->getXMLFilePath());
 
    // Now load from cocos db existing values
    // inexistent will have default value
    for (auto& a : m_key_vals) {
       a.second.value = db->getIntegerForKey(a.second.db_key.c_str(), a.second.value);
-      EM_LOG_DEBUG("Got : " + a.second.db_key + "=" + a.second.value);
+      ECLOG_DEBUG("Got : " + a.second.db_key + "=" + a.second.value);
    }
 
 }
 
 void MPix::SettingsManager::SaveSettings()
 {
-   EM_LOG_INFO("Saving data...");
+   ECLOG_INFO("Saving data...");
    for (auto& v : m_key_vals) {
       if (v.second.is_dirty) {
          db->setIntegerForKey(v.second.db_key.c_str(), v.second.value);
@@ -58,7 +58,7 @@ void MPix::SettingsManager::SetKey(Key key, int value)
 {
    auto it = m_key_vals.find(key);
    assert(it != m_key_vals.end());
-   EM_LOG_DEBUG("Setting " + value + " => " + it->second.db_key);
+   ECLOG_DEBUG("Setting " + value + " => " + it->second.db_key);
    it->second.value = value;
    it->second.is_dirty = true;
 }

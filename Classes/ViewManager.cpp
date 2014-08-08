@@ -7,7 +7,7 @@ using namespace MPix;
 
 MPix::ViewManager::ViewManager()
 {
-   EM_LOG_INFO("[ ViewManager initialized ]");
+   ECLOG_INFO("[ ViewManager initialized ]");
    CmdUIUpdatePixelView::listners["ViewManager"] = std::bind(&ViewManager::UpdatePixelView, this, std::placeholders::_1, std::placeholders::_2);
    CmdUIUpdateGoalView::listners["ViewManager"] = std::bind(&ViewManager::UpdateGoalView, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
 }
@@ -47,18 +47,18 @@ shared_ptr<GoalView> MPix::ViewManager::GetGoalViewByID( int id )
    return vit->second;
 }
 
-EmbossLib::ErrorCode MPix::ViewManager::UpdatePixelView( int id, CmdUIUpdatePixelView::Reason reason )
+EndlessCatLib::ErrorCode MPix::ViewManager::UpdatePixelView( int id, CmdUIUpdatePixelView::Reason reason )
 {
    if ( GetPixelViewByID(id)->Update(reason) == false ) {
-      EM_LOG_WARNING("Pixel View #" + id + " not handled update reason #" + static_cast<int>(reason)) ;
+      ECLOG_WARNING("Pixel View #" + id + " not handled update reason #" + static_cast<int>(reason)) ;
    }
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode MPix::ViewManager::UpdateGoalView( int id, Coordinates task, CmdUIUpdateGoalView::Reason reason )
+EndlessCatLib::ErrorCode MPix::ViewManager::UpdateGoalView( int id, Coordinates task, CmdUIUpdateGoalView::Reason reason )
 {
    if (GetGoalViewByID(id)->Update(reason, task) == false ) {
-      EM_LOG_WARNING("Goal View #" + id + " Task# " + task + " not handled update reason #" + static_cast<int>(reason)) ;
+      ECLOG_WARNING("Goal View #" + id + " Task# " + task + " not handled update reason #" + static_cast<int>(reason)) ;
    };
    return ErrorCode::RET_OK;
 }
@@ -77,7 +77,7 @@ void MPix::ViewManager::RunIdleUpdateOnRandomPixel()
       if (dice < 0.2) { // %20 percent of pixels
          auto reason = CmdUIUpdatePixelView::Reason::IDLE_TRICK;
          if ( p.second->Update(reason) == false ) {
-            EM_LOG_WARNING("Pixel View #" + p.first + " not handled update reason #" + static_cast<int>(reason)) ;
+            ECLOG_WARNING("Pixel View #" + p.first + " not handled update reason #" + static_cast<int>(reason)) ;
          }
       }
    }

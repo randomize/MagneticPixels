@@ -1,7 +1,7 @@
 //===-- TouchLayer.h ------------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/01
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: TouchLayer works with touches, displays grid
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef TOUCHLAYER_H__
 #define TOUCHLAYER_H__
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

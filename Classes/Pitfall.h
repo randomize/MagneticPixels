@@ -1,7 +1,7 @@
 //===-- Pitfall.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Pixel that kills when standing on it
 //
 //===---------------------------------------------------------===//
@@ -10,11 +10,11 @@
 #ifndef PITFALL_H_
 #define PITFALL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 #include "IKilling.h"
 
-#include "EMNode.h"
+#include "ECNode.h"
 
 namespace MPix {
 
@@ -28,7 +28,7 @@ namespace MPix {
    public:
 
       // Register this pixel type to pixel factory
-      EM_NODE_CHILD(Pitfall);
+      ECNODE_CHILD(Pitfall);
 
       Pitfall();
       ~Pitfall();

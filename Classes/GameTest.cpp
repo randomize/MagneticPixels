@@ -57,7 +57,7 @@ void MPix::GameTest::BtnHnadler(Ref* sender)
 
 }
 
-EmbossLib::ErrorCode MPix::GameTest::FinishedGame()
+EndlessCatLib::ErrorCode MPix::GameTest::FinishedGame()
 {
    // Switch back to editor
    GameStateManager::getInstance().SwitchToEditor();

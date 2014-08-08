@@ -79,93 +79,93 @@ void PixelEventPacket::Dispatch()
    switch (event)
    {
    case PixelEvent::MOVED:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Pixel moves " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Pixel moves " );
       GameStateManager::getInstance().CurrentState()->Execute( new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::MOVING) );
       break;
    case PixelEvent::UNDO_MOVED:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Pixel undo moves " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Pixel undo moves " );
       GameStateManager::getInstance().CurrentState()->Execute( new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::MOVING) );
       break;
    case  PixelEvent::CHANGED_DATA:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Changed data " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Changed data " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::CHANGED));
       break;
    case PixelEvent::LOST_FROM_ASSEMBLY:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Lost " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Lost " );
       break;
    case PixelEvent::UNDO_LOST_FROM_ASSEMBLY:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Undo Lost " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Undo Lost " );
       GameStateManager::getInstance().CurrentState()->Execute( new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::WAKE) );
       break;
    case PixelEvent::LOST_FROM_WORLD:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Lost " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Lost " );
       break;
    case PixelEvent::UNDO_LOST_FROM_WORLD:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Undo Lost " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Undo Lost " );
       break;
    case PixelEvent::DIED:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Pixel died " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Pixel died " );
       GameStateManager::getInstance().CurrentState()->Execute( new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::DIED) );
       break;
    case PixelEvent::UNDO_DIED:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Pixel undo died " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Pixel undo died " );
       GameStateManager::getInstance().CurrentState()->Execute( new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::RESURRECT) );
       break;
    case PixelEvent::BLOCKED_MOVE:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Blocked move " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Blocked move " );
       GameStateManager::getInstance().CurrentState()->Execute( new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::BLOCKING) );
       break;
    case PixelEvent::ADDED_TO_ASSEMBLY:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Waked " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Waked " );
       GameStateManager::getInstance().CurrentState()->Execute( new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::WAKE) );
       break;
    case PixelEvent::UNDO_ADDED_TO_ASSEMBLY:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Asleep " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Asleep " );
       GameStateManager::getInstance().CurrentState()->Execute( new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::ASLEEP) );
       break;
    case PixelEvent::SMILED:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Smiled " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Smiled " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::SMILED));
       break;
    case PixelEvent::UNSMILED:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Unsmiled " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Unsmiled " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::UNSMILED));
       break;
    case PixelEvent::ACCEPTED_GOAL:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Accepted " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Accepted " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::ACCEPT));
       break;
    case PixelEvent::UNDO_ACCEPTED_GOAL:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Undo accepted " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Undo accepted " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::RESURRECT));
       break;
    case PixelEvent::RESET:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Reset " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Reset " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::RESET));
       break;
    case PixelEvent::CREATED:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Created " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Created " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::CREATED));
       break;
    case PixelEvent::TAPPED:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Tapped " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Tapped " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::TAPPED));
       break;
    case PixelEvent::CAN_FALL:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Can fall " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Can fall " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::CANFALL));
       break;
    case PixelEvent::CANT_FALL:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Cant fall " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Cant fall " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::CANTFALL));
       break;
    case PixelEvent::KILLED:
-      EM_LOG_DEBUG(" Pixel ["+ id + "] => Killed someone " );
+      ECLOG_DEBUG(" Pixel ["+ id + "] => Killed someone " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdatePixelView(id, CmdUIUpdatePixelView::Reason::KILLED_SOMEONE));
       break;
 
    default:
-      EM_LOG_WARNING(" Pixel ["+ id + "] => Unknown event " );
+      ECLOG_WARNING(" Pixel ["+ id + "] => Unknown event " );
       break;
    }
 }
@@ -219,36 +219,36 @@ void GoalEventPacket::Dispatch()
    switch (event)
    {
    case GoalEvent::ACCEPTED:
-      EM_LOG_DEBUG(" Goal ["+ id + "]" + task + " => Accepted " );
+      ECLOG_DEBUG(" Goal ["+ id + "]" + task + " => Accepted " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateGoalView(id, task, CmdUIUpdateGoalView::Reason::ACCEPTED));
       break;
    case GoalEvent::UNDO_ACCEPTED:
-      EM_LOG_DEBUG(" Goal ["+ id + "]" + task + " => Undo Accepted " );
+      ECLOG_DEBUG(" Goal ["+ id + "]" + task + " => Undo Accepted " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateGoalView(id, task, CmdUIUpdateGoalView::Reason::UNACCEPTED));
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateGoalView(id, task, CmdUIUpdateGoalView::Reason::HIGHLIGHT));
       break;
    case GoalEvent::HIGHTLIGHT:
-      EM_LOG_DEBUG(" Goal ["+ id + "]" + task + " => Highlight " );
+      ECLOG_DEBUG(" Goal ["+ id + "]" + task + " => Highlight " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateGoalView(id, task, CmdUIUpdateGoalView::Reason::HIGHLIGHT));
       break;
    case GoalEvent::UNDO_HIGHLIGHT:
-      EM_LOG_DEBUG(" Goal ["+ id + "]" + task + " => Undo Highlight " );
+      ECLOG_DEBUG(" Goal ["+ id + "]" + task + " => Undo Highlight " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateGoalView(id, task, CmdUIUpdateGoalView::Reason::UNHIGHLIGHT));
       break;
    case GoalEvent::UNHIGHLIGHT:
-      EM_LOG_DEBUG(" Goal ["+ id + "]" + task + " => Unhighlight " );
+      ECLOG_DEBUG(" Goal ["+ id + "]" + task + " => Unhighlight " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateGoalView(id, task, CmdUIUpdateGoalView::Reason::UNHIGHLIGHT));
       break;
    case GoalEvent::UNDO_UNHIGHLIGHT:
-      EM_LOG_DEBUG(" Goal ["+ id + "]" + task + " => Undo Unhighlight " );
+      ECLOG_DEBUG(" Goal ["+ id + "]" + task + " => Undo Unhighlight " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateGoalView(id, task, CmdUIUpdateGoalView::Reason::HIGHLIGHT));
       break;
    case GoalEvent::CREATED:
-      EM_LOG_DEBUG(" Goal ["+ id + "]" + task + " => Goal Create " );
+      ECLOG_DEBUG(" Goal ["+ id + "]" + task + " => Goal Create " );
       GameStateManager::getInstance().CurrentState()->Execute(new CmdUIUpdateGoalView(id, task, CmdUIUpdateGoalView::Reason::CREATED));
       break;
    default:
-      EM_LOG_WARNING(" Goal ["+ id + "]" + task + " => Unknown event " );
+      ECLOG_WARNING(" Goal ["+ id + "]" + task + " => Unknown event " );
       break;
    }
 }
@@ -279,9 +279,9 @@ void EventProcessor::ClearEvents()
    events.clear();
 }
 
-EmbossLib::ErrorCode EventProcessor::ProcessEvents()
+EndlessCatLib::ErrorCode EventProcessor::ProcessEvents()
 {
-   EM_LOG_INFO(" ==== Processing events === ");
+   ECLOG_INFO(" ==== Processing events === ");
 
    PreprocessEvents();
 
@@ -291,12 +291,12 @@ EmbossLib::ErrorCode EventProcessor::ProcessEvents()
 
    ClearEvents();
 
-   EM_LOG_INFO(" ==== End of events === ");
+   ECLOG_INFO(" ==== End of events === ");
 
    return ErrorCode::RET_OK;
 }
 
-EmbossLib::ErrorCode EventProcessor::PreprocessEvents()
+EndlessCatLib::ErrorCode EventProcessor::PreprocessEvents()
 {
 
    // Kill duplicates

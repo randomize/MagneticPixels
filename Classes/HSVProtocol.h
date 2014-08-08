@@ -1,7 +1,7 @@
 //===-- HSVProtocol.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/30
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Class for anything that can have HSV shift
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef HSVPROTOCOL_H_
 #define HSVPROTOCOL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "HSVShader.h"
 #include "MPix.h"
 

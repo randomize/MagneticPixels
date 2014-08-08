@@ -1,7 +1,7 @@
 //===-- MPix.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Generic types and constants for game Magnetic Pixels
 //
 //===---------------------------------------------------------===//
@@ -22,7 +22,7 @@
 
 
 // Include master header
-#include "EMBase.h"
+#include "ECBase.h"
 
 
 
@@ -238,6 +238,6 @@ const string& LocalUTF8Str(const string& key);
 
 
 // Core universal things like Localization, PlatformDependent;
-using namespace EMCore;
+using namespace ECCore;
 
 #endif // MPIX_H_

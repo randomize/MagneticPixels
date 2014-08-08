@@ -1,7 +1,7 @@
 //===-- Solution.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/03
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Solution of a level
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef SOLUTION_H_
 #define SOLUTION_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

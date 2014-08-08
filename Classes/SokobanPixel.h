@@ -1,7 +1,7 @@
 //===-- SokobanPixel.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/15
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Moved by pushing
 //
 //===---------------------------------------------------------===//
@@ -10,8 +10,8 @@
 #ifndef SOKOBANPIXEL_H_
 #define SOKOBANPIXEL_H_
 
-#include "EMBase.h"
-#include "EMNode.h"
+#include "ECBase.h"
+#include "ECNode.h"
 #include "MPix.h"
 
 #include "SokobanBase.h"
@@ -30,7 +30,7 @@ namespace MPix {
    {
    public:
 
-      EM_NODE_CHILD(SokobanPixel);
+      ECNODE_CHILD(SokobanPixel);
 
    public:
 

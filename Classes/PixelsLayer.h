@@ -1,7 +1,7 @@
 //===-- PixelsLayer.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/04
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Pixels layer displays and manages pixel views
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef PIXELSLAYER_H_
 #define PIXELSLAYER_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 #include "Context.h"
 

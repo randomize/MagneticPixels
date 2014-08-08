@@ -1,7 +1,7 @@
 //===-- CuteBlocksLogo.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2014/01/28
-//  Author:      Mihailenco E. at Emboss Games, 2014
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2014
 //  Description: Logo class, used in main menu and credits
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef CUTEBLOCKSLOGO_H_
 #define CUTEBLOCKSLOGO_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

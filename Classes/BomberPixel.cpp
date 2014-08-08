@@ -4,8 +4,8 @@
 
 using namespace MPix;
 
-// Allocating memory for EM_NODE_CHILD, see header
-EM_NODE_CHILD_CPP(BomberPixel);
+// Allocating memory for ECNODE_CHILD, see header
+ECNODE_CHILD_CPP(BomberPixel);
 
 
 MPix::BomberPixel::BomberPixel( PixelColor color, int t ):

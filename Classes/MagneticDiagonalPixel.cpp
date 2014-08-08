@@ -2,8 +2,8 @@
 
 using namespace MPix;
 
-// Allocating memory for EM_NODE_CHILD, see header
-EM_NODE_CHILD_CPP(MagneticDiagonalPixel);
+// Allocating memory for ECNODE_CHILD, see header
+ECNODE_CHILD_CPP(MagneticDiagonalPixel);
 
 
 MPix::MagneticDiagonalPixel::MagneticDiagonalPixel( PixelColor color ):

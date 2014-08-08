@@ -1,7 +1,7 @@
 //===-- IAssembled.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/22
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Assembled means pixels that can be assembled
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef IASSEMBLED_H_
 #define IASSEMBLED_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "Historical.h"
 
 #include "IColorful.h"

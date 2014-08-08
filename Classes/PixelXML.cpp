@@ -58,7 +58,7 @@ shared_ptr<Pixel> MPix::PixelXML::Generate( tinyxml2::XMLElement* src )
       return GenBomberFromXML(src);
    }
 
-   EM_LOG_ERROR("Pixel loading from XML failed, unknown type =`" + t + "`");
+   ECLOG_ERROR("Pixel loading from XML failed, unknown type =`" + t + "`");
    return nullptr;
 
 }
@@ -104,7 +104,7 @@ bool MPix::PixelXML::Store( shared_ptr<Pixel> src, tinyxml2::XMLPrinter * dst )
       return StoreMutantToXML(src, dst);
    }
 
-   EM_LOG_ERROR("Unknown pixel type " + t);
+   ECLOG_ERROR("Unknown pixel type " + t);
    return false;
 
 }
@@ -227,13 +227,13 @@ void QueryCommon(Pixel& px, tinyxml2::XMLElement* src) {
    int x; 
    
    if (src->QueryIntAttribute("x", &x) != XML_NO_ERROR) {
-      EM_LOG_ERROR("Coordinateless pixel detected ");
+      ECLOG_ERROR("Coordinateless pixel detected ");
    }
 
    int y; 
    
    if (src->QueryIntAttribute("y", &y) != XML_NO_ERROR) {
-      EM_LOG_ERROR("Coordinateless pixel detected ");
+      ECLOG_ERROR("Coordinateless pixel detected ");
    }
 
    int t; 

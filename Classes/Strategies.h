@@ -1,7 +1,7 @@
 //===-- Strategies.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/24
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Here are defined all pixel strategies, in one file for now
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef STRATEGIES_H_
 #define STRATEGIES_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 
 // Interfaces
@@ -35,7 +35,7 @@ namespace MPix {
    class AliveImmortal : public AliveBehavior {
    public:
 
-      EM_NODE_CHILD(AliveImmortal);
+      ECNODE_CHILD(AliveImmortal);
       virtual bool canLive( shared_ptr<IAlive> subject, const Context& context ) override;
 
    };
@@ -44,7 +44,7 @@ namespace MPix {
    class AliveSimple : public AliveBehavior {
    public:
 
-      EM_NODE_CHILD(AliveSimple);
+      ECNODE_CHILD(AliveSimple);
       virtual bool canLive( shared_ptr<IAlive> subject, const Context& context ) override;
 
    protected:
@@ -58,7 +58,7 @@ namespace MPix {
    class AliveStandard : public AliveSimple {
    public:
 
-      EM_NODE_CHILD(AliveStandard);
+      ECNODE_CHILD(AliveStandard);
       virtual bool canLive( shared_ptr<IAlive> subject, const Context& context ) override;
 
    };
@@ -67,7 +67,7 @@ namespace MPix {
    class AliveExtended : public AliveStandard {
    public:
 
-      EM_NODE_CHILD(AliveExtended);
+      ECNODE_CHILD(AliveExtended);
       virtual bool canLive( shared_ptr<IAlive> subject, const Context& context ) override;
 
    };
@@ -79,7 +79,7 @@ namespace MPix {
    class KillingBase : public KillingBehavior {
    public:
 
-      EM_NODE_CHILD(KillingBase);
+      ECNODE_CHILD(KillingBase);
       virtual bool tryKillThat( shared_ptr<IKilling> subject, const Context& context, int target) override;
       void PerformKill( const IKilling& subject, const Context& context, IAlive& victim );
 
@@ -89,7 +89,7 @@ namespace MPix {
    class KillingKind : public KillingBehavior {
    public:
 
-      EM_NODE_CHILD(KillingKind);
+      ECNODE_CHILD(KillingKind);
       virtual bool tryKillThat(shared_ptr<IKilling> subject, const Context& context, int target) { return false; }
 
    };
@@ -98,7 +98,7 @@ namespace MPix {
    class KillingAtPoint : public KillingBase {
    public:
 
-      EM_NODE_CHILD(KillingAtPoint);
+      ECNODE_CHILD(KillingAtPoint);
       virtual bool tryKillThat( shared_ptr<IKilling> subject, const Context& context, int target) override;
 
    };
@@ -107,7 +107,7 @@ namespace MPix {
    class KillingPitfall : public KillingBase {
    public:
 
-      EM_NODE_CHILD(KillingPitfall);
+      ECNODE_CHILD(KillingPitfall);
       virtual bool tryKillThat( shared_ptr<IKilling> subject, const Context& context, int target) override;
 
    };
@@ -116,7 +116,7 @@ namespace MPix {
    class KillingSpikes : public KillingBase {
    public:
 
-      EM_NODE_CHILD(KillingSpikes);
+      ECNODE_CHILD(KillingSpikes);
       virtual bool tryKillThat( shared_ptr<IKilling> subject, const Context& context, int target) override;
       bool CheckProtectionAt(  const Context& context, Coordinates pos,shared_ptr<IAlive> victim, shared_ptr<IKilling> killer );
 
@@ -128,14 +128,14 @@ namespace MPix {
    // Always blocked, can't move
    class StepperAlways : public StepperBehavor {
    public:
-      EM_NODE_CHILD(StepperAlways);
+      ECNODE_CHILD(StepperAlways);
       virtual bool canMoveThis( shared_ptr<IMovableStepper> subject, const Context& context, Direction dir) override;
    };
 
    // Moves if there is no blocker
    class StepperStandard : public StepperBehavor {
    public:
-      EM_NODE_CHILD(StepperStandard);
+      ECNODE_CHILD(StepperStandard);
       virtual bool canMoveThis( shared_ptr<IMovableStepper> subject, const Context& context, Direction dir) override;
    protected:
       virtual bool IsSomeoneBlockingMeAt( shared_ptr<IMovableStepper> subject, const Context& context, Coordinates pos, Direction dir);
@@ -144,7 +144,7 @@ namespace MPix {
    // Moves if there is no wall blocker
    class StepperHard : public StepperStandard {
    public:
-      EM_NODE_CHILD(StepperHard);
+      ECNODE_CHILD(StepperHard);
    protected:
       bool IsSomeoneBlockingMeAt( shared_ptr<IMovableStepper> subject, const Context& context, Coordinates pos, Direction dir) override;
    };
@@ -152,7 +152,7 @@ namespace MPix {
    // Moves if there is no hard blocker
    class StepperMagnetic : public StepperStandard {
    public:
-      EM_NODE_CHILD(StepperMagnetic);
+      ECNODE_CHILD(StepperMagnetic);
    protected:
       bool IsSomeoneBlockingMeAt( shared_ptr<IMovableStepper> subject, const Context& context, Coordinates pos, Direction dir) override;
    };
@@ -160,7 +160,7 @@ namespace MPix {
    // Moves anyway
    class StepperGhost : public StepperBehavor {
    public:
-      EM_NODE_CHILD(StepperGhost);
+      ECNODE_CHILD(StepperGhost);
       virtual bool canMoveThis( shared_ptr<IMovableStepper> subject, const Context& context, Direction dir) override;
    };
 
@@ -170,14 +170,14 @@ namespace MPix {
    // Simple blocker blocks only when someone targets it's pos, or pass by diagonal
    class MoveBlockerSimple : public MoveBlockerBehavior {
    public:
-      EM_NODE_CHILD(MoveBlockerSimple);
+      ECNODE_CHILD(MoveBlockerSimple);
       virtual bool blocksMoves (shared_ptr<IMoveBlocker> subject, const Context& context, Coordinates from, Direction to, shared_ptr<Pixel> pix ) override;
    };
 
    // My type blocker blocks only pixels of its type
    class MoveBlockerMyType : public MoveBlockerSimple {
    public:
-      EM_NODE_CHILD(MoveBlockerMyType);
+      ECNODE_CHILD(MoveBlockerMyType);
       virtual bool blocksMoves (shared_ptr<IMoveBlocker> subject, const Context& context, Coordinates from, Direction to, shared_ptr<Pixel> pix ) override;
    };
 
@@ -187,14 +187,14 @@ namespace MPix {
    // Disabled grower
    class DisabledGrow : public GrowBehavior {
    public:
-      EM_NODE_CHILD(DisabledGrow);
+      ECNODE_CHILD(DisabledGrow);
       virtual bool growThis(shared_ptr<IAssembled> subject, const Context& context);
    };
 
    // Grows in 4 directions
    class MagneticGrowStandard : public GrowBehavior {
    public:
-      EM_NODE_CHILD(MagneticGrowStandard);
+      ECNODE_CHILD(MagneticGrowStandard);
       virtual bool growThis(shared_ptr<IAssembled> subject, const Context& context);
       shared_ptr<IAssembled> PerformMagneticGrow(shared_ptr<IAssembled> subject,  const Context& context, Coordinates pos);
    };
@@ -202,7 +202,7 @@ namespace MPix {
    // Grow in 8 directions
    class MagneticGrowExtended : public MagneticGrowStandard {
    public:
-      EM_NODE_CHILD(MagneticGrowExtended);
+      ECNODE_CHILD(MagneticGrowExtended);
       virtual bool growThis(shared_ptr<IAssembled> subject, const Context& context);
    };
 
@@ -213,7 +213,7 @@ namespace MPix {
    class CactusWallProtector : public ProtectorBehavior {
    public:
 
-      EM_NODE_CHILD(CactusWallProtector);
+      ECNODE_CHILD(CactusWallProtector);
       bool isProtecting( shared_ptr<IProtector> subject, const Context& context, shared_ptr<IAlive> victim, shared_ptr<IKilling> killer );
 
    };

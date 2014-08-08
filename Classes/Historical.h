@@ -1,7 +1,7 @@
 //===-- Historical.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/24
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Historical class is wrapper for any type needs to be historized
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef HISTORICAL_H_
 #define HISTORICAL_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "HistoryManager.h"
 
 namespace MPix {

@@ -1,7 +1,7 @@
 //===-- EditorData.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/20
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Editor data stores raw and _mutable_ information
 //               of levels field and goal
 //
@@ -11,7 +11,7 @@
 #ifndef EDITORDATA_H_
 #define EDITORDATA_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {

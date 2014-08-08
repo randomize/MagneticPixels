@@ -1,7 +1,7 @@
 //===-- MenuMain.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/20
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Main menu, simple version for now
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef MENUMAIN_H_
 #define MENUMAIN_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "GameState.h"
 
 namespace MPix {
@@ -24,7 +24,7 @@ namespace MPix {
    {
    public: //  === State interface =====================
 
-      EM_GAME_STATE(MenuMain);
+      ECGAME_STATE(MenuMain);
 
       bool init() override;
 

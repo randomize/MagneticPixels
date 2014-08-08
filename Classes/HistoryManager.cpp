@@ -20,7 +20,7 @@ MPix::HistoryManager::HistoryManager()
    map_main.reserve(PLACES);
    free_ids.reserve(PLACES);
    ExpandIDs();
-   EM_LOG_INFO("============= HistoryManager =============");
+   ECLOG_INFO("============= HistoryManager =============");
 }
 
 int MPix::HistoryManager::GetFreeID()
@@ -44,7 +44,7 @@ void MPix::HistoryManager::ExpandIDs()
    // TODO: random??
    static int max = 0;
    int last = max + 100;
-   EM_LOG_WARNING(" Expanding history ids :" + last );
+   ECLOG_WARNING(" Expanding history ids :" + last );
    for (int i = max; i < last; ++i)
       free_ids.emplace(i);
    max = last;
@@ -52,7 +52,7 @@ void MPix::HistoryManager::ExpandIDs()
 
 MPix::HistoryManager::~HistoryManager()
 {
-   EM_LOG_WARNING("History closing");
+   ECLOG_WARNING("History closing");
 }
 
 

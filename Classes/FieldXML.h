@@ -1,7 +1,7 @@
 //===-- FieldXML.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/10/03
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Loads/Stores field from/to XML
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef FIELDXML_H_
 #define FIELDXML_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 
 namespace MPix {
 

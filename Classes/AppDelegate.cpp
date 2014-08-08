@@ -11,7 +11,7 @@ AppDelegate::AppDelegate()
 {
 
    // Create base loop
-   master = new EMBaseMasterLoop();
+   master = new ECBaseMasterLoop();
 
    // Early init (cocos not started yet)
    master->InitGame();
@@ -43,9 +43,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
    auto frameSize = glview->getFrameSize();
    auto size = director->getWinSize();
-   EM_LOG_DEBUG("Screen metrics: ");
-   EM_LOG_DEBUG(" frameSize: " + frameSize.width + ", " + frameSize.height );
-   EM_LOG_DEBUG("   winSize: " + size.width + ", " + size.height );
+   ECLOG_DEBUG("Screen metrics: ");
+   ECLOG_DEBUG(" frameSize: " + frameSize.width + ", " + frameSize.height );
+   ECLOG_DEBUG("   winSize: " + size.width + ", " + size.height );
 
 #ifdef MPIX_DEVELOPERS_BUILD
    director->setDisplayStats(true);
@@ -59,16 +59,16 @@ bool AppDelegate::applicationDidFinishLaunching() {
    // In NO_BORDER mode cocos fits width or height depending on ratio;
    if (cocos_fits_width)
    {
-      EM_LOG_DEBUG("Cocos fits by width");
+      ECLOG_DEBUG("Cocos fits by width");
       screen_cell_size = frameSize.width / 8;
    }
    else
    {
-      EM_LOG_DEBUG("Cocos fits by height");
+      ECLOG_DEBUG("Cocos fits by height");
       screen_cell_size = frameSize.height / 12;
    }
 
-   EM_LOG_DEBUG("Required cell size: " + screen_cell_size);
+   ECLOG_DEBUG("Required cell size: " + screen_cell_size);
 
    list<std::pair<int, string>> resolutions;
 
@@ -107,7 +107,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
       if (r.first >= screen_cell_size )  {
          // select first that is greater or eq
          director->setContentScaleFactor(r.first / 80.0);
-         EM_LOG_DEBUG("Selected cell size: " + r.second);
+         ECLOG_DEBUG("Selected cell size: " + r.second);
          v.push_back(r.second);
          break;
       }
@@ -115,7 +115,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
    if (v.empty()) { // If not found optimal resolution - use maximum
       v.push_back(resolutions.back().second);
-      EM_LOG_DEBUG("Selected ma][ cell size ");
+      ECLOG_DEBUG("Selected ma][ cell size ");
    }
 
    FileUtils::getInstance()->setSearchPaths(v);
@@ -123,7 +123,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
    director->setAnimationInterval(1.0 / 60);
 
    CCLOG(" ");
-   EM_LOG_INFO("==== Magnetic pixels started =====");
+   ECLOG_INFO("==== Magnetic pixels started =====");
    CCLOG(" ");
 
    // Always switch to start
@@ -134,14 +134,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 // This function will be called when the app is inactive. When comes a phone call,it's be invoked too
 void AppDelegate::applicationDidEnterBackground() {
-   EM_LOG_INFO("MPix did enter BG");
+   ECLOG_INFO("MPix did enter BG");
    Director::getInstance()->stopAnimation();
    CmdDidEnterBG cmd; cmd.Execute();
 }
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
-   EM_LOG_INFO("MPix will enter FG");
+   ECLOG_INFO("MPix will enter FG");
    Director::getInstance()->startAnimation();
    CmdWillEnterFG cmd; cmd.Execute();
 }

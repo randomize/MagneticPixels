@@ -1,7 +1,7 @@
 //===-- Command.h -------------------------------*- C++ -*-===//
 //
 //  Created:     2013/09/02
-//  Author:      Mihailenco E. at Emboss Games, 2013
+//  Author:      Mihailenco E. at TheEndlessCat Games, 2013
 //  Description: Command is universal argument and command name holder
 //
 //===---------------------------------------------------------===//
@@ -10,7 +10,7 @@
 #ifndef COMMAND_H_
 #define COMMAND_H_
 
-#include "EMBase.h"
+#include "ECBase.h"
 #include "MPix.h"
 
 namespace MPix {
