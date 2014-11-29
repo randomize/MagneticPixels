@@ -8,6 +8,23 @@ import os, os.path
 import shutil
 from optparse import OptionParser
 
+def get_num_of_cpu():
+	''' The build process can be accelerated by running multiple concurrent job processes using the -j-option.
+	'''
+	try:
+		platform = sys.platform
+		if platform == 'win32':
+			if 'NUMBER_OF_PROCESSORS' in os.environ:
+				return int(os.environ['NUMBER_OF_PROCESSORS'])
+			else:
+				return 1
+		else:
+			from numpy.distutils import cpuinfo
+			return cpuinfo.cpu._getNCPUs()
+	except Exception:
+		print "Can't know cpuinfo, use default 1 cpu"
+		return 1
+
 def check_environment_variables_sdk():
     ''' Checking the environment ANDROID_SDK_ROOT, which will be used for building
     '''
@@ -39,9 +56,6 @@ def select_toolchain_version():
     ndk-r8e  -> use gcc4.7
     ndk-r9   -> use gcc4.8
     '''
-    '''print "The Selected NDK toolchain version was clang !"
-    os.environ['NDK_TOOLCHAIN_VERSION'] = 'clang'
-    return'''
 
     ndk_root = check_environment_variables()
     if os.path.isdir(os.path.join(ndk_root,"toolchains/arm-linux-androideabi-4.8")):
@@ -58,22 +72,17 @@ def do_build(cocos_root, ndk_root, app_android_root,ndk_build_param,sdk_root,and
 
     ndk_path = os.path.join(ndk_root, "ndk-build")
 
-    # windows should use ";" to seperate module paths
-    platform = sys.platform
-    if platform == 'win32':
-        ndk_module_path = 'NDK_MODULE_PATH=%s;%s/external;%s/cocos' % (cocos_root, cocos_root, cocos_root)
-    else:
-        ndk_module_path = 'NDK_MODULE_PATH=%s:%s/external:%s/cocos' % (cocos_root, cocos_root, cocos_root)
-
+    num_of_cpu = get_num_of_cpu()
+	
     if ndk_build_param == None:
-        command = '%s -j9 -C %s %s' % (ndk_path, app_android_root, ndk_module_path)
+        command = '%s -j%d -C %s NDK_DEBUG=%d' % (ndk_path, num_of_cpu, app_android_root, build_mode=='debug')
     else:
-        command = '%s -j9 -C %s %s %s' % (ndk_path, app_android_root, ''.join(str(e) for e in ndk_build_param), ndk_module_path)
+        command = '%s -j%d -C %s NDK_DEBUG=%d %s' % (ndk_path, num_of_cpu, app_android_root, build_mode=='debug', ' '.join(str(e) for e in ndk_build_param))
     if os.system(command) != 0:
         raise Exception("Build dynamic library for project [ " + app_android_root + " ] fails!")
     elif android_platform is not None:
     	  sdk_tool_path = os.path.join(sdk_root, "tools/android")
-    	  cocoslib_path = os.path.join(cocos_root, "cocos/2d/platform/android/java")
+    	  cocoslib_path = os.path.join(cocos_root, "cocos/platform/android/java")
     	  command = '%s update lib-project -t %s -p %s' % (sdk_tool_path,android_platform,cocoslib_path) 
     	  if os.system(command) != 0:
     	  	  raise Exception("update cocos lib-project [ " + cocoslib_path + " ] fails!")  	  
@@ -140,7 +149,7 @@ def build(ndk_build_param,android_platform,build_mode):
 if __name__ == '__main__':
 
     parser = OptionParser()
-    parser.add_option("-n", "--ndk", dest="ndk_build_param", help='parameter for ndk-build')
+    parser.add_option("-n", "--ndk", dest="ndk_build_param", help='parameter for ndk-build', action="append")
     parser.add_option("-p", "--platform", dest="android_platform", 
     help='parameter for android-update.Without the parameter,the script just build dynamic library for project. Valid android-platform are:[10|11|12|13|14|15|16|17|18|19]')
     parser.add_option("-b", "--build", dest="build_mode", 
